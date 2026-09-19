@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog Idea Generator — StudyTools</title>
+<meta name="description" content="Generate Bible-based blog post ideas: a passage, an angle, an outline, and a title you can start writing from today.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .idea-layout { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .idea-layout { grid-template-columns: 1fr; } }
+  .idea-title { font-family: var(--serif); font-size: clamp(1.35rem, 3.2vw, 1.9rem); line-height: 1.3; margin: 0 0 6px; }
+  .idea-passage { border-left: 3px solid var(--accent-2); background: var(--bg-alt); border-radius: 6px; padding: 12px 14px; margin: 14px 0; }
+  .idea-passage.companion { border-left-style: double; border-left-width: 5px; }
+  .idea-passage .ref { font-family: var(--serif); font-weight: 700; }
+  .idea-passage .text { font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; margin-top: 4px; }
+  .outline-list { counter-reset: step; list-style: none; margin: 8px 0 0; padding: 0; }
+  .outline-list li { counter-increment: step; position: relative; padding: 7px 0 7px 34px; border-bottom: 1px dashed var(--line); font-size: .92rem; }
+  .outline-list li:last-child { border-bottom: 0; }
+  .outline-list li::before {
+    content: counter(step); position: absolute; left: 0; top: 8px; width: 22px; height: 22px;
+    border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: .74rem;
+    font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 2px; }
+  .history-list .history-item { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: .85rem; cursor: pointer; }
+  .history-list .history-item:last-child { border-bottom: 0; }
+  .history-list .history-item:hover { color: var(--accent); }
+  .history-list .when { color: var(--ink-faint); font-size: .74rem; white-space: nowrap; }
+  .kit-select { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 560px) { .kit-select { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-root="../../" data-app="blog">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Blog Idea Generator</h1>
+    <p class="lede">Stuck on what to write next? Pick a book and an angle, and get a passage, an outline, and a working title. Everything is drawn from the public-domain Scripture bundled with this site.</p>
+  </header>
+
+  <div class="idea-layout">
+    <div>
+      <section class="card no-print">
+        <div class="kit-select">
+          <div>
+            <label class="field" for="scope">Where to draw from</label>
+            <select id="scope">
+              <option value="all">The whole Bible</option>
+              <option value="OT">Old Testament</option>
+              <option value="NT">New Testament</option>
+              <option value="gospels">The Gospels</option>
+              <option value="epistles">The letters</option>
+              <option value="wisdom">Wisdom and poetry</option>
+              <option value="prophets">The prophets</option>
+              <option value="DC">Deuterocanon</option>
+            </select>
+          </div>
+          <div>
+            <label class="field" for="angle">Angle</label>
+            <select id="angle">
+              <option value="any">Surprise me</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <button id="generate">Generate idea</button>
+          <button class="secondary" id="another">Another passage, same angle</button>
+        </div>
+        <p class="muted small" style="margin:10px 0 0">Each idea pairs a passage with one of seven writing angles. Save the ones you like.</p>
+      </section>
+
+      <section class="card no-print">
+        <div class="row" style="justify-content:space-between;align-items:baseline">
+          <h2 class="serif" style="margin:0;font-size:1.1rem">Saved ideas</h2>
+          <button class="ghost" id="export-saved" style="font-size:.76rem">Export all</button>
+        </div>
+        <div class="history-list" id="saved" style="margin-top:8px"></div>
+      </section>
+    </div>
+
+    <section class="card" id="idea">
+      <p class="muted">Generate an idea to begin.</p>
+    </section>
+  </div>
+
+  <footer class="site">
+    <p>Passages are quoted from the King James Version (public domain). Angles, outlines, and title patterns are part of this project. Saved ideas stay in this browser.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

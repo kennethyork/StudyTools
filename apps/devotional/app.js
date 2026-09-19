@@ -22,6 +22,9 @@
     var size = els.canvas.width;
     var center = size / 2;
     var radius = center - 6;
+    var styles = getComputedStyle(document.documentElement);
+    var hubFill = (styles.getPropertyValue("--card") || "").trim() || "#fffdf8";
+    var ringStroke = (styles.getPropertyValue("--accent") || "").trim() || "#7a4f2b";
     ctx.clearRect(0, 0, size, size);
 
     var slice = (Math.PI * 2) / topics.length;
@@ -45,16 +48,15 @@
       ctx.textAlign = "right";
       ctx.fillStyle = "#fffdf8";
       ctx.font = "600 25px Georgia, serif";
-      var label = topic.name;
-      ctx.fillText(label, radius - 22, 9);
+      ctx.fillText(topic.name, radius - 22, 9);
       ctx.restore();
     });
 
     ctx.beginPath();
     ctx.arc(center, center, 52, 0, Math.PI * 2);
-    ctx.fillStyle = "#fffdf8";
+    ctx.fillStyle = hubFill;
     ctx.fill();
-    ctx.strokeStyle = "#7a4f2b";
+    ctx.strokeStyle = ringStroke;
     ctx.lineWidth = 3;
     ctx.stroke();
   }
@@ -154,6 +156,7 @@
       reveal(pickIndex());
     });
     els.canvas.addEventListener("click", function () { if (!spinning) spinTo(pickIndex()); });
+    document.addEventListener("st:themechange", function () { if (topics.length) drawWheel(); });
   }
 
   els.spin.disabled = true;

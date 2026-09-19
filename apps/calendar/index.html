@@ -6,6 +6,7 @@
 <title>Church Calendar Tracker — StudyTools</title>
 <meta name="description" content="Track the Christian liturgical year: Advent, Christmas, Epiphany, Lent, Easter, and Ordinary Time, with daily BCP readings, creeds, and the Heidelberg Catechism.">
 <link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
 <style>
   .cal-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 18px; align-items: start; }
   @media (max-width: 940px) { .cal-layout { grid-template-columns: 1fr; } }
@@ -23,12 +24,12 @@
   .season-easter { background: linear-gradient(135deg, #b8863b, #8a5f22); }
   .season-pentecost { background: linear-gradient(135deg, #a8442f, #7a2f20); }
   .season-ordinary { background: linear-gradient(135deg, #3f7a52, #2c5940); }
-  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
   .calendar-grid .dow { text-align: center; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); padding: 4px 0; }
   .calendar-grid button.day {
     position: relative; background: transparent; border: 1px solid var(--line); color: var(--ink);
-    border-radius: 8px; padding: 7px 0 6px; font-weight: 500; font-size: .85rem; cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%;
+    border-radius: 8px; padding: 7px 2px 6px; font-weight: 500; font-size: .85rem; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; min-width: 0; overflow: hidden;
   }
   .calendar-grid button.day:hover { background: var(--bg-alt); filter: none; }
   .calendar-grid button.day.outside { opacity: .34; }
@@ -58,7 +59,7 @@
   }
 </style>
 </head>
-<body data-root="../../">
+<body data-root="../../" data-app="calendar">
 <div data-topbar></div>
 
 <main class="wrap">

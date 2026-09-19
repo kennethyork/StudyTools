@@ -5,9 +5,12 @@
   var APPS = [
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
+    { id: "xref", name: "Cross-References", href: "apps/xref/" },
+    { id: "dictionary", name: "Dictionary", href: "apps/dictionary/" },
     { id: "vocab", name: "Greek & Hebrew Cards", href: "apps/vocab/" },
     { id: "prayer", name: "Prayer Clock", href: "apps/prayer/" },
     { id: "memory", name: "Memory Verses", href: "apps/memory/" },
+    { id: "blog", name: "Blog Ideas", href: "apps/blog/" },
     { id: "devotional", name: "Family Devotional", href: "apps/devotional/" },
     { id: "calendar", name: "Church Calendar", href: "apps/calendar/" }
   ];
@@ -72,7 +75,29 @@
     "2john": "ii-john", "2jn": "ii-john", "iijohn": "ii-john", "ii john": "ii-john",
     "3john": "iii-john", "3jn": "iii-john", "iiijohn": "iii-john", "iii john": "iii-john",
     jude: "jude", revelation: "revelation-of-john", rev: "revelation-of-john",
-    revelations: "revelation-of-john", apocalypse: "revelation-of-john"
+    revelations: "revelation-of-john", apocalypse: "revelation-of-john",
+    // Deuterocanon / Apocrypha
+    "1esdras": "i-esdras", "1esd": "i-esdras", "iesdras": "i-esdras", "i esdras": "i-esdras",
+    "2esdras": "ii-esdras", "2esd": "ii-esdras", "iiesdras": "ii-esdras", "ii esdras": "ii-esdras",
+    tobit: "tobit", tob: "tobit", tobias: "tobit",
+    judith: "judith", jdt: "judith",
+    "additionstoesther": "additions-to-esther", "additionstoesther": "additions-to-esther",
+    "restofesther": "additions-to-esther", "addesther": "additions-to-esther", "adesther": "additions-to-esther",
+    wisdom: "wisdom", wisd: "wisdom", "wisdomofsolomon": "wisdom", wis: "wisdom",
+    sirach: "sirach", sir: "sirach", ecclesiasticus: "sirach", ecclus: "sirach",
+    baruch: "baruch", bar: "baruch",
+    "epistleofjeremiah": "epistle-of-jeremiah", "letterofjeremiah": "epistle-of-jeremiah", letjer: "epistle-of-jeremiah",
+    "prayerofazariah": "prayer-of-azariah", "songofthethree": "prayer-of-azariah",
+    "songofthethreeholychildren": "prayer-of-azariah", "azariah": "prayer-of-azariah",
+    susanna: "susanna", sus: "susanna",
+    "belandthedragon": "bel-and-the-dragon", bel: "bel-and-the-dragon",
+    "prayerofmanasses": "prayer-of-manasses", "prayerofmanasseh": "prayer-of-manasses",
+    manasses: "prayer-of-manasses", manasseh: "prayer-of-manasses",
+    "1maccabees": "i-maccabees", "1macc": "i-maccabees", "imaccabees": "i-maccabees", "i maccabees": "i-maccabees",
+    "2maccabees": "ii-maccabees", "2macc": "ii-maccabees", "iimaccabees": "ii-maccabees", "ii maccabees": "ii-maccabees",
+    maccabees: "i-maccabees", macc: "i-maccabees",
+    "additionalpsalm": "additional-psalm", "psalm151": "additional-psalm",
+    laodiceans: "laodiceans", "epistleoflaodiceans": "laodiceans"
   };
 
   function normalizeBook(name) {
@@ -90,9 +115,15 @@
     if (!m) return null;
     var book = normalizeBook(m[1]);
     if (!book) return null;
+    var chapter = parseInt(m[2], 10);
+    // "Psalm 151" is the additional psalm preserved in the Septuagint.
+    if (book === "psalms" && chapter === 151) {
+      book = "additional-psalm";
+      chapter = 1;
+    }
     return {
       book: book,
-      chapter: parseInt(m[2], 10),
+      chapter: chapter,
       verseStart: m[3] ? parseInt(m[3], 10) : null,
       verseEnd: m[4] ? parseInt(m[4], 10) : (m[3] ? parseInt(m[3], 10) : null)
     };
@@ -220,6 +251,48 @@
     t.__timer = setTimeout(function () { t.style.opacity = "0"; }, 2200);
   }
 
+  var THEME_KEY = "theme";
+
+  function getTheme() {
+    try {
+      var stored = localStorage.getItem("studytools." + THEME_KEY);
+      if (stored === "dark" || stored === "light") return stored;
+    } catch (e) { /* storage unavailable */ }
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("studytools." + THEME_KEY, theme); } catch (e) { /* ignore */ }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#191512" : "#f7f4ed");
+    document.dispatchEvent(new CustomEvent("st:themechange", { detail: { theme: theme } }));
+  }
+
+  function toggleTheme() {
+    var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    return next;
+  }
+
+  function themeToggleButton() {
+    var dark = document.documentElement.getAttribute("data-theme") === "dark";
+    var btn = el("button", {
+      type: "button",
+      class: "theme-toggle",
+      title: dark ? "Switch to light mode" : "Switch to dark mode",
+      "aria-label": dark ? "Switch to light mode" : "Switch to dark mode"
+    });
+    btn.appendChild(el("span", { class: "theme-icon", "aria-hidden": "true", text: dark ? "☀" : "☾" }));
+    btn.addEventListener("click", function () {
+      var next = toggleTheme();
+      btn.title = next === "dark" ? "Switch to light mode" : "Switch to dark mode";
+      btn.setAttribute("aria-label", btn.title);
+      btn.firstChild.textContent = next === "dark" ? "☀" : "☾";
+    });
+    return btn;
+  }
+
   function mountTopbar(currentId) {
     var root = siteRoot();
     var host = document.querySelector("[data-topbar]");
@@ -235,7 +308,8 @@
     var inner = el("div", { class: "topbar-inner" }, [
       el("a", { class: "brand", href: root + "index.html", text: "Study Tools" }),
       el("span", { class: "spacer" }),
-      nav
+      nav,
+      themeToggleButton()
     ]);
     host.appendChild(inner);
   }
@@ -259,6 +333,23 @@
     download: download,
     copyText: copyText,
     toast: toast,
-    mountTopbar: mountTopbar
+    mountTopbar: mountTopbar,
+    getTheme: getTheme,
+    applyTheme: applyTheme,
+    toggleTheme: toggleTheme
   };
+
+  // Auto-mount the shared header on any page that declares a placeholder.
+  // The page's own script sets data-app on <body> to highlight the current tab.
+  function autoMount() {
+    if (!document.querySelector("[data-topbar]")) return;
+    var appId = document.body.getAttribute("data-app") || undefined;
+    mountTopbar(appId);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", autoMount);
+  } else {
+    autoMount();
+  }
 })();

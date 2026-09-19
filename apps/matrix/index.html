@@ -6,6 +6,7 @@
 <title>Verse Comparative Matrix — StudyTools</title>
 <meta name="description" content="Compare a Bible verse across the public-domain KJV, ASV, WEB, and YLT translations side by side.">
 <link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
 <style>
   .search-bar { display: grid; grid-template-columns: minmax(180px, 1fr) auto auto; gap: 10px; align-items: end; }
   @media (max-width: 620px) { .search-bar { grid-template-columns: 1fr; } }
@@ -25,7 +26,7 @@
   .ref-input { font-family: var(--serif); font-size: 1.05rem; }
   .suggestions { position: relative; }
   .suggestions .list {
-    position: absolute; left: 0; right: 0; top: 100%; z-index: 30; background: #fff;
+    position: absolute; left: 0; right: 0; top: 100%; z-index: 30; background: var(--suggest-bg);
     border: 1px solid var(--line); border-radius: 9px; margin-top: 4px; max-height: 240px; overflow: auto;
     box-shadow: var(--shadow);
   }
@@ -35,21 +36,28 @@
   }
   .suggestions .list button:hover, .suggestions .list button.active { background: var(--bg-alt); filter: none; }
   .missing { color: var(--ink-faint); font-style: italic; font-size: .9rem; }
-  .diff { background: #fdf3d7; border-radius: 3px; }
+  .diff { background: var(--highlight); border-radius: 3px; }
+  .tr-choices { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; }
+  .tr-choice {
+    display: inline-flex; align-items: center; gap: 6px; font-size: .86rem; color: var(--ink-soft);
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); cursor: pointer;
+  }
+  .tr-choice input { width: auto; }
+  .tr-choice:has(input:checked) { border-color: var(--accent); color: var(--ink); background: var(--accent-soft); }
   @media print {
-    .search-bar, .chapter-picker, header.page p, .no-print { display: none !important; }
+    .search-bar, .chapter-picker, .translation-picker, header.page p, .no-print { display: none !important; }
     .matrix { grid-template-columns: 1fr 1fr; }
     .card { break-inside: avoid; }
   }
 </style>
 </head>
-<body data-root="../../">
+<body data-root="../../" data-app="matrix">
 <div data-topbar></div>
 
 <main class="wrap">
   <header class="page">
     <h1>Verse Comparative Matrix</h1>
-    <p class="lede">Type a reference such as <strong>John 3:16</strong>, <strong>Psalm 23</strong>, or <strong>Romans 8:28-30</strong> and compare four public-domain translations side by side.</p>
+    <p class="lede">Type a reference such as <strong>John 3:16</strong>, <strong>Psalm 23</strong>, or <strong>Sirach 2:1-6</strong> and compare public-domain translations side by side &mdash; including the modernized King James text and the deuterocanonical books.</p>
   </header>
 
   <section class="card no-print">
@@ -68,7 +76,18 @@
       <button class="ghost" data-quick="Psalm 23">Psalm 23</button>
       <button class="ghost" data-quick="John 3:16">John 3:16</button>
       <button class="ghost" data-quick="Romans 8:28-30">Romans 8:28-30</button>
-      <button class="ghost" data-quick="Philippians 4:4-7">Philippians 4:4-7</button>
+      <button class="ghost" data-quick="Sirach 2:1-6">Sirach 2:1-6</button>
+      <button class="ghost" data-quick="Tobit 4:15">Tobit 4:15</button>
+    </div>
+
+    <hr class="rule">
+
+    <div class="translation-picker">
+      <div class="row" style="justify-content:space-between;align-items:baseline">
+        <label class="field" style="margin:0">Translations</label>
+        <span class="muted small">Deuterocanonical books use the translations that contain them</span>
+      </div>
+      <div class="tr-choices" id="translation-picker"></div>
     </div>
   </section>
 

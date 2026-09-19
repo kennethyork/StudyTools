@@ -1,0 +1,153 @@
+{
+  "audiences": [
+    "your church family",
+    "new believers",
+    "small group leaders",
+    "parents and families",
+    "students",
+    "people walking through grief",
+    "skeptics and seekers",
+    "your future self"
+  ],
+  "angles": [
+    {
+      "id": "devotional",
+      "name": "Devotional",
+      "blurb": "A short reflection that moves from the text to the heart.",
+      "outline": [
+        "Open with a moment from ordinary life that the passage speaks to",
+        "Read the passage slowly, one phrase at a time",
+        "Name what it reveals about God",
+        "Name what it asks of us",
+        "Close with a one-sentence prayer"
+      ],
+      "titles": [
+        "What {theme} Looks Like on a Tuesday",
+        "When God Speaks About {theme}",
+        "A Quiet Word About {theme}",
+        "Learning {theme} in the Ordinary"
+      ]
+    },
+    {
+      "id": "exposition",
+      "name": "Bible study",
+      "blurb": "Work through the passage verse by verse and draw the point out.",
+      "outline": [
+        "Set the scene: who is speaking, and to whom?",
+        "Walk through the passage in short sections",
+        "Note repeated words and the turning point",
+        "State the main idea in one sentence",
+        "Apply it to one concrete decision this week"
+      ],
+      "titles": [
+        "{ref}: What the Text Actually Says",
+        "Three Things You May Have Missed in {ref}",
+        "A Closer Look at {ref}",
+        "The Heart of {ref}"
+      ]
+    },
+    {
+      "id": "testimony",
+      "name": "Personal story",
+      "blurb": "Tell a true story and let the passage interpret it.",
+      "outline": [
+        "Start in the middle of the story, not the beginning",
+        "Describe what you expected and what actually happened",
+        "Show where the passage met you in it",
+        "Say plainly what changed",
+        "Invite the reader into the same hope"
+      ],
+      "titles": [
+        "What {theme} Cost Me",
+        "I Did Not Expect {ref} to Change My Week",
+        "The Year I Learned About {theme}",
+        "An Honest Story About {theme}"
+      ]
+    },
+    {
+      "id": "listicle",
+      "name": "Practical list",
+      "blurb": "Give the reader something they can use today.",
+      "outline": [
+        "Promise a specific, modest outcome in the title",
+        "Anchor every point in the passage",
+        "Keep each point to one sentence plus one example",
+        "End with the one thing to do first"
+      ],
+      "titles": [
+        "5 Ways {ref} Reshapes Your {theme}",
+        "Three Habits for {theme}, From {ref}",
+        "What {ref} Teaches Us About {theme} in 60 Seconds",
+        "A Simple Practice for {theme}"
+      ]
+    },
+    {
+      "id": "apologetic",
+      "name": "Honest questions",
+      "blurb": "Take the hardest objection seriously and answer it gently.",
+      "outline": [
+        "State the objection in its strongest form",
+        "Acknowledge what is right about it",
+        "Bring the passage to bear, not just your opinion",
+        "Say what remains a mystery",
+        "Close with what you would say to a friend over coffee"
+      ],
+      "titles": [
+        "Does God Really Care About {theme}?",
+        "The Hard Question About {theme}",
+        "What {ref} Does Not Say About {theme}",
+        "Honest Doubts About {theme}"
+      ]
+    },
+    {
+      "id": "comparison",
+      "name": "Two passages",
+      "blurb": "Set two passages side by side and let them illuminate each other.",
+      "outline": [
+        "Introduce both passages and why you paired them",
+        "Show where they agree",
+        "Show where the tension is",
+        "Resolve it, or say why it stays open",
+        "Land on what both passages ask of you"
+      ],
+      "titles": [
+        "{ref} and the Verse Nobody Quotes",
+        "Two Pictures of {theme}",
+        "What the Bible Says Twice About {theme}",
+        "Reading {ref} Alongside Its Echo"
+      ]
+    },
+    {
+      "id": "seasonal",
+      "name": "Church season",
+      "blurb": "Tie the passage to where the church is in the year.",
+      "outline": [
+        "Name the season and what it is for",
+        "Read the passage in that light",
+        "Show what the season is training us to see",
+        "Suggest one practice for the weeks ahead"
+      ],
+      "titles": [
+        "{theme} in This Season",
+        "A Word for the Waiting: {ref}",
+        "What {ref} Says While We Wait",
+        "Preparing for {theme}"
+      ]
+    }
+  ],
+  "fillers": {
+    "theme": [
+      "gratitude", "waiting", "forgiveness", "courage", "humility", "hope", "rest",
+      "generosity", "patience", "grief", "doubt", "prayer", "community", "work",
+      "singleness", "marriage", "parenting", "friendship", "money", "calling",
+      "repentance", "joy", "loneliness", "justice", "mercy", "discipline"
+    ],
+    "opening": [
+      "Open with a scene your reader has lived.",
+      "Start with a question you could not answer.",
+      "Begin with the sentence you did not want to read.",
+      "Start small: one detail, one moment, one room.",
+      "Begin with the prayer you were afraid to pray."
+    ]
+  }
+}

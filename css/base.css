@@ -13,12 +13,39 @@
   --ok-soft: #dcede2;
   --err: #a8442f;
   --shadow: 0 1px 2px rgba(60, 44, 30, 0.08), 0 8px 24px rgba(60, 44, 30, 0.08);
+  --input-bg: #ffffff;
+  --btn-ink: #ffffff;
+  --highlight: #fdf3d7;
+  --suggest-bg: #ffffff;
   --radius: 14px;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --greek: "Palatino Linotype", Palatino, "Times New Roman", Georgia, serif;
   --hebrew: "Times New Roman", "Nimbus Roman", Georgia, serif;
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --bg: #191512;
+  --bg-alt: #241e18;
+  --card: #211c17;
+  --ink: #ece4d8;
+  --ink-soft: #bcb0a2;
+  --ink-faint: #8b7f72;
+  --accent: #dda765;
+  --accent-2: #e6bc80;
+  --accent-soft: #372c20;
+  --line: #3b332a;
+  --ok: #7cc590;
+  --ok-soft: #1d3326;
+  --err: #e38a76;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
+  --input-bg: #16120f;
+  --btn-ink: #241a0f;
+  --highlight: #4a3a1c;
+  --suggest-bg: #2a231c;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -76,10 +103,36 @@ a { color: var(--accent); }
   border-radius: 999px;
 }
 
+@media (max-width: 1180px) {
+  .topbar nav a { font-size: 0.79rem; padding: 5px 7px; }
+  .brand { font-size: 0.95rem; }
+}
+
+@media (max-width: 1000px) {
+  .topbar-inner { flex-wrap: wrap; }
+  .topbar nav { order: 3; width: 100%; }
+}
+
 .topbar nav a:hover, .topbar nav a[aria-current="page"] {
   background: var(--bg-alt);
   color: var(--ink);
 }
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.theme-toggle:hover { background: var(--bg-alt); filter: none; }
+
+.theme-icon { font-size: 1rem; line-height: 1; }
 
 header.page { padding: 34px 0 8px; }
 
@@ -116,7 +169,7 @@ input[type="text"], input[type="number"], input[type="date"], select, textarea {
   width: 100%;
   font: inherit;
   color: var(--ink);
-  background: #fff;
+  background: var(--input-bg);
   border: 1px solid var(--line);
   border-radius: 9px;
   padding: 8px 10px;
@@ -135,7 +188,7 @@ button, .btn {
   font-size: 0.88rem;
   border: 1px solid var(--accent);
   background: var(--accent);
-  color: #fff;
+  color: var(--btn-ink);
   border-radius: 9px;
   padding: 8px 14px;
   cursor: pointer;

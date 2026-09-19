@@ -3,21 +3,84 @@
 
   var LABELS = {
     KJV: { name: "King James Version", sub: "1769 · public domain" },
+    KJVM: { name: "KJV, Modernized", sub: "American English · public domain" },
     ASV: { name: "American Standard Version", sub: "1901 · public domain" },
     WEB: { name: "World English Bible", sub: "public domain" },
-    YLT: { name: "Young's Literal Translation", sub: "1862 · public domain" }
+    YLT: { name: "Young's Literal Translation", sub: "1862 · public domain" },
+    KJVA: { name: "KJV with Apocrypha", sub: "1769 · public domain" },
+    DRC: { name: "Douay-Rheims, Challoner", sub: "1752 · public domain" }
   };
+
+  var CORE = ["KJV", "KJVM", "ASV", "WEB", "YLT"];
+  var DEUTERO = ["KJVA", "DRC"];
+  var STORAGE_KEY = "matrix-translations.v1";
 
   var els = {
     ref: document.getElementById("ref"),
     go: document.getElementById("go"),
     print: document.getElementById("print"),
     result: document.getElementById("result"),
-    suggestions: document.getElementById("suggestions")
+    suggestions: document.getElementById("suggestions"),
+    picker: document.getElementById("translation-picker"),
+    deuterocanon: document.getElementById("deuterocanon-toggle")
   };
 
   var books = [];
-  var lastQuery = "";
+  var bySlug = {};
+  var stored = ST.store(STORAGE_KEY);
+  var selected = (stored && stored.length) ? stored : CORE.slice();
+  var userCustomized = !!(stored && stored.length);
+
+  function isDeuterocanon(slug) {
+    var book = bySlug[slug];
+    return !!(book && book.deuterocanon);
+  }
+
+  function availableFor(slug) {
+    var book = bySlug[slug];
+    if (book && book.translations) return book.translations.slice();
+    return CORE.slice();
+  }
+
+  function chosenFor(slug) {
+    var available = availableFor(slug);
+    var chosen = selected.filter(function (id) { return available.indexOf(id) !== -1; });
+    // Until the reader picks translations themselves, show everything a
+    // deuterocanonical book has, and the four core texts elsewhere.
+    if (!userCustomized && isDeuterocanon(slug)) return available;
+    if (!chosen.length) {
+      chosen = available.filter(function (id) { return CORE.indexOf(id) !== -1; });
+      if (!chosen.length) chosen = available.slice(0, 3);
+    }
+    return chosen;
+  }
+
+  function renderPicker() {
+    if (!els.picker) return;
+    els.picker.innerHTML = "";
+    var all = CORE.concat(DEUTERO);
+    all.forEach(function (id) {
+      var label = LABELS[id] || { name: id };
+      var input = ST.el("input", { type: "checkbox", id: "tr-" + id, value: id });
+      input.checked = selected.indexOf(id) !== -1;
+      input.addEventListener("change", function () {
+        if (input.checked) {
+          if (selected.indexOf(id) === -1) selected.push(id);
+        } else {
+          selected = selected.filter(function (x) { return x !== id; });
+        }
+        if (!selected.length) selected = ["KJV"];
+        userCustomized = true;
+        ST.store(STORAGE_KEY, selected);
+        run();
+      });
+      var cb = ST.el("label", { class: "tr-choice", for: "tr-" + id }, [
+        input,
+        ST.el("span", { text: label.name })
+      ]);
+      els.picker.appendChild(cb);
+    });
+  }
 
   function showSuggestions(matches) {
     if (!matches.length) {
@@ -27,7 +90,7 @@
     }
     els.suggestions.innerHTML = "";
     matches.slice(0, 8).forEach(function (b) {
-      var btn = ST.el("button", { type: "button", text: b.name });
+      var btn = ST.el("button", { type: "button", text: b.name + (b.deuterocanon ? " (deuterocanon)" : "") });
       btn.addEventListener("click", function () {
         els.ref.value = b.name + " 1";
         els.suggestions.classList.add("hidden");
@@ -43,7 +106,8 @@
     if (!q) return [];
     return books.filter(function (b) {
       var name = b.name.toLowerCase().replace(/[^a-z0-9 ]/g, "");
-      return name.indexOf(q) === 0 || name.replace(/[ivx]+/g, "").indexOf(q) === 0 ||
+      return name.indexOf(q) === 0 ||
+        name.replace(/[ivx]+/g, "").indexOf(q) === 0 ||
         name.replace(/i{1,3} /, "").indexOf(q) === 0;
     });
   }
@@ -70,8 +134,7 @@
   }
 
   function displayBook(slug) {
-    for (var i = 0; i < books.length; i++) if (books[i].slug === slug) return books[i].name;
-    return slug;
+    return bySlug[slug] ? bySlug[slug].name : slug;
   }
 
   function render(parsed) {
@@ -89,7 +152,7 @@
       ST.el("div", { class: "row", style: "justify-content:space-between" }, [
         ST.el("div", {}, [
           ST.el("h2", { class: "serif", style: "margin:0 0 2px;font-size:1.35rem", text: displayBook(parsed.book) + " " + parsed.chapter }),
-          ST.el("div", { class: "muted small", text: parsed.whole ? "Whole chapter" : "Verses " + parsed.verseStart + (parsed.verseEnd !== parsed.verseStart ? "-" + parsed.verseEnd : "") })
+          ST.el("div", { class: "muted small", text: verses.whole ? "Whole chapter" : "Verses " + parsed.verseStart + (parsed.verseEnd !== parsed.verseStart ? "-" + parsed.verseEnd : "") })
         ]),
         ST.el("button", { class: "ghost no-print", id: "copy-matrix", text: "Copy as text",
           onclick: function () { copyMatrix(); } })
@@ -98,11 +161,18 @@
 
     var grid = ST.el("div", { class: "matrix" });
     var rendered = [];
-    var loads = ST.TRANSLATIONS.map(function (tr) {
+    var translations = chosenFor(parsed.book);
+
+    if (isDeuterocanon(parsed.book)) {
+      header.appendChild(ST.el("div", { class: "notice", style: "margin-top:10px",
+        text: "This is a deuterocanonical book. Only translations that include it are shown." }));
+    }
+
+    var loads = translations.map(function (tr) {
       return ST.loadTranslation(parsed.book, tr).then(function (data) {
         return { tr: tr, data: data };
-      }).catch(function (err) {
-        return { tr: tr, error: err };
+      }).catch(function () {
+        return { tr: tr, error: true };
       });
     });
 
@@ -118,7 +188,7 @@
         col.appendChild(ST.el("div", { class: "sub", text: info.sub }));
 
         if (r.error || !r.data) {
-          col.appendChild(ST.el("p", { class: "missing", text: "This translation could not be loaded." }));
+          col.appendChild(ST.el("p", { class: "missing", text: "Not available for this book." }));
           grid.appendChild(col);
           return;
         }
@@ -132,21 +202,17 @@
 
         var lines = [];
         if (verses.whole) {
-          var nums = Object.keys(chapterData).map(Number).sort(function (a, b) { return a - b; });
-          nums.forEach(function (v) {
-            var row = ST.el("div", { class: "verse-row" }, [
+          Object.keys(chapterData).map(Number).sort(function (a, b) { return a - b; }).forEach(function (v) {
+            col.appendChild(ST.el("div", { class: "verse-row" }, [
               ST.el("span", { class: "num", text: v }),
               ST.el("p", { class: "verse", html: ST.escapeHTML(chapterData[String(v)]) })
-            ]);
-            col.appendChild(row);
+            ]));
             lines.push(v + ". " + chapterData[String(v)]);
           });
         } else {
           verses.list.forEach(function (v) {
             var text = chapterData[String(v)];
-            var row = ST.el("div", { class: "verse-row single" }, [
-              ST.el("p", { class: "verse" })
-            ]);
+            var row = ST.el("div", { class: "verse-row single" }, [ST.el("p", { class: "verse" })]);
             if (text == null || text === "") {
               row.firstChild.className = "verse missing";
               row.firstChild.textContent = "Verse " + v + " is not present in this translation's versification.";
@@ -174,7 +240,7 @@
   }
 
   function copyMatrix() {
-    var parts = window.__matrixText.map(function (m) {
+    var parts = (window.__matrixText || []).map(function (m) {
       return m.name + " (" + m.tr + ")\n" + m.text;
     });
     ST.copyText(parts.join("\n\n")).then(function () { ST.toast("Matrix copied"); }, function () { ST.toast("Copy failed", true); });
@@ -184,14 +250,13 @@
     var raw = els.ref.value.trim();
     if (!raw) return;
     var parsed = ST.parseRef(raw);
-    if (!parsed) {
+    if (!parsed || !bySlug[parsed.book]) {
       els.result.innerHTML = "";
       els.result.appendChild(ST.el("div", { class: "card" }, [
-        ST.el("div", { class: "notice error", text: 'Could not understand that reference. Try a format like "John 3:16", "Psalm 23", or "1 Corinthians 13:4-7".' })
+        ST.el("div", { class: "notice error", text: 'Could not understand that reference. Try a format like "John 3:16", "Psalm 23", or "Sirach 2:1-6".' })
       ]));
       return;
     }
-    lastQuery = raw;
     try { history.replaceState(null, "", "?ref=" + encodeURIComponent(raw)); } catch (e) { /* file:// */ }
     render(parsed);
   }
@@ -199,14 +264,13 @@
   function init() {
     ST.loadBooks().then(function (list) {
       books = list;
+      bySlug = {};
+      list.forEach(function (b) { bySlug[b.slug] = b; });
+      renderPicker();
+
       var fromQuery = ST.qs("ref");
-      if (fromQuery) {
-        els.ref.value = fromQuery;
-        run();
-      } else {
-        els.ref.value = "John 3:16";
-        run();
-      }
+      els.ref.value = fromQuery || "John 3:16";
+      run();
     }).catch(function () {
       els.result.appendChild(ST.el("div", { class: "card" }, [
         ST.el("div", { class: "notice error", text: "Could not load the Bible index. If you opened this file directly, serve the folder over HTTP instead." })

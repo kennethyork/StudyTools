@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-Reference Explorer — StudyTools</title>
+<meta name="meta" name="description" content="See every verse the Bible cross-references to the passage you are reading, ranked by how strongly the church has linked them.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .xref-layout { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .xref-layout { grid-template-columns: 1fr; } }
+  .source-verses { position: sticky; top: 76px; }
+  @media (max-width: 900px) { .source-verses { position: static; } }
+  .verse-line { display: grid; grid-template-columns: 2.2em 1fr; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); }
+  .verse-line:last-child { border-bottom: 0; }
+  .verse-line .num { font-family: var(--mono); font-size: .72rem; color: var(--accent); padding-top: .3em; }
+  .verse-line p { margin: 0; font-family: var(--serif); font-size: .95rem; line-height: 1.55; }
+  .verse-line.is-source { background: var(--accent-soft); border-radius: 6px; padding-left: 8px; padding-right: 8px; }
+  .xref-group { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  .xref-group:last-child { border-bottom: 0; }
+  .xref-head { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+  .xref-ref { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; }
+  .votes { font-size: .72rem; color: var(--ink-faint); white-space: nowrap; }
+  .vote-bar { height: 3px; border-radius: 2px; background: var(--accent-2); margin-top: 6px; }
+  .xref-text { font-family: var(--serif); font-size: .93rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .ref-input { font-family: var(--serif); font-size: 1.05rem; }
+  .chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .chip { font-size: .78rem; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink-soft); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: var(--btn-ink); }
+  @media print {
+    .xref-layout { display: block; }
+    .no-print, header.page p { display: none !important; }
+    .source-verses { position: static; margin-bottom: 14px; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="xref">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Cross-Reference Explorer</h1>
+    <p class="lede">Every passage the church has linked to the one you are reading, ranked by how often it has been cited. Start with a reference and follow the connections.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="search-bar">
+      <label class="field" for="ref">Reference</label>
+      <div class="row" style="align-items:stretch">
+        <input id="ref" class="ref-input" type="text" placeholder="John 3:16" autocomplete="off" spellcheck="false" style="flex:1;min-width:180px">
+        <button id="go">Show cross-references</button>
+        <button class="ghost" id="print">Print</button>
+      </div>
+    </div>
+    <div class="chip-row">
+      <span class="muted small" style="align-self:center">Try:</span>
+      <button class="chip" data-quick="Genesis 1:1">Genesis 1:1</button>
+      <button class="chip" data-quick="Psalm 22:1">Psalm 22:1</button>
+      <button class="chip" data-quick="Isaiah 53:5">Isaiah 53:5</button>
+      <button class="chip" data-quick="Matthew 2:1-12">Matthew 2:1-12</button>
+      <button class="chip" data-quick="John 1:1">John 1:1</button>
+      <button class="chip" data-quick="Romans 8:28">Romans 8:28</button>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <label class="muted small" for="translation" style="margin:0">Verse text</label>
+      <select id="translation" style="width:auto">
+        <option>KJV</option><option>KJVM</option><option>ASV</option><option>WEB</option><option>YLT</option>
+      </select>
+      <label class="muted small" for="min-votes" style="margin-left:12px">Minimum votes</label>
+      <select id="min-votes" style="width:auto">
+        <option value="0">All</option>
+        <option value="5" selected>5+</option>
+        <option value="20">20+</option>
+        <option value="100">100+</option>
+      </select>
+    </div>
+  </section>
+
+  <div class="xref-layout" style="margin-top:16px">
+    <section class="source-verses">
+      <div class="card" id="source-card">
+        <p class="muted small">The passage you are studying will appear here.</p>
+      </div>
+    </section>
+    <section id="results">
+      <div class="card"><p class="muted small">Enter a reference to see its cross-references.</p></div>
+    </section>
+  </div>
+
+  <footer class="site">
+    <p>Cross-reference data from <a href="https://www.openbible.info/labs/cross-references/" rel="noopener">openbible.info</a>, used under CC BY 4.0. Verse text from the public-domain translations bundled with this site. "Votes" is the number of times readers submitted that connection.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

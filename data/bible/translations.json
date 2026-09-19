@@ -1,1 +1,11 @@
-{"translations":[{"id":"KJV","name":"King James Version","year":1769},{"id":"ASV","name":"American Standard Version","year":1901},{"id":"WEB","name":"World English Bible","year":2000},{"id":"YLT","name":"Young's Literal Translation","year":1862},{"id":"Webster","name":"Webster Bible","year":1833}]}
+{
+  "translations": [
+    { "id": "KJV", "name": "King James Version", "year": 1769, "deuterocanon": false },
+    { "id": "KJVM", "name": "King James Version, Modernized", "year": 1611, "deuterocanon": true },
+    { "id": "ASV", "name": "American Standard Version", "year": 1901, "deuterocanon": false },
+    { "id": "WEB", "name": "World English Bible", "year": 2000, "deuterocanon": false },
+    { "id": "YLT", "name": "Young's Literal Translation", "year": 1862, "deuterocanon": false },
+    { "id": "KJVA", "name": "King James Version with Apocrypha", "year": 1769, "deuterocanon": true },
+    { "id": "DRC", "name": "Douay-Rheims Bible, Challoner Revision", "year": 1752, "deuterocanon": true }
+  ]
+}

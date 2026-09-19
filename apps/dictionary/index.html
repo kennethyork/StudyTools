@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bible Dictionary — StudyTools</title>
+<meta name="description" content="Search Easton's, Smith's, and Hastings' public-domain Bible dictionaries together, with linked Scripture references.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .dict-layout { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .dict-layout { grid-template-columns: 1fr; } }
+  .search-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .search-row input { flex: 1; min-width: 180px; }
+  .letter-row { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 10px; }
+  .letter-row button { font-size: .78rem; padding: 3px 8px; background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  .letter-row button.active { background: var(--accent); border-color: var(--accent); color: var(--btn-ink); }
+  .term-list { max-height: 60vh; overflow: auto; margin-top: 10px; }
+  .term-item { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); color: var(--ink); padding: 7px 8px; border-radius: 0; font-weight: 400; cursor: pointer; font-size: .9rem; }
+  .term-item:hover, .term-item.active { background: var(--bg-alt); filter: none; }
+  .term-item .count { color: var(--ink-faint); font-size: .72rem; }
+  .def { border-top: 1px solid var(--line); padding: 14px 0; }
+  .def:first-of-type { border-top: 0; }
+  .def .badge { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 9px; margin-bottom: 6px; }
+  .def p { margin: 0; white-space: pre-wrap; font-size: .95rem; line-height: 1.7; }
+  .scripture-link { color: var(--accent); text-decoration: underline dotted; }
+  @media print {
+    .dict-layout { display: block; }
+    .no-print, header.page p { display: none !important; }
+    .term-list { max-height: none; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="dictionary">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Bible Dictionary</h1>
+    <p class="lede">Search three public-domain Bible dictionaries together — Easton's (1897), Smith's (1863), and Hastings' (1909). Every Scripture citation links to the verse in the Verse Matrix.</p>
+  </header>
+
+  <div class="dict-layout">
+    <div>
+      <section class="card no-print">
+        <div class="search-row">
+          <input id="search" type="text" placeholder="Search a word, person, or place…" autocomplete="off">
+          <button id="clear">Clear</button>
+        </div>
+        <div class="letter-row" id="letters"></div>
+      </section>
+
+      <section class="card">
+        <div class="row" style="justify-content:space-between;align-items:baseline">
+          <h2 class="serif" style="margin:0;font-size:1.05rem" id="list-title">Browse</h2>
+          <span class="muted small" id="list-count"></span>
+        </div>
+        <div class="term-list" id="term-list"></div>
+      </section>
+    </div>
+
+    <section class="card" id="entry">
+      <p class="muted">Choose a word to read its entry.</p>
+    </section>
+  </div>
+
+  <footer class="site">
+    <p>Dictionary text from the <a href="https://github.com/neuu-org/bible-dictionary-dataset" rel="noopener">NEUU bible-dictionary-dataset</a> (CC BY 4.0), which parses public-domain dictionaries from CCEL: Easton's Bible Dictionary (1897), Smith's Bible Dictionary (1863), and Hastings' Dictionary of the Bible (1909). Scripture links open the Verse Matrix.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
