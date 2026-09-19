@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biblical Language Flashcards — StudyTools</title>
+<meta name="description" content="Learn the 500 most frequent Biblical Greek and Hebrew words with glosses, transliteration, morphology, and self-paced quizzing.">
+<link rel="stylesheet" href="../../css/base.css">
+<style>
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: #fff; }
+  .seg button { border: 0; border-radius: 0; background: transparent; color: var(--ink-soft); font-size: .85rem; padding: 7px 14px; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .progress-track { height: 8px; background: var(--bg-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--ok); width: 0; transition: width .2s; }
+  .flash-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; gap: 6px; text-align: center; padding: 24px 12px; }
+  .flash-word { font-size: clamp(2.1rem, 7vw, 3.6rem); line-height: 1.3; }
+  .flash-word.greek { font-family: var(--greek); }
+  .flash-word.hebrew { font-family: var(--hebrew); direction: rtl; }
+  .flash-translit { color: var(--ink-faint); font-style: italic; font-size: 1.05rem; }
+  .flash-gloss { font-size: 1.3rem; font-family: var(--serif); }
+  .flash-meta { font-size: .8rem; color: var(--ink-faint); }
+  .flash-answer { border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 14px; width: min(560px, 100%); }
+  .flash-answer .meaning { font-size: .9rem; color: var(--ink-soft); max-height: 130px; overflow: auto; text-align: left; }
+  .table-wrap { max-height: 62vh; overflow: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table.vocab { width: 100%; border-collapse: collapse; font-size: .89rem; }
+  table.vocab th { position: sticky; top: 0; background: var(--bg-alt); text-align: left; padding: 8px 10px; font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); z-index: 2; }
+  table.vocab td { padding: 7px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+  table.vocab tr.known td { background: var(--ok-soft); }
+  table.vocab td.lemma { font-size: 1.05rem; white-space: nowrap; }
+  table.vocab td.lemma.greek { font-family: var(--greek); }
+  table.vocab td.lemma.hebrew { font-family: var(--hebrew); direction: rtl; }
+  table.vocab td.count { font-family: var(--mono); font-size: .78rem; color: var(--ink-faint); text-align: right; }
+  .stat-chip { display: inline-flex; gap: 6px; align-items: baseline; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+  .stat-chip b { font-family: var(--serif); font-size: 1.15rem; }
+  .stat-chip span { font-size: .76rem; color: var(--ink-faint); }
+  @media print { .no-print, .topbar, footer.site { display: none !important; } }
+</style>
+</head>
+<body data-root="../../">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Biblical Language Flashcards</h1>
+    <p class="lede">The 500 most frequent words of the Greek New Testament and 500 most frequent words of the Hebrew Bible, drawn from real corpus counts and public-domain lexicons. Quiz yourself or browse the list.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="controls">
+      <div>
+        <label class="field">Language</label>
+        <div class="seg" id="lang-seg">
+          <button type="button" data-lang="greek" aria-pressed="true">Greek</button>
+          <button type="button" data-lang="hebrew" aria-pressed="false">Hebrew</button>
+        </div>
+      </div>
+      <div>
+        <label class="field">Mode</label>
+        <div class="seg" id="mode-seg">
+          <button type="button" data-mode="quiz" aria-pressed="true">Flashcards</button>
+          <button type="button" data-mode="browse" aria-pressed="false">Browse list</button>
+        </div>
+      </div>
+      <div>
+        <label class="field" for="deck">Deck</label>
+        <select id="deck">
+          <option value="all">All 500 words</option>
+          <option value="1-100">Top 1–100</option>
+          <option value="101-200">101–200</option>
+          <option value="201-300">201–300</option>
+          <option value="301-400">301–400</option>
+          <option value="401-500">401–500</option>
+          <option value="unknown">Words I haven't marked known</option>
+        </select>
+      </div>
+      <div>
+        <label class="field" for="direction">Card direction</label>
+        <select id="direction">
+          <option value="orig">Original → English</option>
+          <option value="eng">English → Original</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="row" style="justify-content:space-between">
+      <div class="row tight">
+        <div class="stat-chip"><b id="stat-known">0</b><span>known</span></div>
+        <div class="stat-chip"><b id="stat-deck">0</b><span>in deck</span></div>
+        <div class="stat-chip"><b id="stat-streak">0</b><span>streak</span></div>
+      </div>
+      <button class="ghost" id="reset-progress">Reset progress</button>
+    </div>
+    <div class="progress-track" style="margin-top:10px"><div class="progress-fill" id="progress-fill"></div></div>
+  </section>
+
+  <section id="quiz-view">
+    <div class="card" style="margin-top:16px">
+      <div class="row no-print" style="justify-content:space-between; margin-bottom:6px">
+        <span class="muted small" id="deck-position">—</span>
+        <span class="muted small" id="deck-source"></span>
+      </div>
+      <div class="flash-stage" id="flash-stage">
+        <div class="flash-word" id="flash-word"></div>
+        <div class="flash-translit" id="flash-translit"></div>
+      </div>
+      <div class="flash-answer hidden" id="flash-answer" style="margin-left:auto;margin-right:auto">
+        <div class="flash-gloss" id="flash-gloss"></div>
+        <div class="flash-meta" id="flash-meta" style="margin-top:6px"></div>
+        <div class="meaning" id="flash-meaning" style="margin-top:10px"></div>
+      </div>
+      <div class="row no-print" style="justify-content:center; margin-top:18px" id="quiz-actions">
+        <button id="reveal">Show answer</button>
+      </div>
+      <div class="row no-print hidden" style="justify-content:center; margin-top:18px" id="grade-actions">
+        <button class="secondary" id="again">Still learning</button>
+        <button id="known">I know this</button>
+        <button class="ghost" id="skip">Skip</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="browse-view" class="hidden">
+    <div class="card" style="margin-top:16px">
+      <div class="row" style="margin-bottom:10px">
+        <input id="search" type="text" placeholder="Search lemma, transliteration, or gloss…" style="flex:1; min-width:200px">
+        <button class="ghost" id="mark-visible">Mark filtered as known</button>
+      </div>
+      <div class="table-wrap">
+        <table class="vocab">
+          <thead><tr><th>Word</th><th>Transliteration</th><th>Gloss</th><th>Morph</th><th class="count">Count</th><th></th></tr></thead>
+          <tbody id="vocab-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <p>Greek frequency: OpenGNT word-level data (CC BY-SA 4.0). Hebrew frequency: Open Scriptures Hebrew Bible / Westminster Leningrad Codex (CC BY 4.0). Glosses: STEPBible TBESG and TBESH (CC BY 4.0). Your mastery progress is stored only in this browser.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripture Memory (SRS) — StudyTools</title>
+<meta name="description" content="Memorize Bible verses with a spaced-repetition schedule that adapts to how well you remember each one.">
+<link rel="stylesheet" href="../../css/base.css">
+<style>
+  .memory-grid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .memory-grid { grid-template-columns: 1fr; } }
+  .review-card { min-height: 330px; display: flex; flex-direction: column; }
+  .review-ref { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; }
+  .review-text { font-family: var(--serif); font-size: 1.25rem; line-height: 1.7; margin: 16px 0; }
+  .review-text.blurred { filter: blur(6px); user-select: none; }
+  .blanks { font-family: var(--serif); font-size: 1.25rem; line-height: 1.7; margin: 16px 0; }
+  .blanks .blank { display: inline-block; min-width: 4.5em; border-bottom: 1.5px solid var(--accent-2); vertical-align: baseline; color: transparent; }
+  .blanks .blank.shown { color: var(--accent); border-bottom-color: transparent; }
+  .grade-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+  .grade-row button { flex: 1; min-width: 90px; flex-direction: column; gap: 1px; padding: 9px 8px; font-size: .82rem; }
+  .grade-row button small { font-weight: 400; opacity: .8; font-size: .7rem; }
+  .queue-item { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; padding: 8px 4px; border-bottom: 1px solid var(--line); font-size: .88rem; }
+  .queue-item:last-child { border-bottom: 0; }
+  .queue-item .due { font-size: .74rem; color: var(--ink-faint); white-space: nowrap; }
+  .queue-item .due.overdue { color: var(--err); font-weight: 600; }
+  .empty-state { text-align: center; padding: 30px 14px; color: var(--ink-faint); }
+  @media print { .no-print, .topbar, footer.site { display: none !important; } }
+</style>
+</head>
+<body data-root="../../">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Scripture Memory</h1>
+    <p class="lede">Paste a verse you want to hide in your heart, then review it on a spaced-repetition schedule. Verses you know well wait longer between reviews; ones you struggle with come back sooner.</p>
+  </header>
+
+  <div class="memory-grid">
+    <div>
+      <section class="card no-print">
+        <h2 class="serif" style="margin:0 0 10px;font-size:1.15rem">Add a verse</h2>
+        <label class="field" for="add-ref">Reference</label>
+        <input id="add-ref" type="text" placeholder="Psalm 119:11" autocomplete="off">
+        <div class="row tight" style="margin:6px 0 10px">
+          <button class="ghost" id="load-verse" style="font-size:.78rem">Load KJV text</button>
+          <select id="add-translation" style="width:auto;font-size:.78rem;padding:4px 8px">
+            <option>KJV</option><option>ASV</option><option>WEB</option><option>YLT</option>
+          </select>
+        </div>
+        <label class="field" for="add-text">Verse text</label>
+        <textarea id="add-text" rows="4" placeholder="Thy word have I hid in mine heart, that I might not sin against thee."></textarea>
+        <div class="row" style="margin-top:10px">
+          <button id="add-verse">Add to deck</button>
+          <span class="muted small" id="add-status"></span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row" style="justify-content:space-between;align-items:baseline">
+          <h2 class="serif" style="margin:0;font-size:1.15rem">Your verses</h2>
+          <button class="ghost" id="export-deck" style="font-size:.76rem">Export</button>
+        </div>
+        <div id="queue" style="margin-top:8px"></div>
+      </section>
+    </div>
+
+    <section class="card review-card">
+      <div id="review-area"></div>
+    </section>
+  </div>
+
+  <footer class="site">
+    <p>Spaced repetition is a simplified SM-2 style schedule: each successful review multiplies the interval by an ease factor, and lapses reset it. All data stays in your browser.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

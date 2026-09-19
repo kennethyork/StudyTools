@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verse Comparative Matrix — StudyTools</title>
+<meta name="description" content="Compare a Bible verse across the public-domain KJV, ASV, WEB, and YLT translations side by side.">
+<link rel="stylesheet" href="../../css/base.css">
+<style>
+  .search-bar { display: grid; grid-template-columns: minmax(180px, 1fr) auto auto; gap: 10px; align-items: end; }
+  @media (max-width: 620px) { .search-bar { grid-template-columns: 1fr; } }
+  .matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 16px; }
+  .translation-col { display: flex; flex-direction: column; }
+  .translation-col h3 { margin: 0 0 2px; font-family: var(--serif); font-size: 1.05rem; }
+  .translation-col .sub { font-size: .74rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .translation-col .chapter-heading { font-family: var(--serif); font-weight: 700; margin: 12px 0 6px; font-size: 1.02rem; }
+  .verse-row { display: grid; grid-template-columns: 2.2em 1fr; gap: 2px 8px; margin-bottom: 9px; }
+  .verse-row .num { font-family: var(--mono); font-size: .72rem; color: var(--accent); padding-top: .35em; }
+  .verse-row p { margin: 0; }
+  .verse-row.single { grid-template-columns: 1fr; }
+  .verse-row.single .num { display: none; }
+  .chapter-picker { display: flex; gap: 4px; flex-wrap: wrap; margin: 10px 0 2px; }
+  .chapter-picker button { font-size: .78rem; padding: 3px 9px; }
+  .chapter-picker button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .ref-input { font-family: var(--serif); font-size: 1.05rem; }
+  .suggestions { position: relative; }
+  .suggestions .list {
+    position: absolute; left: 0; right: 0; top: 100%; z-index: 30; background: #fff;
+    border: 1px solid var(--line); border-radius: 9px; margin-top: 4px; max-height: 240px; overflow: auto;
+    box-shadow: var(--shadow);
+  }
+  .suggestions .list button {
+    display: block; width: 100%; text-align: left; background: none; border: 0; color: var(--ink);
+    border-radius: 0; padding: 7px 10px; font-weight: 400;
+  }
+  .suggestions .list button:hover, .suggestions .list button.active { background: var(--bg-alt); filter: none; }
+  .missing { color: var(--ink-faint); font-style: italic; font-size: .9rem; }
+  .diff { background: #fdf3d7; border-radius: 3px; }
+  @media print {
+    .search-bar, .chapter-picker, header.page p, .no-print { display: none !important; }
+    .matrix { grid-template-columns: 1fr 1fr; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body data-root="../../">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Verse Comparative Matrix</h1>
+    <p class="lede">Type a reference such as <strong>John 3:16</strong>, <strong>Psalm 23</strong>, or <strong>Romans 8:28-30</strong> and compare four public-domain translations side by side.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="search-bar">
+      <div class="suggestions">
+        <label class="field" for="ref">Reference</label>
+        <input id="ref" class="ref-input" type="text" placeholder="John 3:16" autocomplete="off" spellcheck="false">
+        <div class="list hidden" id="suggestions"></div>
+      </div>
+      <button id="go">Show verses</button>
+      <button class="ghost" id="print">Print</button>
+    </div>
+    <div class="row tight" style="margin-top:10px">
+      <span class="muted small">Try:</span>
+      <button class="ghost" data-quick="Genesis 1:1">Genesis 1:1</button>
+      <button class="ghost" data-quick="Psalm 23">Psalm 23</button>
+      <button class="ghost" data-quick="John 3:16">John 3:16</button>
+      <button class="ghost" data-quick="Romans 8:28-30">Romans 8:28-30</button>
+      <button class="ghost" data-quick="Philippians 4:4-7">Philippians 4:4-7</button>
+    </div>
+  </section>
+
+  <section id="result" aria-live="polite"></section>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sermon Notebook &amp; Outline Builder — StudyTools</title>
+<meta name="description" content="A markdown sermon notebook with SOAP, inductive, and expository templates, one-click PDF export, and copy to clipboard.">
+<link rel="stylesheet" href="../../css/base.css">
+<style>
+  .notebook { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .notebook { grid-template-columns: 1fr; } }
+  .editor-pane textarea {
+    min-height: 62vh; font-family: var(--mono); font-size: .9rem; line-height: 1.6;
+    border-radius: 10px;
+  }
+  .preview-pane { min-height: 62vh; overflow-wrap: break-word; }
+  .preview-pane h1 { font-family: var(--serif); font-size: 1.5rem; margin: .2rem 0 .5rem; }
+  .preview-pane h2 { font-family: var(--serif); font-size: 1.2rem; margin: 1.3rem 0 .4rem; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  .preview-pane h3 { font-family: var(--serif); font-size: 1.05rem; margin: 1rem 0 .3rem; }
+  .preview-pane p { margin: .55rem 0; }
+  .preview-pane blockquote { border-left: 3px solid var(--accent-2); margin: .6rem 0; padding: 2px 0 2px 12px; color: var(--ink-soft); font-family: var(--serif); }
+  .preview-pane code { font-family: var(--mono); background: var(--bg-alt); padding: 1px 4px; border-radius: 4px; font-size: .85em; }
+  .preview-pane ul, .preview-pane ol { padding-left: 1.3rem; }
+  .preview-pane hr { border: 0; border-top: 1px solid var(--line); margin: 1.1rem 0; }
+  .preview-pane a { color: var(--accent); }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+  .status { font-size: .78rem; color: var(--ink-faint); margin-left: auto; }
+  .template-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
+  .template-buttons button { font-size: .8rem; padding: 5px 10px; }
+  .split-note { font-size: .78rem; color: var(--ink-faint); }
+  @media print {
+    .notebook { display: block; }
+    .editor-pane, .toolbar, .meta-grid, header.page p { display: none !important; }
+    .preview-pane { min-height: 0; border: none; box-shadow: none; padding: 0; }
+  }
+</style>
+</head>
+<body data-root="../../">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Sermon Notebook</h1>
+    <p class="lede">Take notes during the service in markdown, or start from a template. The preview updates as you type, and everything saves to this browser automatically. Export a clean PDF or copy the outline when you're done.</p>
+  </header>
+
+  <section class="card">
+    <div class="meta-grid">
+      <div><label class="field" for="sermon-title">Sermon title</label><input id="sermon-title" type="text" placeholder="The Prodigal Son" autocomplete="off"></div>
+      <div><label class="field" for="sermon-speaker">Speaker</label><input id="sermon-speaker" type="text" placeholder="Pastor" autocomplete="off"></div>
+      <div><label class="field" for="sermon-passage">Passage</label><input id="sermon-passage" type="text" placeholder="Luke 15:11-32" autocomplete="off"></div>
+      <div><label class="field" for="sermon-date">Date</label><input id="sermon-date" type="date"></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="template-buttons">
+        <button class="secondary" data-template="soap">SOAP</button>
+        <button class="secondary" data-template="inductive">Inductive</button>
+        <button class="secondary" data-template="expository">Expository</button>
+        <button class="secondary" data-template="notes">Blank notes</button>
+      </div>
+      <span class="status" id="save-status">Saved locally</span>
+    </div>
+
+    <div class="toolbar no-print">
+      <button id="export-pdf">Export to PDF</button>
+      <button class="secondary" id="copy-md">Copy markdown</button>
+      <button class="secondary" id="copy-text">Copy outline</button>
+      <button class="ghost" id="download-md">Download .md</button>
+      <button class="ghost" id="clear-note">Clear</button>
+    </div>
+  </section>
+
+  <div class="notebook">
+    <section class="card editor-pane">
+      <label class="field" for="editor">Markdown <span class="split-note">— headings, lists, &gt; quotes, **bold**, *italic*</span></label>
+      <textarea id="editor" spellcheck="true" placeholder="# Sermon title
+
+## Scripture
+> Luke 15:11-32
+
+## Observation
+- ..."></textarea>
+    </section>
+
+    <section class="card preview-pane" id="preview" aria-live="polite"></section>
+  </div>
+
+  <p class="muted small" style="margin-top:14px">Tip: use the passage field with the Verse Matrix app to pull the text into your notes.</p>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="markdown.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+{
+ "topics": [
+  {
+   "id": "gratitude",
+   "name": "Gratitude",
+   "scriptures": [
+    {
+     "ref": "Psalm 100:4-5",
+     "verse": "Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name. For the Lord is good; his mercy is everlasting; and his truth endureth to all generations.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "1 Thessalonians 5:18",
+     "verse": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Colossians 3:15",
+     "verse": "And let the peace of God rule in your hearts, to the which also ye are called in one body; and be ye thankful.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What are three specific things from this week you can thank God for?",
+    "How does remembering God's past faithfulness change how you face today?",
+    "Who in your life models a thankful heart, and what can you learn from them?"
+   ],
+   "prayer": "Father, open our eyes to the gifts You give us every day. Forgive us for the times we grumble instead of give thanks. Teach us to receive everything as from Your hand, and to say thank You with our words and our lives. Amen."
+  },
+  {
+   "id": "kindness",
+   "name": "Kindness",
+   "scriptures": [
+    {
+     "ref": "Ephesians 4:32",
+     "verse": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ’s sake hath forgiven you.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Micah 6:8",
+     "verse": "He hath shewed thee, O man, what is good; and what doth the Lord require of thee, but to do justly, and to love mercy, and to walk humbly with thy God?",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Luke 6:35",
+     "verse": "But love ye your enemies, and do good, and lend, hoping for nothing again; and your reward shall be great, and ye shall be the children of the Highest: for he is kind unto the unthankful and to the evil.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "When has someone shown you unexpected kindness, and how did it affect you?",
+    "What is one small act of kindness you could plan for this week?",
+    "How does God's kindness toward us shape the way we treat difficult people?"
+   ],
+   "prayer": "Lord, You have been kind to us beyond measure. Make us people who notice the needs around us and respond with Your gentleness. Help us to be kind especially when it costs us something. Amen."
+  },
+  {
+   "id": "forgiveness",
+   "name": "Forgiveness",
+   "scriptures": [
+    {
+     "ref": "Colossians 3:13",
+     "verse": "Forbearing one another, and forgiving one another, if any man have a quarrel against any: even as Christ forgave you, so also do ye.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Matthew 6:14",
+     "verse": "For if ye forgive men their trespasses, your heavenly Father will also forgive you:",
+     "translation": "KJV"
+    },
+    {
+     "ref": "1 John 1:9",
+     "verse": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "Why is forgiveness so hard when we have been truly hurt?",
+    "How does remembering how much God has forgiven us change our willingness to forgive?",
+    "What step toward forgiveness can you take this week, even if the feelings are not there yet?"
+   ],
+   "prayer": "Merciful Father, we come to You because You are faithful to forgive. Search our hearts for any resentment we are carrying. Give us the strength to release it, trusting You with the justice and healing we need. Amen."
+  },
+  {
+   "id": "faith",
+   "name": "Faith",
+   "scriptures": [
+    {
+     "ref": "Hebrews 11:1",
+     "verse": "Now faith is the substance of things hoped for, the evidence of things not seen.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Proverbs 3:5-6",
+     "verse": "Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Mark 9:24",
+     "verse": "And straightway the father of the child cried out, and said with tears, Lord, I believe; help thou mine unbelief.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "Where is God asking you to trust Him without seeing the whole picture?",
+    "How has God proved faithful to you in the past?",
+    "What does it look like to lean on God's understanding instead of your own this week?"
+   ],
+   "prayer": "Lord, we believe, help our unbelief. When we can't see the way forward, remind us of who You are. We choose to trust You in the small decisions and the big ones. Amen."
+  },
+  {
+   "id": "love",
+   "name": "Love",
+   "scriptures": [
+    {
+     "ref": "1 Corinthians 13:4-5",
+     "verse": "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up, Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil;",
+     "translation": "KJV"
+    },
+    {
+     "ref": "John 13:34-35",
+     "verse": "A new commandment I give unto you, That ye love one another; as I have loved you, that ye also love one another. By this shall all men know that ye are my disciples, if ye have love one to another.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "1 John 4:19",
+     "verse": "We love him, because he first loved us.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "Which description of love in 1 Corinthians 13 do you find hardest to live out?",
+    "How has someone shown you Christ-like love recently?",
+    "What is one way you can love your family or church more actively this week?"
+   ],
+   "prayer": "Father, we love because You first loved us. Fill our hearts so that they overflow into patient, humble, selfless love toward everyone You place in our path. Amen."
+  },
+  {
+   "id": "hope",
+   "name": "Hope",
+   "scriptures": [
+    {
+     "ref": "Romans 15:13",
+     "verse": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Jeremiah 29:11",
+     "verse": "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "1 Peter 1:3",
+     "verse": "Blessed be the God and Father of our Lord Jesus Christ, which according to his abundant mercy hath begotten us again unto a lively hope by the resurrection of Jesus Christ from the dead,",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "Where are you tempted to lose hope right now?",
+    "How does the resurrection anchor our hope even in painful circumstances?",
+    "How can you bring hope to someone who is discouraged this week?"
+   ],
+   "prayer": "God of hope, fill us with all joy and peace as we trust in You. Lift our eyes from our circumstances to the living hope we have in Jesus. Make us bearers of that hope to others. Amen."
+  },
+  {
+   "id": "courage",
+   "name": "Courage",
+   "scriptures": [
+    {
+     "ref": "Joshua 1:9",
+     "verse": "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "2 Timothy 1:7",
+     "verse": "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Psalm 27:1",
+     "verse": "A Psalm of David. The Lord is my light and my salvation; whom shall I fear? the Lord is the strength of my life; of whom shall I be afraid?",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What fear is holding you back from obeying God fully?",
+    "How does knowing God is with you change how you face that fear?",
+    "Where do you need to be strong and courageous this week?"
+   ],
+   "prayer": "Almighty God, You have not given us a spirit of fear. Give us courage to obey You, to speak the truth in love, and to face whatever comes with confidence in Your presence. Amen."
+  },
+  {
+   "id": "service",
+   "name": "Service",
+   "scriptures": [
+    {
+     "ref": "Mark 10:45",
+     "verse": "For even the Son of man came not to be ministered unto, but to minister, and to give his life a ransom for many.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Galatians 5:13",
+     "verse": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "1 Peter 4:10",
+     "verse": "As every man hath received the gift, even so minister the same one to another, as good stewards of the manifold grace of God.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What gifts has God given you that could serve others?",
+    "Who around you needs practical help right now?",
+    "How does Jesus' example of serving reshape your idea of greatness?"
+   ],
+   "prayer": "Servant King, You came not to be served but to serve. Break our self-focus and show us the joy of giving ourselves away. Use us this week to meet a real need in Your name. Amen."
+  },
+  {
+   "id": "patience",
+   "name": "Patience",
+   "scriptures": [
+    {
+     "ref": "James 1:2-4",
+     "verse": "My brethren, count it all joy when ye fall into divers temptations; Knowing this, that the trying of your faith worketh patience. But let patience have her perfect work, that ye may be perfect and entire, wanting nothing.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Romans 12:12",
+     "verse": "Rejoicing in hope; patient in tribulation; continuing instant in prayer;",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Psalm 37:7",
+     "verse": "Rest in the Lord, and wait patiently for him: fret not thyself because of him who prospereth in his way, because of the man who bringeth wicked devices to pass.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What situation is testing your patience most right now?",
+    "What might God be growing in you through this waiting season?",
+    "How can you practice resting in the Lord rather than fretting?"
+   ],
+   "prayer": "Patient Father, You are never rushed and never late. Quiet our anxious hearts. Grow in us the endurance that produces mature faith, and help us to wait well. Amen."
+  },
+  {
+   "id": "wisdom",
+   "name": "Wisdom",
+   "scriptures": [
+    {
+     "ref": "James 1:5",
+     "verse": "If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Proverbs 1:7",
+     "verse": "The fear of the Lord is the beginning of knowledge: but fools despise wisdom and instruction.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Psalm 119:105",
+     "verse": "נ NUN. Thy word is a lamp unto my feet, and a light unto my path.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What decision do you need God's wisdom for right now?",
+    "How does the fear of the Lord shape the way you make choices?",
+    "Where has God's Word guided you in a way you didn't expect?"
+   ],
+   "prayer": "Lord, we lack wisdom, so we ask You to give it generously. Guard us from leaning on our own understanding. Light our path with Your Word and teach us to walk in it. Amen."
+  },
+  {
+   "id": "joy",
+   "name": "Joy",
+   "scriptures": [
+    {
+     "ref": "Nehemiah 8:10",
+     "verse": "Then he said unto them, Go your way, eat the fat, and drink the sweet, and send portions unto them for whom nothing is prepared: for this day is holy unto our Lord: neither be ye sorry; for the joy of the Lord is your strength.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "John 15:11",
+     "verse": "These things have I spoken unto you, that my joy might remain in you, and that your joy might be full.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Philippians 4:4",
+     "verse": "Rejoice in the Lord alway: and again I say, Rejoice.",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What is the difference between happiness and joy?",
+    "When have you felt the joy of the Lord strengthen you in a hard time?",
+    "What robs you of joy, and how can you re-center on Christ this week?"
+   ],
+   "prayer": "Joy of heaven, thank You that our joy is not dependent on circumstances but on You. Restore to us the joy of Your salvation and let it strengthen us for every day. Amen."
+  },
+  {
+   "id": "humility",
+   "name": "Humility",
+   "scriptures": [
+    {
+     "ref": "Philippians 2:3-4",
+     "verse": "Let nothing be done through strife or vainglory; but in lowliness of mind let each esteem other better than themselves. Look not every man on his own things, but every man also on the things of others.",
+     "translation": "KJV"
+    },
+    {
+     "ref": "1 Peter 5:6",
+     "verse": "Humble yourselves therefore under the mighty hand of God, that he may exalt you in due time:",
+     "translation": "KJV"
+    },
+    {
+     "ref": "Micah 6:8",
+     "verse": "He hath shewed thee, O man, what is good; and what doth the Lord require of thee, but to do justly, and to love mercy, and to walk humbly with thy God?",
+     "translation": "KJV"
+    }
+   ],
+   "questions": [
+    "What does it look like to consider others better than yourself in daily life?",
+    "Why is humility the soil in which other virtues grow?",
+    "How did Jesus model humility, and how can you follow Him this week?"
+   ],
+   "prayer": "Humble Savior, You laid aside Your glory for us. Put to death our pride and teach us to walk humbly with You. Help us to lift others up rather than ourselves. Amen."
+  }
+ ]
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prayer Prompt &amp; Journal Clock — StudyTools</title>
+<meta name="description" content="A distraction-free prayer timer with a daily rotating list of prayer categories and a private journal.">
+<link rel="stylesheet" href="../../css/base.css">
+<style>
+  .prayer-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 860px) { .prayer-layout { grid-template-columns: 1fr; } }
+  .focus-mode { position: fixed; inset: 0; z-index: 60; background: #221b17; color: #f5efe6; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+  .focus-mode .big-time { font-family: var(--serif); font-size: clamp(3.6rem, 16vw, 8rem); line-height: 1; letter-spacing: -0.02em; }
+  .focus-mode .focus-category { font-size: 1.15rem; color: #d8c8b2; letter-spacing: .04em; }
+  .focus-mode .focus-prompt { max-width: 44ch; text-align: center; color: #bfae97; font-family: var(--serif); }
+  .focus-mode button { background: transparent; border-color: #6b5745; color: #f5efe6; }
+  .focus-mode button.primary { background: var(--accent-2); border-color: var(--accent-2); color: #221b17; }
+  .timer-readout { font-family: var(--serif); font-size: 2.4rem; line-height: 1; }
+  .timer-ring { transform: rotate(-90deg); }
+  .timer-ring circle { fill: none; stroke-width: 6; }
+  .timer-ring .track { stroke: var(--bg-alt); }
+  .timer-ring .value { stroke: var(--accent-2); stroke-linecap: round; transition: stroke-dashoffset .3s linear; }
+  .cat-list { list-style: none; margin: 0; padding: 0; }
+  .cat-list li { display: flex; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .cat-list li:last-child { border-bottom: 0; }
+  .cat-list .cat-name { font-weight: 600; min-width: 8.5em; }
+  .cat-list .cat-desc { color: var(--ink-soft); font-size: .89rem; }
+  .cat-list li.is-today { background: var(--accent-soft); border-radius: 8px; padding-left: 10px; }
+  .journal-entry { border-top: 1px solid var(--line); padding: 10px 0; }
+  .journal-entry .head { display: flex; justify-content: space-between; gap: 10px; font-size: .78rem; color: var(--ink-faint); }
+  .journal-entry p { margin: 5px 0 0; white-space: pre-wrap; }
+</style>
+</head>
+<body data-root="../../">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Prayer Prompt &amp; Journal Clock</h1>
+    <p class="lede">Slow down and pray. Each day has a focus category, a prompt, and a simple timer to help you stay present. Jot down what you prayed about; it stays on this device.</p>
+  </header>
+
+  <div class="prayer-layout">
+    <section class="card">
+      <div class="row" style="justify-content:space-between;align-items:baseline">
+        <h2 class="serif" style="margin:0;font-size:1.2rem" id="today-label">Today</h2>
+        <span class="pill" id="today-category">—</span>
+      </div>
+      <p id="today-prompt" class="serif" style="font-size:1.08rem;margin:12px 0 4px"></p>
+      <p class="muted small" id="today-verse"></p>
+
+      <hr class="rule">
+
+      <div class="row" style="gap:22px;align-items:center">
+        <svg class="timer-ring" width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+          <circle class="track" cx="66" cy="66" r="58"></circle>
+          <circle class="value" id="ring" cx="66" cy="66" r="58" stroke-dasharray="364.4" stroke-dashoffset="0"></circle>
+        </svg>
+        <div>
+          <div class="timer-readout" id="timer-readout">05:00</div>
+          <div class="muted small" id="timer-sub">5 minutes of focused prayer</div>
+          <div class="row tight" style="margin-top:12px">
+            <button id="timer-toggle">Start</button>
+            <button class="ghost" id="timer-reset">Reset</button>
+            <button class="secondary" id="focus-mode">Focus mode</button>
+          </div>
+          <div class="row tight" style="margin-top:8px">
+            <button class="ghost" data-minutes="1">1 min</button>
+            <button class="ghost" data-minutes="5">5 min</button>
+            <button class="ghost" data-minutes="10">10 min</button>
+            <button class="ghost" data-minutes="15">15 min</button>
+            <button class="ghost" data-minutes="30">30 min</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="serif" style="margin:0 0 4px;font-size:1.2rem">Weekly rhythm</h2>
+      <p class="muted small" style="margin:0 0 8px">Each day of the week has a different focus so your prayers stay broad.</p>
+      <ul class="cat-list" id="cat-list"></ul>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="row" style="justify-content:space-between;align-items:baseline">
+      <h2 class="serif" style="margin:0;font-size:1.2rem">Prayer journal</h2>
+      <button class="ghost" id="export-journal">Export journal</button>
+    </div>
+    <p class="muted small">Write a line or two after you pray: what you asked for, what you noticed, what you're thankful for.</p>
+    <textarea id="journal-input" rows="4" placeholder="Today I prayed about…"></textarea>
+    <div class="row" style="margin-top:10px">
+      <button id="save-entry">Save entry</button>
+      <label class="row tight" style="margin-left:auto;font-size:.84rem;color:var(--ink-soft)">
+        <input type="checkbox" id="include-prompt" checked style="width:auto"> Include today's prompt
+      </label>
+    </div>
+    <div id="journal-list" style="margin-top:14px"></div>
+  </section>
+
+  <footer class="site">
+    <p>Prayer categories, prompts, and Scripture selections are part of this project (public domain KJV text). Journal entries are stored only in your browser.</p>
+  </footer>
+</main>
+
+<div class="focus-mode hidden" id="focus-overlay">
+  <div class="focus-category" id="focus-category"></div>
+  <div class="big-time" id="focus-time">05:00</div>
+  <div class="focus-prompt" id="focus-prompt"></div>
+  <button class="primary" id="focus-toggle">Pause</button>
+  <button id="focus-exit">End focus</button>
+</div>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

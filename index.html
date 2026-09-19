@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StudyTools — Bible study apps that run entirely in your browser</title>
+<meta name="description" content="A collection of offline-friendly Bible study tools: sermon notes, translation comparison, Greek and Hebrew flashcards, reading plans, prayer journal, SRS memory verses, family devotions, and a church calendar.">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .hero { padding: 46px 0 8px; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 3rem); margin: 0 0 10px; }
+  .hero p { color: var(--ink-soft); max-width: 62ch; font-size: 1.03rem; }
+  .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; margin-top: 26px; }
+  .app-card { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: transform .12s ease, box-shadow .12s ease; }
+  .app-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(60,44,30,.1), 0 14px 34px rgba(60,44,30,.12); }
+  .app-card h2 { font-family: var(--serif); font-size: 1.12rem; margin: 0; }
+  .app-card p { margin: 0; color: var(--ink-soft); font-size: .9rem; }
+  .app-card .arrow { margin-top: auto; color: var(--accent); font-size: .85rem; font-weight: 600; }
+  .group-label { margin: 30px 0 0; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+  .stats { display: flex; gap: 22px; flex-wrap: wrap; margin: 22px 0 0; }
+  .stat b { display: block; font-family: var(--serif); font-size: 1.35rem; }
+  .stat span { color: var(--ink-faint); font-size: .8rem; }
+</style>
+</head>
+<body data-root="./">
+<div data-topbar></div>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>StudyTools</h1>
+    <p>Seven free Bible study apps that run entirely in your browser. No accounts, no tracking, no server: everything is static files that work on GitHub Pages, and your notes and progress stay in your own browser.</p>
+    <div class="stats">
+      <div class="stat"><b>4</b><span>public-domain translations</span></div>
+      <div class="stat"><b>66</b><span>books of Scripture offline</span></div>
+      <div class="stat"><b>1,000</b><span>Greek &amp; Hebrew vocabulary cards</span></div>
+      <div class="stat"><b>7</b><span>standalone tools</span></div>
+    </div>
+  </section>
+
+  <p class="group-label">Study &amp; content</p>
+  <div class="app-grid">
+    <a class="card app-card" href="apps/sermon/">
+      <h2>Sermon Notebook &amp; Outline Builder</h2>
+      <p>A markdown notebook made for Sunday mornings. SOAP, inductive, and expository templates, plus one-click PDF export and copy-to-clipboard.</p>
+      <span class="arrow">Open notebook →</span>
+    </a>
+    <a class="card app-card" href="apps/matrix/">
+      <h2>Verse Comparative Matrix</h2>
+      <p>Type a reference and see KJV, ASV, WEB, and YLT side by side in a clean, readable grid. Compare whole chapters or single verses.</p>
+      <span class="arrow">Compare translations →</span>
+    </a>
+    <a class="card app-card" href="apps/vocab/">
+      <h2>Biblical Language Flashcards</h2>
+      <p>The 500 most frequent Greek and 500 most frequent Hebrew words, with glosses, transliteration, and morphology. Quiz, browse, and track mastery.</p>
+      <span class="arrow">Study vocabulary →</span>
+    </a>
+    <a class="card app-card" href="apps/memory/">
+      <h2>Scripture Memory (SRS)</h2>
+      <p>Paste verses you want to memorize and review them on a spaced-repetition schedule that grows the interval as you remember.</p>
+      <span class="arrow">Start memorizing →</span>
+    </a>
+  </div>
+
+  <p class="group-label">Habits &amp; spiritual disciplines</p>
+  <div class="app-grid">
+    <a class="card app-card" href="apps/prayer/">
+      <h2>Prayer Prompt &amp; Journal Clock</h2>
+      <p>A distraction-free prayer space: a daily rotating set of prayer categories, a focus timer, and a journal that stays on your device.</p>
+      <span class="arrow">Enter prayer →</span>
+    </a>
+  </div>
+
+  <p class="group-label">Interactive &amp; family</p>
+  <div class="app-grid">
+    <a class="card app-card" href="apps/devotional/">
+      <h2>Family Devotional Randomizer</h2>
+      <p>Spin the topic wheel and get a Scripture passage, three discussion questions, and a short prayer for your family or small group.</p>
+      <span class="arrow">Roll a topic →</span>
+    </a>
+    <a class="card app-card" href="apps/calendar/">
+      <h2>Church Calendar Tracker</h2>
+      <p>Follow Advent, Christmas, Epiphany, Lent, Easter, and Ordinary Time with daily BCP readings, creeds, and the Heidelberg Catechism.</p>
+      <span class="arrow">Open the calendar →</span>
+    </a>
+  </div>
+
+  <footer class="site">
+    <p>Scripture: King James Version, American Standard Version, World English Bible, and Young's Literal Translation — all public domain. Lexicon data from STEPBible and Open Scriptures; vocabulary frequency from OpenGNT and the Open Scriptures Hebrew Bible. Creeds and catechisms are public-domain texts. See the repository README for full attribution.</p>
+    <p>Your notes, journal entries, and study progress never leave this device; they are stored in your browser's local storage.</p>
+  </footer>
+</main>
+
+<script src="js/common.js"></script>
+<script>ST.mountTopbar(undefined);</script>
+</body>
+</html>

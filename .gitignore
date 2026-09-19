@@ -1,0 +1,12 @@
+# Build/download caches (regenerate with the scripts in this folder)
+scripts/.cache/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
