@@ -8,6 +8,8 @@
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
     { id: "dictionary", name: "Dictionary", href: "apps/dictionary/" },
     { id: "vocab", name: "Greek & Hebrew Cards", href: "apps/vocab/" },
+    { id: "interlinear", name: "Interlinear", href: "apps/interlinear/" },
+    { id: "topical", name: "Topical Bible", href: "apps/topical/" },
     { id: "prayer", name: "Prayer Clock", href: "apps/prayer/" },
     { id: "memory", name: "Memory Verses", href: "apps/memory/" },
     { id: "blog", name: "Blog Ideas", href: "apps/blog/" },
@@ -97,7 +99,24 @@
     "2maccabees": "ii-maccabees", "2macc": "ii-maccabees", "iimaccabees": "ii-maccabees", "ii maccabees": "ii-maccabees",
     maccabees: "i-maccabees", macc: "i-maccabees",
     "additionalpsalm": "additional-psalm", "psalm151": "additional-psalm",
-    laodiceans: "laodiceans", "epistleoflaodiceans": "laodiceans"
+    laodiceans: "laodiceans", "epistleoflaodiceans": "laodiceans",
+    // Compact abbreviations used by Nave's and Torrey's topical Bibles
+    ge: "genesis", ex: "exodus", le: "leviticus", nu: "numbers", num: "numbers",
+    de: "deuteronomy", jos: "joshua", jdj: "judges", ru: "ruth",
+    "1sa": "i-samuel", "2sa": "ii-samuel", "1ki": "i-kings", "2ki": "ii-kings",
+    "1ch": "i-chronicles", "2ch": "ii-chronicles", ezr: "ezra", ne: "nehemiah", neh: "nehemiah",
+    es: "esther", ps: "psalms", pr: "proverbs", ec: "ecclesiastes",
+    so: "song-of-solomon", song: "song-of-solomon", isa: "isaiah", jer: "jeremiah",
+    la: "lamentations", eze: "ezekiel", da: "daniel", ho: "hosea", hos: "hosea",
+    joe: "joel", am: "amos", ob: "obadiah", jon: "jonah", mic: "micah", na: "nahum",
+    hab: "habakkuk", zep: "zephaniah", hag: "haggai", zec: "zechariah", mal: "malachi",
+    mt: "matthew", mr: "mark", lu: "luke", joh: "john", jn: "john", ac: "acts",
+    ro: "romans", "1co": "i-corinthians", "2co": "ii-corinthians", ga: "galatians",
+    eph: "ephesians", php: "philippians", col: "colossians",
+    "1th": "i-thessalonians", "2th": "ii-thessalonians", "1ti": "i-timothy", "2ti": "ii-timothy",
+    tit: "titus", phm: "philemon", heb: "hebrews", jas: "james",
+    "1pe": "i-peter", "2pe": "ii-peter", "1jo": "i-john", "2jo": "ii-john", "3jo": "iii-john",
+    jud: "judges", jdj: "judges", jude: "jude", re: "revelation-of-john"
   };
 
   function normalizeBook(name) {

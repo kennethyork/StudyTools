@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Read the Greek New Testament word by word, with transliteration, morphology, Strong's numbers, and a literal English gloss.">
+<title>Greek Interlinear — StudyTools</title>
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .ref-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+  .ref-bar .grow { flex: 1; min-width: 200px; }
+  .verse-block { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .verse-block:last-child { border-bottom: 0; }
+  .verse-num { font-family: var(--mono); font-size: .74rem; color: var(--accent); margin-bottom: 4px; }
+  .verse-greek { font-family: var(--greek); font-size: 1.25rem; line-height: 1.75; margin: 0 0 10px; direction: ltr; }
+  .verse-greek .w { cursor: pointer; border-radius: 4px; padding: 1px 2px; }
+  .verse-greek .w:hover, .verse-greek .w.active { background: var(--highlight); }
+  .verse-greek .w .sup { font-size: .55em; vertical-align: super; color: var(--accent); font-family: var(--sans); }
+  .verse-literal { font-family: var(--serif); color: var(--ink-soft); font-size: .92rem; line-height: 1.7; margin: 0 0 12px; }
+  .word-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 6px; margin-top: 6px; }
+  .word-cell { border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--card); cursor: pointer; }
+  .word-cell:hover, .word-cell.active { border-color: var(--accent-2); background: var(--accent-soft); }
+  .word-cell .g { font-family: var(--greek); font-size: 1.05rem; }
+  .word-cell .t { font-size: .72rem; color: var(--ink-faint); font-style: italic; }
+  .word-cell .e { font-size: .82rem; color: var(--ink-soft); }
+  .word-cell .s { font-family: var(--mono); font-size: .68rem; color: var(--accent); }
+  .chapter-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .chapter-nav button { font-size: .8rem; padding: 4px 10px; }
+  .legend { font-size: .8rem; color: var(--ink-faint); }
+  @media print {
+    .no-print, header.page p { display: none !important; }
+    .word-grid { grid-template-columns: repeat(3, 1fr); }
+    .verse-block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="interlinear">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Greek Interlinear</h1>
+    <p class="lede">Read the Greek New Testament one word at a time. Each word shows its accented form, transliteration, morphology, Strong's number, and a literal English gloss. Tap any word to highlight it.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="ref-bar">
+      <div class="grow">
+        <label class="field" for="ref">Reference</label>
+        <input id="ref" type="text" placeholder="John 3" autocomplete="off" spellcheck="false" style="font-family:var(--serif)">
+      </div>
+      <div>
+        <label class="field" for="book">Book</label>
+        <select id="book" style="min-width:170px"></select>
+      </div>
+      <div>
+        <label class="field" for="chapter">Chapter</label>
+        <select id="chapter" style="min-width:90px"></select>
+      </div>
+      <button id="go">Read</button>
+    </div>
+    <p class="legend" style="margin:10px 0 0">Greek text: OpenGNT (CC BY-SA 4.0). Glosses are the lexicon's brief English rendering, not a translation.</p>
+  </section>
+
+  <section id="reader" style="margin-top:16px">
+    <div class="card"><p class="muted">Choose a passage to read.</p></div>
+  </section>
+
+  <footer class="site">
+    <p>Greek text and word data from <a href="https://github.com/eliranwong/OpenGNT" rel="noopener">OpenGNT</a> by Eliran Wong (CC BY-SA 4.0). Morphology codes follow the Robinson/OpenGNT scheme. Glosses from the same dataset; see the Greek &amp; Hebrew Cards app for the fuller lexicon entries.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

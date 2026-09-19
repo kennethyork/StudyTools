@@ -14,6 +14,8 @@ never leave the device.
 | **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see the translations you choose side by side — KJV, the modernized KJV, ASV, WEB, YLT, plus KJVA and Douay-Rheims for the deuterocanonical books. Whole chapters or single verses, with chapter shortcuts and copy/print. |
 | **Cross-Reference Explorer** (`apps/xref/`) | Every passage openbible.info links to the verse you are reading, grouped by destination chapter and ranked by votes. Follow a link to jump to it. |
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
+| **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
+| **Greek Interlinear** (`apps/interlinear/`) | The Greek New Testament word by word: accented text, transliteration, morphology, Strong's number, and a literal English gloss, with a tap-to-highlight both views. |
 | **Biblical Language Flashcards** (`apps/vocab/`) | The 500 most frequent Greek New Testament words and 500 most frequent Hebrew Bible words with glosses, transliteration, morphology, and frequency. Flashcard and browse modes with known-word tracking. |
 | **Prayer Prompt & Journal Clock** (`apps/prayer/`) | A daily rotating prayer focus (Family, Community, Global Missions, Church, Nation, Sick & Suffering, Unbelievers), a focus timer with full-screen mode, and a private journal. |
 | **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the KJV/ASV/WEB/YLT text for a reference automatically. |
@@ -37,6 +39,8 @@ data/vocab/              top-500 Greek and Hebrew vocabulary
 data/blog/               blog idea kit (angles, fills, title patterns)
 data/crossref/           openbible.info cross-references, grouped by chapter (30 MB)
 data/dictionary/         Easton, Smith, and Hastings dictionary entries
+data/topical/            Nave's and Torrey's topical entries, by initial
+data/interlinear/        OpenGNT word-by-word Greek New Testament
 data/catechism/          Heidelberg and Westminster Shorter
 data/creeds/             Apostles', Nicene, Athanasian
 data/devotional/         topic wheel content
@@ -78,6 +82,8 @@ python3 scripts/build-kjvm.py         # modernized KJV (all 81 books) from the A
 python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
+python3 scripts/build-topical.py      # Nave's and Torrey's topical Bibles
+python3 scripts/build-interlinear.py  # OpenGNT Greek interlinear
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -91,6 +97,8 @@ All Scripture texts bundled here are in the **public domain**.
 | King James Version (1769), American Standard Version (1901), Young's Literal Translation (1862) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain texts; repository under MIT |
 | King James Version with Apocrypha (KJVA, 1769) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
 | Douay-Rheims Bible, Challoner Revision (DRC, 1752) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
+| Topical entries | [topical-bible-search](https://github.com/j86schroeder/topical-bible-search) (Nave 1897, Torrey 1897) | MIT pipeline; source works public domain |
+| Greek interlinear | [OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |
 | Bible dictionaries | [NEUU bible-dictionary-dataset](https://github.com/neuu-org/bible-dictionary-dataset) (CCEL ThML) | CC BY 4.0; source texts public domain |
 | Modernized King James Version (KJVM) | [Abrahamic Library](https://github.com/kennethyork/AbrahamicLibrary) (`kjv-bible`, "modernized in full") | Public domain text; MIT software |

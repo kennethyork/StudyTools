@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Search Nave's Topical Bible and Torrey's New Topical Textbook together, with every reference linked to the verse.">
+<title>Topical Bible — StudyTools</title>
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .topical-layout { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .topical-layout { grid-template-columns: 1fr; } }
+  .search-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .search-row input { flex: 1; min-width: 180px; }
+  .source-seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card); }
+  .source-seg button { border: 0; border-radius: 0; background: transparent; color: var(--ink-soft); font-size: .84rem; padding: 6px 14px; }
+  .source-seg button[aria-pressed="true"] { background: var(--accent); color: var(--btn-ink); }
+  .letter-row { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 10px; }
+  .letter-row button { font-size: .78rem; padding: 3px 8px; background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  .letter-row button.active { background: var(--accent); border-color: var(--accent); color: var(--btn-ink); }
+  .topic-list { max-height: 58vh; overflow: auto; margin-top: 10px; }
+  .topic-item { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); color: var(--ink); padding: 7px 8px; border-radius: 0; font-weight: 400; cursor: pointer; font-size: .9rem; }
+  .topic-item:hover, .topic-item.active { background: var(--bg-alt); filter: none; }
+  .topic-item .count { color: var(--ink-faint); font-size: .72rem; }
+  .entry { border-top: 1px solid var(--line); padding: 12px 0; }
+  .entry:first-of-type { border-top: 0; }
+  .entry .entry-text { font-family: var(--serif); font-size: .98rem; margin: 0 0 6px; }
+  .ref-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ref-chip { font-size: .8rem; font-family: var(--serif); padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-alt); color: var(--accent); text-decoration: none; }
+  .ref-chip:hover { background: var(--accent-soft); }
+  .see-also { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .see-also button { font-size: .78rem; padding: 3px 10px; border-radius: 999px; background: transparent; color: var(--accent); border-color: var(--line); }
+  @media print {
+    .topical-layout { display: block; }
+    .no-print, header.page p { display: none !important; }
+    .topic-list { max-height: none; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="topical">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Topical Bible</h1>
+    <p class="lede">Everything Scripture says about a subject, gathered by two classic reference works. Search Nave's Topical Bible or Torrey's New Topical Textbook, and click any reference to read the verse.</p>
+  </header>
+
+  <div class="topical-layout">
+    <div>
+      <section class="card no-print">
+        <div class="source-seg" id="source-seg" role="group" aria-label="Which topical work">
+          <button type="button" data-source="nave" aria-pressed="true">Nave's</button>
+          <button type="button" data-source="torrey" aria-pressed="false">Torrey's</button>
+          <button type="button" data-source="both" aria-pressed="false">Both</button>
+        </div>
+        <div class="search-row" style="margin-top:12px">
+          <input id="search" type="text" placeholder="Search a subject…" autocomplete="off">
+          <button id="clear">Clear</button>
+        </div>
+        <div class="letter-row" id="letters"></div>
+      </section>
+
+      <section class="card">
+        <div class="row" style="justify-content:space-between;align-items:baseline">
+          <h2 class="serif" style="margin:0;font-size:1.05rem" id="list-title">Browse</h2>
+          <span class="muted small" id="list-count"></span>
+        </div>
+        <div class="topic-list" id="topic-list"></div>
+      </section>
+    </div>
+
+    <section class="card" id="topic">
+      <p class="muted">Choose a subject to see what the Bible says about it.</p>
+    </section>
+  </div>
+
+  <footer class="site">
+    <p>Nave's Topical Bible (1897) and Torrey's New Topical Textbook (1897), both public domain, from the <a href="https://github.com/j86schroeder/topical-bible-search" rel="noopener">topical-bible-search</a> structured edition (MIT). Verse text opens in the Verse Matrix.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
