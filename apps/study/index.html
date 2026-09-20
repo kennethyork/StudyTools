@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1613" media="(prefers-color-scheme: dark)">
 <title>Study a Passage — StudyTools</title>
-<meta name="description" content="One passage, everything the site has on it: the text in three translations, cross-references, the same ground in the Tanakh, Qur'an and Book of Mormon, and the Greek or Hebrew word by word.">
+<meta name="description" content="One passage, everything the site has on it: the text in three translations, cross-references, the public-domain commentary on the chapter, the same ground in the Tanakh, Qur'an and Book of Mormon, and the Greek or Hebrew word by word.">
 <link rel="stylesheet" href="../../css/base.css">
 <script src="../../js/theme.js"></script>
 <style>
@@ -35,6 +35,11 @@
   .words .g { font-size: 1.05rem; }
   .words .t { color: var(--ink-faint); font-size: .8rem; }
   .words .e { color: var(--ink-soft); }
+  .cm-verse { border-bottom: 1px dashed var(--line); padding: 8px 0; }
+  .cm-verse:last-child { border-bottom: 0; }
+  .cm-ref { font-family: var(--mono); font-size: .74rem; color: var(--accent); }
+  .cm-entry { margin-top: 3px; font-size: .94rem; line-height: 1.55; color: var(--ink-soft); }
+  .cm-who { font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); margin-right: 6px; }
   @media print {
     .no-print, header.page p, .tries { display: none !important; }
     .card { break-inside: avoid; box-shadow: none; border-color: #ccc; }
@@ -48,7 +53,7 @@
 <main class="wrap">
   <header class="page">
     <h1>Study a Passage</h1>
-    <p class="lede">Type a reference and get everything this site holds on it &mdash; the text in three translations, the cross-references the church has drawn to it, the ground it shares with the Tanakh, the Qur'an and the Book of Mormon, and the original text word by word, Greek for the New Testament and Hebrew for the Old. Made for preparing to teach.</p>
+    <p class="lede">Type a reference and get everything this site holds on it &mdash; the text in three translations, the cross-references the church has drawn to it, the public-domain commentary on the chapter (Jamieson-Fausset-Brown, Calvin, Meyer), the ground it shares with the Tanakh, the Qur'an and the Book of Mormon, and the original text word by word, Greek for the New Testament and Hebrew for the Old. Made for preparing to teach.</p>
   </header>
 
   <section class="card no-print">

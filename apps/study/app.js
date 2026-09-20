@@ -147,7 +147,42 @@
     });
     els.out.appendChild(xref);
 
-    /* 4. the same ground in the other traditions */
+    /* 4. what the commentators said */
+    var cm = block("Commentary", "Public-domain commentary, verse by verse: Jamieson, Fausset & Brown (1871), John Calvin, and F. B. Meyer. A comment is attached to the verse that opens the passage it explains.");
+    var cbody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
+    cm.appendChild(cbody);
+    q("cm:" + book.slug + ":" + ch, "data/commentary/" + book.slug + "/" + ch + ".json").then(function (d) {
+      cbody.remove();
+      var verses = Object.keys((d || {}).verses || {}).map(Number).sort(function (a, b) { return a - b; });
+      if (!verses.length) {
+        cm.appendChild(ST.el("p", { class: "muted small", text: "No commentary on this chapter in the works bundled here." }));
+        return;
+      }
+      verses.slice(0, 40).forEach(function (v) {
+        var entries = d.verses[String(v)] || [];
+        var day = document.createElement("div");
+        day.className = "cm-verse";
+        var head = document.createElement("div");
+        head.className = "cm-ref";
+        head.textContent = ch + ":" + v;
+        day.appendChild(head);
+        entries.forEach(function (e) {
+          day.appendChild(ST.el("div", { class: "cm-entry" }, [
+            ST.el("span", { class: "cm-who", text: e.short }),
+            ST.el("span", { class: "cm-text", text: e.text })
+          ]));
+        });
+        cm.appendChild(day);
+      });
+      if (verses.length > 40) {
+        cm.appendChild(ST.el("p", { class: "muted small", text: "Showing the first 40 verses of the chapter." }));
+      }
+    }).catch(function () {
+      cbody.textContent = "No commentary on this chapter.";
+    });
+    els.out.appendChild(cm);
+
+    /* 5. the same ground in the other traditions */
     var par = block("The same ground in the other traditions", "Comparisons from Parallel Passages that touch this chapter.");
     var pbody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
     par.appendChild(pbody);
@@ -180,7 +215,7 @@
     });
     els.out.appendChild(par);
 
-    /* 5. the original text, word by word: Greek New Testament, Hebrew Old
+    /* 6. the original text, word by word: Greek New Testament, Hebrew Old
        Testament — whichever the site has tagged for this book */
     if (book.testament === "NT" || book.testament === "OT") {
       var isHebrew = book.testament === "OT";

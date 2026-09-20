@@ -268,6 +268,36 @@
         body.appendChild(xSection);
       }
 
+      /* what the commentators said. The sources attach a comment to the verse
+         that opens a passage, so a verse without one is normal, and says so. */
+      var cSection = panelSection("Commentary");
+      var cBody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
+      cSection.appendChild(cBody);
+      body.appendChild(cSection);
+      ST.loadJSON(root + "data/commentary/" + slug + "/" + chapter + ".json")
+        .then(function (c) {
+          if (panelVerse !== verse) { return; }
+          cBody.remove();
+          var mine = ((c || {}).verses || {})[String(verse)] || [];
+          if (!mine.length) {
+            cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0",
+              text: "No comment on this verse in the works bundled here \u2014 they often attach a comment to the verse that opens a passage. The chapter is in Study a Passage." }));
+            return;
+          }
+          mine.forEach(function (entry) {
+            cSection.appendChild(ST.el("div", { class: "commentary" }, [
+              ST.el("div", { class: "c-who", text: entry.short + (entry.short === "JFB" ? " \u00b7 1871" : "") }),
+              ST.el("div", { class: "c-text", text: entry.text })
+            ]));
+          });
+          cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:8px 0 0" }, [
+            document.createTextNode("Public-domain commentary. "),
+            ST.el("a", { href: root + "apps/study/?ref=" + encodeURIComponent(label), text: "The whole chapter \u2192" })
+          ]));
+        }).catch(function () {
+          cBody.textContent = "Commentary could not be loaded.";
+        });
+
       /* the words behind it, where the site has them */
       var words = interlinear && interlinear.verses ? interlinear.verses[String(verse)] : null;
       if (words && words.length) {
