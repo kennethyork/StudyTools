@@ -344,6 +344,21 @@
             ST.el("a", { href: root + "apps/study/?ref=" + encodeURIComponent(dataLabel), text: "The whole chapter \u2192" })
           ]));
         }).catch(function () {
+          /* A deuterocanonical book has no commentary file at all: the three
+             works bundled here stop at the sixty-six. Say why, and what does
+             exist, instead of reporting a load failure for a file that was
+             never there. */
+          cBody.remove();
+          if (book.testament === "DC") {
+            cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0", text:
+              "No verse-level commentary exists for this book in the public domain. " +
+              "Jamieson, Fausset & Brown (1871), Calvin and F. B. Meyer are Protestant in " +
+              "range and stop at the sixty-six books. The deuterocanon does have public-domain " +
+              "commentary \u2014 Haydock's Catholic Bible Commentary (1859) goes through it verse " +
+              "by verse, and R. H. Charles introduced these books in 1913 \u2014 but neither is " +
+              "bundled here, so this panel says so rather than showing you something else." }));
+            return;
+          }
           cBody.textContent = "Commentary could not be loaded.";
         });
 

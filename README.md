@@ -230,9 +230,18 @@ JFB also writes front matter before most chapters — 1,178 introductions — wh
 sometimes the only place he touches a verse (his note on Genesis 1:1 is in the
 introduction, not on the verse) and, in the Song of Solomon, all he wrote: that
 book has all eight of its chapters as introductions and no verse comments at all,
-which is why it is now covered rather than absent. No deuterocanonical book has
-any commentary: the three works are Protestant in range, and their publisher's
-book list stops at the sixty-six. The panel says which reason applies.
+which is why it is now covered rather than absent.
+
+The twenty deuterocanonical books have none, and the panel now says so in those
+words rather than reporting a file that was never there: the three works are
+Protestant in range, and their publisher's book list stops at the sixty-six.
+Public-domain commentary on those books does exist — Haydock's Catholic Bible
+Commentary (1859) walks the Catholic deuterocanon verse by verse, and R. H.
+Charles introduced all of these books in 1913 — but neither is clean
+machine-readable text: CCEL's Charles is page images, Wikisource's is scan
+transclusion, and the one usable Internet Archive scan is OCR that would need a
+proofreading pass before it could be quoted beside Scripture. So neither is
+bundled, and the panel names both so a reader knows what to go and read instead.
 
 `scripts/check-liturgical.js` does the same job for the calendar: it walks every
 year from 1900 to 2100 and checks that each Sunday is named as the Prayer Book

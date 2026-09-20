@@ -189,7 +189,14 @@
         cm.appendChild(ST.el("p", { class: "muted small", text: "Showing the first 40 verses of the chapter." }));
       }
     }).catch(function () {
-      cbody.textContent = "No commentary on this chapter.";
+      /* These books have no commentary file at all, so say why rather than
+         reporting that a chapter could not be loaded. */
+      cbody.textContent = book.testament === "DC"
+        ? "No verse-level commentary exists for this book in the public domain: the works " +
+          "bundled here are Protestant in range and stop at the sixty-six books. Haydock's " +
+          "Catholic Bible Commentary (1859) and R. H. Charles (1913) cover this ground and are " +
+          "public domain, but neither is bundled here."
+        : "No commentary on this chapter.";
     });
     els.out.appendChild(cm);
 
