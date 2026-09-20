@@ -122,7 +122,9 @@
       actions.appendChild(ST.el("a", { class: "btn",
         href: root() + "apps/bible/?book=" + encodeURIComponent(first.slug) + "&chapter=" + first.chapter,
         text: "Read today's portion \u2192" }));
-      var tick = ST.el("button", { type: "button", class: read ? "secondary" : "",
+      /* btn secondary, not a bare button: this page does not load base.css, so a
+         bare <button> here is the browser's own grey box beside a styled one */
+      var tick = ST.el("button", { type: "button", class: "btn secondary",
         text: read ? "\u2713 Read \u2014 undo" : "Mark as read" });
       tick.addEventListener("click", function () {
         var current = planState();

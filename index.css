@@ -172,7 +172,34 @@ a { color: var(--accent); }
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 }
+
+/* The reading card puts its day, portion, note and buttons in this one container.
+   The day and the portion belong on a line together; the note and the buttons do
+   not — they were being squeezed onto that line beside them and overflowing it. */
+.featured-verse #plan-sub,
+.featured-verse #plan-actions { flex-basis: 100%; }
+.featured-verse #plan-sub { margin-bottom: 0; }
+.featured-verse #plan-actions { margin-top: 2px; }
+
+/* This page styles buttons with .btn classes rather than base.css. A button that
+   arrives without one would otherwise be the browser's grey box, which is what
+   "Mark as read" was next to the amber button beside it. */
+button {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--accent);
+  border-radius: 9px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+button:hover { background: var(--bg-alt); }
 
 .featured-verse .v-num { font-family: var(--serif); font-size: 1.2rem; color: var(--accent); }
 
