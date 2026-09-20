@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sunday Lectionary — StudyTools</title>
-<meta name="description" content="The Revised Common Lectionary for Years A, B and C: the readings for every Sunday and festival, each one opening in Study a Passage.">
+<meta name="description" content="The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage.">
 <link rel="stylesheet" href="../../css/base.css">
 <script src="../../js/theme.js"></script>
 <style>
@@ -14,9 +14,10 @@
   .next { border-left: 3px solid var(--accent-2); }
   .day { border-bottom: 1px solid var(--line); padding: 12px 0; }
   .day:last-child { border-bottom: 0; }
-  .day .when { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
-  .day .when h3 { font-family: var(--serif); font-size: 1.02rem; margin: 0; }
-  .day .when .date { color: var(--ink-faint); font-size: .82rem; }
+  .day h3 { font-family: var(--serif); font-size: 1.02rem; margin: 0 0 2px; }
+  .day .season { color: var(--ink-faint); font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; }
+  .office { margin-top: 8px; }
+  .office-title { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); }
   .readings { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 4px 14px; margin-top: 6px; }
   .reading { font-size: .92rem; }
   .reading .kind { color: var(--ink-faint); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; }
@@ -29,11 +30,11 @@
 <main class="wrap">
   <header class="page">
     <h1>Sunday Lectionary</h1>
-    <p class="lede">The Revised Common Lectionary, Years A, B and C &mdash; the readings appointed for every Sunday and festival. Open any reading to study it, or send it to the lectern to read aloud.</p>
+    <p class="lede">The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), which is in the public domain. Open any reading to study it, or send it to the lectern to read aloud.</p>
   </header>
 
   <section class="card no-print">
-    <div class="years" id="years" role="group" aria-label="Choose a year"></div>
+    <div class="years" id="seasons" role="group" aria-label="Choose a season"></div>
   </section>
 
   <section id="out"></section>

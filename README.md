@@ -95,6 +95,7 @@ python3 scripts/build-ebible.py JPS   # JPS Tanakh 1917 (39 books) from eBible.o
 python3 scripts/modernize.py RV RVM   # rule-based modernization of any of the above
 python3 scripts/modernize.py JPS JPSM
 python3 scripts/build-compare.py      # freezes the compared passages (Qur'an, Tanakh, Book of Mormon)
+python3 scripts/build-lectionary.py   # the BCP 1928 Sunday tables (public domain)
 python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries

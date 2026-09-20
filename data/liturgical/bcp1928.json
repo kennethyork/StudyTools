@@ -1,0 +1,4920 @@
+{
+  "source": "The Book of Common Prayer (1928), Episcopal Church - public domain in the United States since 1 January 2024. Tables transcribed by github.com/vovchykbratyk/BCP_1928. Readings are given as the Prayer Book prints them.",
+  "weeks": [
+    {
+      "label": "FIRST SUNDAY IN ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "46",
+            "link": "46"
+          },
+          {
+            "ref": "97",
+            "link": "97"
+          },
+          {
+            "ref": "50",
+            "link": "50"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Mal. 3:1–6,4:4–6",
+            "link": "Mal 3:1-6"
+          },
+          {
+            "ref": "*Isa. 28:14-22",
+            "link": "Isa 28:14-22"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 1:5–25",
+            "link": "Luke 1:5-25"
+          },
+          {
+            "ref": "Heb. 12:14",
+            "link": "Heb 12:14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "48",
+            "link": "48"
+          },
+          {
+            "ref": "126",
+            "link": "126"
+          },
+          {
+            "ref": "18:1-20",
+            "link": "18:1-20"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 13:6-13",
+            "link": "Isa 13:6-13"
+          },
+          {
+            "ref": "Isa. 62",
+            "link": "Isa 62"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 25:1–13",
+            "link": "Matt 25:1-13"
+          },
+          {
+            "ref": "1 Thess. 5:1-11",
+            "link": "1 Thess 5:1-11"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY IN ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "25",
+            "link": "25"
+          },
+          {
+            "ref": "119:1-16",
+            "link": "119:1-16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 52:1–10",
+            "link": "Isa 52:1-10"
+          },
+          {
+            "ref": "*Isa. 55",
+            "link": "Isa 55"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 1:26–56",
+            "link": "Luke 1:26-56"
+          },
+          {
+            "ref": "2 Tim. 3",
+            "link": "2 Tim 3"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "119:89–104",
+            "link": "119:89-104"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          },
+          {
+            "ref": "111",
+            "link": "111"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Amos 3:1–8",
+            "link": "Amos 3:1-8"
+          },
+          {
+            "ref": "Isa. 26:1-11",
+            "link": "Isa 26:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Thess. 2:1–13",
+            "link": "1 Thess 2:1-13"
+          },
+          {
+            "ref": "John 5:30-40",
+            "link": "John 5:30-40"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRD SUNDAY IN ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "22:23",
+            "link": "22:23"
+          },
+          {
+            "ref": "99",
+            "link": "99"
+          },
+          {
+            "ref": "85",
+            "link": "85"
+          },
+          {
+            "ref": "107:1-16",
+            "link": "107:1-16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 1:4–10,17–19",
+            "link": "Jer 1:4-10"
+          },
+          {
+            "ref": "*Isa. 35",
+            "link": "Isa 35"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 1:57",
+            "link": "Luke 1:57"
+          },
+          {
+            "ref": "1 Thess. 5:12-23",
+            "link": "1 Thess 5:12-23"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "132",
+            "link": "132"
+          },
+          {
+            "ref": "134",
+            "link": "134"
+          },
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "130",
+            "link": "130"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Nahum 1:3–8,15",
+            "link": "Nahum 1:3-8"
+          },
+          {
+            "ref": "Isa. 26:1-11",
+            "link": "Isa 26:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 9:7–23",
+            "link": "1 Cor 9:7-23"
+          },
+          {
+            "ref": "Matt. 9:35-10:15",
+            "link": "Matt 9:35-10:15"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FOURTH SUNDAY IN ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "80",
+            "link": "80"
+          },
+          {
+            "ref": "77",
+            "link": "77"
+          },
+          {
+            "ref": "100",
+            "link": "100"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 33:7-16",
+            "link": "Jer 33:7-16"
+          },
+          {
+            "ref": "*Isa. 40:1–11",
+            "link": "Isa 40:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 3:1–17",
+            "link": "Luke 3:1-17"
+          },
+          {
+            "ref": "1 Thess. 1",
+            "link": "1 Thess 1"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "33",
+            "link": "33"
+          },
+          {
+            "ref": "102:15",
+            "link": "102:15"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 40:12–18,21–31",
+            "link": "Isa 40:12-18"
+          },
+          {
+            "ref": "Isa.42:1-16",
+            "link": "Isa42:1-16"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Thess. 3:7",
+            "link": "1 Thess 3:7"
+          },
+          {
+            "ref": "Matt. 11:11-24",
+            "link": "Matt 11:11-24"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIRST SUNDAY AFTER CHRISTMAS",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          },
+          {
+            "ref": "98",
+            "link": "98"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 49:8-13",
+            "link": "Isa 49:8-13"
+          },
+          {
+            "ref": "*Isa. 9:2–7",
+            "link": "Isa 9:2-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 2:1–20",
+            "link": "Luke 2:1-20"
+          },
+          {
+            "ref": "Heb. 2",
+            "link": "Heb 2"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "68",
+            "link": "68"
+          },
+          {
+            "ref": "27",
+            "link": "27"
+          },
+          {
+            "ref": "8",
+            "link": "8"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 63:7–16",
+            "link": "Isa 63:7-16"
+          },
+          {
+            "ref": "Job 28:12",
+            "link": "Job 28:12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Pet. 1:1–12",
+            "link": "2 Pet 1:1-12"
+          },
+          {
+            "ref": "Matt. 11:25",
+            "link": "Matt 11:25"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY AFTER CHRISTMAS",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "65",
+            "link": "65"
+          },
+          {
+            "ref": "121",
+            "link": "121"
+          },
+          {
+            "ref": "89:1-30",
+            "link": "89:1-30"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 44:1-8,21-23",
+            "link": "Isa 44:1-8"
+          },
+          {
+            "ref": "*Micah 4:1–5,5:2–4",
+            "link": "Micah 4:1-5"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 2:21–32",
+            "link": "Luke 2:21-32"
+          },
+          {
+            "ref": "Col. 2:6-17",
+            "link": "Col 2:6-17"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "111",
+            "link": "111"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          },
+          {
+            "ref": "132",
+            "link": "132"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Prov. 9:1–6,10",
+            "link": "Prov 9:1-6"
+          },
+          {
+            "ref": "Haggai 2:1-9",
+            "link": "Haggai 2:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 4:1–6",
+            "link": "2 Cor 4:1-6"
+          },
+          {
+            "ref": "Luke 2:34-40",
+            "link": "Luke 2:34-40"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIRST SUNDAY AFTER EPIPHANY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "72",
+            "link": "72"
+          },
+          {
+            "ref": "97",
+            "link": "97"
+          },
+          {
+            "ref": "92",
+            "link": "92"
+          },
+          {
+            "ref": "93",
+            "link": "93"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 60:1–9",
+            "link": "Isa 60:1-9"
+          },
+          {
+            "ref": "*Prov. 8:22-35",
+            "link": "Prov 8:22-35"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 2:1–12",
+            "link": "Matt 2:1-12"
+          },
+          {
+            "ref": "Col. 1:9",
+            "link": "Col 1:9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "84",
+            "link": "84"
+          },
+          {
+            "ref": "122",
+            "link": "122"
+          },
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          }
+        ],
+        "first": [
+          {
+            "ref": "1 Sam. 1:21",
+            "link": "1 Sam 1:21"
+          },
+          {
+            "ref": "Isa. 49:1-7",
+            "link": "Isa 49:1-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 18:1–14",
+            "link": "Matt 18:1-14"
+          },
+          {
+            "ref": "1 John 1:1-9",
+            "link": "1 John 1:1-9"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY AFTER EPIPHANY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "118",
+            "link": "118"
+          },
+          {
+            "ref": "29",
+            "link": "29"
+          },
+          {
+            "ref": "99",
+            "link": "99"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Exod. 34:29",
+            "link": "Exod 34:29"
+          },
+          {
+            "ref": "*Zech. 8:1–8,20-23",
+            "link": "Zech 8:1-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 12:12–31a",
+            "link": "1 Cor 12:12-31a"
+          },
+          {
+            "ref": "Mark 9:2-13",
+            "link": "Mark 9:2-13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "102:15",
+            "link": "102:15"
+          },
+          {
+            "ref": "117",
+            "link": "117"
+          },
+          {
+            "ref": "62",
+            "link": "62"
+          },
+          {
+            "ref": "127",
+            "link": "127"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 45:1-15",
+            "link": "Isa 45:1-15"
+          },
+          {
+            "ref": "Isa. 54:11",
+            "link": "Isa 54:11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom.9:14-26",
+            "link": "Rom9:14-26"
+          },
+          {
+            "ref": "John 1:35",
+            "link": "John 1:35"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRD SUNDAY AFTER EPIPHANY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "42",
+            "link": "42"
+          },
+          {
+            "ref": "43",
+            "link": "43"
+          },
+          {
+            "ref": "11",
+            "link": "11"
+          },
+          {
+            "ref": "12",
+            "link": "12"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 16:18-20,17:8-11",
+            "link": "Deut 16:18-20"
+          },
+          {
+            "ref": "*Isa. 41:8–10,17–20",
+            "link": "Isa 41:8-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 4:1–14",
+            "link": "John 4:1-14"
+          },
+          {
+            "ref": "James 2:1-13",
+            "link": "James 2:1-13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "27",
+            "link": "27"
+          },
+          {
+            "ref": "134",
+            "link": "134"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 56:1–8",
+            "link": "Isa 56:1-8"
+          },
+          {
+            "ref": "Isa. 54:1-8",
+            "link": "Isa 54:1-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 2:13",
+            "link": "John 2:13"
+          },
+          {
+            "ref": "Rom. 14:1-15:3",
+            "link": "Rom 14:1-15:3"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FOURTH SUNDAY AFTER EPIPHANY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "66",
+            "link": "66"
+          },
+          {
+            "ref": "18:1-20",
+            "link": "18:1-20"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 61",
+            "link": "Isa 61"
+          },
+          {
+            "ref": "*Deut. 4:5-13,32-40",
+            "link": "Deut 4:5-13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 4:16–32",
+            "link": "Luke 4:16-32"
+          },
+          {
+            "ref": "Eph. 2",
+            "link": "Eph 2"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          },
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "36:5",
+            "link": "36:5"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 45:20",
+            "link": "Isa 45:20"
+          },
+          {
+            "ref": "Dan. 10:10-19",
+            "link": "Dan 10:10-19"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 10",
+            "link": "Rom 10"
+          },
+          {
+            "ref": "Mark 6:45",
+            "link": "Mark 6:45"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIFTH SUNDAY AFTER EPIPHANY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "15",
+            "link": "15"
+          },
+          {
+            "ref": "85",
+            "link": "85"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ruth 1:1–17",
+            "link": "Ruth 1:1-17"
+          },
+          {
+            "ref": "*Hab. 1:12-2:4,9-14",
+            "link": "Hab 1:12-2:4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Col. 3:5–11",
+            "link": "Col 3:5-11"
+          },
+          {
+            "ref": "Luke 12:35-48",
+            "link": "Luke 12:35-48"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "21",
+            "link": "21"
+          },
+          {
+            "ref": "22:23",
+            "link": "22:23"
+          },
+          {
+            "ref": "7",
+            "link": "7"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Joel 3:9–17",
+            "link": "Joel 3:9-17"
+          },
+          {
+            "ref": "Amos 5:14-24",
+            "link": "Amos 5:14-24"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 13:36-52",
+            "link": "Matt 13:36-52"
+          },
+          {
+            "ref": "Gal. 6:1-10",
+            "link": "Gal 6:1-10"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SIXTH SUNDAY AFTER EPIPHANY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "75",
+            "link": "75"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "93",
+            "link": "93"
+          },
+          {
+            "ref": "98",
+            "link": "98"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 2:6–19",
+            "link": "Isa 2:6-19"
+          },
+          {
+            "ref": "*Isa. 66:1-2,10,12-16,18-23",
+            "link": "Isa 66:1-2"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 25:14–29",
+            "link": "Matt 25:14-29"
+          },
+          {
+            "ref": "2 Thess. 1",
+            "link": "2 Thess 1"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "9",
+            "link": "9"
+          },
+          {
+            "ref": "76",
+            "link": "76"
+          },
+          {
+            "ref": "96",
+            "link": "96"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Gen. 19:1–3,12–17,24-48",
+            "link": "Gen 19:1-3"
+          },
+          {
+            "ref": "2 Esdras 8:63-9:13",
+            "link": "2 Esdras 8:63-9:13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 17:20",
+            "link": "Luke 17:20"
+          },
+          {
+            "ref": "2 Pet. 3:1-14,17-18",
+            "link": "2 Pet 3:1-14"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SEPTUAGESIMA SUNDAY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "20",
+            "link": "20"
+          },
+          {
+            "ref": "121",
+            "link": "121"
+          },
+          {
+            "ref": "1",
+            "link": "1"
+          },
+          {
+            "ref": "18:21-35",
+            "link": "18:21-35"
+          },
+          {
+            "ref": "125",
+            "link": "125"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Joshua 1:1–9",
+            "link": "Joshua 1:1-9"
+          },
+          {
+            "ref": "Ezek. 3:4-11",
+            "link": "Ezek 3:4-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Tim. 2:1–13",
+            "link": "2 Tim 2:1-13"
+          },
+          {
+            "ref": "Matt.5:1-16",
+            "link": "Matt5:1-16"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "144",
+            "link": "144"
+          },
+          {
+            "ref": "80",
+            "link": "80"
+          }
+        ],
+        "first": [
+          {
+            "ref": "1 Macc. 2:49–64",
+            "link": "1 Macc 2:49-64"
+          },
+          {
+            "ref": "Isa. 5:1-7",
+            "link": "Isa 5:1-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Tim. 6:11–19",
+            "link": "1 Tim 6:11-19"
+          },
+          {
+            "ref": "Matt. 21:23-32",
+            "link": "Matt 21:23-32"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SEXAGESIMA SUNDAY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "71",
+            "link": "71"
+          },
+          {
+            "ref": "33",
+            "link": "33"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 50:4–10",
+            "link": "Isa 50:4-10"
+          },
+          {
+            "ref": "Isa. 30:8-21",
+            "link": "Isa 30:8-21"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 12:1–12",
+            "link": "2 Cor 12:1-12"
+          },
+          {
+            "ref": "Mark 4:26-34",
+            "link": "Mark 4:26-34"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "147",
+            "link": "147"
+          },
+          {
+            "ref": "37:26",
+            "link": "37:26"
+          },
+          {
+            "ref": "124",
+            "link": "124"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Eccles. 11:1–6",
+            "link": "Eccles 11:1-6"
+          },
+          {
+            "ref": "Dan. 3:1-26",
+            "link": "Dan 3:1-26"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 4:31–38",
+            "link": "John 4:31-38"
+          },
+          {
+            "ref": "Matt. 10:16-23,40-42",
+            "link": "Matt 10:16-23"
+          }
+        ]
+      }
+    },
+    {
+      "label": "QUINQUAGESIMA SUNDAY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "103",
+            "link": "103"
+          },
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "23",
+            "link": "23"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 7:7–14",
+            "link": "Wisdom 7:7-14"
+          },
+          {
+            "ref": "*Deut. 10:12-15,17-11:1",
+            "link": "Deut 10:12-15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 15:1–17",
+            "link": "John 15:1-17"
+          },
+          {
+            "ref": "1 John 2:1-17",
+            "link": "1 John 2:1-17"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "119:33–48",
+            "link": "119:33-48"
+          },
+          {
+            "ref": "139",
+            "link": "139"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Lev. 19:1–2,9–18",
+            "link": "Lev 19:1-2"
+          },
+          {
+            "ref": "Isa. 51:1-8",
+            "link": "Isa 51:1-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 4",
+            "link": "1 John 4"
+          },
+          {
+            "ref": "Mark 9:14-32",
+            "link": "Mark 9:14-32"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIRST SUNDAY IN LENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "50",
+            "link": "50"
+          },
+          {
+            "ref": "3",
+            "link": "3"
+          },
+          {
+            "ref": "62",
+            "link": "62"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 58",
+            "link": "Isa 58"
+          },
+          {
+            "ref": "Ecclus. 2",
+            "link": "Ecclus 2"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 6:1–18",
+            "link": "Matt 6:1-18"
+          },
+          {
+            "ref": "Rom 7:14",
+            "link": "Rom 7:14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "15",
+            "link": "15"
+          },
+          {
+            "ref": "92",
+            "link": "92"
+          },
+          {
+            "ref": "69:1-19",
+            "link": "69:1-19"
+          },
+          {
+            "ref": "30-37",
+            "link": "30-37"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 17:5–14",
+            "link": "Jer 17:5-14"
+          },
+          {
+            "ref": "Dan.9:3-10",
+            "link": "Dan9:3-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 10:1–13",
+            "link": "1 Cor 10:1-13"
+          },
+          {
+            "ref": "Luke 5:33-6:10",
+            "link": "Luke 5:33-6:10"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY IN LENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "86",
+            "link": "86"
+          },
+          {
+            "ref": "142",
+            "link": "142"
+          },
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "32",
+            "link": "32"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*1 Kings 8:37–43",
+            "link": "1 Kings 8:37-43"
+          },
+          {
+            "ref": "Ezek. 18:1-4,25-32",
+            "link": "Ezek 18:1-4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Col. 3:12-17",
+            "link": "Col 3:12-17"
+          },
+          {
+            "ref": "Matt. 5:27-37",
+            "link": "Matt 5:27-37"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "26",
+            "link": "26"
+          },
+          {
+            "ref": "119:1–16",
+            "link": "119:1-16"
+          },
+          {
+            "ref": "31",
+            "link": "31"
+          }
+        ],
+        "first": [
+          {
+            "ref": "2 Sam. 12:1–10,13-14",
+            "link": "2 Sam 12:1-10"
+          },
+          {
+            "ref": "Ecclus. 51:1-12",
+            "link": "Ecclus 51:1-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 6:9",
+            "link": "1 Cor 6:9"
+          },
+          {
+            "ref": "Luke 18:1-8",
+            "link": "Luke 18:1-8"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRD SUNDAY IN LENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "25",
+            "link": "25"
+          },
+          {
+            "ref": "34",
+            "link": "34"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Deut. 6:1–9,20-25",
+            "link": "Deut 6:1-9"
+          },
+          {
+            "ref": "Zech. 1:1-6,12-17",
+            "link": "Zech 1:1-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 3",
+            "link": "1 Cor 3"
+          },
+          {
+            "ref": "Mark 8:27-9:1",
+            "link": "Mark 8:27-9:1"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "119:113–128",
+            "link": "119:113-128"
+          },
+          {
+            "ref": "143",
+            "link": "143"
+          },
+          {
+            "ref": "27",
+            "link": "27"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Amos 5:4-15",
+            "link": "Amos 5:4-15"
+          },
+          {
+            "ref": "Prov. 4:7-18",
+            "link": "Prov 4:7-18"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Gal. 5:16-24",
+            "link": "Gal 5:16-24"
+          },
+          {
+            "ref": "Luke 11:29-36",
+            "link": "Luke 11:29-36"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FOURTH SUNDAY IN LENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "147",
+            "link": "147"
+          },
+          {
+            "ref": "18:1-20",
+            "link": "18:1-20"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Exod. 16:4–15",
+            "link": "Exod 16:4-15"
+          },
+          {
+            "ref": "*Ezek. 39:21",
+            "link": "Ezek 39:21"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 6:27–40",
+            "link": "John 6:27-40"
+          },
+          {
+            "ref": "2 Cor. 3:12",
+            "link": "2 Cor 3:12"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "116",
+            "link": "116"
+          },
+          {
+            "ref": "46",
+            "link": "46"
+          },
+          {
+            "ref": "122",
+            "link": "122"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 55",
+            "link": "Isa 55"
+          },
+          {
+            "ref": "2 Esdras 2:15-32",
+            "link": "2 Esdras 2:15-32"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 6:41–51",
+            "link": "John 6:41-51"
+          },
+          {
+            "ref": "Rev. 3:1-12",
+            "link": "Rev 3:1-12"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIFTH SUNDAY IN LENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "51",
+            "link": "51"
+          },
+          {
+            "ref": "71",
+            "link": "71"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 1:10-20",
+            "link": "Isa 1:10-20"
+          },
+          {
+            "ref": "Deut. 18:15",
+            "link": "Deut 18:15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Pet. 4:12",
+            "link": "1 Pet 4:12"
+          },
+          {
+            "ref": "Luke 20:9-18",
+            "link": "Luke 20:9-18"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "42",
+            "link": "42"
+          },
+          {
+            "ref": "43",
+            "link": "43"
+          },
+          {
+            "ref": "40:1-16",
+            "link": "40:1-16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Hosea 6:1–6",
+            "link": "Hosea 6:1-6"
+          },
+          {
+            "ref": "Jer. 14:7-12",
+            "link": "Jer 14:7-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 10:1–25",
+            "link": "Heb 10:1-25"
+          },
+          {
+            "ref": "John 10:17-38",
+            "link": "John 10:17-38"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SIXTH SUNDAY IN LENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "24",
+            "link": "24"
+          },
+          {
+            "ref": "97",
+            "link": "97"
+          },
+          {
+            "ref": "22",
+            "link": "22"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Zech. 9:9-12",
+            "link": "Zech 9:9-12"
+          },
+          {
+            "ref": "Isa. 52:13-53:12",
+            "link": "Isa 52:13-53:12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Mark 11:1–11",
+            "link": "Mark 11:1-11"
+          },
+          {
+            "ref": "Matt. 26",
+            "link": "Matt 26"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "130",
+            "link": "130"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "77",
+            "link": "77"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 8:9–15,18–9:1",
+            "link": "Jer 8:9-15"
+          },
+          {
+            "ref": "Isa. 59:1-3,9-21",
+            "link": "Isa 59:1-3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 1:17",
+            "link": "1 Cor 1:17"
+          },
+          {
+            "ref": "John 12:20-36",
+            "link": "John 12:20-36"
+          }
+        ]
+      }
+    },
+    {
+      "label": "EASTER DAY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "93",
+            "link": "93"
+          },
+          {
+            "ref": "111",
+            "link": "111"
+          },
+          {
+            "ref": "57",
+            "link": "57"
+          }
+        ],
+        "first": [
+          {
+            "ref": "* Isa. 25:1–9",
+            "link": "Isa 25:1-9"
+          },
+          {
+            "ref": "Exod. 12:1-14",
+            "link": "Exod 12:1-14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 28:1–10,16–20",
+            "link": "Matt 28:1-10"
+          },
+          {
+            "ref": "Rev. 14:1-7,12-13",
+            "link": "Rev 14:1-7"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "98",
+            "link": "98"
+          },
+          {
+            "ref": "114",
+            "link": "114"
+          },
+          {
+            "ref": "118",
+            "link": "118"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 51:9-16",
+            "link": "Isa 51:9-16"
+          },
+          {
+            "ref": "Isa. 12",
+            "link": "Isa 12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 24:13–35",
+            "link": "Luke 24:13-35"
+          },
+          {
+            "ref": "John 20:11-18",
+            "link": "John 20:11-18"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIRST SUNDAY AFTER EASTER",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "66",
+            "link": "66"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 2:23–3:9",
+            "link": "Wisdom 2:23-3:9"
+          },
+          {
+            "ref": "*Isa. 43:1-12",
+            "link": "Isa 43:1-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 1:1–12",
+            "link": "Rom 1:1-12"
+          },
+          {
+            "ref": "Luke 24:36-49",
+            "link": "Luke 24:36-49"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "33",
+            "link": "33"
+          },
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "121",
+            "link": "121"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Zeph. 3:14",
+            "link": "Zeph 3:14"
+          },
+          {
+            "ref": "2 Esdras 2:33",
+            "link": "2 Esdras 2:33"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 20:19",
+            "link": "John 20:19"
+          },
+          {
+            "ref": "Rev.1:4-18",
+            "link": "Rev1:4-18"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY AFTER EASTER",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "23",
+            "link": "23"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          },
+          {
+            "ref": "34",
+            "link": "34"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 40:1–11",
+            "link": "Isa 40:1-11"
+          },
+          {
+            "ref": "Baruch 4:21-30",
+            "link": "Baruch 4:21-30"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 10:1–10",
+            "link": "John 10:1-10"
+          },
+          {
+            "ref": "Phil. 3:7-16",
+            "link": "Phil 3:7-16"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          },
+          {
+            "ref": "16",
+            "link": "16"
+          },
+          {
+            "ref": "100",
+            "link": "100"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ezek. 34:11–16,30-31",
+            "link": "Ezek 34:11-16"
+          },
+          {
+            "ref": "2 Esdras 8:20-30,46,51-54",
+            "link": "2 Esdras 8:20-30"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 21:1–19",
+            "link": "John 21:1-19"
+          },
+          {
+            "ref": "1 Cor. 15:12-23",
+            "link": "1 Cor 15:12-23"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRD SUNDAY AFTER EASTER",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "36:5",
+            "link": "36:5"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          },
+          {
+            "ref": "124",
+            "link": "124"
+          }
+        ],
+        "first": [
+          {
+            "ref": "2 Sam. 12:15b–23",
+            "link": "2 Sam 12:15b-23"
+          },
+          {
+            "ref": "*1 Sam. 2:1b-10",
+            "link": "1 Sam 2:1b-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 14:1–14",
+            "link": "John 14:1-14"
+          },
+          {
+            "ref": "Acts 2:22-36",
+            "link": "Acts 2:22-36"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "68:1–20",
+            "link": "68:1-20"
+          },
+          {
+            "ref": "115",
+            "link": "115"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 26:12–16,19",
+            "link": "Isa 26:12-16"
+          },
+          {
+            "ref": "Wisdom 5:1-6,14-16",
+            "link": "Wisdom 5:1-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 5",
+            "link": "2 Cor 5"
+          },
+          {
+            "ref": "Luke 20:27-39",
+            "link": "Luke 20:27-39"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FOURTH SUNDAY AFTER EASTER",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "116",
+            "link": "116"
+          },
+          {
+            "ref": "107:1-16",
+            "link": "107:1-16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Job 19:21-27a",
+            "link": "Job 19:21-27a"
+          },
+          {
+            "ref": "Ezek. 37:1-14",
+            "link": "Ezek 37:1-14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 12:44",
+            "link": "John 12:44"
+          },
+          {
+            "ref": "Acts 3:1-21",
+            "link": "Acts 3:1-21"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "18:1–20",
+            "link": "18:1-20"
+          },
+          {
+            "ref": "27",
+            "link": "27"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Dan. 12:1–4,13",
+            "link": "Dan 12:1-4"
+          },
+          {
+            "ref": "Isa. 60:3",
+            "link": "Isa 60:3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Thess. 4:13",
+            "link": "1 Thess 4:13"
+          },
+          {
+            "ref": "John 8:12-30",
+            "link": "John 8:12-30"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIFTH SUNDAY AFTER EASTER",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "65",
+            "link": "65"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          },
+          {
+            "ref": "118",
+            "link": "118"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ezek. 34:25",
+            "link": "Ezek 34:25"
+          },
+          {
+            "ref": "2 Esdras 14:27-35",
+            "link": "2 Esdras 14:27-35"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 11:1–13",
+            "link": "Luke 11:1-13"
+          },
+          {
+            "ref": "Acts 4:1-13,33",
+            "link": "Acts 4:1-13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "147",
+            "link": "147"
+          },
+          {
+            "ref": "144",
+            "link": "144"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 48:12–21",
+            "link": "Isa 48:12-21"
+          },
+          {
+            "ref": "Ezek. 36:25",
+            "link": "Ezek 36:25"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rev. 5",
+            "link": "Rev 5"
+          },
+          {
+            "ref": "Mark 11:22-26",
+            "link": "Mark 11:22-26"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SUNDAY AFTER ASCENSION",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "21:1–6",
+            "link": "21:1-6"
+          },
+          {
+            "ref": "24",
+            "link": "24"
+          },
+          {
+            "ref": "8",
+            "link": "8"
+          },
+          {
+            "ref": "108:1-5",
+            "link": "108:1-5"
+          },
+          {
+            "ref": "72",
+            "link": "72"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 33:5,17,20-22",
+            "link": "Isa 33:5"
+          },
+          {
+            "ref": "Isa. 4:2",
+            "link": "Isa 4:2"
+          },
+          {
+            "ref": "Isa. 65:17",
+            "link": "Isa 65:17"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 17",
+            "link": "John 17"
+          },
+          {
+            "ref": "Heb. 4:14-5:10",
+            "link": "Heb 4:14-5:10"
+          },
+          {
+            "ref": "Rev. 21:1-14,21-27",
+            "link": "Rev 21:1-14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "93",
+            "link": "93"
+          },
+          {
+            "ref": "96",
+            "link": "96"
+          },
+          {
+            "ref": "46",
+            "link": "46"
+          },
+          {
+            "ref": "47",
+            "link": "47"
+          },
+          {
+            "ref": "97",
+            "link": "97"
+          },
+          {
+            "ref": "110",
+            "link": "110"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 9",
+            "link": "Wisdom 9"
+          },
+          {
+            "ref": "Isa. 32:1-4,15-20",
+            "link": "Isa 32:1-4"
+          },
+          {
+            "ref": "Dan.7:9-10,13-14",
+            "link": "Dan7:9-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Eph. 1",
+            "link": "Eph 1"
+          },
+          {
+            "ref": "John 3:16-21,31-36",
+            "link": "John 3:16-21"
+          },
+          {
+            "ref": "Rev. 22",
+            "link": "Rev 22"
+          }
+        ]
+      }
+    },
+    {
+      "label": "WHITSUNDAY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "68",
+            "link": "68"
+          },
+          {
+            "ref": "145",
+            "link": "145"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 1:1–7",
+            "link": "Wisdom 1:1-7"
+          },
+          {
+            "ref": "*Joel 2:28",
+            "link": "Joel 2:28"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 4:19-26",
+            "link": "John 4:19-26"
+          },
+          {
+            "ref": "Rom. 8:1-11",
+            "link": "Rom 8:1-11"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "104",
+            "link": "104"
+          },
+          {
+            "ref": "48",
+            "link": "48"
+          },
+          {
+            "ref": "122",
+            "link": "122"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 7:22–8:1",
+            "link": "Wisdom 7:22-8:1"
+          },
+          {
+            "ref": "Isa.11:1-9",
+            "link": "Isa11:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 2",
+            "link": "1 Cor 2"
+          },
+          {
+            "ref": "John 6:53-69",
+            "link": "John 6:53-69"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TRINITY SUNDAY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "29",
+            "link": "29"
+          },
+          {
+            "ref": "99",
+            "link": "99"
+          },
+          {
+            "ref": "33",
+            "link": "33"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 6:1–8",
+            "link": "Isa 6:1-8"
+          },
+          {
+            "ref": "Gen. 1:1-2:3",
+            "link": "Gen 1:1-2:3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Pet. 1:1–12",
+            "link": "1 Pet 1:1-12"
+          },
+          {
+            "ref": "John 1:1-18",
+            "link": "John 1:1-18"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "98",
+            "link": "98"
+          },
+          {
+            "ref": "100",
+            "link": "100"
+          },
+          {
+            "ref": "148",
+            "link": "148"
+          },
+          {
+            "ref": "150",
+            "link": "150"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ecclus. 43:1–12,27–33",
+            "link": "Ecclus 43:1-12"
+          },
+          {
+            "ref": "Job 38:1-11,16-18,42:1-6",
+            "link": "Job 38:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Eph. 4:1–16",
+            "link": "Eph 4:1-16"
+          },
+          {
+            "ref": "John 1:29-34",
+            "link": "John 1:29-34"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIRST SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "73",
+            "link": "73"
+          },
+          {
+            "ref": "89:1-19",
+            "link": "89:1-19"
+          },
+          {
+            "ref": "90",
+            "link": "90"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Jer. 23:23–32",
+            "link": "Jer 23:23-32"
+          },
+          {
+            "ref": "Isa. 5:8-12,18-24",
+            "link": "Isa 5:8-12"
+          },
+          {
+            "ref": "Gen. 3",
+            "link": "Gen 3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 7:13–14,21-29",
+            "link": "Matt 7:13-14"
+          },
+          {
+            "ref": "James 5",
+            "link": "James 5"
+          },
+          {
+            "ref": "Rom. 5",
+            "link": "Rom 5"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "119:33–48",
+            "link": "119:33-48"
+          },
+          {
+            "ref": "49",
+            "link": "49"
+          },
+          {
+            "ref": "85",
+            "link": "85"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 30:11",
+            "link": "Deut 30:11"
+          },
+          {
+            "ref": "Job 21:17-33",
+            "link": "Job 21:17-33"
+          },
+          {
+            "ref": "1 Sam. 1:1-11,19-20",
+            "link": "1 Sam 1:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 13:1–17,34-35",
+            "link": "John 13:1-17"
+          },
+          {
+            "ref": "Luke 16:19",
+            "link": "Luke 16:19"
+          },
+          {
+            "ref": "Acts 6",
+            "link": "Acts 6"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "15",
+            "link": "15"
+          },
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "76",
+            "link": "76"
+          },
+          {
+            "ref": "125",
+            "link": "125"
+          },
+          {
+            "ref": "11",
+            "link": "11"
+          },
+          {
+            "ref": "12",
+            "link": "12"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Job 31:13–28",
+            "link": "Job 31:13-28"
+          },
+          {
+            "ref": "*Deut. 20:1-9",
+            "link": "Deut 20:1-9"
+          },
+          {
+            "ref": "Gen. 6:5-8,13-22",
+            "link": "Gen 6:5-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 13",
+            "link": "1 Cor 13"
+          },
+          {
+            "ref": "Luke 9:57",
+            "link": "Luke 9:57"
+          },
+          {
+            "ref": "Matt. 24:32-42",
+            "link": "Matt 24:32-42"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "112",
+            "link": "112"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          },
+          {
+            "ref": "147",
+            "link": "147"
+          }
+        ],
+        "first": [
+          {
+            "ref": "1 Sam. 20:1–7,12–42",
+            "link": "1 Sam 20:1-7"
+          },
+          {
+            "ref": "2 Kings 4:8-17",
+            "link": "2 Kings 4:8-17"
+          },
+          {
+            "ref": "1 Sam. 3:1-18",
+            "link": "1 Sam 3:1-18"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Pet. 1:17",
+            "link": "1 Pet 1:17"
+          },
+          {
+            "ref": "Luke 14:12-24",
+            "link": "Luke 14:12-24"
+          },
+          {
+            "ref": "Acts7:44-8:4",
+            "link": "Acts7:44-8:4"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRD SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          },
+          {
+            "ref": "25",
+            "link": "25"
+          },
+          {
+            "ref": "27",
+            "link": "27"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Jer 31:1–14",
+            "link": "Jer 31:1-14"
+          },
+          {
+            "ref": "Prov. 16:18-24,32",
+            "link": "Prov 16:18-24"
+          },
+          {
+            "ref": "Gen. 9:1-17",
+            "link": "Gen 9:1-17"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 9:9–13",
+            "link": "Matt 9:9-13"
+          },
+          {
+            "ref": "Phil. 1:27-2:4",
+            "link": "Phil 1:27-2:4"
+          },
+          {
+            "ref": "1 Pet. 3:17-4:6",
+            "link": "1 Pet 3:17-4:6"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "32",
+            "link": "32"
+          },
+          {
+            "ref": "36:5",
+            "link": "36:5"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          },
+          {
+            "ref": "72",
+            "link": "72"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 23:1–8",
+            "link": "Jer 23:1-8"
+          },
+          {
+            "ref": "Ezek. 34:20-24",
+            "link": "Ezek 34:20-24"
+          },
+          {
+            "ref": "1Sam. 8",
+            "link": "1Sam 8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 19:2–10",
+            "link": "Luke 19:2-10"
+          },
+          {
+            "ref": "Luke 15:1-10",
+            "link": "Luke 15:1-10"
+          },
+          {
+            "ref": "Acts 8:5-25",
+            "link": "Acts 8:5-25"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FOURTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "91",
+            "link": "91"
+          },
+          {
+            "ref": "75",
+            "link": "75"
+          },
+          {
+            "ref": "82",
+            "link": "82"
+          },
+          {
+            "ref": "22:23",
+            "link": "22:23"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Lam 3:22–33",
+            "link": "Lam 3:22-33"
+          },
+          {
+            "ref": "Deut. 32:1-4,34-39",
+            "link": "Deut 32:1-4"
+          },
+          {
+            "ref": "Gen. 12:1-9",
+            "link": "Gen 12:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 10:24–39",
+            "link": "Matt 10:24-39"
+          },
+          {
+            "ref": "Rom. 2:1-16",
+            "link": "Rom 2:1-16"
+          },
+          {
+            "ref": "Gal. 3:1-9",
+            "link": "Gal 3:1-9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "51",
+            "link": "51"
+          },
+          {
+            "ref": "139",
+            "link": "139"
+          },
+          {
+            "ref": "80",
+            "link": "80"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 29:9–15",
+            "link": "Isa 29:9-15"
+          },
+          {
+            "ref": "Prov. 27:1,10-12",
+            "link": "Prov 27:1"
+          },
+          {
+            "ref": "1 Sam. 9:1-10,18-19,26-10:1",
+            "link": "1 Sam 9:1-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 15:1–20",
+            "link": "Matt 15:1-20"
+          },
+          {
+            "ref": "Luke 6:36-42",
+            "link": "Luke 6:36-42"
+          },
+          {
+            "ref": "Acts 8:26",
+            "link": "Acts 8:26"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIFTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "62",
+            "link": "62"
+          },
+          {
+            "ref": "63",
+            "link": "63"
+          },
+          {
+            "ref": "34",
+            "link": "34"
+          },
+          {
+            "ref": "1",
+            "link": "1"
+          },
+          {
+            "ref": "121",
+            "link": "121"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Eccles. 2:1–11,18–23",
+            "link": "Eccles 2:1-11"
+          },
+          {
+            "ref": "Prov. 15:1-10,26",
+            "link": "Prov 15:1-10"
+          },
+          {
+            "ref": "Gen. 17:1-8",
+            "link": "Gen 17:1-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 19:16",
+            "link": "Matt 19:16"
+          },
+          {
+            "ref": "James 3",
+            "link": "James 3"
+          },
+          {
+            "ref": "Heb. 11:1-16",
+            "link": "Heb 11:1-16"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "66",
+            "link": "66"
+          },
+          {
+            "ref": "65",
+            "link": "65"
+          },
+          {
+            "ref": "97",
+            "link": "97"
+          },
+          {
+            "ref": "98",
+            "link": "98"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Prov. 3:1–7,11–12",
+            "link": "Prov 3:1-7"
+          },
+          {
+            "ref": "Judges 6:11-23",
+            "link": "Judges 6:11-23"
+          },
+          {
+            "ref": "1 Sam. 11",
+            "link": "1 Sam 11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 14:25",
+            "link": "Luke 14:25"
+          },
+          {
+            "ref": "Luke 5:1-11",
+            "link": "Luke 5:1-11"
+          },
+          {
+            "ref": "Acts 9:1-20",
+            "link": "Acts 9:1-20"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SIXTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "85",
+            "link": "85"
+          },
+          {
+            "ref": "16",
+            "link": "16"
+          },
+          {
+            "ref": "111",
+            "link": "111"
+          },
+          {
+            "ref": "71",
+            "link": "71"
+          }
+        ],
+        "first": [
+          {
+            "ref": "2 Sam. 19:16-23",
+            "link": "2 Sam 19:16-23"
+          },
+          {
+            "ref": "*Isa. 57:13b-19",
+            "link": "Isa 57:13b-19"
+          },
+          {
+            "ref": "Gen. 18:1-16",
+            "link": "Gen 18:1-16"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 5:38",
+            "link": "Matt 5:38"
+          },
+          {
+            "ref": "2 Tim. 2:7-13",
+            "link": "2 Tim 2:7-13"
+          },
+          {
+            "ref": "Rom. 4:13",
+            "link": "Rom 4:13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "57",
+            "link": "57"
+          },
+          {
+            "ref": "130",
+            "link": "130"
+          },
+          {
+            "ref": "94:1-22",
+            "link": "94:1-22"
+          },
+          {
+            "ref": "104",
+            "link": "104"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Exod. 24:1–11,16–18",
+            "link": "Exod 24:1-11"
+          },
+          {
+            "ref": "Gen 4:1-16",
+            "link": "Gen 4:1-16"
+          },
+          {
+            "ref": "1 Sam.16:1-13",
+            "link": "1 Sam16:1-13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 9:18",
+            "link": "Heb 9:18"
+          },
+          {
+            "ref": "Matt. 5:20-26",
+            "link": "Matt 5:20-26"
+          },
+          {
+            "ref": "Acts 11:1-18",
+            "link": "Acts 11:1-18"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SEVENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "18:1–20",
+            "link": "18:1-20"
+          },
+          {
+            "ref": "133",
+            "link": "133"
+          },
+          {
+            "ref": "134",
+            "link": "134"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "40:1-16",
+            "link": "40:1-16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Hosea 14",
+            "link": "Hosea 14"
+          },
+          {
+            "ref": "Ecclus. 6:5-17",
+            "link": "Ecclus 6:5-17"
+          },
+          {
+            "ref": "Gen. 22:1-18",
+            "link": "Gen 22:1-18"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 6:12–18",
+            "link": "Rom 6:12-18"
+          },
+          {
+            "ref": "John 15:12",
+            "link": "John 15:12"
+          },
+          {
+            "ref": "Heb. 6",
+            "link": "Heb 6"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "50",
+            "link": "50"
+          },
+          {
+            "ref": "116",
+            "link": "116"
+          },
+          {
+            "ref": "24",
+            "link": "24"
+          },
+          {
+            "ref": "29",
+            "link": "29"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Dan. 5:1–9,13–30",
+            "link": "Dan 5:1-9"
+          },
+          {
+            "ref": "Micah 7:14",
+            "link": "Micah 7:14"
+          },
+          {
+            "ref": "1 Sam. 17:1-11,32,40-50",
+            "link": "1 Sam 17:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 1:17–21,28-32",
+            "link": "Rom 1:17-21"
+          },
+          {
+            "ref": "Mark 8:1-21",
+            "link": "Mark 8:1-21"
+          },
+          {
+            "ref": "Acts 11:19",
+            "link": "Acts 11:19"
+          }
+        ]
+      }
+    },
+    {
+      "label": "EIGHTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "119:33–48",
+            "link": "119:33-48"
+          },
+          {
+            "ref": "126",
+            "link": "126"
+          },
+          {
+            "ref": "127",
+            "link": "127"
+          },
+          {
+            "ref": "84",
+            "link": "84"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ecclus 1:18–27",
+            "link": "Ecclus 1:18-27"
+          },
+          {
+            "ref": "Zech. 4:1-10",
+            "link": "Zech 4:1-10"
+          },
+          {
+            "ref": "Gen. 24:1-27",
+            "link": "Gen 24:1-27"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 7:14–24",
+            "link": "John 7:14-24"
+          },
+          {
+            "ref": "Gal. 3:24-4:7",
+            "link": "Gal 3:24-4:7"
+          },
+          {
+            "ref": "Eph. 5:22",
+            "link": "Eph 5:22"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "25",
+            "link": "25"
+          },
+          {
+            "ref": "92",
+            "link": "92"
+          },
+          {
+            "ref": "148",
+            "link": "148"
+          },
+          {
+            "ref": "150",
+            "link": "150"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ecclus. 6:22",
+            "link": "Ecclus 6:22"
+          },
+          {
+            "ref": "Prov. 11:24",
+            "link": "Prov 11:24"
+          },
+          {
+            "ref": "1 Sam. 26:1-7,12-17,21-25",
+            "link": "1 Sam 26:1-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 10:38",
+            "link": "Luke 10:38"
+          },
+          {
+            "ref": "Matt. 7:15-21",
+            "link": "Matt 7:15-21"
+          },
+          {
+            "ref": "Acts 12:1-17",
+            "link": "Acts 12:1-17"
+          }
+        ]
+      }
+    },
+    {
+      "label": "NINTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "115",
+            "link": "115"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          },
+          {
+            "ref": "91",
+            "link": "91"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ezek. 14:1–11",
+            "link": "Ezek 14:1-11"
+          },
+          {
+            "ref": "*Wisdom 11:21-12:2",
+            "link": "Wisdom 11:21-12:2"
+          },
+          {
+            "ref": "Gen. 28:10",
+            "link": "Gen 28:10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Thess. 4:1–12",
+            "link": "1 Thess 4:1-12"
+          },
+          {
+            "ref": "John 8:1-11",
+            "link": "John 8:1-11"
+          },
+          {
+            "ref": "2 Cor. 9",
+            "link": "2 Cor 9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "119:9–24",
+            "link": "119:9-24"
+          },
+          {
+            "ref": "51",
+            "link": "51"
+          },
+          {
+            "ref": "93",
+            "link": "93"
+          },
+          {
+            "ref": "96",
+            "link": "96"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Prov. 4:1–4,20-27",
+            "link": "Prov 4:1-4"
+          },
+          {
+            "ref": "Lam. 3:40-58",
+            "link": "Lam 3:40-58"
+          },
+          {
+            "ref": "1 Sam. 31",
+            "link": "1 Sam 31"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 12:1–13",
+            "link": "Heb 12:1-13"
+          },
+          {
+            "ref": "Luke 15:11",
+            "link": "Luke 15:11"
+          },
+          {
+            "ref": "Acts 13:1-3,14-31,38,44-49",
+            "link": "Acts 13:1-3"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          },
+          {
+            "ref": "147",
+            "link": "147"
+          },
+          {
+            "ref": "144",
+            "link": "144"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ecclus. 1:1–10",
+            "link": "Ecclus 1:1-10"
+          },
+          {
+            "ref": "Jer. 26:1-7,10-15",
+            "link": "Jer 26:1-7"
+          },
+          {
+            "ref": "Gen. 32.22-31",
+            "link": "Gen 3222-31"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 8:25–36",
+            "link": "John 8:25-36"
+          },
+          {
+            "ref": "Matt. 23:34",
+            "link": "Matt 23:34"
+          },
+          {
+            "ref": "2 Cor. 4:7",
+            "link": "2 Cor 4:7"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "15",
+            "link": "15"
+          },
+          {
+            "ref": "46",
+            "link": "46"
+          },
+          {
+            "ref": "42",
+            "link": "42"
+          },
+          {
+            "ref": "43",
+            "link": "43"
+          },
+          {
+            "ref": "47",
+            "link": "47"
+          },
+          {
+            "ref": "48",
+            "link": "48"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 44:1–8,21–23",
+            "link": "Isa 44:1-8"
+          },
+          {
+            "ref": "Lam. 1:1-12",
+            "link": "Lam 1:1-12"
+          },
+          {
+            "ref": "2 Sam. 1:17",
+            "link": "2 Sam 1:17"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 12:1–9",
+            "link": "Rom 12:1-9"
+          },
+          {
+            "ref": "Luke 19:41",
+            "link": "Luke 19:41"
+          },
+          {
+            "ref": "Acts:14:8",
+            "link": "Acts:14:8"
+          }
+        ]
+      }
+    },
+    {
+      "label": "ELEVENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "124",
+            "link": "124"
+          },
+          {
+            "ref": "125",
+            "link": "125"
+          },
+          {
+            "ref": "33",
+            "link": "33"
+          },
+          {
+            "ref": "62",
+            "link": "62"
+          },
+          {
+            "ref": "63",
+            "link": "63"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 26:12–16,19",
+            "link": "Isa 26:12-16"
+          },
+          {
+            "ref": "Job 5:8-18",
+            "link": "Job 5:8-18"
+          },
+          {
+            "ref": "Gen. 37:3-4,12-35",
+            "link": "Gen 37:3-4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "19 Rom. 8:26",
+            "link": "19 Rom 8:26"
+          },
+          {
+            "ref": "Matt. 23:13-31",
+            "link": "Matt 23:13-31"
+          },
+          {
+            "ref": "James 1:1-15",
+            "link": "James 1:1-15"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "68",
+            "link": "68"
+          },
+          {
+            "ref": "142",
+            "link": "142"
+          },
+          {
+            "ref": "100",
+            "link": "100"
+          },
+          {
+            "ref": "101",
+            "link": "101"
+          },
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "121",
+            "link": "121"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ecclus. 35:10-19",
+            "link": "Ecclus 35:10-19"
+          },
+          {
+            "ref": "Eccles. 5:1-7",
+            "link": "Eccles 5:1-7"
+          },
+          {
+            "ref": "2 Sam. 7:18",
+            "link": "2 Sam 7:18"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Mark 12:38",
+            "link": "Mark 12:38"
+          },
+          {
+            "ref": "Luke 18:9-14",
+            "link": "Luke 18:9-14"
+          },
+          {
+            "ref": "Acts 15:1-21",
+            "link": "Acts 15:1-21"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TWELFTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "139",
+            "link": "139"
+          },
+          {
+            "ref": "102:15",
+            "link": "102:15"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          },
+          {
+            "ref": "72",
+            "link": "72"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ecclus. 15:11",
+            "link": "Ecclus 15:11"
+          },
+          {
+            "ref": "Ecclus. 38:1-14",
+            "link": "Ecclus 38:1-14"
+          },
+          {
+            "ref": "Gen. 41:1a,8,14-40",
+            "link": "Gen 41:1a"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Phil. 2:12–18",
+            "link": "Phil 2:12-18"
+          },
+          {
+            "ref": "Luke 4:31",
+            "link": "Luke 4:31"
+          },
+          {
+            "ref": "Col. 3:22-4:6",
+            "link": "Col 3:22-4:6"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "27",
+            "link": "27"
+          },
+          {
+            "ref": "32",
+            "link": "32"
+          },
+          {
+            "ref": "126",
+            "link": "126"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          },
+          {
+            "ref": "122",
+            "link": "122"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Tobit 13:1b–5,7–11",
+            "link": "Tobit 13:1b-5"
+          },
+          {
+            "ref": "Isa. 29:18",
+            "link": "Isa 29:18"
+          },
+          {
+            "ref": "2 Sam. 15:1-23",
+            "link": "2 Sam 15:1-23"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 15:14–21",
+            "link": "Rom 15:14-21"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRTEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "104",
+            "link": "104"
+          },
+          {
+            "ref": "73",
+            "link": "73"
+          },
+          {
+            "ref": "118",
+            "link": "118"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ecclus. 17:1–15",
+            "link": "Ecclus 17:1-15"
+          },
+          {
+            "ref": "Hab. 1:12-2:4,14",
+            "link": "Hab 1:12-2:4"
+          },
+          {
+            "ref": "Gen. 43:1-5,11-16,26-34",
+            "link": "Gen 43:1-5"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Mark 3:20-21,3:1-35",
+            "link": "Mark 3:20-21"
+          },
+          {
+            "ref": "Heb. 10:35",
+            "link": "Heb 10:35"
+          },
+          {
+            "ref": "Heb. 13:1-21",
+            "link": "Heb 13:1-21"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "11",
+            "link": "11"
+          },
+          {
+            "ref": "12",
+            "link": "12"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          },
+          {
+            "ref": "20",
+            "link": "20"
+          },
+          {
+            "ref": "23",
+            "link": "23"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 15:7–15",
+            "link": "Deut 15:7-15"
+          },
+          {
+            "ref": "Deut. 24:10",
+            "link": "Deut 24:10"
+          },
+          {
+            "ref": "2 Sam. 18:1,6-14,19-33",
+            "link": "2 Sam 18:1"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 26:6–13",
+            "link": "Matt 26:6-13"
+          },
+          {
+            "ref": "Luke 10:23-37",
+            "link": "Luke 10:23-37"
+          },
+          {
+            "ref": "Acts 16:16-34",
+            "link": "Acts 16:16-34"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FOURTEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "24",
+            "link": "24"
+          },
+          {
+            "ref": "65",
+            "link": "65"
+          },
+          {
+            "ref": "85",
+            "link": "85"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Micah 6:1–8",
+            "link": "Micah 6:1-8"
+          },
+          {
+            "ref": "1 Chron. 29:10-17",
+            "link": "1 Chron 29:10-17"
+          },
+          {
+            "ref": "Gen. 45:1-15,25-28",
+            "link": "Gen 45:1-15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Phil. 4:4–13",
+            "link": "Phil 4:4-13"
+          },
+          {
+            "ref": "Luke 17:5-10",
+            "link": "Luke 17:5-10"
+          },
+          {
+            "ref": "Rom. 12:9",
+            "link": "Rom 12:9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "50",
+            "link": "50"
+          },
+          {
+            "ref": "92",
+            "link": "92"
+          },
+          {
+            "ref": "42",
+            "link": "42"
+          },
+          {
+            "ref": "43",
+            "link": "43"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 7:1–11",
+            "link": "Jer 7:1-11"
+          },
+          {
+            "ref": "Deut. 8:1-14,17-20",
+            "link": "Deut 8:1-14"
+          },
+          {
+            "ref": "1 Kings 3:4-15",
+            "link": "1 Kings 3:4-15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 13:18–30",
+            "link": "Luke 13:18-30"
+          },
+          {
+            "ref": "Luke 17:11-19",
+            "link": "Luke 17:11-19"
+          },
+          {
+            "ref": "Acts 17:16",
+            "link": "Acts 17:16"
+          }
+        ]
+      }
+    },
+    {
+      "label": "FIFTEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "49",
+            "link": "49"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          },
+          {
+            "ref": "1",
+            "link": "1"
+          },
+          {
+            "ref": "15",
+            "link": "15"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ecclus. 5:1–10",
+            "link": "Ecclus 5:1-10"
+          },
+          {
+            "ref": "Deut. 7:6-13",
+            "link": "Deut 7:6-13"
+          },
+          {
+            "ref": "Exod. 2:1-22",
+            "link": "Exod 2:1-22"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 12:13–21",
+            "link": "Luke 12:13-21"
+          },
+          {
+            "ref": "Gal. 2:15-20",
+            "link": "Gal 2:15-20"
+          },
+          {
+            "ref": "James 4",
+            "link": "James 4"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "26",
+            "link": "26"
+          },
+          {
+            "ref": "128",
+            "link": "128"
+          },
+          {
+            "ref": "34",
+            "link": "34"
+          },
+          {
+            "ref": "84",
+            "link": "84"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Eccles. 5:8",
+            "link": "Eccles 5:8"
+          },
+          {
+            "ref": "Joel 2:21-27",
+            "link": "Joel 2:21-27"
+          },
+          {
+            "ref": "1 Kings 8:22-30,54-63",
+            "link": "1 Kings 8:22-30"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Tim. 6:1–10",
+            "link": "1 Tim 6:1-10"
+          },
+          {
+            "ref": "Matt. 6:24",
+            "link": "Matt 6:24"
+          },
+          {
+            "ref": "Acts 18:1-17",
+            "link": "Acts 18:1-17"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SIXTEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "116",
+            "link": "116"
+          },
+          {
+            "ref": "91",
+            "link": "91"
+          },
+          {
+            "ref": "145",
+            "link": "145"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 12",
+            "link": "Isa 12"
+          },
+          {
+            "ref": "Jer. 32:36-42",
+            "link": "Jer 32:36-42"
+          },
+          {
+            "ref": "Exod. 3:1-15",
+            "link": "Exod 3:1-15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 11:21–44",
+            "link": "John 11:21-44"
+          },
+          {
+            "ref": "Rom. 11:25",
+            "link": "Rom 11:25"
+          },
+          {
+            "ref": "1 Pet. 5:1-11",
+            "link": "1 Pet 5:1-11"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "90",
+            "link": "90"
+          },
+          {
+            "ref": "142",
+            "link": "142"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          },
+          {
+            "ref": "66",
+            "link": "66"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ezek. 33:1–9",
+            "link": "Ezek 33:1-9"
+          },
+          {
+            "ref": "1 Kings 17:8-9,17-24",
+            "link": "1 Kings 17:8-9"
+          },
+          {
+            "ref": "1 Kings 12:1-20",
+            "link": "1 Kings 12:1-20"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 24:37",
+            "link": "Matt 24:37"
+          },
+          {
+            "ref": "Luke 7:11-17",
+            "link": "Luke 7:11-17"
+          },
+          {
+            "ref": "Acts 19:21",
+            "link": "Acts 19:21"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SEVENTEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "25",
+            "link": "25"
+          },
+          {
+            "ref": "10",
+            "link": "10"
+          },
+          {
+            "ref": "107:1-16",
+            "link": "107:1-16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Jer. 13:15–21",
+            "link": "Jer 13:15-21"
+          },
+          {
+            "ref": "Ecclus. 8:1-9",
+            "link": "Ecclus 8:1-9"
+          },
+          {
+            "ref": "Exod. 5:1-9,19-6:1",
+            "link": "Exod 5:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Mark 10:35–45",
+            "link": "Mark 10:35-45"
+          },
+          {
+            "ref": "2 Tim. 2:19",
+            "link": "2 Tim 2:19"
+          },
+          {
+            "ref": "Heb. 3",
+            "link": "Heb 3"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "36:5",
+            "link": "36:5"
+          },
+          {
+            "ref": "130",
+            "link": "130"
+          },
+          {
+            "ref": "33",
+            "link": "33"
+          },
+          {
+            "ref": "144",
+            "link": "144"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Mal. 2:1–10",
+            "link": "Mal 2:1-10"
+          },
+          {
+            "ref": "Ecclus. 10:7-18",
+            "link": "Ecclus 10:7-18"
+          },
+          {
+            "ref": "1 Kings 18:1-2,17-39",
+            "link": "1 Kings 18:1-2"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 13:10-17",
+            "link": "Luke 13:10-17"
+          },
+          {
+            "ref": "Luke 14:1-11",
+            "link": "Luke 14:1-11"
+          },
+          {
+            "ref": "Acts 20:17",
+            "link": "Acts 20:17"
+          }
+        ]
+      }
+    },
+    {
+      "label": "EIGHTEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "48",
+            "link": "48"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          },
+          {
+            "ref": "62",
+            "link": "62"
+          },
+          {
+            "ref": "63",
+            "link": "63"
+          },
+          {
+            "ref": "77:11",
+            "link": "77:11"
+          },
+          {
+            "ref": "114",
+            "link": "114"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Prov. 2:1–9",
+            "link": "Prov 2:1-9"
+          },
+          {
+            "ref": "*Amos 8:4-12",
+            "link": "Amos 8:4-12"
+          },
+          {
+            "ref": "Exod. 14:5-14,19-21,24-28,30",
+            "link": "Exod 14:5-14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Tim. 3:14–4:16",
+            "link": "1 Tim 3:14-4:16"
+          },
+          {
+            "ref": "John 7:37",
+            "link": "John 7:37"
+          },
+          {
+            "ref": "Heb. 11:23-29,32-40",
+            "link": "Heb 11:23-29"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "147",
+            "link": "147"
+          },
+          {
+            "ref": "119:89-104",
+            "link": "119:89-104"
+          },
+          {
+            "ref": "139",
+            "link": "139"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 11:18–21,26–28,32",
+            "link": "Deut 11:18-21"
+          },
+          {
+            "ref": "Deut. 5:1-21",
+            "link": "Deut 5:1-21"
+          },
+          {
+            "ref": "1 Kings 19",
+            "link": "1 Kings 19"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Gal. 1:1–12",
+            "link": "Gal 1:1-12"
+          },
+          {
+            "ref": "Matt. 22:34",
+            "link": "Matt 22:34"
+          },
+          {
+            "ref": "Acts 21:7-19,27-39",
+            "link": "Acts 21:7-19"
+          }
+        ]
+      }
+    },
+    {
+      "label": "NINETEENTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "72",
+            "link": "72"
+          },
+          {
+            "ref": "34",
+            "link": "34"
+          },
+          {
+            "ref": "29",
+            "link": "29"
+          },
+          {
+            "ref": "99",
+            "link": "99"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Job 24:1–17",
+            "link": "Job 24:1-17"
+          },
+          {
+            "ref": "Jer. 30:12-22",
+            "link": "Jer 30:12-22"
+          },
+          {
+            "ref": "Exod. 19:1-7,16-19,20:1-3",
+            "link": "Exod 19:1-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Titus 2",
+            "link": "Titus 2"
+          },
+          {
+            "ref": "John 5:1-16",
+            "link": "John 5:1-16"
+          },
+          {
+            "ref": "Rom. 3:1-2,19-31",
+            "link": "Rom 3:1-2"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "80",
+            "link": "80"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          },
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "46",
+            "link": "46"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 5:7—19",
+            "link": "Jer 5:7-19"
+          },
+          {
+            "ref": "Wisdom 12:12-19",
+            "link": "Wisdom 12:12-19"
+          },
+          {
+            "ref": "1 Kings 21:1-22",
+            "link": "1 Kings 21:1-22"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 13",
+            "link": "2 Cor 13"
+          },
+          {
+            "ref": "Matt. 9:1-8",
+            "link": "Matt 9:1-8"
+          },
+          {
+            "ref": "Acts 22:24-23:11",
+            "link": "Acts 22:24-23:11"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TWENTIETH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "11",
+            "link": "11"
+          },
+          {
+            "ref": "12",
+            "link": "12"
+          },
+          {
+            "ref": "1",
+            "link": "1"
+          },
+          {
+            "ref": "15",
+            "link": "15"
+          },
+          {
+            "ref": "115",
+            "link": "115"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Mal. 2:14",
+            "link": "Mal 2:14"
+          },
+          {
+            "ref": "*Eccles. 9:4-10",
+            "link": "Eccles 9:4-10"
+          },
+          {
+            "ref": "Exod. 32:1-6,15-20,30-34",
+            "link": "Exod 32:1-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 19:3–9a,13-15",
+            "link": "Matt 19:3-9a"
+          },
+          {
+            "ref": "Eph. 6:1-9",
+            "link": "Eph 6:1-9"
+          },
+          {
+            "ref": "1 Cor. 10:14-22",
+            "link": "1 Cor 10:14-22"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          },
+          {
+            "ref": "84",
+            "link": "84"
+          },
+          {
+            "ref": "111",
+            "link": "111"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 31:31—37",
+            "link": "Jer 31:31-37"
+          },
+          {
+            "ref": "Jer. 2:1-9,13",
+            "link": "Jer 2:1-9"
+          },
+          {
+            "ref": "2 Kings 2:1-15",
+            "link": "2 Kings 2:1-15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 13:31—35",
+            "link": "John 13:31-35"
+          },
+          {
+            "ref": "Matt. 22:1-14",
+            "link": "Matt 22:1-14"
+          },
+          {
+            "ref": "Acts 24:10",
+            "link": "Acts 24:10"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TWENTY-FIRST SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "76",
+            "link": "76"
+          },
+          {
+            "ref": "121",
+            "link": "121"
+          },
+          {
+            "ref": "27",
+            "link": "27"
+          },
+          {
+            "ref": "91",
+            "link": "91"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Isa. 59:15b",
+            "link": "Isa 59:15b"
+          },
+          {
+            "ref": "Baruch 3:14-15,29-37",
+            "link": "Baruch 3:14-15"
+          },
+          {
+            "ref": "Exod. 33:1,12-23",
+            "link": "Exod 33:1"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 10:1–7,17-18",
+            "link": "2 Cor 10:1-7"
+          },
+          {
+            "ref": "John 9:1-38",
+            "link": "John 9:1-38"
+          },
+          {
+            "ref": "Heb. 4:1-13",
+            "link": "Heb 4:1-13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "25",
+            "link": "25"
+          },
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          },
+          {
+            "ref": "118",
+            "link": "118"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Gen. 15:1—6",
+            "link": "Gen 15:1-6"
+          },
+          {
+            "ref": "2 Kings 5:1-15a",
+            "link": "2 Kings 5:1-15a"
+          },
+          {
+            "ref": "2 Kings 6:8-23",
+            "link": "2 Kings 6:8-23"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 4:1–8",
+            "link": "Rom 4:1-8"
+          },
+          {
+            "ref": "John 4:46b",
+            "link": "John 4:46b"
+          },
+          {
+            "ref": "Acts 25:1-22",
+            "link": "Acts 25:1-22"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TWENTY-SECOND SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "32",
+            "link": "32"
+          },
+          {
+            "ref": "43",
+            "link": "43"
+          },
+          {
+            "ref": "147",
+            "link": "147"
+          },
+          {
+            "ref": "71",
+            "link": "71"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Ecclus. 27:30–28:7",
+            "link": "Ecclus 27:30-28:7"
+          },
+          {
+            "ref": "Baruch 5",
+            "link": "Baruch 5"
+          },
+          {
+            "ref": "Num. 20:14",
+            "link": "Num 20:14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 18:7–20",
+            "link": "Matt 18:7-20"
+          },
+          {
+            "ref": "1 John 2:24",
+            "link": "1 John 2:24"
+          },
+          {
+            "ref": "2 Tim. 1:3-14",
+            "link": "2 Tim 1:3-14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "51",
+            "link": "51"
+          },
+          {
+            "ref": "7",
+            "link": "7"
+          },
+          {
+            "ref": "65",
+            "link": "65"
+          }
+        ],
+        "first": [
+          {
+            "ref": "1 Kings 8:46-53",
+            "link": "1 Kings 8:46-53"
+          },
+          {
+            "ref": "Zech. 7:8",
+            "link": "Zech 7:8"
+          },
+          {
+            "ref": "2 Kings 9:1-6,10b-13,16-26",
+            "link": "2 Kings 9:1-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 7:36",
+            "link": "Luke 7:36"
+          },
+          {
+            "ref": "Matt. 18:21",
+            "link": "Matt 18:21"
+          },
+          {
+            "ref": "Acts 26",
+            "link": "Acts 26"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TWENTY-THIRD SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "33",
+            "link": "33"
+          },
+          {
+            "ref": "8",
+            "link": "8"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "23",
+            "link": "23"
+          },
+          {
+            "ref": "102:15",
+            "link": "102:15"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 29:1,4–14",
+            "link": "Jer 29:1"
+          },
+          {
+            "ref": "*Isa. 64",
+            "link": "Isa 64"
+          },
+          {
+            "ref": "Deut. 34",
+            "link": "Deut 34"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Titus 3:1–8",
+            "link": "Titus 3:1-8"
+          },
+          {
+            "ref": "Matt. 23:1-12",
+            "link": "Matt 23:1-12"
+          },
+          {
+            "ref": "2 Tim. 4:1-8",
+            "link": "2 Tim 4:1-8"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          },
+          {
+            "ref": "72",
+            "link": "72"
+          },
+          {
+            "ref": "99",
+            "link": "99"
+          },
+          {
+            "ref": "100",
+            "link": "100"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ezek. 33:30",
+            "link": "Ezek 33:30"
+          },
+          {
+            "ref": "Wisdom 6:1-11",
+            "link": "Wisdom 6:1-11"
+          },
+          {
+            "ref": "2 Kings 23:1-4,11-14,21-23",
+            "link": "2 Kings 23:1-4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 4:8–16",
+            "link": "1 Cor 4:8-16"
+          },
+          {
+            "ref": "Matt. 22:15-22",
+            "link": "Matt 22:15-22"
+          },
+          {
+            "ref": "Acts 27:1-20",
+            "link": "Acts 27:1-20"
+          },
+          {
+            "ref": "27-32,39-44",
+            "link": "27-32"
+          }
+        ]
+      }
+    },
+    {
+      "label": "TWENTY-FOURTH SUNDAY AFTER TRINITY",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "66",
+            "link": "66"
+          },
+          {
+            "ref": "20",
+            "link": "20"
+          },
+          {
+            "ref": "28",
+            "link": "28"
+          },
+          {
+            "ref": "136",
+            "link": "136"
+          }
+        ],
+        "first": [
+          {
+            "ref": "*Mal 3:13–4:3",
+            "link": "Mal 3:13-4:3"
+          },
+          {
+            "ref": "Ecclus. 36:1-17",
+            "link": "Ecclus 36:1-17"
+          },
+          {
+            "ref": "Joshua 23:1-3,11-16",
+            "link": "Joshua 23:1-3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 10:17–24",
+            "link": "Luke 10:17-24"
+          },
+          {
+            "ref": "1 Tim. 2:1-8",
+            "link": "1 Tim 2:1-8"
+          },
+          {
+            "ref": "Luke 13:1-9",
+            "link": "Luke 13:1-9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "139",
+            "link": "139"
+          },
+          {
+            "ref": "86",
+            "link": "86"
+          },
+          {
+            "ref": "73",
+            "link": "73"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 33:1–3,26-29",
+            "link": "Deut 33:1-3"
+          },
+          {
+            "ref": "2 Kings 4:18-37",
+            "link": "2 Kings 4:18-37"
+          },
+          {
+            "ref": "2 Chron. 36:11",
+            "link": "2 Chron 36:11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Jude 1–4,17–25",
+            "link": "Jude 1-4"
+          },
+          {
+            "ref": "Matt. 9:18-26",
+            "link": "Matt 9:18-26"
+          },
+          {
+            "ref": "Acts 28:16",
+            "link": "Acts 28:16"
+          }
+        ]
+      }
+    },
+    {
+      "label": "THIRD SUNDAY BEFORE ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "15",
+            "link": "15"
+          },
+          {
+            "ref": "85",
+            "link": "85"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ruth 1:1–17",
+            "link": "Ruth 1:1-17"
+          },
+          {
+            "ref": "*Hab. 1:12-2:4,9-14",
+            "link": "Hab 1:12-2:4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Col. 3:5–11",
+            "link": "Col 3:5-11"
+          },
+          {
+            "ref": "Luke 12:35-48",
+            "link": "Luke 12:35-48"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "21",
+            "link": "21"
+          },
+          {
+            "ref": "22:23",
+            "link": "22:23"
+          },
+          {
+            "ref": "7",
+            "link": "7"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Joel 3:9–17",
+            "link": "Joel 3:9-17"
+          },
+          {
+            "ref": "Amos 5:14-24",
+            "link": "Amos 5:14-24"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 13:36-52",
+            "link": "Matt 13:36-52"
+          },
+          {
+            "ref": "Gal. 6:1-10",
+            "link": "Gal 6:1-10"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SECOND SUNDAY BEFORE ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "75",
+            "link": "75"
+          },
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "93",
+            "link": "93"
+          },
+          {
+            "ref": "98",
+            "link": "98"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 2:6–19",
+            "link": "Isa 2:6-19"
+          },
+          {
+            "ref": "*Isa. 66:1-2,10,12-16,18-23",
+            "link": "Isa 66:1-2"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 25:14–29",
+            "link": "Matt 25:14-29"
+          },
+          {
+            "ref": "2 Thess. 1",
+            "link": "2 Thess 1"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "9",
+            "link": "9"
+          },
+          {
+            "ref": "76",
+            "link": "76"
+          },
+          {
+            "ref": "96",
+            "link": "96"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Gen. 19:1–3,12–17,24-28",
+            "link": "Gen 19:1-3"
+          },
+          {
+            "ref": "2 Esdras 8:63-9:13",
+            "link": "2 Esdras 8:63-9:13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 17:20",
+            "link": "Luke 17:20"
+          },
+          {
+            "ref": "2 Pet. 3:1-14,17-18",
+            "link": "2 Pet 3:1-14"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SUNDAY NEXT BEFORE ADVENT",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "39",
+            "link": "39"
+          },
+          {
+            "ref": "145",
+            "link": "145"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 4:23",
+            "link": "Jer 4:23"
+          },
+          {
+            "ref": "*Jer. 3:14-18",
+            "link": "Jer 3:14-18"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 25:31",
+            "link": "Matt 25:31"
+          },
+          {
+            "ref": "1 Cor. 11:17-32",
+            "link": "1 Cor 11:17-32"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "90",
+            "link": "90"
+          },
+          {
+            "ref": "103",
+            "link": "103"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Eccles. 11:9–12:8,13-14",
+            "link": "Eccles 11:9-12:8"
+          },
+          {
+            "ref": "Isa. 25:1-9",
+            "link": "Isa 25:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 13:1–21",
+            "link": "Heb 13:1-21"
+          },
+          {
+            "ref": "John 5:17-29",
+            "link": "John 5:17-29"
+          }
+        ]
+      }
+    }
+  ]
+}
