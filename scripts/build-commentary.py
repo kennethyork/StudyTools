@@ -27,6 +27,7 @@ Output:
                                                the chapter's introduction
   data/commentary/index.json                   which sources cover what
 """
+import importlib.util
 import json
 import os
 import re
@@ -136,11 +137,18 @@ def verse_texts(payload):
     return out
 
 
+def index_writer():
+    """The one place that writes data/commentary/index.json."""
+    spec = importlib.util.spec_from_file_location(
+        "build_haydock", os.path.join(ROOT, "scripts", "build-haydock.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def main():
     books = json.load(open(os.path.join(ROOT, "data", "bible", "books.json"), encoding="utf-8"))
     os.makedirs(OUT, exist_ok=True)
-    coverage = {s["id"]: {"books": set(), "chapters": 0, "verses": 0, "introductions": 0}
-                for s in SOURCES}
     written = 0
     total_bytes = 0
 
@@ -167,14 +175,9 @@ def main():
                 if paragraphs:
                     introductions.append({"source": source["id"], "short": source["short"],
                                           "year": source["year"], "paragraphs": paragraphs})
-                    coverage[source["id"]]["introductions"] += 1
-                    coverage[source["id"]]["books"].add(slug)
                 texts = verse_texts(payload)
                 if not texts:
                     continue
-                coverage[source["id"]]["books"].add(slug)
-                coverage[source["id"]]["chapters"] += 1
-                coverage[source["id"]]["verses"] += len(texts)
                 for verse, text in texts.items():
                     per_verse.setdefault(verse, []).append(
                         {"source": source["id"], "short": source["short"], "text": text})
@@ -184,34 +187,50 @@ def main():
             dest_dir = os.path.join(OUT, slug)
             os.makedirs(dest_dir, exist_ok=True)
             path = os.path.join(dest_dir, "{}.json".format(chapter))
+            verses = {str(v): list(per_verse[v]) for v in sorted(per_verse)}
+            intros = list(introductions)
+            # Daniel is commented on by these three and by Haydock, and his remarks
+            # have to survive a rebuild of the canon: keep whatever a source this
+            # script does not handle already put in the file.
+            mine = {s["id"] for s in SOURCES}
+            if os.path.exists(path):
+                old = json.load(open(path, encoding="utf-8"))
+                for verse, entries in (old.get("verses") or {}).items():
+                    keep = [e for e in entries if e.get("source") not in mine]
+                    if keep:
+                        verses[verse] = sorted(keep + verses.get(verse, []),
+                                               key=lambda e: e.get("source", ""))
+                for intro in old.get("introductions") or []:
+                    if intro.get("source") not in mine:
+                        intros.append(intro)
+            sources = [{"id": s["id"], "short": s["short"], "name": s["name"],
+                        "year": s["year"]} for s in SOURCES]
+            if os.path.exists(path):
+                for source in json.load(open(path, encoding="utf-8")).get("sources") or []:
+                    if source.get("id") not in mine:
+                        sources.append(source)
             payload = {
                 "book": book["name"], "slug": slug, "chapter": chapter,
-                "sources": [{"id": s["id"], "short": s["short"], "name": s["name"],
-                             "year": s["year"]} for s in SOURCES],
-                "verses": {str(v): per_verse[v] for v in sorted(per_verse)}
+                "sources": sources,
+                "verses": verses
             }
-            if introductions:
-                payload["introductions"] = introductions
+            if intros:
+                payload["introductions"] = intros
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
             written += 1
             total_bytes += os.path.getsize(path)
 
-    index = {
-        "sources": [{"id": s["id"], "short": s["short"], "name": s["name"], "year": s["year"],
-                     "books": len(coverage[s["id"]]["books"]),
-                     "chapters": coverage[s["id"]]["chapters"],
-                     "verses": coverage[s["id"]]["verses"],
-                     "introductions": coverage[s["id"]]["introductions"]} for s in SOURCES],
-        "books": sorted({b for s in coverage.values() for b in s["books"]})
-    }
-    with open(os.path.join(OUT, "index.json"), "w", encoding="utf-8") as f:
-        json.dump(index, f, ensure_ascii=False, indent=1)
-        f.write("\n")
+    # The index is not this script's to keep. build-haydock.py's write_index()
+    # reads the files on disk and counts what is there, whichever script wrote
+    # them, so a build can never publish an index that disagrees with the data —
+    # and Haydock's deuterocanonical books are counted here without this script
+    # knowing anything about them.
+    index = index_writer().write_index()
 
     for s in index["sources"]:
-        print("  {:<26} {:>3} books  {:>5} chapters  {:>7,} verses  {:>5,} introductions".format(
-            s["name"], s["books"], s["chapters"], s["verses"], s["introductions"]))
+        print("  {:<10} {:>3} books  {:>5} chapters  {:>7,} verses  {:>5,} introductions".format(
+            s["short"], s["books"], s["chapters"], s["verses"], s["introductions"]))
     print("  {} chapter files, {:.1f} MB".format(written, total_bytes / 1e6))
 
 

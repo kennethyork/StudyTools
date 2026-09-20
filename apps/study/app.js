@@ -151,6 +151,19 @@
     var cm = block("Commentary", "Public-domain commentary, verse by verse: Jamieson, Fausset & Brown (1871), John Calvin, and F. B. Meyer. A comment is attached to the verse that opens the passage it explains, and the chapter's introduction comes first.");
     var cbody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
     cm.appendChild(cbody);
+    q("about:" + book.slug, "data/about/" + book.slug + ".json").then(function (a) {
+      /* the introduction to the book, where a source wrote one */
+      if (a && (a.paragraphs || []).length) {
+        var aw = ST.el("div", { class: "cm-intro" });
+        aw.appendChild(ST.el("div", { class: "cm-who",
+          text: (a.source.short || "") + (a.source.year ? " \u00b7 " + a.source.year : "") +
+            " \u00b7 about this book" }));
+        a.paragraphs.forEach(function (para) {
+          aw.appendChild(ST.el("p", { class: "cm-text", style: "margin:0 0 6px", text: para }));
+        });
+        cm.insertBefore(aw, cbody);
+      }
+    }).catch(function () { /* no introduction for this book */ });
     q("cm:" + book.slug + ":" + ch, "data/commentary/" + book.slug + "/" + ch + ".json").then(function (d) {
       cbody.remove();
       var verses = Object.keys((d || {}).verses || {}).map(Number).sort(function (a, b) { return a - b; });

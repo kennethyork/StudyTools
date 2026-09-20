@@ -1,16 +1,6 @@
 {
  "sources": [
   {
-   "id": "jamieson-fausset-brown",
-   "short": "JFB",
-   "name": "Jamieson, Fausset & Brown",
-   "year": "1871",
-   "books": 66,
-   "chapters": 1086,
-   "verses": 17055,
-   "introductions": 1178
-  },
-  {
    "id": "calvin",
    "short": "Calvin",
    "name": "John Calvin",
@@ -29,17 +19,41 @@
    "chapters": 973,
    "verses": 1940,
    "introductions": 0
+  },
+  {
+   "id": "haydock",
+   "short": "Haydock",
+   "name": "George Leo Haydock",
+   "year": "1859",
+   "books": 12,
+   "chapters": 165,
+   "verses": 2720,
+   "introductions": 9
+  },
+  {
+   "id": "jamieson-fausset-brown",
+   "short": "JFB",
+   "name": "Jamieson, Fausset & Brown",
+   "year": "1871",
+   "books": 66,
+   "chapters": 1086,
+   "verses": 17055,
+   "introductions": 1178
   }
  ],
  "books": [
   "acts",
   "amos",
+  "baruch",
+  "bel-and-the-dragon",
   "colossians",
   "daniel",
   "deuteronomy",
   "ecclesiastes",
   "ephesians",
+  "epistle-of-jeremiah",
   "esther",
+  "esther-greek",
   "exodus",
   "ezekiel",
   "ezra",
@@ -53,6 +67,7 @@
   "i-corinthians",
   "i-john",
   "i-kings",
+  "i-maccabees",
   "i-peter",
   "i-samuel",
   "i-thessalonians",
@@ -61,6 +76,7 @@
   "ii-corinthians",
   "ii-john",
   "ii-kings",
+  "ii-maccabees",
   "ii-peter",
   "ii-samuel",
   "ii-thessalonians",
@@ -76,6 +92,7 @@
   "joshua",
   "jude",
   "judges",
+  "judith",
   "lamentations",
   "leviticus",
   "luke",
@@ -94,8 +111,12 @@
   "revelation-of-john",
   "romans",
   "ruth",
+  "sirach",
   "song-of-solomon",
+  "susanna",
   "titus",
+  "tobit",
+  "wisdom",
   "zechariah",
   "zephaniah"
  ]

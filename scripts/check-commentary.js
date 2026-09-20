@@ -32,11 +32,25 @@ notes.push(index.sources.map(function (s) {
   return s.short + ": " + s.books + " books, " + s.chapters + " chapters, " + s.verses + " verses";
 }).join(" | "));
 
-/* The deuterocanon has no commentary source, and that is stated rather than
-   pretended: nothing under data/commentary should claim those books. */
-check("the deuterocanon is not claimed by any commentary",
-  index.books.every(function (slug) { return bySlug[slug] && bySlug[slug].testament !== "DC"; }),
-  index.books.filter(function (s) { return bySlug[s] && bySlug[s].testament === "DC"; }).join(", "));
+/* The deuterocanon is Haydock's. The three Protestant works stop at the
+   sixty-six, which is why these books had no commentary here at all until his
+   arrived — so what used to be "nothing claims them" is now "only he does". */
+const dcSlugs = Object.keys(bySlug).filter(function (s) {
+  return bySlug[s].testament === "DC";
+});
+const haydock = index.sources.filter(function (s) { return s.id === "haydock"; })[0];
+check("the index lists Haydock and what he covers",
+  !!haydock && haydock.verses > 2000 && haydock.books >= 10,
+  haydock ? JSON.stringify(haydock) : "absent");
+check("the deuterocanonical books he does cover have files now",
+  ["tobit", "judith", "wisdom", "sirach", "baruch", "i-maccabees", "ii-maccabees",
+   "susanna", "bel-and-the-dragon", "epistle-of-jeremiah"].every(function (slug) {
+    return slug in bySlug && fs.existsSync(path.join(OUT, slug, "1.json"));
+  }));
+check("the deuterocanonical books he does not cover still have none, and the reader says so",
+  ["i-esdras", "ii-esdras", "prayer-of-manasses", "psalm-151", "iii-maccabees",
+   "iv-maccabees"].every(function (slug) { return !fs.existsSync(path.join(OUT, slug)); }),
+  dcSlugs.join(", "));
 
 /* ---------- every chapter file ---------- */
 
@@ -145,7 +159,75 @@ check("a comment is not shown as an introduction instead of a verse comment",
   !!gen1 && (gen1.verses["2"] || []).length > 0);
 
 check("a book with no source at all has no file, rather than an empty one",
-  !fs.existsSync(path.join(OUT, "tobit", "1.json")));
+  !fs.existsSync(path.join(OUT, "psalm-151")));
+
+/* ---------- every remark against the verses the reader actually has ---------- */
+
+/* This is where Haydock can go quietly wrong. He follows the Vulgate, and the
+   reader shows these books in translations that do not all divide them his way,
+   so a remark has to land on a verse some translation has — otherwise tapping a
+   verse would show a remark about a verse that is not there. */
+const verseCache = {};
+function versesOf(slug, chapter) {
+  const key = slug + "|" + chapter;
+  if (key in verseCache) { return verseCache[key]; }
+  const numbers = new Set();
+  const book = bySlug[slug];
+  ((book && book.translations) || []).forEach(function (t) {
+    const file = path.join(ROOT, "data", "bible", slug + "." + t + ".json");
+    if (!fs.existsSync(file)) { return; }
+    let data;
+    try { data = JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { return; }
+    const verses = ((data.chapters || {})[String(chapter)]) || {};
+    Object.keys(verses).forEach(function (v) { numbers.add(Number(v)); });
+  });
+  verseCache[key] = numbers;
+  return numbers;
+}
+
+let offText = 0;
+const offTextExamples = [];
+index.books.forEach(function (slug) {
+  const dir = path.join(OUT, slug);
+  if (!fs.existsSync(dir)) { return; }
+  fs.readdirSync(dir).forEach(function (name) {
+    const chapter = Number(String(name).replace(/\.json$/, ""));
+    let data;
+    try { data = JSON.parse(fs.readFileSync(path.join(dir, name), "utf8")); }
+    catch (e) { return; }
+    const have = versesOf(slug, chapter);
+    if (!have.size) { return; }
+    Object.keys(data.verses || {}).forEach(function (v) {
+      if (!have.has(Number(v))) {
+        offText++;
+        if (offTextExamples.length < 4) { offTextExamples.push(slug + " " + chapter + ":" + v); }
+      }
+    });
+  });
+});
+check("every remark lands on a verse the reader has in some translation",
+  offText === 0, offText + " not in any" +
+    (offTextExamples.length ? ": " + offTextExamples.join("; ") : ""));
+
+/* ---------- the book introductions ---------- */
+
+const ABOUT = path.join(ROOT, "data", "about");
+const about = fs.existsSync(ABOUT) ? fs.readdirSync(ABOUT).filter(function (n) {
+  return /\.json$/.test(n);
+}) : [];
+check("book introductions exist for the deuterocanon", about.length >= 8, about.length + " files");
+check("every book introduction names its source and holds clean paragraphs",
+  about.every(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    return data.source && data.source.short && data.slug &&
+      (data.paragraphs || []).length > 0 &&
+      (data.paragraphs || []).every(function (p) { return p && !/<[a-z/]/i.test(p); });
+  }));
+check("a book introduction exists only for a book the reader has",
+  about.every(function (n) { return !!bySlug[n.replace(/\.json$/, "")]; }));
+notes.push(about.length + " book introductions: " + about.map(function (n) {
+  return n.replace(/\.json$/, "");
+}).join(", "));
 
 check("the index's book list matches what is on disk",
   index.books.every(function (slug) { return fs.existsSync(path.join(OUT, slug)); }));

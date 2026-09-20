@@ -309,12 +309,46 @@
       var cBody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
       cSection.appendChild(cBody);
       body.appendChild(cSection);
-      ST.loadJSON(root + "data/commentary/" + dataRef.book + "/" + dataRef.chapter + ".json")
-        .then(function (c) {
+      var commentaryP = ST.loadJSON(root + "data/commentary/" + dataRef.book + "/" + dataRef.chapter + ".json")
+        .catch(function () { return null; });
+      /* the introduction to the book itself, where a source wrote one: Haydock's
+         is the only one that covers the deuterocanon */
+      var aboutP = ST.loadJSON(root + "data/about/" + dataRef.book + ".json")
+        .catch(function () { return null; });
+      Promise.all([commentaryP, aboutP])
+        .then(function (loaded) {
           if (panelVerse !== verse) { return; }
+          var c = loaded[0] || {};
+          var about = loaded[1];
           cBody.remove();
-          var mine = ((c || {}).verses || {})[String(dataRef.verse)] || [];
-          var introductions = (c || {}).introductions || [];
+          if (about && (about.paragraphs || []).length) {
+            var ab = ST.el("div", { class: "commentary intro" });
+            ab.appendChild(ST.el("div", { class: "c-who",
+              text: (about.source.short || "") + (about.source.year ? " \u00b7 " + about.source.year : "") +
+                " \u00b7 about this book" }));
+            about.paragraphs.forEach(function (para) {
+              ab.appendChild(ST.el("p", { class: "c-text", style: "margin:0 0 6px", text: para }));
+            });
+            cSection.appendChild(ab);
+          }
+          var mine = (c.verses || {})[String(dataRef.verse)] || [];
+          var introductions = c.introductions || [];
+          var anyHere = mine.length || introductions.length ||
+            (about && (about.paragraphs || []).length);
+          if (!anyHere && book.testament === "DC") {
+            /* Nothing for this book at all: the works bundled here are Protestant
+               in range and stop at the sixty-six, and Haydock, who covers the
+               Catholic deuterocanon, does not reach this one either. Say which,
+               rather than reporting a load failure for a file never written. */
+            cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0", text:
+              "No verse-level commentary exists for this book in the public domain. " +
+              "Jamieson, Fausset & Brown, Calvin and F. B. Meyer are Protestant in range and " +
+              "stop at the sixty-six books, and Haydock (1859), who covers the Catholic " +
+              "deuterocanon, does not reach this one. R. H. Charles introduced it in 1913, in a " +
+              "volume that exists only as page images and unproofread OCR, so it is not here " +
+              "either \u2014 this panel says so rather than showing you something else." }));
+            return;
+          }
           if (!mine.length) {
             cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0",
               text: introductions.length
@@ -344,21 +378,6 @@
             ST.el("a", { href: root + "apps/study/?ref=" + encodeURIComponent(dataLabel), text: "The whole chapter \u2192" })
           ]));
         }).catch(function () {
-          /* A deuterocanonical book has no commentary file at all: the three
-             works bundled here stop at the sixty-six. Say why, and what does
-             exist, instead of reporting a load failure for a file that was
-             never there. */
-          cBody.remove();
-          if (book.testament === "DC") {
-            cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0", text:
-              "No verse-level commentary exists for this book in the public domain. " +
-              "Jamieson, Fausset & Brown (1871), Calvin and F. B. Meyer are Protestant in " +
-              "range and stop at the sixty-six books. The deuterocanon does have public-domain " +
-              "commentary \u2014 Haydock's Catholic Bible Commentary (1859) goes through it verse " +
-              "by verse, and R. H. Charles introduced these books in 1913 \u2014 but neither is " +
-              "bundled here, so this panel says so rather than showing you something else." }));
-            return;
-          }
           cBody.textContent = "Commentary could not be loaded.";
         });
 
