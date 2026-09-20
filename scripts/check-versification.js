@@ -141,6 +141,52 @@ check("other books are left alone",
 check("no mapping when the numberings agree",
   V.mapReference({ book: "psalms", chapter: 23, verseStart: 1, verseEnd: 1 }, "masoretic", "masoretic").mapped === false);
 
+/* ---------- the other direction ---------- */
+
+/* The verse panel looks the commentary, the cross-references and the interlinear
+   up by the Hebrew numbering, so a reader in the Douay-Rheims needs the Vulgate's
+   numbers turned back. If this direction is wrong, that panel shows what was
+   said about the neighbouring psalm, and nothing else would notice. */
+
+const back = (ch, v) => V.mapReference(
+  { book: "psalms", chapter: ch, verseStart: v, verseEnd: v }, "vulgate", "masoretic").parsed;
+
+check("the Vulgate's Psalm 22 is the Hebrew Psalm 23",
+  back(22, 1).chapter === 23 && back(22, 1).verseStart === 1, JSON.stringify(back(22, 1)));
+check("the Vulgate's Psalm 113 holds both Hebrew psalms 114 and 115",
+  back(113, 1).chapter === 114 && back(113, 8).chapter === 114 &&
+  back(113, 9).chapter === 115 && back(113, 9).verseStart === 1,
+  JSON.stringify([back(113, 8), back(113, 9)]));
+check("the Vulgate's Psalm 114 is the first half of Hebrew 116",
+  back(114, 1).chapter === 116 && back(114, 1).verseStart === 1, JSON.stringify(back(114, 1)));
+check("the Vulgate's Psalm 115 is the second half of Hebrew 116",
+  back(115, 1).chapter === 116 && back(115, 1).verseStart === 10, JSON.stringify(back(115, 1)));
+check("the mapping says what it did, both ways",
+  /as the Vulgate numbers it is Psalm 23/.test(V.mapReference(
+    { book: "psalms", chapter: 22, verseStart: 1, verseEnd: 1 }, "vulgate", "masoretic").note));
+
+/* The check above round-trips a psalm's first verse through the table. This one
+   goes through mapReference itself, both ways, verse by verse. */
+let verseTrips = 0;
+const verseTripBad = [];
+for (let n = 1; n <= 150; n++) {
+  for (let v = 1; v <= 8; v++) {
+    const there = V.mapReference(
+      { book: "psalms", chapter: n, verseStart: v, verseEnd: v }, "masoretic", "vulgate");
+    if (!there.mapped) { continue; }
+    verseTrips++;
+    const here = V.mapReference(
+      { book: "psalms", chapter: there.parsed.chapter, verseStart: there.parsed.verseStart,
+        verseEnd: there.parsed.verseStart }, "vulgate", "masoretic").parsed;
+    if (here.chapter !== n || here.verseStart !== v) {
+      verseTripBad.push(n + ":" + v + " came back as " + here.chapter + ":" + here.verseStart);
+    }
+  }
+}
+check("every psalm verse mapped and mapped back is the verse it was",
+  verseTripBad.length === 0, verseTripBad.slice(0, 4).join("; "));
+notes.push("the numbering was round-tripped through mapReference over " + verseTrips + " verses");
+
 /* ---------- report ---------- */
 
 notes.forEach(function (n) { console.log("note: " + n); });

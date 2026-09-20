@@ -41,6 +41,7 @@ check("the deuterocanon is not claimed by any commentary",
 /* ---------- every chapter file ---------- */
 
 let files = 0, entries = 0, offBook = 0, offVerse = 0, unknownSource = 0, markup = 0, empty = 0, badJson = 0;
+let intros = 0, introParagraphs = 0, badIntro = 0;
 const perSource = {};
 
 index.books.forEach(function (slug) {
@@ -54,6 +55,17 @@ index.books.forEach(function (slug) {
     files++;
 
     if (data.slug !== slug || data.chapter !== chapter) { offBook++; }
+    (data.introductions || []).forEach(function (intro) {
+      intros++;
+      if (sourceIds.indexOf(intro.source) === -1) { unknownSource++; }
+      const paragraphs = intro.paragraphs || [];
+      if (!paragraphs.length) { badIntro++; }
+      paragraphs.forEach(function (p) {
+        introParagraphs++;
+        if (!p) { empty++; }
+        if (/<[a-z/]/i.test(p)) { markup++; }
+      });
+    });
     const verses = data.verses || {};
     Object.keys(verses).forEach(function (v) {
       const number = Number(v);
@@ -75,7 +87,9 @@ check("every comment is on a plausible verse number", offVerse === 0, offVerse +
 check("every comment comes from a source the index lists", unknownSource === 0, unknownSource + " unknown");
 check("no comment is empty", empty === 0, empty + " empty");
 check("no markup is left in the text", markup === 0, markup + " with markup");
-notes.push(files + " chapter files, " + entries.toLocaleString() + " comments");
+check("every introduction is written as paragraphs", badIntro === 0, badIntro + " with none");
+notes.push(files + " chapter files, " + entries.toLocaleString() + " comments, " +
+  intros.toLocaleString() + " chapter introductions in " + introParagraphs.toLocaleString() + " paragraphs");
 
 /* ---------- what a reader will actually see ---------- */
 
@@ -95,6 +109,23 @@ check("a comment carries text worth reading",
   !!john3 && (john3.verses["16"] || [])[0].text.length > 200,
   john3 ? String((john3.verses["16"] || [])[0].text.length) : "no file");
 
+/* The chapter introductions: the commentators' front matter, which is sometimes
+   the only place they touch a verse at all — JFB's remark on Genesis 1:1 is in
+   the introduction, not on the verse — and for the Song of Solomon the only
+   thing he wrote anywhere. */
+check("the index says how many introductions each source has",
+  index.sources.every(function (s) { return typeof s.introductions === "number"; }),
+  JSON.stringify(index.sources.map(function (s) { return s.short + ":" + s.introductions; })));
+
+const sng = commentary("song-of-solomon", 1);
+check("the Song of Solomon has a file although no verse of it is commented on",
+  !!sng && !Object.keys(sng.verses || {}).length && (sng.introductions || []).length === 1,
+  sng ? Object.keys(sng.verses || {}).length + " verses, " +
+    (sng.introductions || []).length + " introductions" : "no file");
+check("that introduction is the commentator's own prose",
+  !!sng && (sng.introductions[0].paragraphs || []).join(" ").length > 300,
+  !!sng ? String((sng.introductions[0].paragraphs || []).join(" ").length) : "no file");
+
 /* The documented omissions: Calvin's Genesis 1:1, and JFB's, which the source
    attaches to the book's front matter rather than to the verse. Both are absent
    rather than invented, and the chapter still has plenty. */
@@ -104,6 +135,14 @@ check("Genesis 1 has commentary", !!gen1 && Object.keys(gen1.verses).length > 5,
 check("Calvin's Genesis 1:1 is absent, as its source documents",
   !!gen1 && !(gen1.verses["1"] || []).some(function (e) { return e.source === "calvin"; }),
   !!gen1 ? JSON.stringify((gen1.verses["1"] || []).map(function (e) { return e.short; })) : "no file");
+check("JFB's note on Genesis 1:1 is in the introduction, where the source put it",
+  !!gen1 && (gen1.introductions || []).length === 1 &&
+    (gen1.introductions[0].paragraphs || []).length > 2 &&
+    /In the beginning/.test((gen1.introductions[0].paragraphs || []).join(" ")),
+  !!gen1 ? JSON.stringify((gen1.introductions || []).map(function (i) {
+    return i.short + ":" + (i.paragraphs || []).length; })) : "no file");
+check("a comment is not shown as an introduction instead of a verse comment",
+  !!gen1 && (gen1.verses["2"] || []).length > 0);
 
 check("a book with no source at all has no file, rather than an empty one",
   !fs.existsSync(path.join(OUT, "tobit", "1.json")));

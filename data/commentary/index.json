@@ -5,9 +5,10 @@
    "short": "JFB",
    "name": "Jamieson, Fausset & Brown",
    "year": "1871",
-   "books": 65,
+   "books": 66,
    "chapters": 1086,
-   "verses": 17055
+   "verses": 17055,
+   "introductions": 1178
   },
   {
    "id": "calvin",
@@ -16,7 +17,8 @@
    "year": "1550s",
    "books": 47,
    "chapters": 773,
-   "verses": 13106
+   "verses": 13106,
+   "introductions": 0
   },
   {
    "id": "fbmeyer",
@@ -24,8 +26,9 @@
    "name": "F. B. Meyer",
    "year": "1900s",
    "books": 62,
-   "chapters": 972,
-   "verses": 1938
+   "chapters": 973,
+   "verses": 1940,
+   "introductions": 0
   }
  ],
  "books": [
@@ -91,6 +94,7 @@
   "revelation-of-john",
   "romans",
   "ruth",
+  "song-of-solomon",
   "titus",
   "zechariah",
   "zephaniah"

@@ -166,12 +166,35 @@
     return chip;
   }
 
+  /* The cross-references, the commentary, the interlinear and the Prayer Book's
+     office tables are all keyed to the Hebrew numbering. A translation that
+     numbers its psalms the Vulgate's way has to be mapped into it, or Psalm 22
+     in the Douay-Rheims would show what the commentators said about Psalm 23. */
+  function dataRefFor(slug, chapter, verse) {
+    var plain = { book: slug, chapter: chapter, verse: verse, note: null };
+    if (!STVersification.isVulgate(translationById(state.tr))) { return plain; }
+    var mapped = STVersification.mapReference(
+      { book: slug, chapter: chapter, verseStart: verse, verseEnd: verse },
+      "vulgate", "masoretic");
+    if (!mapped.mapped) { return plain; }
+    return { book: mapped.parsed.book, chapter: mapped.parsed.chapter,
+             verse: mapped.parsed.verseStart, note: mapped.note };
+  }
+
+  /* What a chapter file this site holds calls the passage being read — the
+     Hebrew numbering, so a link out of the reader lands on the same words. */
+  function dataLabelFor(book, ref) {
+    return book.name + " " + ref.chapter + ":" + ref.verse;
+  }
+
   function openPanel(verse) {
     var book = bySlug[state.book];
     if (!book) { return; }
     var slug = state.book, chapter = state.chapter;
     var verseText = (lastChapter[String(verse)] || "");
     var label = book.name + " " + chapter + ":" + verse;
+    var dataRef = dataRefFor(slug, chapter, verse);
+    var dataLabel = dataLabelFor(book, dataRef);
 
     ensurePanel();
     panelEl.hidden = false;
@@ -196,19 +219,19 @@
         }).catch(function () { return { t: t, text: null }; });
       }));
     });
-    var crossrefP = ST.loadJSON(root + "data/crossref/" + slug + "/" + chapter + ".json")
+    var crossrefP = ST.loadJSON(root + "data/crossref/" + dataRef.book + "/" + dataRef.chapter + ".json")
       .catch(function () { return { refs: [] }; });
-    var wordsP = ST.loadJSON(root + "data/interlinear/" + slug + "/" + chapter + ".json")
+    var wordsP = ST.loadJSON(root + "data/interlinear/" + dataRef.book + "/" + dataRef.chapter + ".json")
       .catch(function () { return null; });
     var readingsP = readingIndex().then(function (index) {
-      return STLiturgy.readingsFor(index, slug, chapter, verse);
+      return STLiturgy.readingsFor(index, dataRef.book, dataRef.chapter, dataRef.verse);
     });
 
     Promise.all([translationsP, crossrefP, wordsP, readingsP]).then(function (loaded) {
       if (panelVerse !== verse) { return; }            /* the reader moved on */
       var versions = loaded[0];
       var refs = ((loaded[1] || {}).refs || [])
-        .filter(function (r) { return r.from === verse; })
+        .filter(function (r) { return r.from === dataRef.verse; })
         .sort(function (a, b) { return b.votes - a.votes; })
         .slice(0, 12);
       var interlinear = loaded[2];
@@ -216,6 +239,12 @@
 
       document.getElementById("vp-sub").textContent =
         ST.translationSub(translationById(state.tr)) + " \u00b7 " + book.name + " " + chapter;
+
+      if (dataRef.note) {
+        body.appendChild(ST.el("p", { class: "muted small", style: "margin:0 0 14px",
+          text: dataRef.note + " The cross-references, the commentary and the original " +
+            "text below are shown for that psalm." }));
+      }
 
       /* the same verse in each translation — translations with their own
          numbering stay out of this, because their verse 5 is not this verse 5 */
@@ -274,15 +303,17 @@
       var cBody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
       cSection.appendChild(cBody);
       body.appendChild(cSection);
-      ST.loadJSON(root + "data/commentary/" + slug + "/" + chapter + ".json")
+      ST.loadJSON(root + "data/commentary/" + dataRef.book + "/" + dataRef.chapter + ".json")
         .then(function (c) {
           if (panelVerse !== verse) { return; }
           cBody.remove();
-          var mine = ((c || {}).verses || {})[String(verse)] || [];
+          var mine = ((c || {}).verses || {})[String(dataRef.verse)] || [];
+          var introductions = (c || {}).introductions || [];
           if (!mine.length) {
             cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0",
-              text: "No comment on this verse in the works bundled here \u2014 they often attach a comment to the verse that opens a passage. The chapter is in Study a Passage." }));
-            return;
+              text: introductions.length
+                ? "No comment on this verse \u2014 they attach a comment to the verse that opens a passage, and this chapter's argument is in the introduction below."
+                : "No comment on this verse in the works bundled here \u2014 they often attach a comment to the verse that opens a passage. The chapter is in Study a Passage." }));
           }
           mine.forEach(function (entry) {
             cSection.appendChild(ST.el("div", { class: "commentary" }, [
@@ -290,16 +321,29 @@
               ST.el("div", { class: "c-text", text: entry.text })
             ]));
           });
+          introductions.forEach(function (intro) {
+            /* the front matter these commentators print before the verses: the
+               argument of the passage, and for a book like the Song of Solomon
+               the only thing they wrote at all */
+            var wrap = ST.el("div", { class: "commentary intro" });
+            wrap.appendChild(ST.el("div", { class: "c-who",
+              text: intro.short + (intro.year ? " \u00b7 " + intro.year : "") + " \u00b7 the chapter's introduction" }));
+            intro.paragraphs.forEach(function (para) {
+              wrap.appendChild(ST.el("p", { class: "c-text", style: "margin:0 0 6px", text: para }));
+            });
+            cSection.appendChild(wrap);
+          });
           cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:8px 0 0" }, [
             document.createTextNode("Public-domain commentary. "),
-            ST.el("a", { href: root + "apps/study/?ref=" + encodeURIComponent(label), text: "The whole chapter \u2192" })
+            ST.el("a", { href: root + "apps/study/?ref=" + encodeURIComponent(dataLabel), text: "The whole chapter \u2192" })
           ]));
         }).catch(function () {
           cBody.textContent = "Commentary could not be loaded.";
         });
 
       /* the words behind it, where the site has them */
-      var words = interlinear && interlinear.verses ? interlinear.verses[String(verse)] : null;
+      var words = interlinear && interlinear.verses
+        ? interlinear.verses[String(dataRef.verse)] : null;
       if (words && words.length) {
         var wSection = panelSection("The words behind it");
         var wrap = document.createElement("div");

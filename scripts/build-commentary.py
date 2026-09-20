@@ -17,8 +17,14 @@ Job, Proverbs, Acts or Revelation, and the Pillar conversion drops a handful of
 verses where a book's front matter had been attached to a verse slot instead of a
 comment. Those are shown as missing, not filled in.
 
+JFB also writes front matter before the verses of most chapters — the argument of
+the passage, in its own paragraphs, and sometimes the only place it comments on a
+verse at all (Genesis 1:1 is in the introduction, not on the verse; the Song of
+Solomon has nothing else). That is carried too, as introduction paragraphs.
+
 Output:
-  data/commentary/<book-slug>/<chapter>.json   the comments on each verse
+  data/commentary/<book-slug>/<chapter>.json   the comments on each verse, and
+                                               the chapter's introduction
   data/commentary/index.json                   which sources cover what
 """
 import json
@@ -93,6 +99,21 @@ def clean(text):
     return re.sub(r"\s+", " ", t).strip()
 
 
+def introduction_paragraphs(payload):
+    """The front matter these sources print before a chapter's verses.
+
+    Kept as paragraphs: it is written as prose with a heading, and running it
+    together the way a verse comment can be run together would lose its shape.
+    """
+    chapter = (payload or {}).get("chapter") or {}
+    intro = chapter.get("introduction")
+    if not intro:
+        return []
+    if isinstance(intro, list):
+        intro = " ".join(str(part) for part in intro)
+    return [p for p in (clean(p) for p in re.split(r"\n\s*\n", str(intro))) if p]
+
+
 def verse_texts(payload):
     """{verse: text} from the HelloAO shape, which both sources use."""
     out = {}
@@ -118,7 +139,8 @@ def verse_texts(payload):
 def main():
     books = json.load(open(os.path.join(ROOT, "data", "bible", "books.json"), encoding="utf-8"))
     os.makedirs(OUT, exist_ok=True)
-    coverage = {s["id"]: {"books": set(), "chapters": 0, "verses": 0} for s in SOURCES}
+    coverage = {s["id"]: {"books": set(), "chapters": 0, "verses": 0, "introductions": 0}
+                for s in SOURCES}
     written = 0
     total_bytes = 0
 
@@ -130,6 +152,7 @@ def main():
 
         for chapter in range(1, book["chapters"] + 1):
             per_verse = {}
+            introductions = []
             for source in SOURCES:
                 url = source["url"].format(source=source["id"], usfm=usfm, chapter=chapter)
                 dest = os.path.join(CACHE, source["id"], usfm, "{}.json".format(chapter))
@@ -140,6 +163,12 @@ def main():
                     payload = json.loads(body)
                 except ValueError:
                     continue
+                paragraphs = introduction_paragraphs(payload)
+                if paragraphs:
+                    introductions.append({"source": source["id"], "short": source["short"],
+                                          "year": source["year"], "paragraphs": paragraphs})
+                    coverage[source["id"]]["introductions"] += 1
+                    coverage[source["id"]]["books"].add(slug)
                 texts = verse_texts(payload)
                 if not texts:
                     continue
@@ -150,18 +179,21 @@ def main():
                     per_verse.setdefault(verse, []).append(
                         {"source": source["id"], "short": source["short"], "text": text})
 
-            if not per_verse:
+            if not per_verse and not introductions:
                 continue
             dest_dir = os.path.join(OUT, slug)
             os.makedirs(dest_dir, exist_ok=True)
             path = os.path.join(dest_dir, "{}.json".format(chapter))
+            payload = {
+                "book": book["name"], "slug": slug, "chapter": chapter,
+                "sources": [{"id": s["id"], "short": s["short"], "name": s["name"],
+                             "year": s["year"]} for s in SOURCES],
+                "verses": {str(v): per_verse[v] for v in sorted(per_verse)}
+            }
+            if introductions:
+                payload["introductions"] = introductions
             with open(path, "w", encoding="utf-8") as f:
-                json.dump({
-                    "book": book["name"], "slug": slug, "chapter": chapter,
-                    "sources": [{"id": s["id"], "short": s["short"], "name": s["name"],
-                                 "year": s["year"]} for s in SOURCES],
-                    "verses": {str(v): per_verse[v] for v in sorted(per_verse)}
-                }, f, ensure_ascii=False, separators=(",", ":"))
+                json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
             written += 1
             total_bytes += os.path.getsize(path)
 
@@ -169,7 +201,8 @@ def main():
         "sources": [{"id": s["id"], "short": s["short"], "name": s["name"], "year": s["year"],
                      "books": len(coverage[s["id"]]["books"]),
                      "chapters": coverage[s["id"]]["chapters"],
-                     "verses": coverage[s["id"]]["verses"]} for s in SOURCES],
+                     "verses": coverage[s["id"]]["verses"],
+                     "introductions": coverage[s["id"]]["introductions"]} for s in SOURCES],
         "books": sorted({b for s in coverage.values() for b in s["books"]})
     }
     with open(os.path.join(OUT, "index.json"), "w", encoding="utf-8") as f:
@@ -177,8 +210,8 @@ def main():
         f.write("\n")
 
     for s in index["sources"]:
-        print("  {:<26} {:>3} books  {:>5} chapters  {:>7,} verses".format(
-            s["name"], s["books"], s["chapters"], s["verses"]))
+        print("  {:<26} {:>3} books  {:>5} chapters  {:>7,} verses  {:>5,} introductions".format(
+            s["name"], s["books"], s["chapters"], s["verses"], s["introductions"]))
     print("  {} chapter files, {:.1f} MB".format(written, total_bytes / 1e6))
 
 

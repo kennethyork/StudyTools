@@ -148,14 +148,25 @@
     els.out.appendChild(xref);
 
     /* 4. what the commentators said */
-    var cm = block("Commentary", "Public-domain commentary, verse by verse: Jamieson, Fausset & Brown (1871), John Calvin, and F. B. Meyer. A comment is attached to the verse that opens the passage it explains.");
+    var cm = block("Commentary", "Public-domain commentary, verse by verse: Jamieson, Fausset & Brown (1871), John Calvin, and F. B. Meyer. A comment is attached to the verse that opens the passage it explains, and the chapter's introduction comes first.");
     var cbody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
     cm.appendChild(cbody);
     q("cm:" + book.slug + ":" + ch, "data/commentary/" + book.slug + "/" + ch + ".json").then(function (d) {
       cbody.remove();
       var verses = Object.keys((d || {}).verses || {}).map(Number).sort(function (a, b) { return a - b; });
+      ((d || {}).introductions || []).forEach(function (intro) {
+        var wrap = ST.el("div", { class: "cm-intro" });
+        wrap.appendChild(ST.el("div", { class: "cm-who",
+          text: intro.short + (intro.year ? " \u00b7 " + intro.year : "") + " \u00b7 the chapter's introduction" }));
+        intro.paragraphs.forEach(function (para) {
+          wrap.appendChild(ST.el("p", { class: "cm-text", style: "margin:0 0 6px", text: para }));
+        });
+        cm.appendChild(wrap);
+      });
       if (!verses.length) {
-        cm.appendChild(ST.el("p", { class: "muted small", text: "No commentary on this chapter in the works bundled here." }));
+        cm.appendChild(ST.el("p", { class: "muted small", text: (d.introductions || []).length
+          ? "No comment on a verse of this chapter: these works attach a comment to the verse that opens a passage."
+          : "No commentary on this chapter in the works bundled here." }));
         return;
       }
       verses.slice(0, 40).forEach(function (v) {
