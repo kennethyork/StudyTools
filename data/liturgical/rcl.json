@@ -1,0 +1,5788 @@
+{
+  "source": "Revised Common Lectionary readings, from the CSV published for download by Vanderbilt Divinity Library (lectionary.library.vanderbilt.edu). The Revised Common Lectionary is copyright © 1992 Consultation on Common Texts.",
+  "years": {
+    "A": {
+      "label": "Year A (2025-26)",
+      "sundays": [
+        {
+          "liturgical": "First Sunday of Advent",
+          "date": "Nov 30, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 2:1-5",
+              "link": "Isaiah 2:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 122",
+              "link": "Psalm 122"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 13:11-14",
+              "link": "Romans 13:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 24:36-44",
+              "link": "Matthew 24:36-44"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday of Advent",
+          "date": "Dec 07, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 11:1-10",
+              "link": "Isaiah 11:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 72:1-7, 18-19",
+              "link": "Psalm 72:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 15:4-13",
+              "link": "Romans 15:4-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 3:1-12",
+              "link": "Matthew 3:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday of Advent",
+          "date": "Dec 14, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 35:1-10",
+              "link": "Isaiah 35:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 146:5-10 or Luke 1:46b-55",
+              "link": "Psalm 146:5-10"
+            },
+            {
+              "type": "second",
+              "ref": "James 5:7-10",
+              "link": "James 5:7-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 11:2-11",
+              "link": "Matthew 11:2-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday of Advent",
+          "date": "Dec 21, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 7:10-16",
+              "link": "Isaiah 7:10-16"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 80:1-7, 17-19",
+              "link": "Psalm 80:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 1:1-7",
+              "link": "Romans 1:1-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 1:18-25",
+              "link": "Matthew 1:18-25"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Name of Jesus",
+          "date": "Jan 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 6:22-27",
+              "link": "Numbers 6:22-27"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 8",
+              "link": "Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 4:4-7 or Philippians 2:5-11",
+              "link": "Galatians 4:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:15-21",
+              "link": "Luke 2:15-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "New Year's Day",
+          "date": "Jan 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ecclesiastes 3:1-13",
+              "link": "Ecclesiastes 3:1-13"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 8",
+              "link": "Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 21:1-6a",
+              "link": "Revelation 21:1-6a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 25:31-46",
+              "link": "Matthew 25:31-46"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday after Christmas Day",
+          "date": "Jan 04, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 31:7-14 or Sirach 24:1-12",
+              "link": "Jeremiah 31:7-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 147:12-20 or Wisdom of Solomon 10:15-21",
+              "link": "Psalm 147:12-20"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:3-14",
+              "link": "Ephesians 1:3-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:(1-9), 10-18",
+              "link": "John 1"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper I",
+          "date": "Dec 24, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 9:2-7",
+              "link": "Isaiah 9:2-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 96",
+              "link": "Psalm 96"
+            },
+            {
+              "type": "second",
+              "ref": "Titus 2:11-14",
+              "link": "Titus 2:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:1-14, (15-20)",
+              "link": "Luke 2:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper II",
+          "date": "Dec 25, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 62:6-12",
+              "link": "Isaiah 62:6-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 97",
+              "link": "Psalm 97"
+            },
+            {
+              "type": "second",
+              "ref": "Titus 3:4-7",
+              "link": "Titus 3:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:(1-7), 8-20",
+              "link": "Luke 2"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper III",
+          "date": "Dec 25, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 52:7-10",
+              "link": "Isaiah 52:7-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 98",
+              "link": "Psalm 98"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 1:1-4, (5-12)",
+              "link": "Hebrews 1:1-4"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:1-14",
+              "link": "John 1:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "First Sunday after Christmas Day",
+          "date": "Dec 28, 2025",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 63:7-9",
+              "link": "Isaiah 63:7-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 148",
+              "link": "Psalm 148"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 2:10-18",
+              "link": "Hebrews 2:10-18"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 2:13-23",
+              "link": "Matthew 2:13-23"
+            }
+          ]
+        },
+        {
+          "liturgical": "Epiphany of the Lord",
+          "date": "Jan 06, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 60:1-6",
+              "link": "Isaiah 60:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 72:1-7, 10-14",
+              "link": "Psalm 72:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 3:1-12",
+              "link": "Ephesians 3:1-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 2:1-12",
+              "link": "Matthew 2:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Baptism of the Lord",
+          "date": "Jan 11, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 42:1-9",
+              "link": "Isaiah 42:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 29",
+              "link": "Psalm 29"
+            },
+            {
+              "type": "second",
+              "ref": "Acts 10:34-43",
+              "link": "Acts 10:34-43"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 3:13-17",
+              "link": "Matthew 3:13-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday after the Epiphany",
+          "date": "Jan 18, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 49:1-7",
+              "link": "Isaiah 49:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 40:1-11",
+              "link": "Psalm 40:1-11"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:1-9",
+              "link": "1 Corinthians 1:1-9"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:29-42",
+              "link": "John 1:29-42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday after the Epiphany",
+          "date": "Jan 25, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 9:1-4",
+              "link": "Isaiah 9:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 27:1, 4-9",
+              "link": "Psalm 27:1"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:10-18",
+              "link": "1 Corinthians 1:10-18"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 4:12-23",
+              "link": "Matthew 4:12-23"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday after the Epiphany",
+          "date": "Feb 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Micah 6:1-8",
+              "link": "Micah 6:1-8"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 15",
+              "link": "Psalm 15"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-31",
+              "link": "1 Corinthians 1:18-31"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 5:1-12",
+              "link": "Matthew 5:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Presentation of the Lord",
+          "date": "Feb 02, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Malachi 3:1-4",
+              "link": "Malachi 3:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 84 or Psalm 24:7-10",
+              "link": "Psalm 84"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 2:14-18",
+              "link": "Hebrews 2:14-18"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:22-40",
+              "link": "Luke 2:22-40"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday after the Epiphany",
+          "date": "Feb 08, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 58:1-9a (9b-12)",
+              "link": "Isaiah 58:1-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 112:1-9 (10)",
+              "link": "Psalm 112:1-9"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 2:1-12 (13-16)",
+              "link": "1 Corinthians 2:1-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 5:13-20",
+              "link": "Matthew 5:13-20"
+            }
+          ]
+        },
+        {
+          "liturgical": "Transfiguration Sunday",
+          "date": "Feb 15, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 24:12-18",
+              "link": "Exodus 24:12-18"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 2 or Psalm 99",
+              "link": "Psalm 2"
+            },
+            {
+              "type": "second",
+              "ref": "2 Peter 1:16-21",
+              "link": "2 Peter 1:16-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 17:1-9",
+              "link": "Matthew 17:1-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Ash Wednesday",
+          "date": "Feb 18, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joel 2:1-2, 12-17 or Isaiah 58:1-12",
+              "link": "Joel 2:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 51:1-17",
+              "link": "Psalm 51:1-17"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 5:20b-6:10",
+              "link": "2 Corinthians 5:20b-6:10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 6:1-6, 16-21",
+              "link": "Matthew 6:1-6"
+            }
+          ]
+        },
+        {
+          "liturgical": "First Sunday in Lent",
+          "date": "Feb 22, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 2:15-17; 3:1-7",
+              "link": "Genesis 2:15-17; 3:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 32",
+              "link": "Psalm 32"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 5:12-19",
+              "link": "Romans 5:12-19"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 4:1-11",
+              "link": "Matthew 4:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday in Lent",
+          "date": "Mar 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 12:1-4a",
+              "link": "Genesis 12:1-4a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 121",
+              "link": "Psalm 121"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 4:1-5, 13-17",
+              "link": "Romans 4:1-5"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 3:1-17 or Matthew 17:1-9",
+              "link": "John 3:1-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday in Lent",
+          "date": "Mar 08, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 17:1-7",
+              "link": "Exodus 17:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 95",
+              "link": "Psalm 95"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 5:1-11",
+              "link": "Romans 5:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 4:5-42",
+              "link": "John 4:5-42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday in Lent",
+          "date": "Mar 15, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 16:1-13",
+              "link": "1 Samuel 16:1-13"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 23",
+              "link": "Psalm 23"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 5:8-14",
+              "link": "Ephesians 5:8-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 9:1-41",
+              "link": "John 9:1-41"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday in Lent",
+          "date": "Mar 22, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ezekiel 37:1-14",
+              "link": "Ezekiel 37:1-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 130",
+              "link": "Psalm 130"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:6-11",
+              "link": "Romans 8:6-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 11:1-45",
+              "link": "John 11:1-45"
+            }
+          ]
+        },
+        {
+          "liturgical": "Annunciation of the Lord",
+          "date": "Mar 25, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 7:10-14",
+              "link": "Isaiah 7:10-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 45 or Psalm 40:5-10",
+              "link": "Psalm 45"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:4-10",
+              "link": "Hebrews 10:4-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:26-38",
+              "link": "Luke 1:26-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Liturgy of the Palms",
+          "date": "Mar 29, 2026",
+          "readings": [
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:1-2, 19-29",
+              "link": "Psalm 118:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "Matthew 21:1-11",
+              "link": "Matthew 21:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Liturgy of the Passion",
+          "date": "Mar 29, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 50:4-9a",
+              "link": "Isaiah 50:4-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:9-16",
+              "link": "Psalm 31:9-16"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 2:5-11",
+              "link": "Philippians 2:5-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 26:14-27:66 or Matthew 27:11-54",
+              "link": "Matthew 26:14-27:66"
+            }
+          ]
+        },
+        {
+          "liturgical": "Monday of Holy Week",
+          "date": "Mar 30, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 42:1-9",
+              "link": "Isaiah 42:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 36:5-11",
+              "link": "Psalm 36:5-11"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 9:11-15",
+              "link": "Hebrews 9:11-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:1-11",
+              "link": "John 12:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Tuesday of Holy Week",
+          "date": "Mar 31, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 49:1-7",
+              "link": "Isaiah 49:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 71:1-14",
+              "link": "Psalm 71:1-14"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-31",
+              "link": "1 Corinthians 1:18-31"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:20-36",
+              "link": "John 12:20-36"
+            }
+          ]
+        },
+        {
+          "liturgical": "Wednesday of Holy Week",
+          "date": "Apr 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 50:4-9a",
+              "link": "Isaiah 50:4-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 70",
+              "link": "Psalm 70"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 12:1-3",
+              "link": "Hebrews 12:1-3"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:21-32",
+              "link": "John 13:21-32"
+            }
+          ]
+        },
+        {
+          "liturgical": "Maundy Thursday",
+          "date": "Apr 02, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 12:1-4, (5-10), 11-14",
+              "link": "Exodus 12:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 116:1-2, 12-19",
+              "link": "Psalm 116:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 11:23-26",
+              "link": "1 Corinthians 11:23-26"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:1-17, 31b-35",
+              "link": "John 13:1-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Good Friday",
+          "date": "Apr 03, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 52:13-53:12",
+              "link": "Isaiah 52:13-53:12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 22",
+              "link": "Psalm 22"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:16-25 or Hebrews 4:14-16; 5:7-9",
+              "link": "Hebrews 10:16-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 18:1-19:42",
+              "link": "John 18:1-19:42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Saturday",
+          "date": "Apr 04, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 14:1-14 or Lamentations 3:1-9, 19-24",
+              "link": "Job 14:1-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:1-4, 15-16",
+              "link": "Psalm 31:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 4:1-8",
+              "link": "1 Peter 4:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 27:57-66 or John 19:38-42",
+              "link": "Matthew 27:57-66"
+            }
+          ]
+        },
+        {
+          "liturgical": "Easter Vigil",
+          "date": "Apr 05, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Old Testament Readings and Psalms - Genesis 1:1-2:4a and Psalm 136:1-9, 23-26 - Genesis 7:1-5, 11-18; 8:6-18; 9:8-13 and Psalm 46 - Genesis 22:1-18 and Psalm 16 - Exodus 14:10-31; 15:20-21 and Exodus 15:1b-13, 17-18 - Isaiah 55:1-11 and Isaiah 12:2-6 - Baruch 3:9-15, 3:32-4:4 or Proverbs 8:1-8, 19-21; 9:4b-6 and Psalm 19 - Ezekiel 36:24-28 and Psalm 42 and 43 - Ezekiel 37:1-14 and Psalm 143 - Zephaniah 3:14-20 and Psalm 98 - New Testament Reading and Psalm - Romans 6:3-11 and Psalm 114 - Gospel - Matthew 28:1-10",
+              "link": "Old Testament Readings and Psalms - Genesis 1:1-2:4a and Psalm 136:1-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Resurrection of the Lord",
+          "date": "Apr 05, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 10:34-43 or Jeremiah 31:1-6",
+              "link": "* Acts 10:34-43"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:1-2, 14-24",
+              "link": "Psalm 118:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 3:1-4 or Acts 10:34-43",
+              "link": "Colossians 3:1-4"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:1-18 or Matthew 28:1-10",
+              "link": "John 20:1-18"
+            }
+          ]
+        },
+        {
+          "liturgical": "Easter Evening",
+          "date": "Apr 05, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Isaiah 25:6-9",
+              "link": "* Isaiah 25:6-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 114",
+              "link": "Psalm 114"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 5:6b-8",
+              "link": "1 Corinthians 5:6b-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:13-49",
+              "link": "Luke 24:13-49"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday of Easter",
+          "date": "Apr 12, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 2:14a, 22-32",
+              "link": "* Acts 2:14a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 16",
+              "link": "Psalm 16"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 1:3-9",
+              "link": "1 Peter 1:3-9"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:19-31",
+              "link": "John 20:19-31"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday of Easter",
+          "date": "Apr 19, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 2:14a, 36-41",
+              "link": "* Acts 2:14a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 116:1-4, 12-19",
+              "link": "Psalm 116:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 1:17-23",
+              "link": "1 Peter 1:17-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:13-35",
+              "link": "Luke 24:13-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday of Easter",
+          "date": "Apr 26, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 2:42-47",
+              "link": "* Acts 2:42-47"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 23",
+              "link": "Psalm 23"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 2:19-25",
+              "link": "1 Peter 2:19-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 10:1-10",
+              "link": "John 10:1-10"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday of Easter",
+          "date": "May 03, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 7:55-60",
+              "link": "* Acts 7:55-60"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:1-5, 15-16",
+              "link": "Psalm 31:1-5"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 2:2-10",
+              "link": "1 Peter 2:2-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 14:1-14",
+              "link": "John 14:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "Sixth Sunday of Easter",
+          "date": "May 10, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 17:22-31",
+              "link": "* Acts 17:22-31"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 66:8-20",
+              "link": "Psalm 66:8-20"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 3:13-22",
+              "link": "1 Peter 3:13-22"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 14:15-21",
+              "link": "John 14:15-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "Ascension of the Lord",
+          "date": "May 14, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 1:1-11",
+              "link": "* Acts 1:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 47 or Psalm 93",
+              "link": "Psalm 47"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:15-23",
+              "link": "Ephesians 1:15-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:44-53",
+              "link": "Luke 24:44-53"
+            }
+          ]
+        },
+        {
+          "liturgical": "Seventh Sunday of Easter",
+          "date": "May 17, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 1:6-14",
+              "link": "* Acts 1:6-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 68:1-10, 32-35",
+              "link": "Psalm 68:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 4:12-14; 5:6-11",
+              "link": "1 Peter 4:12-14; 5:6-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 17:1-11",
+              "link": "John 17:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Day of Pentecost",
+          "date": "May 24, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 2:1-21 or Numbers 11:24-30",
+              "link": "* Acts 2:1-21"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 104:24-34, 35b",
+              "link": "Psalm 104:24-34"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 12:3b-13 or Acts 2:1-21",
+              "link": "1 Corinthians 12:3b-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:19-23 or John 7:37-39",
+              "link": "John 20:19-23"
+            }
+          ]
+        },
+        {
+          "liturgical": "Visitation of Mary to Elizabeth",
+          "date": "May 31, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 2:1-10 Psalm 113",
+              "link": "1 Samuel 2:1-10 Psalm 113"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 12:9-16b",
+              "link": "Romans 12:9-16b"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:39-57",
+              "link": "Luke 1:39-57"
+            }
+          ]
+        },
+        {
+          "liturgical": "Trinity Sunday",
+          "date": "May 31, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 1:1-2:4a Psalm 8",
+              "link": "Genesis 1:1-2:4a Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 13:11-13",
+              "link": "2 Corinthians 13:11-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 28:16-20",
+              "link": "Matthew 28:16-20"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 5 (10)",
+          "date": "Jun 07, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 12:1-9 Psalm 33:1-12",
+              "link": "Genesis 12:1-9 Psalm 33:1-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Hosea 5:15-6:6 Psalm 50:7-15",
+              "link": "Hosea 5:15-6:6 Psalm 50:7-15"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 4:13-25",
+              "link": "Romans 4:13-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 9:9-13, 18-26",
+              "link": "Matthew 9:9-13"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 6 (11)",
+          "date": "Jun 14, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 18:1-15, (21:1-7) Psalm 116:1-2, 12-19",
+              "link": "Genesis 18:1-15"
+            },
+            {
+              "type": "psalm",
+              "ref": "Exodus 19:2-8a Psalm 100",
+              "link": "Exodus 19:2-8a Psalm 100"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 5:1-8",
+              "link": "Romans 5:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 9:35-10:8, (9-23)",
+              "link": "Matthew 9:35-10:8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 7 (12)",
+          "date": "Jun 21, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 21:8-21 Psalm 86:1-10, 16-17",
+              "link": "Genesis 21:8-21 Psalm 86:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 20:7-13 Psalm 69:7-10, (11-15), 16-18",
+              "link": "Jeremiah 20:7-13 Psalm 69:7-10"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 6:1b-11",
+              "link": "Romans 6:1b-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 10:24-39",
+              "link": "Matthew 10:24-39"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 8 (13)",
+          "date": "Jun 28, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 22:1-14 Psalm 13",
+              "link": "Genesis 22:1-14 Psalm 13"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 28:5-9 Psalm 89:1-4, 15-18",
+              "link": "Jeremiah 28:5-9 Psalm 89:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 6:12-23",
+              "link": "Romans 6:12-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 10:40-42",
+              "link": "Matthew 10:40-42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 9 (14)",
+          "date": "Jul 05, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 24:34-38, 42-49, 58-67 Psalm 45:10-17 or Song of Solomon 2:8-13",
+              "link": "Genesis 24:34-38"
+            },
+            {
+              "type": "psalm",
+              "ref": "Zechariah 9:9-12 Psalm 145:8-14",
+              "link": "Zechariah 9:9-12 Psalm 145:8-14"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 7:15-25a",
+              "link": "Romans 7:15-25a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 11:16-19, 25-30",
+              "link": "Matthew 11:16-19"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 10 (15)",
+          "date": "Jul 12, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 25:19-34 Psalm 119:105-112",
+              "link": "Genesis 25:19-34 Psalm 119:105-112"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 55:10-13 Psalm 65:(1-8), 9-13",
+              "link": "Isaiah 55:10-13 Psalm 65"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:1-11",
+              "link": "Romans 8:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 13:1-9, 18-23",
+              "link": "Matthew 13:1-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 11 (16)",
+          "date": "Jul 19, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 28:10-19a Psalm 139:1-12, 23-24",
+              "link": "Genesis 28:10-19a Psalm 139:1-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Wisdom of Solomon 12:13, 16-19 or Isaiah 44:6-8 Psalm 86:11-17",
+              "link": "Wisdom of Solomon 12:13"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:12-25",
+              "link": "Romans 8:12-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 13:24-30, 36-43",
+              "link": "Matthew 13:24-30"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 12 (17)",
+          "date": "Jul 26, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 29:15-28 Psalm 105:1-11, 45b or Psalm 128",
+              "link": "Genesis 29:15-28 Psalm 105:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "1 Kings 3:5-12 Psalm 119:129-136",
+              "link": "1 Kings 3:5-12 Psalm 119:129-136"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:26-39",
+              "link": "Romans 8:26-39"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 13:31-33, 44-52",
+              "link": "Matthew 13:31-33"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 13 (18)",
+          "date": "Aug 02, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 32:22-31 Psalm 17:1-7, 15",
+              "link": "Genesis 32:22-31 Psalm 17:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 55:1-5 Psalm 145:8-9, 14-21",
+              "link": "Isaiah 55:1-5 Psalm 145:8-9"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 9:1-5",
+              "link": "Romans 9:1-5"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 14:13-21",
+              "link": "Matthew 14:13-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 14 (19)",
+          "date": "Aug 09, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 37:1-4, 12-28 Psalm 105: 1-6, 16-22, 45b",
+              "link": "Genesis 37:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "1 Kings 19:9-18 Psalm 85:8-13",
+              "link": "1 Kings 19:9-18 Psalm 85:8-13"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 10:5-15",
+              "link": "Romans 10:5-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 14:22-33",
+              "link": "Matthew 14:22-33"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 15 (20)",
+          "date": "Aug 16, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 45:1-15 Psalm 133",
+              "link": "Genesis 45:1-15 Psalm 133"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 56:1, 6-8 Psalm 67",
+              "link": "Isaiah 56:1"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 11:1-2a, 29-32",
+              "link": "Romans 11:1-2a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 15: (10-20), 21-28",
+              "link": "Matthew 15"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 16 (21)",
+          "date": "Aug 23, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 1:8-2:10 Psalm 124",
+              "link": "Exodus 1:8-2:10 Psalm 124"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 51:1-6 Psalm 138",
+              "link": "Isaiah 51:1-6 Psalm 138"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 12:1-8",
+              "link": "Romans 12:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 16:13-20",
+              "link": "Matthew 16:13-20"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 17 (22)",
+          "date": "Aug 30, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 3:1-15 Psalm 105:1-6, 23-26, 45b",
+              "link": "Exodus 3:1-15 Psalm 105:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 15:15-21 Psalm 26:1-8",
+              "link": "Jeremiah 15:15-21 Psalm 26:1-8"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 12:9-21",
+              "link": "Romans 12:9-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 16:21-28",
+              "link": "Matthew 16:21-28"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 18 (23)",
+          "date": "Sep 06, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 12:1-14 Psalm 149",
+              "link": "Exodus 12:1-14 Psalm 149"
+            },
+            {
+              "type": "psalm",
+              "ref": "Ezekiel 33:7-11 Psalm 119:33-40",
+              "link": "Ezekiel 33:7-11 Psalm 119:33-40"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 13:8-14",
+              "link": "Romans 13:8-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 18:15-20",
+              "link": "Matthew 18:15-20"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 19 (24)",
+          "date": "Sep 13, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 14:19-31 Psalm 114 or Exodus 15:1b-11, 20-21",
+              "link": "Exodus 14:19-31 Psalm 114"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 50:15-21 Psalm 103:(1-7), 8-13",
+              "link": "Genesis 50:15-21 Psalm 103"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 14:1-12",
+              "link": "Romans 14:1-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 18:21-35",
+              "link": "Matthew 18:21-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Cross",
+          "date": "Sep 14, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 21:4b-9 Psalm 98:1-5 or Psalm 78:1-2, 34-38",
+              "link": "Numbers 21:4b-9 Psalm 98:1-5"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-24",
+              "link": "1 Corinthians 1:18-24"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 3:13-17",
+              "link": "John 3:13-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 20 (25)",
+          "date": "Sep 20, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 16:2-15 Psalm 105:1-6, 37-45",
+              "link": "Exodus 16:2-15 Psalm 105:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jonah 3:10-4:11 Psalm 145:1-8",
+              "link": "Jonah 3:10-4:11 Psalm 145:1-8"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 1:21-30",
+              "link": "Philippians 1:21-30"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 20:1-16",
+              "link": "Matthew 20:1-16"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 21 (26)",
+          "date": "Sep 27, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 17:1-7 Psalm 78:1-4, 12-16",
+              "link": "Exodus 17:1-7 Psalm 78:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Ezekiel 18:1-4, 25-32 Psalm 25:1-9",
+              "link": "Ezekiel 18:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 2:1-13",
+              "link": "Philippians 2:1-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 21:23-32",
+              "link": "Matthew 21:23-32"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 22 (27)",
+          "date": "Oct 04, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 20:1-4, 7-9, 12-20 Psalm 19",
+              "link": "Exodus 20:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 5:1-7 Psalm 80:7-15",
+              "link": "Isaiah 5:1-7 Psalm 80:7-15"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 3:4b-14",
+              "link": "Philippians 3:4b-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 21:33-46",
+              "link": "Matthew 21:33-46"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 23 (28)",
+          "date": "Oct 11, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 32:1-14 Psalm 106:1-6, 19-23",
+              "link": "Exodus 32:1-14 Psalm 106:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 25:1-9 Psalm 23",
+              "link": "Isaiah 25:1-9 Psalm 23"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 4:1-9",
+              "link": "Philippians 4:1-9"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 22:1-14",
+              "link": "Matthew 22:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "Canadian Thanksgiving Day",
+          "date": "Oct 12, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 8:7-18 Psalm 65",
+              "link": "Deuteronomy 8:7-18 Psalm 65"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 9:6-15",
+              "link": "2 Corinthians 9:6-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 17:11-19",
+              "link": "Luke 17:11-19"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 24 (29)",
+          "date": "Oct 18, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 33:12-23 Psalm 99",
+              "link": "Exodus 33:12-23 Psalm 99"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 45:1-7 Psalm 96:1-9, (10-13)",
+              "link": "Isaiah 45:1-7 Psalm 96:1-9"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 1:1-10",
+              "link": "1 Thessalonians 1:1-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 22:15-22",
+              "link": "Matthew 22:15-22"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 25 (30)",
+          "date": "Oct 25, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 34:1-12 Psalm 90:1-6, 13-17",
+              "link": "Deuteronomy 34:1-12 Psalm 90:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Leviticus 19:1-2, 15-18 Psalm 1",
+              "link": "Leviticus 19:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 2:1-8",
+              "link": "1 Thessalonians 2:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 22:34-46",
+              "link": "Matthew 22:34-46"
+            }
+          ]
+        },
+        {
+          "liturgical": "All Saints Day",
+          "date": "Nov 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Revelation 7:9-17 Psalm 34:1-10, 22",
+              "link": "Revelation 7:9-17 Psalm 34:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 3:1-3",
+              "link": "1 John 3:1-3"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 5:1-12",
+              "link": "Matthew 5:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 26 (31)",
+          "date": "Nov 01, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joshua 3:7-17 Psalm 107:1-7, 33-37",
+              "link": "Joshua 3:7-17 Psalm 107:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Micah 3:5-12 Psalm 43",
+              "link": "Micah 3:5-12 Psalm 43"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 2:9-13",
+              "link": "1 Thessalonians 2:9-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 23:1-12",
+              "link": "Matthew 23:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 27 (32)",
+          "date": "Nov 08, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joshua 24:1-3a, 14-25 Psalm 78:1-7",
+              "link": "Joshua 24:1-3a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Wisdom of Solomon 6:12-16 or Amos 5:18-24 Wisdom of Solomon 6:17-20 or Psalm 70",
+              "link": "Wisdom of Solomon 6:12-16"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 4:13-18",
+              "link": "1 Thessalonians 4:13-18"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 25:1-13",
+              "link": "Matthew 25:1-13"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 28 (33)",
+          "date": "Nov 15, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Judges 4:1-7 Psalm 123",
+              "link": "Judges 4:1-7 Psalm 123"
+            },
+            {
+              "type": "psalm",
+              "ref": "Zephaniah 1:7, 12-18 Psalm 90:1-8, (9-11), 12",
+              "link": "Zephaniah 1:7"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 5:1-11",
+              "link": "1 Thessalonians 5:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 25:14-30",
+              "link": "Matthew 25:14-30"
+            }
+          ]
+        },
+        {
+          "liturgical": "Reign of Christ - Proper 29 (34)",
+          "date": "Nov 22, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ezekiel 34:11-16, 20-24 Psalm 100",
+              "link": "Ezekiel 34:11-16"
+            },
+            {
+              "type": "psalm",
+              "ref": "Ezekiel 34:11-16, 20-24 Psalm 95:1-7a",
+              "link": "Ezekiel 34:11-16"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:15-23",
+              "link": "Ephesians 1:15-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 25:31-46",
+              "link": "Matthew 25:31-46"
+            }
+          ]
+        },
+        {
+          "liturgical": "Thanksgiving Day",
+          "date": "Nov 26, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 8:7-18 Psalm 65",
+              "link": "Deuteronomy 8:7-18 Psalm 65"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 9:6-15",
+              "link": "2 Corinthians 9:6-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 17:11-19",
+              "link": "Luke 17:11-19"
+            }
+          ]
+        }
+      ]
+    },
+    "B": {
+      "label": "Year B (2026-27)",
+      "sundays": [
+        {
+          "liturgical": "First Sunday of Advent",
+          "date": "Nov 29, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 64:1-9",
+              "link": "Isaiah 64:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 80:1-7, 17-19",
+              "link": "Psalm 80:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:3-9",
+              "link": "1 Corinthians 1:3-9"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 13:24-37",
+              "link": "Mark 13:24-37"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday of Advent",
+          "date": "Dec 06, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 40:1-11",
+              "link": "Isaiah 40:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 85:1-2, 8-13",
+              "link": "Psalm 85:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "2 Peter 3:8-15a",
+              "link": "2 Peter 3:8-15a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 1:1-8",
+              "link": "Mark 1:1-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday of Advent",
+          "date": "Dec 13, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 61:1-4, 8-11",
+              "link": "Isaiah 61:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 126 or Luke 1:46b-55",
+              "link": "Psalm 126"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 5:16-24",
+              "link": "1 Thessalonians 5:16-24"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:6-8, 19-28",
+              "link": "John 1:6-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday of Advent",
+          "date": "Dec 20, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 7:1-11, 16",
+              "link": "2 Samuel 7:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Luke 1:46b-55 or Psalm 89:1-4, 19-26",
+              "link": "Luke 1:46b-55"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 16:25-27",
+              "link": "Romans 16:25-27"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:26-38",
+              "link": "Luke 1:26-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Name of Jesus",
+          "date": "Jan 01, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 6:22-27",
+              "link": "Numbers 6:22-27"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 8",
+              "link": "Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 4:4-7 or Philippians 2:5-11",
+              "link": "Galatians 4:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:15-21",
+              "link": "Luke 2:15-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "New Year's Day",
+          "date": "Jan 01, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ecclesiastes 3:1-13",
+              "link": "Ecclesiastes 3:1-13"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 8",
+              "link": "Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 21:1-6a",
+              "link": "Revelation 21:1-6a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 25:31-46",
+              "link": "Matthew 25:31-46"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday after Christmas Day",
+          "date": "Jan 03, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 31:7-14 or Sirach 24:1-12",
+              "link": "Jeremiah 31:7-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 147:12-20 or Wisdom of Solomon 10:15-21",
+              "link": "Psalm 147:12-20"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:3-14",
+              "link": "Ephesians 1:3-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:(1-9), 10-18",
+              "link": "John 1"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper I",
+          "date": "Dec 24, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 9:2-7",
+              "link": "Isaiah 9:2-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 96",
+              "link": "Psalm 96"
+            },
+            {
+              "type": "second",
+              "ref": "Titus 2:11-14",
+              "link": "Titus 2:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:1-14, (15-20)",
+              "link": "Luke 2:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper II",
+          "date": "Dec 25, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 62:6-12",
+              "link": "Isaiah 62:6-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 97",
+              "link": "Psalm 97"
+            },
+            {
+              "type": "second",
+              "ref": "Titus 3:4-7",
+              "link": "Titus 3:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:(1-7), 8-20",
+              "link": "Luke 2"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper III",
+          "date": "Dec 25, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 52:7-10",
+              "link": "Isaiah 52:7-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 98",
+              "link": "Psalm 98"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 1:1-4, (5-12)",
+              "link": "Hebrews 1:1-4"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:1-14",
+              "link": "John 1:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "First Sunday after Christmas Day",
+          "date": "Dec 27, 2026",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 61:10-62:3",
+              "link": "Isaiah 61:10-62:3"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 148",
+              "link": "Psalm 148"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 4:4-7",
+              "link": "Galatians 4:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:22-40",
+              "link": "Luke 2:22-40"
+            }
+          ]
+        },
+        {
+          "liturgical": "Epiphany of the Lord",
+          "date": "Jan 06, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 60:1-6",
+              "link": "Isaiah 60:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 72:1-7, 10-14",
+              "link": "Psalm 72:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 3:1-12",
+              "link": "Ephesians 3:1-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 2:1-12",
+              "link": "Matthew 2:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Baptism of the Lord",
+          "date": "Jan 10, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 1:1-5",
+              "link": "Genesis 1:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 29",
+              "link": "Psalm 29"
+            },
+            {
+              "type": "second",
+              "ref": "Acts 19:1-7",
+              "link": "Acts 19:1-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 1:4-11",
+              "link": "Mark 1:4-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday after the Epiphany",
+          "date": "Jan 17, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 3:1-10, (11-20)",
+              "link": "1 Samuel 3:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 139:1-6, 13-18",
+              "link": "Psalm 139:1-6"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 6:12-20",
+              "link": "1 Corinthians 6:12-20"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:43-51",
+              "link": "John 1:43-51"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday after the Epiphany",
+          "date": "Jan 24, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jonah 3:1-5, 10",
+              "link": "Jonah 3:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 62:5-12",
+              "link": "Psalm 62:5-12"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 7:29-31",
+              "link": "1 Corinthians 7:29-31"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 1:14-20",
+              "link": "Mark 1:14-20"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday after the Epiphany",
+          "date": "Jan 31, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 18:15-20",
+              "link": "Deuteronomy 18:15-20"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 111",
+              "link": "Psalm 111"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 8:1-13",
+              "link": "1 Corinthians 8:1-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 1:21-28",
+              "link": "Mark 1:21-28"
+            }
+          ]
+        },
+        {
+          "liturgical": "Presentation of the Lord",
+          "date": "Feb 02, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Malachi 3:1-4",
+              "link": "Malachi 3:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 84 or Psalm 24:7-10",
+              "link": "Psalm 84"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 2:14-18",
+              "link": "Hebrews 2:14-18"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:22-40",
+              "link": "Luke 2:22-40"
+            }
+          ]
+        },
+        {
+          "liturgical": "Transfiguration Sunday",
+          "date": "Feb 07, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Kings 2:1-12",
+              "link": "2 Kings 2:1-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 50:1-6",
+              "link": "Psalm 50:1-6"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 4:3-6",
+              "link": "2 Corinthians 4:3-6"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 9:2-9",
+              "link": "Mark 9:2-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Ash Wednesday",
+          "date": "Feb 10, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joel 2:1-2, 12-17 or Isaiah 58:1-12",
+              "link": "Joel 2:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 51:1-17",
+              "link": "Psalm 51:1-17"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 5:20b-6:10",
+              "link": "2 Corinthians 5:20b-6:10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 6:1-6, 16-21",
+              "link": "Matthew 6:1-6"
+            }
+          ]
+        },
+        {
+          "liturgical": "First Sunday in Lent",
+          "date": "Feb 14, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 9:8-17",
+              "link": "Genesis 9:8-17"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 25:1-10",
+              "link": "Psalm 25:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 3:18-22",
+              "link": "1 Peter 3:18-22"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 1:9-15",
+              "link": "Mark 1:9-15"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday in Lent",
+          "date": "Feb 21, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 17:1-7, 15-16",
+              "link": "Genesis 17:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 22:23-31",
+              "link": "Psalm 22:23-31"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 4:13-25",
+              "link": "Romans 4:13-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 8:31-38 or Mark 9:2-9",
+              "link": "Mark 8:31-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday in Lent",
+          "date": "Feb 28, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 20:1-17",
+              "link": "Exodus 20:1-17"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 19",
+              "link": "Psalm 19"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-25",
+              "link": "1 Corinthians 1:18-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 2:13-22",
+              "link": "John 2:13-22"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday in Lent",
+          "date": "Mar 07, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 21:4-9",
+              "link": "Numbers 21:4-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 107:1-3, 17-22",
+              "link": "Psalm 107:1-3"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 2:1-10",
+              "link": "Ephesians 2:1-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 3:14-21",
+              "link": "John 3:14-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday in Lent",
+          "date": "Mar 14, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 31:31-34",
+              "link": "Jeremiah 31:31-34"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 51:1-12 or Psalm 119:9-16",
+              "link": "Psalm 51:1-12"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 5:5-10",
+              "link": "Hebrews 5:5-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:20-33",
+              "link": "John 12:20-33"
+            }
+          ]
+        },
+        {
+          "liturgical": "Liturgy of the Palms",
+          "date": "Mar 21, 2027",
+          "readings": [
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:1-2, 19-29",
+              "link": "Psalm 118:1-2"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 11:1-11 or John 12:12-16",
+              "link": "Mark 11:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Liturgy of the Passion",
+          "date": "Mar 21, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 50:4-9a",
+              "link": "Isaiah 50:4-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:9-16",
+              "link": "Psalm 31:9-16"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 2:5-11",
+              "link": "Philippians 2:5-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 14:1-15:47 or Mark 15:1-39, (40-47)",
+              "link": "Mark 14:1-15:47"
+            }
+          ]
+        },
+        {
+          "liturgical": "Monday of Holy Week",
+          "date": "Mar 22, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 42:1-9",
+              "link": "Isaiah 42:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 36:5-11",
+              "link": "Psalm 36:5-11"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 9:11-15",
+              "link": "Hebrews 9:11-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:1-11",
+              "link": "John 12:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Tuesday of Holy Week",
+          "date": "Mar 23, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 49:1-7",
+              "link": "Isaiah 49:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 71:1-14",
+              "link": "Psalm 71:1-14"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-31",
+              "link": "1 Corinthians 1:18-31"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:20-36",
+              "link": "John 12:20-36"
+            }
+          ]
+        },
+        {
+          "liturgical": "Wednesday of Holy Week",
+          "date": "Mar 24, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 50:4-9a",
+              "link": "Isaiah 50:4-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 70",
+              "link": "Psalm 70"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 12:1-3",
+              "link": "Hebrews 12:1-3"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:21-32",
+              "link": "John 13:21-32"
+            }
+          ]
+        },
+        {
+          "liturgical": "Maundy Thursday",
+          "date": "Mar 25, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 12:1-4, (5-10), 11-14",
+              "link": "Exodus 12:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 116:1-2, 12-19",
+              "link": "Psalm 116:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 11:23-26",
+              "link": "1 Corinthians 11:23-26"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:1-17, 31b-35",
+              "link": "John 13:1-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Good Friday",
+          "date": "Mar 26, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 52:13-53:12",
+              "link": "Isaiah 52:13-53:12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 22",
+              "link": "Psalm 22"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:16-25 or Hebrews 4:14-16; 5:7-9",
+              "link": "Hebrews 10:16-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 18:1-19:42",
+              "link": "John 18:1-19:42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Saturday",
+          "date": "Mar 27, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 14:1-14 or Lamentations 3:1-9, 19-24",
+              "link": "Job 14:1-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:1-4, 15-16",
+              "link": "Psalm 31:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 4:1-8",
+              "link": "1 Peter 4:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 27:57-66 or John 19:38-42",
+              "link": "Matthew 27:57-66"
+            }
+          ]
+        },
+        {
+          "liturgical": "Easter Vigil",
+          "date": "Mar 28, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Old Testament Readings and Psalms - Genesis 1:1-2:4a and Psalm 136:1-9, 23-26 - Genesis 7:1-5, 11-18; 8:6-18; 9:8-13 and Psalm 46 - Genesis 22:1-18 and Psalm 16 - Exodus 14:10-31; 15:20-21 and Exodus 15:1b-13, 17-18 - Isaiah 55:1-11 and Isaiah 12:2-6 - Baruch 3:9-15, 3:32-4:4 or Proverbs 8:1-8, 19-21; 9:4b-6 and Psalm 19 - Ezekiel 36:24-28 and Psalm 42 and 43 - Ezekiel 37:1-14 and Psalm 143 - Zephaniah 3:14-20 and Psalm 98 - New Testament Reading and Psalm - Romans 6:3-11 and Psalm 114 - Gospel - Mark 16:1-8",
+              "link": "Old Testament Readings and Psalms - Genesis 1:1-2:4a and Psalm 136:1-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Resurrection of the Lord",
+          "date": "Mar 28, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 10:34-43 or Isaiah 25:6-9",
+              "link": "* Acts 10:34-43"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:1-2, 14-24",
+              "link": "Psalm 118:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 15:1-11 or Acts 10:34-43",
+              "link": "1 Corinthians 15:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:1-18 or Mark 16:1-8",
+              "link": "John 20:1-18"
+            }
+          ]
+        },
+        {
+          "liturgical": "Easter Evening",
+          "date": "Mar 28, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Isaiah 25:6-9",
+              "link": "* Isaiah 25:6-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 114",
+              "link": "Psalm 114"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 5:6b-8",
+              "link": "1 Corinthians 5:6b-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:13-49",
+              "link": "Luke 24:13-49"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday of Easter",
+          "date": "Apr 04, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 4:32-35",
+              "link": "* Acts 4:32-35"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 133",
+              "link": "Psalm 133"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 1:1-2:2",
+              "link": "1 John 1:1-2:2"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:19-31",
+              "link": "John 20:19-31"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday of Easter",
+          "date": "Apr 11, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 3:12-19",
+              "link": "* Acts 3:12-19"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 4",
+              "link": "Psalm 4"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 3:1-7",
+              "link": "1 John 3:1-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:36b-48",
+              "link": "Luke 24:36b-48"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday of Easter",
+          "date": "Apr 18, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 4:5-12",
+              "link": "* Acts 4:5-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 23",
+              "link": "Psalm 23"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 3:16-24",
+              "link": "1 John 3:16-24"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 10:11-18",
+              "link": "John 10:11-18"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday of Easter",
+          "date": "Apr 25, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 8:26-40",
+              "link": "* Acts 8:26-40"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 22:25-31",
+              "link": "Psalm 22:25-31"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 4:7-21",
+              "link": "1 John 4:7-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 15:1-8",
+              "link": "John 15:1-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Sixth Sunday of Easter",
+          "date": "May 02, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 10:44-48",
+              "link": "* Acts 10:44-48"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 98",
+              "link": "Psalm 98"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 5:1-6",
+              "link": "1 John 5:1-6"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 15:9-17",
+              "link": "John 15:9-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Ascension of the Lord",
+          "date": "May 06, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 1:1-11",
+              "link": "* Acts 1:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 47 or Psalm 93",
+              "link": "Psalm 47"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:15-23",
+              "link": "Ephesians 1:15-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:44-53",
+              "link": "Luke 24:44-53"
+            }
+          ]
+        },
+        {
+          "liturgical": "Seventh Sunday of Easter",
+          "date": "May 09, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 1:15-17, 21-26",
+              "link": "* Acts 1:15-17"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 1",
+              "link": "Psalm 1"
+            },
+            {
+              "type": "second",
+              "ref": "1 John 5:9-13",
+              "link": "1 John 5:9-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 17:6-19",
+              "link": "John 17:6-19"
+            }
+          ]
+        },
+        {
+          "liturgical": "Day of Pentecost",
+          "date": "May 16, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 2:1-21 or Ezekiel 37:1-14",
+              "link": "* Acts 2:1-21"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 104:24-34, 35b",
+              "link": "Psalm 104:24-34"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:22-27 or Acts 2:1-21",
+              "link": "Romans 8:22-27"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 15:26-27; 16:4b-15",
+              "link": "John 15:26-27; 16:4b-15"
+            }
+          ]
+        },
+        {
+          "liturgical": "Trinity Sunday",
+          "date": "May 23, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 6:1-8 Psalm 29",
+              "link": "Isaiah 6:1-8 Psalm 29"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:12-17",
+              "link": "Romans 8:12-17"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 3:1-17",
+              "link": "John 3:1-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 4 (9)",
+          "date": "May 30, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 3:1-10, (11-20) Psalm 139:1-6, 13-18",
+              "link": "1 Samuel 3:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Deuteronomy 5:12-15 Psalm 81:1-10",
+              "link": "Deuteronomy 5:12-15 Psalm 81:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 4:5-12",
+              "link": "2 Corinthians 4:5-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 2:23-3:6",
+              "link": "Mark 2:23-3:6"
+            }
+          ]
+        },
+        {
+          "liturgical": "Visitation of Mary to Elizabeth",
+          "date": "May 31, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 2:1-10 Psalm 113",
+              "link": "1 Samuel 2:1-10 Psalm 113"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 12:9-16b",
+              "link": "Romans 12:9-16b"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:39-57",
+              "link": "Luke 1:39-57"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 5 (10)",
+          "date": "Jun 06, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 8:4-11, (12-15), 16-20, (11:14-15) Psalm 138",
+              "link": "1 Samuel 8:4-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 3:8-15 Psalm 130",
+              "link": "Genesis 3:8-15 Psalm 130"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 4:13-5:1",
+              "link": "2 Corinthians 4:13-5:1"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 3:20-35",
+              "link": "Mark 3:20-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 6 (11)",
+          "date": "Jun 13, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 15:34 &#8211; 16:13 Psalm 20",
+              "link": "1 Samuel 15:34 &#8211; 16:13 Psalm 20"
+            },
+            {
+              "type": "psalm",
+              "ref": "Ezekiel 17:22-24 Psalm 92:1-4, 12-15",
+              "link": "Ezekiel 17:22-24 Psalm 92:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 5:6-10, (11-13), 14-17",
+              "link": "2 Corinthians 5:6-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 4:26-34",
+              "link": "Mark 4:26-34"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 7 (12)",
+          "date": "Jun 20, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 17:(1a, 4-11, 19-23), 32-49 Psalm 9:9-20 or 1 Samuel 17:57-18:5, 18:10-16 Psalm 133",
+              "link": "1 Samuel 17"
+            },
+            {
+              "type": "psalm",
+              "ref": "Job 38:1-11 Psalm 107:1-3, 23-32",
+              "link": "Job 38:1-11 Psalm 107:1-3"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 6:1-13",
+              "link": "2 Corinthians 6:1-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 4:35-41",
+              "link": "Mark 4:35-41"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 8 (13)",
+          "date": "Jun 27, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 1:1, 17-27 Psalm 130",
+              "link": "2 Samuel 1:1"
+            },
+            {
+              "type": "psalm",
+              "ref": "Wisdom of Solomon 1:13-15, 2:23-24 or Lamentations 3:22-33 Psalm 30",
+              "link": "Wisdom of Solomon 1:13-15"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 8:7-15",
+              "link": "2 Corinthians 8:7-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 5:21-43",
+              "link": "Mark 5:21-43"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 9 (14)",
+          "date": "Jul 04, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 5:1-5, 9-10 Psalm 48",
+              "link": "2 Samuel 5:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Ezekiel 2:1-5 Psalm 123",
+              "link": "Ezekiel 2:1-5 Psalm 123"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 12:2-10",
+              "link": "2 Corinthians 12:2-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 6:1-13",
+              "link": "Mark 6:1-13"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 10 (15)",
+          "date": "Jul 11, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 6:1-5, 12b-19 Psalm 24",
+              "link": "2 Samuel 6:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Amos 7:7-15 Psalm 85:8-13",
+              "link": "Amos 7:7-15 Psalm 85:8-13"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:3-14",
+              "link": "Ephesians 1:3-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 6:14-29",
+              "link": "Mark 6:14-29"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 11 (16)",
+          "date": "Jul 18, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 7:1-14a Psalm 89:20-37",
+              "link": "2 Samuel 7:1-14a Psalm 89:20-37"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 23:1-6 Psalm 23",
+              "link": "Jeremiah 23:1-6 Psalm 23"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 2:11-22",
+              "link": "Ephesians 2:11-22"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 6:30-34, 53-56",
+              "link": "Mark 6:30-34"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 12 (17)",
+          "date": "Jul 25, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 11:1-15 Psalm 14",
+              "link": "2 Samuel 11:1-15 Psalm 14"
+            },
+            {
+              "type": "psalm",
+              "ref": "2 Kings 4:42-44 Psalm 145:10-18",
+              "link": "2 Kings 4:42-44 Psalm 145:10-18"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 3:14-21",
+              "link": "Ephesians 3:14-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:1-21",
+              "link": "John 6:1-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 13 (18)",
+          "date": "Aug 01, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 11:26 &#8211; 12:13a Psalm 51:1-12",
+              "link": "2 Samuel 11:26 &#8211; 12:13a Psalm 51:1-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Exodus 16:2-4, 9-15 Psalm 78:23-29",
+              "link": "Exodus 16:2-4"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 4:1-16",
+              "link": "Ephesians 4:1-16"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:24-35",
+              "link": "John 6:24-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 14 (19)",
+          "date": "Aug 08, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 18:5-9, 15, 31-33 Psalm 130",
+              "link": "2 Samuel 18:5-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "1 Kings 19:4-8 Psalm 34:1-8",
+              "link": "1 Kings 19:4-8 Psalm 34:1-8"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 4:25-5:2",
+              "link": "Ephesians 4:25-5:2"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:35, 41-51",
+              "link": "John 6:35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 15 (20)",
+          "date": "Aug 15, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Kings 2:10-12; 3:3-14 Psalm 111",
+              "link": "1 Kings 2:10-12; 3:3-14 Psalm 111"
+            },
+            {
+              "type": "psalm",
+              "ref": "Proverbs 9:1-6 Psalm 34:9-14",
+              "link": "Proverbs 9:1-6 Psalm 34:9-14"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 5:15-20",
+              "link": "Ephesians 5:15-20"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:51-58",
+              "link": "John 6:51-58"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 16 (21)",
+          "date": "Aug 22, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Kings 8:(1,6,10-11), 22-30, 41-43 Psalm 84",
+              "link": "1 Kings 8"
+            },
+            {
+              "type": "psalm",
+              "ref": "Joshua 24:1-2a, 14-18 Psalm 34:15-22",
+              "link": "Joshua 24:1-2a"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 6:10-20",
+              "link": "Ephesians 6:10-20"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:56-69",
+              "link": "John 6:56-69"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 17 (22)",
+          "date": "Aug 29, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Song of Solomon 2:8-13 Psalm 45:1-2, 6-9",
+              "link": "Song of Solomon 2:8-13 Psalm 45:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "Deuteronomy 4:1-2, 6-9 Psalm 15",
+              "link": "Deuteronomy 4:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "James 1:17-27",
+              "link": "James 1:17-27"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 7:1-8, 14-15, 21-23",
+              "link": "Mark 7:1-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 18 (23)",
+          "date": "Sep 05, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Proverbs 22:1-2, 8-9, 22-23 Psalm 125",
+              "link": "Proverbs 22:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 35:4-7a Psalm 146",
+              "link": "Isaiah 35:4-7a Psalm 146"
+            },
+            {
+              "type": "second",
+              "ref": "James 2:1-10, (11-13), 14-17",
+              "link": "James 2:1-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 7:24-37",
+              "link": "Mark 7:24-37"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 19 (24)",
+          "date": "Sep 12, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Proverbs 1:20-33 Psalm 19 or Wisdom of Solomon 7:26 &#8211; 8:1",
+              "link": "Proverbs 1:20-33 Psalm 19"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 50:4-9a Psalm 116:1-9",
+              "link": "Isaiah 50:4-9a Psalm 116:1-9"
+            },
+            {
+              "type": "second",
+              "ref": "James 3:1-12",
+              "link": "James 3:1-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 8:27-38",
+              "link": "Mark 8:27-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Cross",
+          "date": "Sep 14, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 21:4b-9 Psalm 98:1-5 or Psalm 78:1-2, 34-38",
+              "link": "Numbers 21:4b-9 Psalm 98:1-5"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-24",
+              "link": "1 Corinthians 1:18-24"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 3:13-17",
+              "link": "John 3:13-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 20 (25)",
+          "date": "Sep 19, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Proverbs 31:10-31 Psalm 1",
+              "link": "Proverbs 31:10-31 Psalm 1"
+            },
+            {
+              "type": "psalm",
+              "ref": "Wisdom of Solomon 1:16-2:1, 12-22 or Jeremiah 11:18-20 Psalm 54",
+              "link": "Wisdom of Solomon 1:16-2:1"
+            },
+            {
+              "type": "second",
+              "ref": "James 3:13-4:3, 7-8a",
+              "link": "James 3:13-4:3"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 9:30-37",
+              "link": "Mark 9:30-37"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 21 (26)",
+          "date": "Sep 26, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Esther 7:1-6, 9-10; 9:20-22 Psalm 124",
+              "link": "Esther 7:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Numbers 11:4-6, 10-16, 24-29 Psalm 19:7-14",
+              "link": "Numbers 11:4-6"
+            },
+            {
+              "type": "second",
+              "ref": "James 5:13-20",
+              "link": "James 5:13-20"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 9:38-50",
+              "link": "Mark 9:38-50"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 22 (27)",
+          "date": "Oct 03, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 1:1, 2:1-10 Psalm 26",
+              "link": "Job 1:1"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 2:18-24 Psalm 8",
+              "link": "Genesis 2:18-24 Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 1:1-4, 2:5-12",
+              "link": "Hebrews 1:1-4"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 10:2-16",
+              "link": "Mark 10:2-16"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 23 (28)",
+          "date": "Oct 10, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 23:1-9, 16-17 Psalm 22:1-15",
+              "link": "Job 23:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Amos 5:6-7, 10-15 Psalm 90:12-17",
+              "link": "Amos 5:6-7"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 4:12-16",
+              "link": "Hebrews 4:12-16"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 10:17-31",
+              "link": "Mark 10:17-31"
+            }
+          ]
+        },
+        {
+          "liturgical": "Canadian Thanksgiving Day",
+          "date": "Oct 11, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joel 2:21-27 Psalm 126",
+              "link": "Joel 2:21-27 Psalm 126"
+            },
+            {
+              "type": "second",
+              "ref": "1 Timothy 2:1-7",
+              "link": "1 Timothy 2:1-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 6:25-33",
+              "link": "Matthew 6:25-33"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 24 (29)",
+          "date": "Oct 17, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 38:1-7, (34-41) Psalm 104:1-9, 24, 35c",
+              "link": "Job 38:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 53:4-12 Psalm 91:9-16",
+              "link": "Isaiah 53:4-12 Psalm 91:9-16"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 5:1-10",
+              "link": "Hebrews 5:1-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 10:35-45",
+              "link": "Mark 10:35-45"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 25 (30)",
+          "date": "Oct 24, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 42:1-6, 10-17 Psalm 34:1-8, (19-22)",
+              "link": "Job 42:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 31:7-9 Psalm 126",
+              "link": "Jeremiah 31:7-9 Psalm 126"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 7:23-28",
+              "link": "Hebrews 7:23-28"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 10:46-52",
+              "link": "Mark 10:46-52"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 26 (31)",
+          "date": "Oct 31, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ruth 1:1-18 Psalm 146",
+              "link": "Ruth 1:1-18 Psalm 146"
+            },
+            {
+              "type": "psalm",
+              "ref": "Deuteronomy 6:1-9 Psalm 119:1-8",
+              "link": "Deuteronomy 6:1-9 Psalm 119:1-8"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 9:11-14",
+              "link": "Hebrews 9:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 12:28-34",
+              "link": "Mark 12:28-34"
+            }
+          ]
+        },
+        {
+          "liturgical": "All Saints Day",
+          "date": "Nov 01, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Wisdom of Solomon 3:1-9 Psalm 24 or Isaiah 25:6-9",
+              "link": "Wisdom of Solomon 3:1-9 Psalm 24"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 21:1-6a",
+              "link": "Revelation 21:1-6a"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 11:32-44",
+              "link": "John 11:32-44"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 27 (32)",
+          "date": "Nov 07, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ruth 3:1-5; 4:13-17 Psalm 127",
+              "link": "Ruth 3:1-5; 4:13-17 Psalm 127"
+            },
+            {
+              "type": "psalm",
+              "ref": "1 Kings 17:8-16 Psalm 146",
+              "link": "1 Kings 17:8-16 Psalm 146"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 9:24-28",
+              "link": "Hebrews 9:24-28"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 12:38-44",
+              "link": "Mark 12:38-44"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 28 (33)",
+          "date": "Nov 14, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 1:4-20 1 Samuel 2:1-10",
+              "link": "1 Samuel 1:4-20 1 Samuel 2:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Daniel 12:1-3 Psalm 16",
+              "link": "Daniel 12:1-3 Psalm 16"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:11-14, (15-18), 19-25",
+              "link": "Hebrews 10:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Mark 13:1-8",
+              "link": "Mark 13:1-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Reign of Christ - Proper 29 (34)",
+          "date": "Nov 21, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Samuel 23:1-7 Psalm 132:1-12, (13-18)",
+              "link": "2 Samuel 23:1-7 Psalm 132:1-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Daniel 7:9-10, 13-14 Psalm 93",
+              "link": "Daniel 7:9-10"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 1:4b-8",
+              "link": "Revelation 1:4b-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 18:33-37",
+              "link": "John 18:33-37"
+            }
+          ]
+        },
+        {
+          "liturgical": "Thanksgiving Day",
+          "date": "Nov 25, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joel 2:21-27 Psalm 126",
+              "link": "Joel 2:21-27 Psalm 126"
+            },
+            {
+              "type": "second",
+              "ref": "1 Timothy 2:1-7",
+              "link": "1 Timothy 2:1-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 6:25-33",
+              "link": "Matthew 6:25-33"
+            }
+          ]
+        }
+      ]
+    },
+    "C": {
+      "label": "Year C (2027-28)",
+      "sundays": [
+        {
+          "liturgical": "First Sunday of Advent",
+          "date": "Nov 28, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 33:14-16",
+              "link": "Jeremiah 33:14-16"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 25:1-10",
+              "link": "Psalm 25:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "1 Thessalonians 3:9-13",
+              "link": "1 Thessalonians 3:9-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 21:25-36",
+              "link": "Luke 21:25-36"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday of Advent",
+          "date": "Dec 05, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Baruch 5:1-9 or Malachi 3:1-4",
+              "link": "Baruch 5:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Luke 1:68-79",
+              "link": "Luke 1:68-79"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 1:3-11",
+              "link": "Philippians 1:3-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 3:1-6",
+              "link": "Luke 3:1-6"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday of Advent",
+          "date": "Dec 12, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Zephaniah 3:14-20",
+              "link": "Zephaniah 3:14-20"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 12:2-6",
+              "link": "Isaiah 12:2-6"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 4:4-7",
+              "link": "Philippians 4:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 3:7-18",
+              "link": "Luke 3:7-18"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday of Advent",
+          "date": "Dec 19, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Micah 5:2-5a",
+              "link": "Micah 5:2-5a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Luke 1:46b-55 or Psalm 80:1-7",
+              "link": "Luke 1:46b-55"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:5-10",
+              "link": "Hebrews 10:5-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:39-45, (46-55)",
+              "link": "Luke 1:39-45"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Name of Jesus",
+          "date": "Jan 01, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 6:22-27",
+              "link": "Numbers 6:22-27"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 8",
+              "link": "Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 4:4-7 or Philippians 2:5-11",
+              "link": "Galatians 4:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:15-21",
+              "link": "Luke 2:15-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "New Year's Day",
+          "date": "Jan 01, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Ecclesiastes 3:1-13",
+              "link": "Ecclesiastes 3:1-13"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 8",
+              "link": "Psalm 8"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 21:1-6a",
+              "link": "Revelation 21:1-6a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 25:31-46",
+              "link": "Matthew 25:31-46"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday after Christmas Day",
+          "date": "Jan 02, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 31:7-14 or Sirach 24:1-12",
+              "link": "Jeremiah 31:7-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 147:12-20 or Wisdom of Solomon 10:15-21",
+              "link": "Psalm 147:12-20"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:3-14",
+              "link": "Ephesians 1:3-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:(1-9), 10-18",
+              "link": "John 1"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper I",
+          "date": "Dec 24, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 9:2-7",
+              "link": "Isaiah 9:2-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 96",
+              "link": "Psalm 96"
+            },
+            {
+              "type": "second",
+              "ref": "Titus 2:11-14",
+              "link": "Titus 2:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:1-14, (15-20)",
+              "link": "Luke 2:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper II",
+          "date": "Dec 25, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 62:6-12",
+              "link": "Isaiah 62:6-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 97",
+              "link": "Psalm 97"
+            },
+            {
+              "type": "second",
+              "ref": "Titus 3:4-7",
+              "link": "Titus 3:4-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:(1-7), 8-20",
+              "link": "Luke 2"
+            }
+          ]
+        },
+        {
+          "liturgical": "Nativity of the Lord - Proper III",
+          "date": "Dec 25, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 52:7-10",
+              "link": "Isaiah 52:7-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 98",
+              "link": "Psalm 98"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 1:1-4, (5-12)",
+              "link": "Hebrews 1:1-4"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 1:1-14",
+              "link": "John 1:1-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "First Sunday after Christmas Day",
+          "date": "Dec 26, 2027",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Samuel 2:18-20, 26",
+              "link": "1 Samuel 2:18-20"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 148",
+              "link": "Psalm 148"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 3:12-17",
+              "link": "Colossians 3:12-17"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:41-52",
+              "link": "Luke 2:41-52"
+            }
+          ]
+        },
+        {
+          "liturgical": "Epiphany of the Lord",
+          "date": "Jan 06, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 60:1-6",
+              "link": "Isaiah 60:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 72:1-7, 10-14",
+              "link": "Psalm 72:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 3:1-12",
+              "link": "Ephesians 3:1-12"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 2:1-12",
+              "link": "Matthew 2:1-12"
+            }
+          ]
+        },
+        {
+          "liturgical": "Baptism of the Lord",
+          "date": "Jan 09, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 43:1-7",
+              "link": "Isaiah 43:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 29",
+              "link": "Psalm 29"
+            },
+            {
+              "type": "second",
+              "ref": "Acts 8:14-17",
+              "link": "Acts 8:14-17"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 3:15-17, 21-22",
+              "link": "Luke 3:15-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday after the Epiphany",
+          "date": "Jan 16, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 62:1-5",
+              "link": "Isaiah 62:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 36:5-10",
+              "link": "Psalm 36:5-10"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 12:1-11",
+              "link": "1 Corinthians 12:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 2:1-11",
+              "link": "John 2:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday after the Epiphany",
+          "date": "Jan 23, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Nehemiah 8:1-3, 5-6, 8-10",
+              "link": "Nehemiah 8:1-3"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 19",
+              "link": "Psalm 19"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 12:12-31a",
+              "link": "1 Corinthians 12:12-31a"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 4:14-21",
+              "link": "Luke 4:14-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday after the Epiphany",
+          "date": "Jan 30, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 1:4-10",
+              "link": "Jeremiah 1:4-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 71:1-6",
+              "link": "Psalm 71:1-6"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 13:1-13",
+              "link": "1 Corinthians 13:1-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 4:21-30",
+              "link": "Luke 4:21-30"
+            }
+          ]
+        },
+        {
+          "liturgical": "Presentation of the Lord",
+          "date": "Feb 02, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Malachi 3:1-4",
+              "link": "Malachi 3:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 84 or Psalm 24:7-10",
+              "link": "Psalm 84"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 2:14-18",
+              "link": "Hebrews 2:14-18"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 2:22-40",
+              "link": "Luke 2:22-40"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday after the Epiphany",
+          "date": "Feb 06, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 6:1-8, (9-13)",
+              "link": "Isaiah 6:1-8"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 138",
+              "link": "Psalm 138"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 15:1-11",
+              "link": "1 Corinthians 15:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 5:1-11",
+              "link": "Luke 5:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Sixth Sunday after the Epiphany",
+          "date": "Feb 13, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 17:5-10",
+              "link": "Jeremiah 17:5-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 1",
+              "link": "Psalm 1"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 15:12-20",
+              "link": "1 Corinthians 15:12-20"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 6:17-26",
+              "link": "Luke 6:17-26"
+            }
+          ]
+        },
+        {
+          "liturgical": "Seventh Sunday after the Epiphany",
+          "date": "Feb 20, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 45:3-11, 15",
+              "link": "Genesis 45:3-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 37:1-11, 39-40",
+              "link": "Psalm 37:1-11"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 15:35-38, 42-50",
+              "link": "1 Corinthians 15:35-38"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 6:27-38",
+              "link": "Luke 6:27-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Transfiguration Sunday",
+          "date": "Feb 27, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 34:29-35",
+              "link": "Exodus 34:29-35"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 99",
+              "link": "Psalm 99"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 3:12-4:2",
+              "link": "2 Corinthians 3:12-4:2"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 9:28-36, (37-43a)",
+              "link": "Luke 9:28-36"
+            }
+          ]
+        },
+        {
+          "liturgical": "Ash Wednesday",
+          "date": "Mar 01, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joel 2:1-2, 12-17 or Isaiah 58:1-12",
+              "link": "Joel 2:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 51:1-17",
+              "link": "Psalm 51:1-17"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 5:20b-6:10",
+              "link": "2 Corinthians 5:20b-6:10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 6:1-6, 16-21",
+              "link": "Matthew 6:1-6"
+            }
+          ]
+        },
+        {
+          "liturgical": "First Sunday in Lent",
+          "date": "Mar 05, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 26:1-11",
+              "link": "Deuteronomy 26:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 91:1-2, 9-16",
+              "link": "Psalm 91:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 10:8b-13",
+              "link": "Romans 10:8b-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 4:1-13",
+              "link": "Luke 4:1-13"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday in Lent",
+          "date": "Mar 12, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Genesis 15:1-12, 17-18",
+              "link": "Genesis 15:1-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 27",
+              "link": "Psalm 27"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 3:17-4:1",
+              "link": "Philippians 3:17-4:1"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 13:31-35 or Luke 9:28-36, (37-43a)",
+              "link": "Luke 13:31-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday in Lent",
+          "date": "Mar 19, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 55:1-9",
+              "link": "Isaiah 55:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 63:1-8",
+              "link": "Psalm 63:1-8"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 10:1-13",
+              "link": "1 Corinthians 10:1-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 13:1-9",
+              "link": "Luke 13:1-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Annunciation of the Lord",
+          "date": "Mar 25, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 7:10-14",
+              "link": "Isaiah 7:10-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 45 or Psalm 40:5-10",
+              "link": "Psalm 45"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:4-10",
+              "link": "Hebrews 10:4-10"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:26-38",
+              "link": "Luke 1:26-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday in Lent",
+          "date": "Mar 26, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joshua 5:9-12",
+              "link": "Joshua 5:9-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 32",
+              "link": "Psalm 32"
+            },
+            {
+              "type": "second",
+              "ref": "2 Corinthians 5:16-21",
+              "link": "2 Corinthians 5:16-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 15:1-3, 11b-32",
+              "link": "Luke 15:1-3"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday in Lent",
+          "date": "Apr 02, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 43:16-21",
+              "link": "Isaiah 43:16-21"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 126",
+              "link": "Psalm 126"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 3:4b-14",
+              "link": "Philippians 3:4b-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:1-8",
+              "link": "John 12:1-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Liturgy of the Palms",
+          "date": "Apr 09, 2028",
+          "readings": [
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:1-2, 19-29",
+              "link": "Psalm 118:1-2"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 19:28-40",
+              "link": "Luke 19:28-40"
+            }
+          ]
+        },
+        {
+          "liturgical": "Liturgy of the Passion",
+          "date": "Apr 09, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 50:4-9a",
+              "link": "Isaiah 50:4-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:9-16",
+              "link": "Psalm 31:9-16"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 2:5-11",
+              "link": "Philippians 2:5-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 22:14-23:56 or Luke 23:1-49",
+              "link": "Luke 22:14-23:56"
+            }
+          ]
+        },
+        {
+          "liturgical": "Monday of Holy Week",
+          "date": "Apr 10, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 42:1-9",
+              "link": "Isaiah 42:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 36:5-11",
+              "link": "Psalm 36:5-11"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 9:11-15",
+              "link": "Hebrews 9:11-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:1-11",
+              "link": "John 12:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Tuesday of Holy Week",
+          "date": "Apr 11, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 49:1-7",
+              "link": "Isaiah 49:1-7"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 71:1-14",
+              "link": "Psalm 71:1-14"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-31",
+              "link": "1 Corinthians 1:18-31"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 12:20-36",
+              "link": "John 12:20-36"
+            }
+          ]
+        },
+        {
+          "liturgical": "Wednesday of Holy Week",
+          "date": "Apr 12, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 50:4-9a",
+              "link": "Isaiah 50:4-9a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 70",
+              "link": "Psalm 70"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 12:1-3",
+              "link": "Hebrews 12:1-3"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:21-32",
+              "link": "John 13:21-32"
+            }
+          ]
+        },
+        {
+          "liturgical": "Maundy Thursday",
+          "date": "Apr 13, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Exodus 12:1-4, (5-10), 11-14",
+              "link": "Exodus 12:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 116:1-2, 12-19",
+              "link": "Psalm 116:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 11:23-26",
+              "link": "1 Corinthians 11:23-26"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:1-17, 31b-35",
+              "link": "John 13:1-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Good Friday",
+          "date": "Apr 14, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 52:13-53:12",
+              "link": "Isaiah 52:13-53:12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 22",
+              "link": "Psalm 22"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 10:16-25 or Hebrews 4:14-16; 5:7-9",
+              "link": "Hebrews 10:16-25"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 18:1-19:42",
+              "link": "John 18:1-19:42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Saturday",
+          "date": "Apr 15, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Job 14:1-14 or Lamentations 3:1-9, 19-24",
+              "link": "Job 14:1-14"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 31:1-4, 15-16",
+              "link": "Psalm 31:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "1 Peter 4:1-8",
+              "link": "1 Peter 4:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Matthew 27:57-66 or John 19:38-42",
+              "link": "Matthew 27:57-66"
+            }
+          ]
+        },
+        {
+          "liturgical": "Easter Vigil",
+          "date": "Apr 16, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Old Testament Readings and Psalms - Genesis 1:1-2:4a and Psalm 136:1-9, 23-26 - Genesis 7:1-5, 11-18; 8:6-18; 9:8-13 and Psalm 46 - Genesis 22:1-18 and Psalm 16 - Exodus 14:10-31; 15:20-21 and Exodus 15:1b-13, 17-18 - Isaiah 55:1-11 and Isaiah 12:2-6 - Baruch 3:9-15, 3:32-4:4 or Proverbs 8:1-8, 19-21; 9:4b-6 and Psalm 19 - Ezekiel 36:24-28 and Psalm 42 and 43 - Ezekiel 37:1-14 and Psalm 143 - Zephaniah 3:14-20 and Psalm 98 - New Testament Reading and Psalm - Romans 6:3-11 and Psalm 114 - Gospel - Luke 24:1-12",
+              "link": "Old Testament Readings and Psalms - Genesis 1:1-2:4a and Psalm 136:1-9"
+            }
+          ]
+        },
+        {
+          "liturgical": "Resurrection of the Lord",
+          "date": "Apr 16, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 10:34-43 or Isaiah 65:17-25",
+              "link": "* Acts 10:34-43"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:1-2, 14-24",
+              "link": "Psalm 118:1-2"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 15:19-26 or Acts 10:34-43",
+              "link": "1 Corinthians 15:19-26"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:1-18 or Luke 24:1-12",
+              "link": "John 20:1-18"
+            }
+          ]
+        },
+        {
+          "liturgical": "Easter Evening",
+          "date": "Apr 16, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Isaiah 25:6-9",
+              "link": "* Isaiah 25:6-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 114",
+              "link": "Psalm 114"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 5:6b-8",
+              "link": "1 Corinthians 5:6b-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:13-49",
+              "link": "Luke 24:13-49"
+            }
+          ]
+        },
+        {
+          "liturgical": "Second Sunday of Easter",
+          "date": "Apr 23, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 5:27-32",
+              "link": "* Acts 5:27-32"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 118:14-29 or Psalm 150",
+              "link": "Psalm 118:14-29"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 1:4-8",
+              "link": "Revelation 1:4-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 20:19-31",
+              "link": "John 20:19-31"
+            }
+          ]
+        },
+        {
+          "liturgical": "Third Sunday of Easter",
+          "date": "Apr 30, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 9:1-6, (7-20)",
+              "link": "* Acts 9:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 30",
+              "link": "Psalm 30"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 5:11-14",
+              "link": "Revelation 5:11-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 21:1-19",
+              "link": "John 21:1-19"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fourth Sunday of Easter",
+          "date": "May 07, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 9:36-43",
+              "link": "* Acts 9:36-43"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 23",
+              "link": "Psalm 23"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 7:9-17",
+              "link": "Revelation 7:9-17"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 10:22-30",
+              "link": "John 10:22-30"
+            }
+          ]
+        },
+        {
+          "liturgical": "Fifth Sunday of Easter",
+          "date": "May 14, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 11:1-18",
+              "link": "* Acts 11:1-18"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 148",
+              "link": "Psalm 148"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 21:1-6",
+              "link": "Revelation 21:1-6"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 13:31-35",
+              "link": "John 13:31-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Sixth Sunday of Easter",
+          "date": "May 21, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 16:9-15",
+              "link": "* Acts 16:9-15"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 67",
+              "link": "Psalm 67"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 21:10, 22-22:5",
+              "link": "Revelation 21:10"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 14:23-29 or John 5:1-9",
+              "link": "John 14:23-29"
+            }
+          ]
+        },
+        {
+          "liturgical": "Ascension of the Lord",
+          "date": "May 25, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 1:1-11",
+              "link": "* Acts 1:1-11"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 47 or Psalm 93",
+              "link": "Psalm 47"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:15-23",
+              "link": "Ephesians 1:15-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 24:44-53",
+              "link": "Luke 24:44-53"
+            }
+          ]
+        },
+        {
+          "liturgical": "Seventh Sunday of Easter",
+          "date": "May 28, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 16:16-34",
+              "link": "* Acts 16:16-34"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 97",
+              "link": "Psalm 97"
+            },
+            {
+              "type": "second",
+              "ref": "Revelation 22:12-14, 16-17, 20-21",
+              "link": "Revelation 22:12-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 17:20-26",
+              "link": "John 17:20-26"
+            }
+          ]
+        },
+        {
+          "liturgical": "Visitation of Mary to Elizabeth",
+          "date": "May 31, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* 1 Samuel 2:1-10",
+              "link": "* 1 Samuel 2:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 113",
+              "link": "Psalm 113"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 12:9-16b",
+              "link": "Romans 12:9-16b"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 1:39-57",
+              "link": "Luke 1:39-57"
+            }
+          ]
+        },
+        {
+          "liturgical": "Day of Pentecost",
+          "date": "Jun 04, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "* Acts 2:1-21 or Genesis 11:1-9",
+              "link": "* Acts 2:1-21"
+            },
+            {
+              "type": "psalm",
+              "ref": "Psalm 104:24-34, 35b",
+              "link": "Psalm 104:24-34"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 8:14-17 or Acts 2:1-21",
+              "link": "Romans 8:14-17"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 14:8-17, (25-27)",
+              "link": "John 14:8-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Trinity Sunday",
+          "date": "Jun 11, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Proverbs 8:1-4, 22-31 Psalm 8",
+              "link": "Proverbs 8:1-4"
+            },
+            {
+              "type": "second",
+              "ref": "Romans 5:1-5",
+              "link": "Romans 5:1-5"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 16:12-15",
+              "link": "John 16:12-15"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 6 (11)",
+          "date": "Jun 18, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Kings 21:1-10, (11-14), 15-21a Psalm 5:1-8",
+              "link": "1 Kings 21:1-10"
+            },
+            {
+              "type": "psalm",
+              "ref": "2 Samuel 11:26-12:10, 13-15 Psalm 32",
+              "link": "2 Samuel 11:26-12:10"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 2:15-21",
+              "link": "Galatians 2:15-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 7:36-8:3",
+              "link": "Luke 7:36-8:3"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 7 (12)",
+          "date": "Jun 25, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "1 Kings 19:1-4, (5-7), 8-15a Psalm 42 and 43",
+              "link": "1 Kings 19:1-4"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 65:1-9 Psalm 22:19-28",
+              "link": "Isaiah 65:1-9 Psalm 22:19-28"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 3:23-29",
+              "link": "Galatians 3:23-29"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 8:26-39",
+              "link": "Luke 8:26-39"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 8 (13)",
+          "date": "Jul 02, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Kings 2:1-2, 6-14 Psalm 77:1-2, 11-20",
+              "link": "2 Kings 2:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "1 Kings 19:15-16, 19-21 Psalm 16",
+              "link": "1 Kings 19:15-16"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 5:1, 13-25",
+              "link": "Galatians 5:1"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 9:51-62",
+              "link": "Luke 9:51-62"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 9 (14)",
+          "date": "Jul 09, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "2 Kings 5:1-14 Psalm 30",
+              "link": "2 Kings 5:1-14 Psalm 30"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 66:10-14 Psalm 66:1-9",
+              "link": "Isaiah 66:10-14 Psalm 66:1-9"
+            },
+            {
+              "type": "second",
+              "ref": "Galatians 6:(1-6), 7-16",
+              "link": "Galatians 6"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 10:1-11, 16-20",
+              "link": "Luke 10:1-11"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 10 (15)",
+          "date": "Jul 16, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Amos 7:7-17 Psalm 82",
+              "link": "Amos 7:7-17 Psalm 82"
+            },
+            {
+              "type": "psalm",
+              "ref": "Deuteronomy 30:9-14 Psalm 25:1-10",
+              "link": "Deuteronomy 30:9-14 Psalm 25:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 1:1-14",
+              "link": "Colossians 1:1-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 10:25-37",
+              "link": "Luke 10:25-37"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 11 (16)",
+          "date": "Jul 23, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Amos 8:1-12 Psalm 52",
+              "link": "Amos 8:1-12 Psalm 52"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 18:1-10a Psalm 15",
+              "link": "Genesis 18:1-10a Psalm 15"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 1:15-28",
+              "link": "Colossians 1:15-28"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 10:38-42",
+              "link": "Luke 10:38-42"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 12 (17)",
+          "date": "Jul 30, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Hosea 1:2-10 Psalm 85",
+              "link": "Hosea 1:2-10 Psalm 85"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 18:20-32 Psalm 138",
+              "link": "Genesis 18:20-32 Psalm 138"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 2:6-15, (16-19)",
+              "link": "Colossians 2:6-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 11:1-13",
+              "link": "Luke 11:1-13"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 13 (18)",
+          "date": "Aug 06, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Hosea 11:1-11 Psalm 107:1-9, 43",
+              "link": "Hosea 11:1-11 Psalm 107:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Ecclesiastes 1:2, 12-14; 2:18-23 Psalm 49:1-12",
+              "link": "Ecclesiastes 1:2"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 3:1-11",
+              "link": "Colossians 3:1-11"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 12:13-21",
+              "link": "Luke 12:13-21"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 14 (19)",
+          "date": "Aug 13, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 1:1, 10-20 Psalm 50:1-8, 22-23",
+              "link": "Isaiah 1:1"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 15:1-6 Psalm 33:12-22",
+              "link": "Genesis 15:1-6 Psalm 33:12-22"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 11:1-3, 8-16",
+              "link": "Hebrews 11:1-3"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 12:32-40",
+              "link": "Luke 12:32-40"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 15 (20)",
+          "date": "Aug 20, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 5:1-7 Psalm 80:1-2, 8-19",
+              "link": "Isaiah 5:1-7 Psalm 80:1-2"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 23:23-29 Psalm 82",
+              "link": "Jeremiah 23:23-29 Psalm 82"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 11:29-12:2",
+              "link": "Hebrews 11:29-12:2"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 12:49-56",
+              "link": "Luke 12:49-56"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 16 (21)",
+          "date": "Aug 27, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 1:4-10 Psalm 71:1-6",
+              "link": "Jeremiah 1:4-10 Psalm 71:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 58:9b-14 Psalm 103:1-8",
+              "link": "Isaiah 58:9b-14 Psalm 103:1-8"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 12:18-29",
+              "link": "Hebrews 12:18-29"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 13:10-17",
+              "link": "Luke 13:10-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 17 (22)",
+          "date": "Sep 03, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 2:4-13 Psalm 81:1, 10-16",
+              "link": "Jeremiah 2:4-13 Psalm 81:1"
+            },
+            {
+              "type": "psalm",
+              "ref": "Sirach 10:12-18 or Proverbs 25:6-7 Psalm 112",
+              "link": "Sirach 10:12-18"
+            },
+            {
+              "type": "second",
+              "ref": "Hebrews 13:1-8, 15-16",
+              "link": "Hebrews 13:1-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 14:1, 7-14",
+              "link": "Luke 14:1"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 18 (23)",
+          "date": "Sep 10, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 18:1-11 Psalm 139:1-6, 13-18",
+              "link": "Jeremiah 18:1-11 Psalm 139:1-6"
+            },
+            {
+              "type": "psalm",
+              "ref": "Deuteronomy 30:15-20 Psalm 1",
+              "link": "Deuteronomy 30:15-20 Psalm 1"
+            },
+            {
+              "type": "second",
+              "ref": "Philemon 1:1-21",
+              "link": "Philemon 1:1-21"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 14:25-33",
+              "link": "Luke 14:25-33"
+            }
+          ]
+        },
+        {
+          "liturgical": "Holy Cross",
+          "date": "Sep 14, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Numbers 21:4b-9 Psalm 98:1-5 or Psalm 78:1-2, 34-38",
+              "link": "Numbers 21:4b-9 Psalm 98:1-5"
+            },
+            {
+              "type": "second",
+              "ref": "1 Corinthians 1:18-24",
+              "link": "1 Corinthians 1:18-24"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 3:13-17",
+              "link": "John 3:13-17"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 19 (24)",
+          "date": "Sep 17, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 4:11-12, 22-28 Psalm 14",
+              "link": "Jeremiah 4:11-12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Exodus 32:7-14 Psalm 51:1-10",
+              "link": "Exodus 32:7-14 Psalm 51:1-10"
+            },
+            {
+              "type": "second",
+              "ref": "1 Timothy 1:12-17",
+              "link": "1 Timothy 1:12-17"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 15:1-10",
+              "link": "Luke 15:1-10"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 20 (25)",
+          "date": "Sep 24, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 8:18-9:1 Psalm 79:1-9",
+              "link": "Jeremiah 8:18-9:1 Psalm 79:1-9"
+            },
+            {
+              "type": "psalm",
+              "ref": "Amos 8:4-7 Psalm 113",
+              "link": "Amos 8:4-7 Psalm 113"
+            },
+            {
+              "type": "second",
+              "ref": "1 Timothy 2:1-7",
+              "link": "1 Timothy 2:1-7"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 16:1-13",
+              "link": "Luke 16:1-13"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 21 (26)",
+          "date": "Oct 01, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 32:1-3a, 6-15 Psalm 91:1-6, 14-16",
+              "link": "Jeremiah 32:1-3a"
+            },
+            {
+              "type": "psalm",
+              "ref": "Amos 6:1a, 4-7 Psalm 146",
+              "link": "Amos 6:1a"
+            },
+            {
+              "type": "second",
+              "ref": "1 Timothy 6:6-19",
+              "link": "1 Timothy 6:6-19"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 16:19-31",
+              "link": "Luke 16:19-31"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 22 (27)",
+          "date": "Oct 08, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Lamentations 1:1-6 Lamentations 3:19-26 or Psalm 137",
+              "link": "Lamentations 1:1-6 Lamentations 3:19-26"
+            },
+            {
+              "type": "psalm",
+              "ref": "Habakkuk 1:1-4; 2:1-4 Psalm 37:1-9",
+              "link": "Habakkuk 1:1-4; 2:1-4 Psalm 37:1-9"
+            },
+            {
+              "type": "second",
+              "ref": "2 Timothy 1:1-14",
+              "link": "2 Timothy 1:1-14"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 17:5-10",
+              "link": "Luke 17:5-10"
+            }
+          ]
+        },
+        {
+          "liturgical": "Canadian Thanksgiving Day",
+          "date": "Oct 09, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 26:1-11 Psalm 100",
+              "link": "Deuteronomy 26:1-11 Psalm 100"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 4:4-9",
+              "link": "Philippians 4:4-9"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:25-35",
+              "link": "John 6:25-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 23 (28)",
+          "date": "Oct 15, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 29:1, 4-7 Psalm 66:1-12",
+              "link": "Jeremiah 29:1"
+            },
+            {
+              "type": "psalm",
+              "ref": "2 Kings 5:1-3, 7-15c Psalm 111",
+              "link": "2 Kings 5:1-3"
+            },
+            {
+              "type": "second",
+              "ref": "2 Timothy 2:8-15",
+              "link": "2 Timothy 2:8-15"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 17:11-19",
+              "link": "Luke 17:11-19"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 24 (29)",
+          "date": "Oct 22, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 31:27-34 Psalm 119:97-104",
+              "link": "Jeremiah 31:27-34 Psalm 119:97-104"
+            },
+            {
+              "type": "psalm",
+              "ref": "Genesis 32:22-31 Psalm 121",
+              "link": "Genesis 32:22-31 Psalm 121"
+            },
+            {
+              "type": "second",
+              "ref": "2 Timothy 3:14-4:5",
+              "link": "2 Timothy 3:14-4:5"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 18:1-8",
+              "link": "Luke 18:1-8"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 25 (30)",
+          "date": "Oct 29, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Joel 2:23-32 Psalm 65",
+              "link": "Joel 2:23-32 Psalm 65"
+            },
+            {
+              "type": "psalm",
+              "ref": "Sirach 35:12-17 or Jeremiah 14:7-10, 19-22 Psalm 84:1-7",
+              "link": "Sirach 35:12-17"
+            },
+            {
+              "type": "second",
+              "ref": "2 Timothy 4:6-8, 16-18",
+              "link": "2 Timothy 4:6-8"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 18:9-14",
+              "link": "Luke 18:9-14"
+            }
+          ]
+        },
+        {
+          "liturgical": "All Saints Day",
+          "date": "Nov 01, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Daniel 7:1-3, 15-18 Psalm 149",
+              "link": "Daniel 7:1-3"
+            },
+            {
+              "type": "second",
+              "ref": "Ephesians 1:11-23",
+              "link": "Ephesians 1:11-23"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 6:20-31",
+              "link": "Luke 6:20-31"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 26 (31)",
+          "date": "Nov 05, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Habakkuk 1:1-4; 2:1-4 Psalm 119:137-144",
+              "link": "Habakkuk 1:1-4; 2:1-4 Psalm 119:137-144"
+            },
+            {
+              "type": "psalm",
+              "ref": "Isaiah 1:10-18 Psalm 32:1-7",
+              "link": "Isaiah 1:10-18 Psalm 32:1-7"
+            },
+            {
+              "type": "second",
+              "ref": "2 Thessalonians 1:1-4, 11-12",
+              "link": "2 Thessalonians 1:1-4"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 19:1-10",
+              "link": "Luke 19:1-10"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 27 (32)",
+          "date": "Nov 12, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Haggai 1:15b-2:9 Psalm 145:1-5, 17-21 or Psalm 98",
+              "link": "Haggai 1:15b-2:9 Psalm 145:1-5"
+            },
+            {
+              "type": "psalm",
+              "ref": "Job 19:23-27a Psalm 17:1-9",
+              "link": "Job 19:23-27a Psalm 17:1-9"
+            },
+            {
+              "type": "second",
+              "ref": "2 Thessalonians 2:1-5, 13-17",
+              "link": "2 Thessalonians 2:1-5"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 20:27-38",
+              "link": "Luke 20:27-38"
+            }
+          ]
+        },
+        {
+          "liturgical": "Proper 28 (33)",
+          "date": "Nov 19, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Isaiah 65:17-25 Isaiah 12",
+              "link": "Isaiah 65:17-25 Isaiah 12"
+            },
+            {
+              "type": "psalm",
+              "ref": "Malachi 4:1-2a Psalm 98",
+              "link": "Malachi 4:1-2a Psalm 98"
+            },
+            {
+              "type": "second",
+              "ref": "2 Thessalonians 3:6-13",
+              "link": "2 Thessalonians 3:6-13"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 21:5-19",
+              "link": "Luke 21:5-19"
+            }
+          ]
+        },
+        {
+          "liturgical": "Thanksgiving Day",
+          "date": "Nov 23, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Deuteronomy 26:1-11 Psalm 100",
+              "link": "Deuteronomy 26:1-11 Psalm 100"
+            },
+            {
+              "type": "second",
+              "ref": "Philippians 4:4-9",
+              "link": "Philippians 4:4-9"
+            },
+            {
+              "type": "gospel",
+              "ref": "John 6:25-35",
+              "link": "John 6:25-35"
+            }
+          ]
+        },
+        {
+          "liturgical": "Reign of Christ - Proper 29 (34)",
+          "date": "Nov 26, 2028",
+          "readings": [
+            {
+              "type": "first",
+              "ref": "Jeremiah 23:1-6 Luke 1:68-79",
+              "link": "Jeremiah 23:1-6 Luke 1:68-79"
+            },
+            {
+              "type": "psalm",
+              "ref": "Jeremiah 23:1-6 Psalm 46",
+              "link": "Jeremiah 23:1-6 Psalm 46"
+            },
+            {
+              "type": "second",
+              "ref": "Colossians 1:11-20",
+              "link": "Colossians 1:11-20"
+            },
+            {
+              "type": "gospel",
+              "ref": "Luke 23:33-43",
+              "link": "Luke 23:33-43"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

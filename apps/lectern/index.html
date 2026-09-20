@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lectern — StudyTools</title>
+<meta name="description" content="A passage in large type with nothing else on the screen, for reading aloud in a service. Verse numbers can be hidden and the text enlarged.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  body { background: var(--bg); }
+  .lectern { max-width: 46rem; margin: 0 auto; padding: 4vh 24px 12vh; }
+  .lectern .head { text-align: center; margin-bottom: 1.4em; }
+  .lectern .head h1 { font-family: var(--serif); font-size: 1.4rem; margin: 0 0 .2em; font-weight: 600; }
+  .lectern .head .meta { color: var(--ink-faint); font-size: .82rem; }
+  .verse { font-family: var(--serif); line-height: 1.75; margin: 0 0 .7em; }
+  .verse .n { font-family: var(--mono); font-size: .52em; color: var(--accent); vertical-align: super; margin-right: .35em; }
+  .lectern[data-numbers="off"] .verse .n { display: none; }
+  .controls { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%);
+    display: flex; gap: 8px; align-items: center; padding: 6px 10px; border-radius: 12px;
+    background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); z-index: 30; }
+  .controls button, .controls select { font-size: .8rem; padding: 4px 9px; }
+  .controls .sz { min-width: 44px; text-align: center; font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); }
+  .controls.quiet { opacity: .25; }
+  .controls:hover { opacity: 1; }
+  @media print { .controls, .no-print { display: none !important; } .lectern { padding: 0; max-width: none; } }
+</style>
+</head>
+<body data-root="../../">
+<main class="lectern" id="lectern" data-numbers="on">
+  <div class="head">
+    <h1 id="title">Loading…</h1>
+    <div class="meta" id="meta"></div>
+  </div>
+  <div id="text"></div>
+</main>
+
+<div class="controls" id="controls">
+  <button id="prev" class="ghost" type="button" title="Previous chapter">&larr;</button>
+  <button id="next" class="ghost" type="button" title="Next chapter">&rarr;</button>
+  <select id="tr" title="Translation"></select>
+  <button id="numbers" class="ghost" type="button" title="Show or hide verse numbers">#</button>
+  <button id="smaller" class="ghost" type="button" title="Smaller text">A&minus;</button>
+  <button id="bigger" class="ghost" type="button" title="Larger text">A+</button>
+  <a class="btn secondary" id="exit" href="../bible/" title="Leave the lectern" style="text-decoration:none">Exit</a>
+</div>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

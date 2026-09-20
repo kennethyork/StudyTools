@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study a Passage — StudyTools</title>
+<meta name="description" content="One passage, everything the site has on it: the text in three translations, cross-references, the same ground in the Tanakh, Qur'an and Book of Mormon, and the Greek word by word.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .bar { display: grid; grid-template-columns: minmax(0,1fr) auto auto; gap: 10px; align-items: end; }
+  @media (max-width: 640px) { .bar { grid-template-columns: 1fr; } }
+  .tries { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tries button { font-size: .78rem; padding: 3px 10px; background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  .block { margin-top: 16px; }
+  .block h2 { font-family: var(--serif); font-size: 1.15rem; margin: 0 0 4px; }
+  .block .sub { color: var(--ink-faint); font-size: .8rem; margin: 0 0 12px; }
+  .tr-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .tr-col h3 { margin: 0 0 8px; font-family: var(--serif); font-size: 1rem; }
+  .verse-line { display: grid; grid-template-columns: 2.3em 1fr; gap: 2px 8px; margin-bottom: 7px; }
+  .verse-line .n { font-family: var(--mono); font-size: .7rem; color: var(--accent); padding-top: .45em; }
+  .verse-line p { margin: 0; font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; }
+  .xlist { list-style: none; margin: 0; padding: 0; }
+  .xlist li { display: flex; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+  .xlist li:last-child { border-bottom: 0; }
+  .xlist .v { font-family: var(--mono); font-size: .72rem; color: var(--accent); flex: 0 0 auto; width: 3.4em; }
+  .xlist .r { flex: 1; }
+  .xlist .c { color: var(--ink-faint); font-size: .76rem; flex: 0 0 auto; }
+  .words { font-size: .92rem; }
+  .words .row { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .words .row:last-child { border-bottom: 0; }
+  .words .g { font-size: 1.05rem; }
+  .words .t { color: var(--ink-faint); font-size: .8rem; }
+  .words .e { color: var(--ink-soft); }
+  @media print {
+    .no-print, header.page p, .tries { display: none !important; }
+    .card { break-inside: avoid; box-shadow: none; border-color: #ccc; }
+    .block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="study">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Study a Passage</h1>
+    <p class="lede">Type a reference and get everything this site holds on it &mdash; the text in three translations, the cross-references the church has drawn to it, the ground it shares with the Tanakh, the Qur'an and the Book of Mormon, and the Greek word by word. Made for preparing to teach.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="bar">
+      <div>
+        <label class="field" for="ref">Reference</label>
+        <input id="ref" type="text" placeholder="Genesis 22" autocomplete="off" spellcheck="false">
+      </div>
+      <div>
+        <label class="field" for="tr">Translation</label>
+        <select id="tr" style="width:auto"></select>
+      </div>
+      <button id="go">Study</button>
+    </div>
+    <div class="tries" id="tries"></div>
+  </section>
+
+  <section id="out" aria-live="polite"></section>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

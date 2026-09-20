@@ -5,6 +5,9 @@
   var APPS = [
     { id: "bible", name: "Read the Bible", href: "apps/bible/" },
     { id: "parallels", name: "Parallel Passages", href: "apps/parallels/" },
+    { id: "study", name: "Study a Passage", href: "apps/study/" },
+    { id: "lectionary", name: "Sunday Lectionary", href: "apps/lectionary/" },
+    { id: "lectern", name: "Lectern", href: "apps/lectern/" },
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
