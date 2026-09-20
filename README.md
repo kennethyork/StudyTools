@@ -20,7 +20,7 @@ never leave the device.
 | **Cross-Reference Explorer** (`apps/xref/`) | Every passage openbible.info links to the verse you are reading, grouped by destination chapter and ranked by votes. Follow a link to jump to it. |
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
 | **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
-| **Greek Interlinear** (`apps/interlinear/`) | The Greek New Testament word by word: accented text, transliteration, morphology, Strong's number, and a literal English gloss, with a tap-to-highlight both views. |
+| **Interlinear** (`apps/interlinear/`) | Every word of the original text behind the translation: the Greek New Testament (OpenGNT) and, by the same tags, the Hebrew Old Testament (Open Scriptures Hebrew Bible with STEPBible's glosses) — accented text, transliteration, morphology, Strong's number, and a literal English gloss, with a tap-to-highlight both views. The reader's verse panel uses the same data for whichever verse you tap. |
 | **Biblical Language Flashcards** (`apps/vocab/`) | The 500 most frequent Greek New Testament words and 500 most frequent Hebrew Bible words with glosses, transliteration, morphology, and frequency. Flashcard and browse modes with known-word tracking. |
 | **Prayer Prompt & Journal Clock** (`apps/prayer/`) | A daily rotating prayer focus (Family, Community, Global Missions, Church, Nation, Sick & Suffering, Unbelievers), a focus timer with full-screen mode, and a private journal. |
 | **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/RVM/JPSM text for a reference automatically. |
@@ -56,7 +56,7 @@ data/blog/               blog idea kit (angles, fills, title patterns)
 data/crossref/           openbible.info cross-references, grouped by chapter (30 MB)
 data/dictionary/         Easton, Smith, and Hastings dictionary entries
 data/topical/            Nave's and Torrey's topical entries, by initial
-data/interlinear/        OpenGNT word-by-word Greek New Testament
+data/interlinear/        word-by-word Greek New Testament and Hebrew Old Testament
 data/catechism/          Heidelberg and Westminster Shorter
 data/creeds/             Apostles', Nicene, Athanasian
 data/devotional/         topic wheel content
@@ -106,7 +106,7 @@ python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
 python3 scripts/build-topical.py      # Nave's and Torrey's topical Bibles
-python3 scripts/build-interlinear.py  # OpenGNT Greek interlinear
+python3 scripts/build-interlinear.py  # the Greek and Hebrew interlinear (OpenGNT, morphhb + TBESH)
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -123,6 +123,7 @@ All Scripture texts bundled here are in the **public domain**.
 | JPS Tanakh, Modernized (JPSM) | [eBible.org](https://ebible.org/engjps/) `engjps` USFM (JPS 1917), modernized by this project | Public domain (the 1917 JPS translation is public domain; the modernization is this repository's own rule-based pass) |
 | Topical entries | [topical-bible-search](https://github.com/j86schroeder/topical-bible-search) (Nave 1897, Torrey 1897) | MIT pipeline; source works public domain |
 | Greek interlinear | [OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
+| Hebrew interlinear | [Open Scriptures Hebrew Bible](https://github.com/openscriptures/morphhb) (morphhb) with [STEPBible](https://github.com/STEPBible/STEPBible-Data) TBESH | CC BY 4.0; the glosses cover about 96% of the words (TBESH itself has no entry for some, e.g. H518 "if") |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |
 | Bible dictionaries | [NEUU bible-dictionary-dataset](https://github.com/neuu-org/bible-dictionary-dataset) (CCEL ThML) | CC BY 4.0; source texts public domain |
 | Modernized King James Version (KJVM) | [Abrahamic Library](https://github.com/kennethyork/AbrahamicLibrary) (`kjv-bible`, "modernized in full") | Public domain text; MIT software |

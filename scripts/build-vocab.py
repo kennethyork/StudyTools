@@ -117,6 +117,23 @@ def parse_lexicon(path, prefix_re):
             "gloss": gloss or (meaning.split(";")[0].split(".")[0].strip()),
             "meaning": meaning[:400],
         }
+
+    # A number may be split into lettered senses (H7225A/H7225B, G25G/G25H).
+    # Register the bare number as well, because the tagged texts carry the bare
+    # number and would otherwise find no gloss at all.
+    #
+    # Which sense to use: the first whose lemma is a single word. Some numbers
+    # lead with a phrase — H7462A is the place "Beth-eked of the shepherds"
+    # before H7462B "to pasture" — and a phrase is never the right reading for
+    # a word standing in a sentence. Where every sense is a phrase, the first
+    # is taken and the app shows the number's gloss or nothing at all.
+    for key in list(entries):
+        bare = re.sub(r"[A-Za-z]$", "", key)
+        if bare == key or bare in entries:
+            continue
+        senses = [entries[k] for k in entries if re.sub(r"[A-Za-z]$", "", k) == bare]
+        single = [s for s in senses if " " not in s["lemma"] and "\u05be" not in s["lemma"]]
+        entries[bare] = (single or senses)[0]
     return entries
 
 
