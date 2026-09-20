@@ -149,6 +149,11 @@
       order: order,
       date: new Date().toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" })
     });
+    var markText = STHighlights.toMarkdown(ST.store(STHighlights.STORE_KEY) || {}, {
+      names: names, order: order,
+      verses: function (slug, chapter, verse) { return ""; }
+    });
+    if (markText) { text = (text ? text + "\n" : "") + markText; }
     if (!text) {
       ST.toast("There are no notes to export");
       return;
@@ -169,20 +174,75 @@
   function init() {
     ST.loadBooks().then(function (loaded) {
       books = loaded || [];
-      books.forEach(function (b, i) {
+      books.forEach(function (b) {
         names[b.slug] = b.name;
         order.push(b.slug);
       });
       render();
+      renderHighlights();   /* after the names are known, so "Genesis 1:1" not "genesis 1:1" */
     }).catch(function () {
       /* the notes are still readable without the book list, just less pretty */
       render();
+      renderHighlights();
     });
 
     els.filter.addEventListener("input", render);
-    els.sort.addEventListener("change", render);
+    els.sort.addEventListener("change", function () { render(); renderHighlights(); });
     els.exportMd.addEventListener("click", exportMarkdown);
     els.exportJson.addEventListener("click", exportJson);
+  }
+
+  /* ---------- highlights ---------- */
+
+  function highlightRow(row) {
+    var name = names[row.slug] || row.slug;
+    var ref = name + " " + row.chapter + ":" + row.verse;
+    var wrap = ST.el("div", { class: "note hl-row", "data-key": row.key });
+    wrap.appendChild(ST.el("div", { class: "note-head" }, [
+      ST.el("span", { class: "swatch " + row.colour, style: "width:14px;height:14px;border-radius:4px",
+        title: (STHighlights.colour(row.colour) || {}).label || row.colour }),
+      ST.el("a", { class: "ref serif",
+        href: ST.siteRoot() + "apps/bible/?book=" + encodeURIComponent(row.slug) +
+          "&chapter=" + row.chapter + "&verse=" + row.verse, text: ref }),
+      ST.el("span", { class: "when", text: when(row.updated) }),
+      ST.el("span", { class: "actions no-print" }, [(function () {
+        var go = ST.el("a", { class: "ghost btn", style: "font-size:.76rem;padding:3px 9px",
+          href: ST.siteRoot() + "apps/bible/?book=" + encodeURIComponent(row.slug) +
+            "&chapter=" + row.chapter + "&verse=" + row.verse, text: "open \u2192" });
+        return go;
+      })()])
+    ]));
+    var body = ST.el("blockquote", { text: "\u2026" });
+    ST.loadTranslation(row.slug, "WEBU").then(function (data) {
+      var chapter = (data.chapters || {})[String(row.chapter)];
+      body.textContent = chapter ? (chapter[String(row.verse)] || "") : "";
+    }).catch(function () { body.textContent = ""; });
+    wrap.appendChild(body);
+    return wrap;
+  }
+
+  /* The marks, read from the store each time, so a mark made in the reader (or
+     in another tab) shows as soon as this page is looked at again. */
+  function marks() {
+    return STHighlights.list(ST.store(STHighlights.STORE_KEY) || {}, order);
+  }
+
+  function renderHighlights() {
+    var host = document.getElementById("highlights");
+    if (!host) { return; }
+    var rows = marks();
+    host.innerHTML = "";
+    if (!rows.length) {
+      host.appendChild(ST.el("p", { class: "muted small", text:
+        "No verses highlighted yet. Open the reader, tap a verse, and pick a colour." }));
+      return;
+    }
+    var tally = STHighlights.byColour(ST.store(STHighlights.STORE_KEY) || {});
+    var bits = STHighlights.COLOURS.filter(function (c) { return tally[c.id]; })
+      .map(function (c) { return tally[c.id] + " " + c.label.toLowerCase(); });
+    host.appendChild(ST.el("p", { class: "muted small", text: rows.length +
+      (rows.length === 1 ? " verse marked" : " verses marked") + (bits.length ? " \u2014 " + bits.join(", ") : "") }));
+    rows.forEach(function (row) { host.appendChild(highlightRow(row)); });
   }
 
   init();

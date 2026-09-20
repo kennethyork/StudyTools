@@ -40,6 +40,7 @@
 
   var LABELS = {
     "verse-notes.v1": "Verse notes",
+    "highlights.v1": "Highlighted verses",
     "reading-plan.v1": "Reading plan and ticks",
     "memory-deck.v1": "Memory deck",
     "vocab-progress.v1": "Vocabulary marked known",

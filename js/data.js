@@ -7,7 +7,8 @@
    not one overwriting the other.
 
    The rules here are deliberately conservative and per key:
-     - verse notes: per note, the most recently changed wins
+     - verse notes, and highlighted verses: per item, the most recently
+       changed wins
      - reading-plan ticks: the union of days read (a set, so it only grows)
      - memory deck: the union of verses, keeping whichever card has more
        reviews behind it
@@ -26,6 +27,7 @@
 
   /* How each key is brought together, where bringing it together is obvious. */
   var NOTES = "verse-notes.v1";
+  var MARKS = "highlights.v1";
   var PLAN = "reading-plan.v1";
   var DECK = "memory-deck.v1";
   var VOCAB = "vocab-progress.v1";
@@ -132,7 +134,7 @@
       }
 
       var result = null;
-      if (key === NOTES) { result = mergeNotes(mine, theirs); }
+      if (key === NOTES || key === MARKS) { result = mergeNotes(mine, theirs); }
       else if (key === PLAN) { result = mergePlan(mine, theirs); }
       else if (key === DECK) { result = mergeDeck(mine, theirs); }
       else if (key === VOCAB) { result = mergeVocab(mine, theirs); }

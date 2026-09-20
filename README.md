@@ -12,7 +12,7 @@ never leave the device.
 | --- | --- |
 | **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in all seven translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
 | **Your Data** (`apps/sync/`) | What this browser has saved, in one place: download a backup, import one, or make a sync code to carry it to another device. Importing merges rather than replaces — notes take the more recently changed copy, reading-plan ticks add up, memory cards keep the schedule further along, and a key that cannot be merged safely is left alone and reported. No account and no server. |
-| **Verse Notes** (`apps/notes/`) | Noting your Bible: a note can hang on a **verse**, on a **chapter**, or on a **book** (`studytools.verse-notes.v1`). Verse notes are written in the reader's verse panel and marked in the margin; the chapter note is written under the chapter, where the notes on its verses are listed back beside the text. Everything gathers here to read, edit, delete, filter and export as Markdown or JSON — a book note, a chapter note and its verses in canonical order. The same store the reader writes, so either side shows the other's changes. |
+| **Verse Notes** (`apps/notes/`) | Noting your Bible: a note can hang on a **verse**, on a **chapter**, or on a **book**, and a verse can be **highlighted** in one of four colours (gold, green, blue, rose) — kept in its own store (`studytools.highlights.v1`) so a verse can be marked without your having anything to say about it, and four colours rather than a paintbox so the page stays readable (`studytools.verse-notes.v1`). Verse notes are written in the reader's verse panel and marked in the margin; the chapter note is written under the chapter, where the notes on its verses are listed back beside the text. Highlights are gathered here too, with the verse quoted and the colour shown, and both notes and highlights travel in the Markdown and JSON exports. Everything gathers here to read, edit, delete, filter and export — a book note, a chapter note and its verses in canonical order. The same store the reader writes, so either side shows the other's changes. |
 | **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader, with an optional local model you can ask about a verse (off by default, runs on your device, Llama 3.2 3B by default, grounded in the verse text, cross-references, original words and Prayer Book readings the panel already holds). The instructions are written for Scripture rather than for chat: read the passage as the kind of writing it is, keep the canon in view, separate what the text says from what a tradition reads into it, do not preach or speak as God, and never invent a quotation or a reference. Five ways of asking come with it — the plain sense, where it sits in the Bible's story, what the Hebrew or Greek adds, how the church reads it, and help to teach it — each pointing the model at one part of the material. Pick a book and chapter and switch translations as you read. Seven public-domain translations, offered in four groups: the **full Bible with the Apocrypha** (WEBU, KJVM, RVM), the **66-book canon** (American Standard Version, Young's Literal Translation), the **Hebrew Bible** (JPS Tanakh 1917, modernized — Old Testament only) and the **Douay-Rheims**, which keeps the Vulgate's numbering and is therefore read on its own: chapters are numbered as it numbers them, the reader says which Hebrew psalm you are in, and a shared link is turned into the psalm it calls by that number. Tap a verse for every translation that carries it, the cross-references, the Greek or Hebrew, where the Prayer Book reads it, and to write a note on that verse. Under each chapter is your own page for it: a note on the chapter, and the notes you have written on its verses. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
 | **Sunday Lectionary** (`apps/lectionary/`) | The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage to prepare from. |
@@ -54,6 +54,7 @@ js/data.js               your data: what to carry, how to merge two devices, the
 sw.js                    the service worker: installable, and usable with no connection
 manifest.webmanifest     what the browser needs to install it
 js/notes.js              verse notes: keys, the store rules, ordering, export
+js/highlights.js         highlighting: the colours, the marks, the export
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
@@ -122,6 +123,7 @@ python3 scripts/build-search.py       # the word index behind Search the Bible
 node scripts/check-search.js          # re-checks the index against the text it indexes
 node scripts/check-versification.js   # re-checks the Vulgate psalm numbering against the texts
 node scripts/check-notes.js           # re-checks the verse-note rules and the Markdown export
+node scripts/check-highlights.js      # re-checks the highlight colours, marking and export
 node scripts/check-ask.js             # re-checks the model list, its instructions and the streaming path
 node scripts/check-yourdata.js        # re-checks the merge of two devices' reading, and the code
 python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms the Vulgate's way
@@ -196,8 +198,8 @@ counting weeks from Advent runs ahead of the names in a year that uses fewer.
   model in the verse panel downloads its weights once from Hugging Face and then
   runs on the device through WebGPU. Nothing typed or read is sent anywhere; the
   model is off until it is turned on, and the download size is shown first.
-- Prayer journal entries, memory cards, reading-plan ticks, verse notes, and
-  vocabulary mastery are stored in browser `localStorage` under the `studytools.*` prefix.
+- Prayer journal entries, memory cards, reading-plan ticks, verse notes, highlights,
+  and vocabulary mastery are stored in browser `localStorage` under the `studytools.*` prefix.
   Reading-plan ticks are kept by date (`studytools.reading-plan.v1`), so moving
   a plan's start date moves which day each tick answers for, and a verse
   memorized from the reader's verse panel lands in the same deck `apps/memory/`

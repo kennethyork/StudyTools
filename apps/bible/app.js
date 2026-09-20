@@ -25,6 +25,7 @@
                 stubModel: false, stubQuestion: null };
   var lastChapter = {};            /* the chapter on screen, for the panel's actions */
   var notes = ST.store(STNotes.STORE_KEY) || {};   /* what the reader has written */
+  var highlights = ST.store(STHighlights.STORE_KEY) || {};   /* what the reader has marked */
   var refreshChapterNotes = null;   /* the chapter card's list, redrawn when a note is saved */
 
   /* A note belongs to book, chapter and verse; the margin marks the ones that
@@ -36,13 +37,28 @@
     if (refreshChapterNotes) { refreshChapterNotes(); }
   }
 
+  /* A verse carries two marks: a dot if you have written on it, and a colour if
+     you have highlighted it. Both are painted from the stores on every render. */
   function markNoted() {
     var chapterNotes = STNotes.forChapter(notes, state.book, state.chapter);
+    var marked = STHighlights.forChapter(highlights, state.book, state.chapter);
     var rows = document.querySelectorAll(".verse-block.tappable");
+    STHighlights.COLOURS.forEach(function (c) {
+      document.querySelectorAll(".verse-block.hl-" + c.id).forEach(function (el) {
+        el.classList.remove("hl-" + c.id);
+      });
+    });
     for (var i = 0; i < rows.length; i++) {
       var verse = Number(rows[i].id.replace(/^v/, ""));
       rows[i].classList.toggle("has-note", !!chapterNotes[verse]);
+      if (marked[verse]) { rows[i].classList.add("hl-" + marked[verse]); }
     }
+  }
+
+  function setHighlight(verse, colourId) {
+    highlights = STHighlights.put(highlights, STHighlights.key(state.book, state.chapter, verse), colourId);
+    ST.store(STHighlights.STORE_KEY, highlights);
+    markNoted();
   }
 
   /* ---------- the verse panel ----------
@@ -302,6 +318,36 @@
         body.appendChild(rSection);
       }
 
+      /* highlight this verse, or clear it */
+      var markBox = panelSection("Highlight");
+      var swatches = ST.el("div", { class: "swatches" });
+      var current = STHighlights.colourAt(highlights, state.book, chapter, verse);
+      STHighlights.COLOURS.forEach(function (c) {
+        var swatch = ST.el("button", { type: "button", class: "swatch " + c.id,
+          title: c.label + " \u2014 " + c.note, "aria-label": "Highlight " + c.label });
+        swatch.setAttribute("aria-pressed", current === c.id ? "true" : "false");
+        swatch.addEventListener("click", function () {
+          var now = STHighlights.colourAt(highlights, state.book, chapter, verse);
+          setHighlight(verse, now === c.id ? null : c.id);
+          var pressed = now === c.id ? null : c.id;
+          swatches.querySelectorAll(".swatch").forEach(function (b) {
+            b.setAttribute("aria-pressed", b === swatch ? (pressed ? "true" : "false") : "false");
+          });
+        });
+        swatches.appendChild(swatch);
+      });
+      var none = ST.el("button", { type: "button", class: "swatch none", text: "\u2715",
+        title: "No highlight", "aria-label": "Clear the highlight" });
+      none.addEventListener("click", function () {
+        setHighlight(verse, null);
+        swatches.querySelectorAll(".swatch").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      });
+      swatches.appendChild(none);
+      markBox.appendChild(swatches);
+      markBox.appendChild(ST.el("p", { class: "muted small", style: "margin:6px 0 0",
+        text: STHighlights.COLOURS.map(function (c) { return c.label + " \u2014 " + c.note; }).join("; ") + "." }));
+      body.appendChild(markBox);
+
       /* a note on this verse, kept with every other note the site holds */
       var noteKey = STNotes.key(state.book, chapter, verse);
       var existing = STNotes.get(notes, noteKey);
@@ -393,10 +439,13 @@
 
   function chapterNotesCard(book) {
     var slug = book.slug;
+    var marked = STHighlights.forChapter(highlights, slug, state.chapter);
+    var markedCount = Object.keys(marked).length;
     var wrap = ST.el("section", { class: "card my-notes no-print" });
     wrap.appendChild(ST.el("div", { class: "row", style: "justify-content:space-between;align-items:baseline" }, [
       ST.el("h3", { class: "serif", style: "margin:0;font-size:1.05rem",
-        text: "Your notes on " + book.name + " " + state.chapter }),
+        text: "Your notes on " + book.name + " " + state.chapter +
+          (markedCount ? " \u2014 " + markedCount + " verse" + (markedCount === 1 ? "" : "s") + " highlighted" : "") }),
       ST.el("a", { class: "muted small", href: ST.siteRoot() + "apps/notes/", text: "All your notes \u2192" })
     ]));
 

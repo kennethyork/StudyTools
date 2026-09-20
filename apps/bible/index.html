@@ -36,6 +36,25 @@
   .verse-block:target { background: var(--highlight); }
   .verse-block.tappable { cursor: pointer; }
   .verse-block.has-note .num::after { content: "\2022"; color: var(--accent); margin-left: 3px; }
+  /* highlights: four colours, quiet enough to read through */
+  .verse-block.hl-gold { background: rgba(214, 176, 74, .18); }
+  .verse-block.hl-green { background: rgba(63, 122, 82, .16); }
+  .verse-block.hl-blue { background: rgba(58, 106, 150, .16); }
+  .verse-block.hl-rose { background: rgba(168, 68, 47, .14); }
+  @media (prefers-color-scheme: dark) {
+    .verse-block.hl-gold { background: rgba(214, 176, 74, .16); }
+    .verse-block.hl-green { background: rgba(94, 168, 118, .14); }
+    .verse-block.hl-blue { background: rgba(96, 150, 200, .16); }
+    .verse-block.hl-rose { background: rgba(200, 110, 90, .14); }
+  }
+  .swatches { display: flex; flex-wrap: wrap; gap: 6px; }
+  .swatch { width: 30px; height: 24px; border-radius: 7px; border: 1px solid var(--line); cursor: pointer; }
+  .swatch[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .swatch.none { background: var(--bg); color: var(--ink-faint); font-size: .7rem; }
+  .swatch.gold { background: rgba(214, 176, 74, .35); }
+  .swatch.green { background: rgba(63, 122, 82, .3); }
+  .swatch.blue { background: rgba(58, 106, 150, .3); }
+  .swatch.rose { background: rgba(168, 68, 47, .28); }
   .my-notes { margin-top: 14px; }
   .verse-note { display: grid; grid-template-columns: 4.5em 1fr; gap: 8px; padding: 5px 0;
     border-bottom: 1px dashed var(--line); font-size: .92rem; }
@@ -134,6 +153,7 @@
 <script src="../../js/common.js"></script>
 <script src="../../js/liturgy.js"></script>
 <script src="../../js/notes.js"></script>
+<script src="../../js/highlights.js"></script>
 <script src="../../js/versification.js"></script>
 <script src="../../js/ask.js"></script>
 <script src="app.js"></script>
