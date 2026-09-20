@@ -48,7 +48,8 @@
   <section class="card">
     <h2>What this is</h2>
     <p>StudyTools is a collection of small, dependency-free Bible study apps. Everything is static HTML, CSS and JavaScript, so the whole site can be served from any static host with no build step and no backend.</p>
-    <p>Notes, journals, memory decks, verse notes and study progress are saved in your browser's local storage and never leave your device.</p>
+    <p>Between them they read the Bible in three modern public-domain translations, search it word by word, write notes against a verse, carry a plan through the whole text a day at a time, keep the church's year from the Book of Common Prayer (1928), and open any passage in the Greek or Hebrew behind it.</p>
+    <p>Notes, journals, memory decks, reading-plan ticks and study progress are saved in your browser's local storage and never leave your device.</p>
     <p>The companion site is <a href="https://witness.studytools.cc/" rel="noopener">Witness</a>, a cited term base for interfaith translation: how each tradition renders a concept, and what each rendering loses. It runs with no server too.</p>
     <div class="about-links">
       <a class="btn" href="apps/bible/">Read the Bible</a>
@@ -80,7 +81,7 @@
         </tr>
         <tr>
           <td><strong>Revised Version, Modernized</strong><br><span class="tagline">RVM</span></td>
-          <td>78<br><span class="tagline">with the Apocrypha</span></td>
+          <td>80<br><span class="tagline">with the Apocrypha</span></td>
           <td>The Revised Version of 1895 &mdash; public domain, from <a href="https://ebible.org/eng-rv/" rel="noopener">eBible.org</a> &mdash; brought into present-day English by this project. <code>scripts/build-rvm.py</code> updates the second-person pronouns and verb forms (<em>thou knowest</em> &rarr; <em>you know</em>, <em>goeth</em> &rarr; <em>goes</em>) and leaves the wording otherwise untouched. <code>RVM</code> is this site's own label for the edition.</td>
         </tr>
       </tbody>
@@ -104,14 +105,29 @@
       <li><strong>Interlinear</strong> &mdash; Greek New Testament from <a href="https://github.com/eliranwong/OpenGNT" rel="noopener">OpenGNT</a> <span class="lic">&middot; CC BY-SA 4.0</span>; Hebrew Old Testament from the <a href="https://github.com/openscriptures/morphhb" rel="noopener">Open Scriptures Hebrew Bible</a> with STEPBible TBESH glosses <span class="lic">&middot; CC BY 4.0</span></li>
       <li><strong>Greek and Hebrew vocabulary</strong> &mdash; OpenGNT and the <a href="https://github.com/openscriptures/morphhb" rel="noopener">Open Scriptures Hebrew Bible</a> <span class="lic">&middot; CC BY 4.0</span></li>
       <li><strong>Lexicon and glosses</strong> &mdash; <a href="https://github.com/STEPBible/STEPBible-Data" rel="noopener">STEPBible</a> TBESG / TBESH <span class="lic">&middot; CC BY 4.0</span></li>
-      <li><strong>Daily office and Sunday readings</strong> &mdash; Book of Common Prayer (1928), Episcopal Church <span class="lic">&middot; public domain</span></li>
+      <li><strong>Daily office and Sunday readings</strong> &mdash; Book of Common Prayer (1928), Episcopal Church, transcribed by <a href="https://github.com/vovchykbratyk/BCP_1928" rel="noopener">vovchykbratyk/BCP_1928</a> <span class="lic">&middot; public domain</span></li>
       <li><strong>Creeds and catechisms</strong> &mdash; Apostles', Nicene and Athanasian; Heidelberg and Westminster Shorter <span class="lic">&middot; public domain</span></li>
     </ul>
   </section>
 
   <section class="card">
+    <h2>How the data is built and checked</h2>
+    <p>The texts and tables the tools use are not typed in by hand. Each is built from its source by a script in <code>scripts/</code>, and the parts a reader would notice getting wrong are checked by scripts of their own, which anyone can run again:</p>
+    <ul class="src-list">
+      <li><strong>The church year</strong> &mdash; Easter by the usual computus, every season derived from it, every date from 1900 to 2100 confirmed to have both a morning and an evening office, and every Sunday named as the Prayer Book names it <span class="lic">&middot; check-liturgical.js</span></li>
+      <li><strong>The readings</strong> &mdash; the Prayer Book's printed references, alternatives and all, read back to book, chapter and verse <span class="lic">&middot; check-refs.js</span></li>
+      <li><strong>The reading plans</strong> &mdash; every chapter of a plan read exactly once, in order, with no empty day and no day more than one chapter longer than another <span class="lic">&middot; check-plan.js</span></li>
+      <li><strong>Search</strong> &mdash; the word index compared against the text it indexes, book by book and word by word, with the two tokenisers pinned to one another <span class="lic">&middot; check-search.js</span></li>
+      <li><strong>Notes</strong> &mdash; the store rules, both orderings and the Markdown export <span class="lic">&middot; check-notes.js</span></li>
+      <li><strong>Devotional verses</strong> &mdash; every quoted verse re-checked against the bundled text, so the site cannot print a misquotation <span class="lic">&middot; verify-devotional.py</span></li>
+    </ul>
+    <p>Where a check has found something wrong, the fix went into the data or the arithmetic rather than into a footnote: an Epiphany taking its year from Christmas, a Sunday Lectionary three weeks out because a year has fewer Sundays after the Epiphany than the tables allow for, and a lexicon lookup that left everyday Hebrew words blank.</p>
+  </section>
+
+  <section class="card">
     <h2>Privacy</h2>
-    <p>Nothing is uploaded. There are no accounts, no cookies, no analytics and no server to talk to. Everything you type &mdash; notes, journals, memory decks, saved ideas &mdash; stays in your browser's local storage, and clearing your browser data removes it.</p>
+    <p>Nothing is uploaded. There are no accounts, no cookies, no analytics and no server to talk to. Everything you type &mdash; verse notes, journal entries, memory decks, reading-plan ticks, saved ideas &mdash; stays in your browser's local storage, and clearing your browser data removes it.</p>
+    <p>Following the link to <a href="https://witness.studytools.cc/" rel="noopener">Witness</a>, the companion site, takes you off this one — that site will see the visit, as any website does. Nothing here sends it anything.</p>
   </section>
 
   <footer class="site">
