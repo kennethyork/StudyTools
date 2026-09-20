@@ -38,6 +38,21 @@
     return STNotes.label(note.slug, note.chapter, note.verse, names);
   }
 
+  /* Where a note lives: a verse opens the verse, a chapter the chapter, a book
+     the book. */
+  function href(note) {
+    var root = ST.siteRoot() + "apps/bible/?";
+    if (note.level === "book") { return root + "book=" + encodeURIComponent(note.slug); }
+    var base = root + "book=" + encodeURIComponent(note.slug) + "&chapter=" + note.chapter;
+    return note.level === "chapter" ? base : base + "&verse=" + note.verse;
+  }
+
+  function kindLabel(note) {
+    if (note.level === "book") { return "the book"; }
+    if (note.level === "chapter") { return "the chapter"; }
+    return null;
+  }
+
   /* The verse text if the site can reach it, for showing the note in context. */
   function verseText(note) {
     return ST.loadTranslation(note.slug, "WEBU").then(function (data) {
@@ -55,9 +70,8 @@
   function noteCard(note) {
     var card = ST.el("div", { class: "note", "data-key": note.key });
     card.appendChild(ST.el("div", { class: "note-head" }, [
-      ST.el("a", { class: "ref serif",
-        href: ST.siteRoot() + "apps/bible/?ref=" + encodeURIComponent(label(note)),
-        text: label(note) }),
+      ST.el("a", { class: "ref serif", href: href(note), text: label(note) }),
+      (kindLabel(note) ? ST.el("span", { class: "muted small", text: kindLabel(note) }) : null),
       ST.el("span", { class: "when", text: when(note.updated) }),
       ST.el("span", { class: "actions no-print" }, [
         ST.el("a", { class: "ghost btn", style: "font-size:.76rem;padding:3px 9px",
@@ -84,9 +98,12 @@
     });
     card.appendChild(area);
 
-    var quote = ST.el("blockquote", { text: "\u2026" });
-    verseText(note).then(function (text) { quote.textContent = text || ""; });
-    card.appendChild(quote);
+    /* the verse itself, where the note is on one verse */
+    if (note.level === "verse") {
+      var quote = ST.el("blockquote", { text: "\u2026" });
+      verseText(note).then(function (text) { quote.textContent = text || ""; });
+      card.appendChild(quote);
+    }
     return card;
   }
 
@@ -100,10 +117,15 @@
     var total = STNotes.count(notes);
     var chapters = {};
     list.forEach(function (n) { chapters[n.slug + "." + n.chapter] = true; });
+    var kinds = { verse: 0, chapter: 0, book: 0 };
+    list.forEach(function (n) { kinds[n.level] = (kinds[n.level] || 0) + 1; });
+    var parts = [];
+    if (kinds.verse) { parts.push(kinds.verse + " on a verse"); }
+    if (kinds.chapter) { parts.push(kinds.chapter + " on a chapter"); }
+    if (kinds.book) { parts.push(kinds.book + " on a book"); }
     els.summary.textContent = total === 0
       ? "No notes yet."
-      : total + (total === 1 ? " note" : " notes") + " on " +
-        Object.keys(chapters).length + (Object.keys(chapters).length === 1 ? " chapter" : " chapters") +
+      : total + (total === 1 ? " note" : " notes") + (parts.length ? " \u2014 " + parts.join(", ") : "") +
         (needle ? " \u2014 " + shown.length + " matching \u201c" + needle + "\u201d" : "");
 
     els.out.innerHTML = "";

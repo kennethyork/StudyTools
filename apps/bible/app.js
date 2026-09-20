@@ -25,6 +25,7 @@
                 stubModel: false, stubQuestion: null };
   var lastChapter = {};            /* the chapter on screen, for the panel's actions */
   var notes = ST.store(STNotes.STORE_KEY) || {};   /* what the reader has written */
+  var refreshChapterNotes = null;   /* the chapter card's list, redrawn when a note is saved */
 
   /* A note belongs to book, chapter and verse; the margin marks the ones that
      have one. Kept in the same store the Notes app reads, so either can write. */
@@ -32,6 +33,7 @@
     notes = STNotes.put(notes, k, text);
     ST.store(STNotes.STORE_KEY, notes);
     markNoted();
+    if (refreshChapterNotes) { refreshChapterNotes(); }
   }
 
   function markNoted() {
@@ -325,6 +327,7 @@
           notes = STNotes.remove(notes, noteKey);
           ST.store(STNotes.STORE_KEY, notes);
           markNoted();
+          if (refreshChapterNotes) { refreshChapterNotes(); }
           area.value = "";
           noteStatus.textContent = "Note removed.";
         });
@@ -380,6 +383,83 @@
       body.innerHTML = "";
       body.appendChild(ST.el("p", { class: "notice error", text: "Could not load the verse's material." }));
     });
+  }
+
+  /* ---------- your own page for the chapter ----------
+
+     Noting a Bible means writing beside what you read, so this sits under the
+     chapter: a note on the chapter itself, and the notes already written on its
+     verses, each one a link back to the verse it belongs to. */
+
+  function chapterNotesCard(book) {
+    var slug = book.slug;
+    var wrap = ST.el("section", { class: "card my-notes no-print" });
+    wrap.appendChild(ST.el("div", { class: "row", style: "justify-content:space-between;align-items:baseline" }, [
+      ST.el("h3", { class: "serif", style: "margin:0;font-size:1.05rem",
+        text: "Your notes on " + book.name + " " + state.chapter }),
+      ST.el("a", { class: "muted small", href: ST.siteRoot() + "apps/notes/", text: "All your notes \u2192" })
+    ]));
+
+    var onChapter = STNotes.chapterNote(notes, slug, state.chapter);
+    var area = document.createElement("textarea");
+    area.className = "note-area";
+    area.rows = 3;
+    area.value = onChapter ? onChapter.text : "";
+    area.placeholder = "What do you want to remember about this chapter?";
+    wrap.appendChild(ST.el("p", { class: "muted small", style: "margin:10px 0 4px", text: "On the chapter" }));
+    wrap.appendChild(area);
+
+    var row = ST.el("div", { class: "row", style: "margin-top:8px" });
+    var status = ST.el("span", { class: "muted small" });
+    var save = ST.el("button", { type: "button", text: "Save" });
+    save.addEventListener("click", function () {
+      notes = STNotes.put(notes, STNotes.chapterKey(slug, state.chapter), area.value);
+      ST.store(STNotes.STORE_KEY, notes);
+      status.textContent = area.value.trim() ? "Saved." : "Note removed.";
+      setTimeout(function () { status.textContent = ""; }, 4000);
+      renderChapterNotes();
+    });
+    row.appendChild(save);
+    if (onChapter) {
+      var drop = ST.el("button", { type: "button", class: "ghost", text: "Delete" });
+      drop.addEventListener("click", function () {
+        notes = STNotes.remove(notes, STNotes.chapterKey(slug, state.chapter));
+        ST.store(STNotes.STORE_KEY, notes);
+        area.value = "";
+        status.textContent = "Note removed.";
+        renderChapterNotes();
+      });
+      row.appendChild(drop);
+    }
+    row.appendChild(status);
+    wrap.appendChild(row);
+
+    var onVerses = ST.el("div", { class: "verse-notes" });
+    wrap.appendChild(onVerses);
+
+    function renderChapterNotes() {
+      var written = STNotes.forChapter(notes, slug, state.chapter);
+      onVerses.innerHTML = "";
+      var verses = Object.keys(written).map(Number).sort(function (a, b) { return a - b; });
+      if (!verses.length) {
+        onVerses.appendChild(ST.el("p", { class: "muted small", style: "margin:10px 0 0",
+          text: "Tap any verse above to write a note on it; they gather here, and in Verse Notes." }));
+        return;
+      }
+      onVerses.appendChild(ST.el("p", { class: "muted small", style: "margin:12px 0 4px",
+        text: verses.length + (verses.length === 1 ? " note on a verse" : " notes on verses") }));
+      verses.forEach(function (v) {
+        var text = STNotes.get(notes, STNotes.key(slug, state.chapter, v)).text;
+        onVerses.appendChild(ST.el("div", { class: "verse-note" }, [
+          ST.el("a", { class: "vn-ref", href: "#v" + v, text: state.chapter + ":" + v }),
+          ST.el("span", { class: "vn-text", text: text })
+        ]));
+      });
+    }
+
+    renderChapterNotes();
+    refreshChapterNotes = renderChapterNotes;   /* so a verse note appears here at once */
+    return wrap;
   }
 
   /* ---------- asking a local model ---------- */
@@ -830,6 +910,7 @@
 
     els.reader.innerHTML = "";
     els.reader.appendChild(card);
+    els.reader.appendChild(chapterNotesCard(book));
     markNoted();            /* after the verses are in the page */
 
     var nav = document.createElement("div");

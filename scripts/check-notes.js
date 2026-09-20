@@ -20,9 +20,56 @@ function check(name, condition, detail) {
 
 check("a key is book, chapter and verse", N.key("genesis", 1, 1) === "genesis.1.1", N.key("genesis", 1, 1));
 check("a key takes strings or numbers", N.key("psalms", "23", "1") === "psalms.23.1", N.key("psalms", "23", "1"));
+
+/* ---------- notes on a chapter, and on a book ---------- */
+
+check("a chapter note has no verse", N.key("genesis", 1) === "genesis.1", N.key("genesis", 1));
+check("a verse of 0 means the chapter", N.key("genesis", 1, 0) === "genesis.1", N.key("genesis", 1, 0));
+check("a book note is the slug alone", N.key("genesis") === "genesis", N.key("genesis"));
+check("a chapter key reads back with no verse",
+  JSON.stringify(N.parseKey("genesis.1")) === JSON.stringify({ slug: "genesis", chapter: 1, verse: null }),
+  JSON.stringify(N.parseKey("genesis.1")));
+check("a book key reads back with neither",
+  JSON.stringify(N.parseKey("genesis")) === JSON.stringify({ slug: "genesis", chapter: null, verse: null }),
+  JSON.stringify(N.parseKey("genesis")));
+check("the level of a note is named",
+  N.levelOf("john.3.16") === "verse" && N.levelOf("john.3") === "chapter" &&
+  N.levelOf("john") === "book",
+  [N.levelOf("john.3.16"), N.levelOf("john.3"), N.levelOf("john")].join("/"));
+
+let mixed = {};
+mixed = N.put(mixed, N.key("genesis"), "the book as a whole", "2026-09-20T08:00:00.000Z");
+mixed = N.put(mixed, N.key("genesis", 1), "the chapter", "2026-09-20T09:00:00.000Z");
+mixed = N.put(mixed, N.key("genesis", 1, 1), "the first verse", "2026-09-20T10:00:00.000Z");
+check("a book, a chapter and a verse note live side by side", N.count(mixed) === 3, String(N.count(mixed)));
+check("the chapter note is found by the chapter",
+  N.chapterNote(mixed, "genesis", 1).text === "the chapter", JSON.stringify(N.chapterNote(mixed, "genesis", 1)));
+check("the book note is found by the book", N.bookNote(mixed, "genesis").text === "the book as a whole");
+check("the chapter's verse notes do not include the chapter note itself",
+  Object.keys(N.forChapter(mixed, "genesis", 1)).join(",") === "1",
+  Object.keys(N.forChapter(mixed, "genesis", 1)).join(","));
+check("another chapter has no note", N.chapterNote(mixed, "genesis", 2) === null);
+check("scripture order puts the book first, then the chapter, then its verses",
+  N.byScripture(mixed, ["genesis"]).map(function (n) { return n.level; }).join(",") ===
+  "book,chapter,verse",
+  N.byScripture(mixed, ["genesis"]).map(function (n) { return n.level; }).join(","));
+check("each note knows what it is about",
+  N.byScripture(mixed, ["genesis"]).every(function (n) { return n.level === N.levelOf(n.key); }));
+
+const mdMixed = N.toMarkdown(mixed, { names: { genesis: "Genesis" }, order: ["genesis"] });
+check("the export says which note is on the book", mdMixed.indexOf("_On the book:_ the book as a whole") > -1, mdMixed);
+check("the export says which note is on the chapter", mdMixed.indexOf("_On the chapter:_ the chapter") > -1);
+check("the export still lists the verse note as a verse", mdMixed.indexOf("- **1:1** the first verse") > -1);
+check("labels name a chapter and a book without inventing a verse",
+  N.label("genesis", 1, null, { genesis: "Genesis" }) === "Genesis 1" &&
+  N.label("genesis", null, null, { genesis: "Genesis" }) === "Genesis");
 check("a key reads back", JSON.stringify(N.parseKey("i-kings.2.11")) ===
   JSON.stringify({ slug: "i-kings", chapter: 2, verse: 11 }));
-check("a malformed key reads back as nothing", N.parseKey("nonsense") === null && N.parseKey("") === null);
+check("a book name on its own is a book note, not a malformed key",
+  N.parseKey("nonsense") !== null && N.levelOf("nonsense") === "book");
+check("a malformed key reads back as nothing",
+  N.parseKey("a.b.c.d") === null && N.parseKey("genesis.0") === null && N.parseKey("") === null,
+  JSON.stringify([N.parseKey("a.b.c.d"), N.parseKey("genesis.0"), N.parseKey("")]));
 
 /* ---------- the store ---------- */
 

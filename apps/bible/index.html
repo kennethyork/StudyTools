@@ -36,6 +36,11 @@
   .verse-block:target { background: var(--highlight); }
   .verse-block.tappable { cursor: pointer; }
   .verse-block.has-note .num::after { content: "\2022"; color: var(--accent); margin-left: 3px; }
+  .my-notes { margin-top: 14px; }
+  .verse-note { display: grid; grid-template-columns: 4.5em 1fr; gap: 8px; padding: 5px 0;
+    border-bottom: 1px dashed var(--line); font-size: .92rem; }
+  .verse-note:last-child { border-bottom: 0; }
+  .verse-note .vn-ref { font-family: var(--mono); font-size: .76rem; color: var(--accent); }
   .note-area { width: 100%; min-height: 5.5em; font-family: inherit; font-size: .92rem; line-height: 1.5;
     border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); color: var(--ink); }
   .verse-block.tappable:hover { background: var(--bg-alt); }

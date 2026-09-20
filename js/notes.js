@@ -15,17 +15,38 @@
 
   var STORE_KEY = "verse-notes.v1";
 
+  /* A note hangs on a verse, on a chapter, or on a book: "john.3.16",
+     "john.3", "john". The chapter note is the page in your own study Bible;
+     the book note is the cover. */
   function key(slug, chapter, verse) {
+    if (chapter == null) { return String(slug); }
+    if (verse == null || Number(verse) === 0) { return slug + "." + Number(chapter); }
     return slug + "." + Number(chapter) + "." + Number(verse);
   }
 
   function parseKey(k) {
     var parts = String(k || "").split(".");
-    if (parts.length !== 3) { return null; }
-    var chapter = Number(parts[1]), verse = Number(parts[2]);
-    if (!parts[0] || !chapter || !verse) { return null; }
-    return { slug: parts[0], chapter: chapter, verse: verse };
+    if (parts.length < 1 || parts.length > 3) { return null; }
+    var slug = parts[0];
+    if (!slug) { return null; }
+    if (parts.length === 1) { return { slug: slug, chapter: null, verse: null }; }
+    var chapter = Number(parts[1]);
+    if (!chapter) { return null; }
+    if (parts.length === 2) { return { slug: slug, chapter: chapter, verse: null }; }
+    var verse = Number(parts[2]);
+    if (!verse) { return null; }
+    return { slug: slug, chapter: chapter, verse: verse };
   }
+
+  /* What kind of thing a note is about, for the pages that show them. */
+  function levelOf(noteKey) {
+    var parsed = parseKey(noteKey);
+    if (!parsed) { return null; }
+    return parsed.verse ? "verse" : (parsed.chapter ? "chapter" : "book");
+  }
+
+  function bookKey(slug) { return String(slug); }
+  function chapterKey(slug, chapter) { return slug + "." + Number(chapter); }
 
   /* Both writers hand back a new object rather than changing the one they were
      given: a store that mutates under its callers is a bug waiting to happen. */
@@ -64,25 +85,38 @@
     return Object.keys(notes || {}).length;
   }
 
-  /* The notes on one chapter, as {verse: note}, for the reader to mark up. */
+  /* The verse notes on one chapter, as {verse: note}, for the reader to mark up. */
   function forChapter(notes, slug, chapter) {
     var out = {};
     Object.keys(notes || {}).forEach(function (k) {
       var parsed = parseKey(k);
-      if (parsed && parsed.slug === slug && parsed.chapter === Number(chapter)) {
+      if (parsed && parsed.verse && parsed.slug === slug && parsed.chapter === Number(chapter)) {
         out[parsed.verse] = notes[k];
       }
     });
     return out;
   }
 
+  /* The note on the chapter itself, if there is one. */
+  function chapterNote(notes, slug, chapter) {
+    return get(notes, chapterKey(slug, chapter));
+  }
+
+  /* The note on the book. */
+  function bookNote(notes, slug) {
+    return get(notes, bookKey(slug));
+  }
+
   /* Newest change first, which is how a person looks for what they just wrote. */
+  function entry(key_, note) {
+    var parsed = parseKey(key_) || { slug: key_, chapter: null, verse: null };
+    return { key: key_, slug: parsed.slug, chapter: parsed.chapter, verse: parsed.verse,
+             level: levelOf(key_), text: note.text, updated: note.updated || "" };
+  }
+
   function byUpdated(notes) {
-    return Object.keys(notes || {}).map(function (k) {
-      var parsed = parseKey(k) || { slug: k, chapter: 0, verse: 0 };
-      return { key: k, slug: parsed.slug, chapter: parsed.chapter, verse: parsed.verse,
-               text: notes[k].text, updated: notes[k].updated || "" };
-    }).sort(function (a, b) {
+    return Object.keys(notes || {}).map(function (k) { return entry(k, notes[k]); })
+      .sort(function (a, b) {
       if (a.updated === b.updated) { return a.key < b.key ? -1 : 1; }
       return a.updated < b.updated ? 1 : -1;
     });
@@ -93,21 +127,22 @@
   function byScripture(notes, order) {
     var rank = {};
     (order || []).forEach(function (slug, i) { rank[slug] = i; });
-    return Object.keys(notes || {}).map(function (k) {
-      var parsed = parseKey(k) || { slug: k, chapter: 0, verse: 0 };
-      return { key: k, slug: parsed.slug, chapter: parsed.chapter, verse: parsed.verse,
-               text: notes[k].text, updated: notes[k].updated || "" };
-    }).sort(function (a, b) {
-      var ra = rank[a.slug] == null ? 999 : rank[a.slug];
-      var rb = rank[b.slug] == null ? 999 : rank[b.slug];
-      if (ra !== rb) { return ra - rb; }
-      if (a.chapter !== b.chapter) { return a.chapter - b.chapter; }
-      return a.verse - b.verse;
-    });
+    return Object.keys(notes || {}).map(function (k) { return entry(k, notes[k]); })
+      .sort(function (a, b) {
+        var ra = rank[a.slug] == null ? 999 : rank[a.slug];
+        var rb = rank[b.slug] == null ? 999 : rank[b.slug];
+        if (ra !== rb) { return ra - rb; }
+        /* the book's own note first, then the chapter's, then its verses */
+        var ca = a.chapter || 0, cb = b.chapter || 0;
+        if (ca !== cb) { return ca - cb; }
+        return (a.verse || 0) - (b.verse || 0);
+      });
   }
 
   function label(slug, chapter, verse, names) {
     var name = (names || {})[slug] || slug;
+    if (chapter == null) { return name; }
+    if (verse == null) { return name + " " + chapter; }
     return name + " " + chapter + ":" + verse;
   }
 
@@ -132,10 +167,20 @@
         lines.push("## " + (names[book] || book));
         lines.push("");
       }
+      if (n.level === "book") {
+        lines.push("_On the book:_ " + n.text.replace(/\s*\n\s*/g, " "));
+        lines.push("");
+        return;
+      }
       if (n.chapter !== chapter) {
         chapter = n.chapter;
         lines.push("### " + (names[book] || book) + " " + chapter);
         lines.push("");
+      }
+      if (n.level === "chapter") {
+        lines.push("_On the chapter:_ " + n.text.replace(/\s*\n\s*/g, " "));
+        lines.push("");
+        return;
       }
       lines.push("- **" + n.chapter + ":" + n.verse + "** " + n.text.replace(/\s*\n\s*/g, " "));
       if (verses) {
@@ -151,6 +196,11 @@
     STORE_KEY: STORE_KEY,
     key: key,
     parseKey: parseKey,
+    levelOf: levelOf,
+    bookKey: bookKey,
+    chapterKey: chapterKey,
+    chapterNote: chapterNote,
+    bookNote: bookNote,
     put: put,
     remove: remove,
     get: get,
