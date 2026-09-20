@@ -13,13 +13,13 @@ never leave the device.
 | **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in all seven translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
 | **Your Data** (`apps/sync/`) | What this browser has saved, in one place: download a backup, import one, or make a sync code to carry it to another device. Importing merges rather than replaces — notes take the more recently changed copy, reading-plan ticks add up, memory cards keep the schedule further along, and a key that cannot be merged safely is left alone and reported. No account and no server. |
 | **Verse Notes** (`apps/notes/`) | Noting your Bible: a note can hang on a **verse**, on a **chapter**, or on a **book**, and a verse can be **highlighted** in one of four colours (gold, green, blue, rose) — kept in its own store (`studytools.highlights.v1`) so a verse can be marked without your having anything to say about it, and four colours rather than a paintbox so the page stays readable (`studytools.verse-notes.v1`). Verse notes are written in the reader's verse panel and marked in the margin; the chapter note is written under the chapter, where the notes on its verses are listed back beside the text. Highlights are gathered here too, with the verse quoted and the colour shown, and both notes and highlights travel in the Markdown and JSON exports. Everything gathers here to read, edit, delete, filter and export — a book note, a chapter note and its verses in canonical order. The same store the reader writes, so either side shows the other's changes. |
-| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader, with an optional local model you can ask about a verse (off by default, runs on your device, Llama 3.2 3B by default, grounded in the verse text, cross-references, original words and Prayer Book readings the panel already holds). The instructions are written for Scripture rather than for chat: read the passage as the kind of writing it is, keep the canon in view, separate what the text says from what a tradition reads into it, do not preach or speak as God, and never invent a quotation or a reference. Five ways of asking come with it — the plain sense, where it sits in the Bible's story, what the Hebrew or Greek adds, how the church reads it, and help to teach it — each pointing the model at one part of the material. Pick a book and chapter and switch translations as you read. Seven public-domain translations, offered in four groups: the **full Bible with the Apocrypha** (WEBU, KJVM, RVM), the **66-book canon** (American Standard Version, Young's Literal Translation), the **Hebrew Bible** (JPS Tanakh 1917, modernized — Old Testament only) and the **Douay-Rheims**, which keeps the Vulgate's numbering and is therefore read on its own: chapters are numbered as it numbers them, the reader says which Hebrew psalm you are in, and a shared link is turned into the psalm it calls by that number. Tap a verse for every translation that carries it, the cross-references, the Greek or Hebrew, where the Prayer Book reads it, and to write a note on that verse. Under each chapter is your own page for it: a note on the chapter, and the notes you have written on its verses. Chapter navigation runs across book boundaries. |
+| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader, with an optional local model you can ask about a verse (off by default, runs on your device, Llama 3.2 3B by default, grounded in the verse text, cross-references, original words and Prayer Book readings the panel already holds). The instructions are written for Scripture rather than for chat: read the passage as the kind of writing it is, keep the canon in view, separate what the text says from what a tradition reads into it, do not preach or speak as God, and never invent a quotation or a reference. Five ways of asking come with it — the plain sense, where it sits in the Bible's story, what the Hebrew or Greek adds, how the church reads it, and help to teach it — each pointing the model at one part of the material. Pick a book and chapter and switch translations as you read. Seven public-domain translations, offered in four groups: the **full Bible with the Apocrypha** (WEBU, KJVM, RVM), the **66-book canon** (American Standard Version 1901, Young's Literal Translation 1862, both modernized), the **Hebrew Bible** (JPS Tanakh 1917, modernized — Old Testament only) and the **Douay-Rheims** (Challoner 1752, modernized), which keeps the Vulgate's numbering and is therefore read on its own: chapters are numbered as it numbers them, the reader says which Hebrew psalm you are in, and a shared link is turned into the psalm it calls by that number. Tap a verse for every translation that carries it, the cross-references, the public-domain commentary the site holds on it (Jamieson-Fausset-Brown 1871, Calvin, and F. B. Meyer), the Greek or Hebrew, where the Prayer Book reads it, and to write a note on that verse. Under each chapter is your own page for it: a note on the chapter, and the notes you have written on its verses. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
 | **Sunday Lectionary** (`apps/lectionary/`) | The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage to prepare from. |
 | **Lectern** (`apps/lectern/`) | One passage in large type with nothing else on the screen, for reading aloud in a service. Arrow keys move by chapter, verse numbers can be hidden, and the text can be enlarged. |
-| **Study a Passage** (`apps/study/`) | Type a reference and get everything the site holds on it in one place: the text in three translations, the cross-references drawn to those verses ranked by votes, the comparisons in the other traditions that touch the chapter, and the original text word by word — Greek for the New Testament, Hebrew for the Old. Printable as a teaching handout. |
+| **Study a Passage** (`apps/study/`) | Type a reference and get everything the site holds on it in one place: the text in three translations, the cross-references drawn to those verses ranked by votes, the public-domain commentary on the chapter (Jamieson-Fausset-Brown 1871, Calvin, F. B. Meyer), the comparisons in the other traditions that touch the chapter, and the original text word by word — Greek for the New Testament, Hebrew for the Old. Printable as a teaching handout. |
 | **Parallel Passages** (`apps/parallels/`) | The Bible beside the Qur'an, the Jewish Tanakh and the Book of Mormon on the same figures and events (Adam, Noah, Abraham, Joseph, Moses, Jonah, Mary, Jesus, the Sermon on the Mount, the Ten Commandments, charity, faith). 99 comparisons, each one the Bible against a single other tradition (Tanakh, Qur'an or Book of Mormon), one passage against one passage, quoted from its own public-domain edition and modernized into the same present-day English. Every book of the Tanakh and every book of the Book of Mormon is covered. Only the compared passages are bundled — the full texts are not part of this site. |
-| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see every translation the site carries side by side — the World English Bible (Updated), the modernized King James Version and the modernized Revised Version (each with the deuterocanonical books), the American Standard Version, Young's Literal Translation, and the JPS Tanakh for the Old Testament — with a book a translation does not carry simply left out. Whole chapters or single verses, with chapter shortcuts and copy/print. |
+| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see every translation the site carries side by side — the World English Bible (Updated), the modernized King James Version and the modernized Revised Version (each with the deuterocanonical books), the modernized American Standard Version and Young's Literal Translation, and the modernized JPS Tanakh for the Old Testament — with a book a translation does not carry simply left out. Whole chapters or single verses, with chapter shortcuts and copy/print. |
 | **Cross-Reference Explorer** (`apps/xref/`) | Every passage openbible.info links to the verse you are reading, grouped by destination chapter and ranked by votes. Follow a link to jump to it. |
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
 | **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
@@ -109,6 +109,10 @@ python3 scripts/build-ebible.py RV    # Revised Version (80 books) from eBible.o
 python3 scripts/build-ebible.py JPS   # JPS Tanakh 1917 (39 books) from eBible.org
 python3 scripts/modernize.py RV RVM   # rule-based modernization of any of the above
 python3 scripts/modernize.py JPS JPSM
+python3 scripts/modernize.py DRC DRCM
+python3 scripts/modernize.py ASV ASVM
+python3 scripts/modernize.py YLT YLTM
+python3 scripts/verify-modernized.py  # re-checks every modernized text against its source
 python3 scripts/build-compare.py      # freezes the compared passages (Qur'an, Tanakh, Book of Mormon)
 python3 scripts/build-lectionary.py   # the BCP 1928 Sunday and daily office tables (public domain)
 node scripts/check-liturgical.js      # re-checks the 1928 cycle, Easter and the feast days (needs node)
@@ -126,7 +130,9 @@ node scripts/check-notes.js           # re-checks the verse-note rules and the M
 node scripts/check-highlights.js      # re-checks the highlight colours, marking and export
 node scripts/check-ask.js             # re-checks the model list, its instructions and the streaming path
 node scripts/check-yourdata.js        # re-checks the merge of two devices' reading, and the code
+node scripts/check-commentary.js      # re-checks the commentary against the verses it comments on
 python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms the Vulgate's way
+python3 scripts/build-commentary.py   # the public-domain commentary, verse by verse
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -142,9 +148,12 @@ All Scripture texts bundled here are in the **public domain**.
 | Qur'an, Pickthall, Modernized (PKM) | [tanzil.net](https://tanzil.net/trans/en.pickthall) (M. M. Pickthall, 1930), modernized by this project | Public domain in the US since 1 January 2026; the modernization is this repository's own rule-based pass |
 | JPS Tanakh, Modernized (JPSM) | [eBible.org](https://ebible.org/engjps/) `engjps` USFM (JPS 1917), modernized by this project | Public domain (the 1917 JPS translation is public domain; the modernization is this repository's own rule-based pass) |
 | Topical entries | [topical-bible-search](https://github.com/j86schroeder/topical-bible-search) (Nave 1897, Torrey 1897) | MIT pipeline; source works public domain |
-| American Standard Version (1901) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
-| Douay-Rheims, Challoner (1752) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain; Vulgate numbering, so it is read on its own and kept out of the side-by-side views |
-| Young's Literal Translation (1862) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
+| American Standard Version, Modernized (ASVM) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) (ASV 1901), modernized by this project | Public domain (the 1901 Standard Version is public domain; the modernization is this repository's own rule-based pass) |
+| Douay-Rheims, Modernized (DRCM) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) (Challoner 1752), modernized by this project | Public domain; Vulgate numbering, so it is read on its own and kept out of the side-by-side views |
+| Young's Literal Translation, Modernized (YLTM) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) (Young 1862), modernized by this project | Public domain (Young's 1862 translation is public domain; the modernization is this repository's own rule-based pass) |
+| Commentary: Jamieson, Fausset & Brown (1871) | [HelloAO Bible API](https://bible.helloao.org/) `jamieson-fausset-brown` | Public domain (the API carries the public-domain mark) |
+| Commentary: John Calvin (1550s) | [HelloAO Bible API](https://bible.helloao.org/) `calvin` | Public domain (the API carries the public-domain mark) |
+| Commentary: F. B. Meyer (1900s) | [HelloAO Bible API](https://bible.helloao.org/) `fbmeyer` | Public domain (the API carries the public-domain mark) |
 | Greek interlinear | [OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Hebrew interlinear | [Open Scriptures Hebrew Bible](https://github.com/openscriptures/morphhb) (morphhb) with [STEPBible](https://github.com/STEPBible/STEPBible-Data) TBESH | CC BY 4.0; the glosses cover about 96% of the words (TBESH itself has no entry for some, e.g. H518 "if") |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |
@@ -169,6 +178,19 @@ The verse text in `data/devotional/topics.json` is verified by
 `scripts/verify-devotional.py` against the bundled KJV data so the app cannot
 display a misquoted verse.
 
+`scripts/verify-modernized.py` does the same for the modernized texts, against
+the text each was made from: the verse structure has to match chapter for chapter
+and verse for verse; no archaic pronoun may survive; no ordinal may have been
+mistaken for a verb ("the thirtieth year" was being read as "the thirties
+year"); and every word in the output has to be a word one of the published
+translations already uses, or one an ordinary English ending makes of one, so a
+rule cannot invent "hids" out of "hideth". It prints what -eth and -est forms
+were left in place and what the "do you ...?" rule produced, because residue is
+the conservative outcome here but it should not be invisible. The pass itself
+reads only the published texts when it decides whether a word is a verb — never
+its own earlier output, which would let a mistake from a previous run look like
+evidence.
+
 `scripts/check-search.js` does the same for search: it re-reads the translation
 files, tokenises them with the JavaScript, and compares whole posting lists
 against the shipped index, so an index built with different rules — or one that
@@ -182,6 +204,15 @@ references the Prayer Book prints ("Isa. 61:1-3,10-11" is Isaiah 61, verses 1 to
 tapping a verse in the reader can say which office reads it), and the reading
 plans (every chapter once, in order, no day empty, and days that differ by at
 most one chapter).
+
+The commentary is public domain and incomplete in ways worth knowing. The
+sources attach a comment to the verse that opens a passage, so many verses have
+none, and the reader says so rather than leaving the panel blank. It covers 65 of
+the 66 books; Song of Solomon has no verse-level comments in the source at all,
+only an introduction. It covers no deuterocanonical book: the three works are
+Protestant in range, and their publisher's book list stops at the sixty-six. For
+the same reason the Deuterocanonical books in the reader show no commentary, and
+the panel says which reason applies.
 
 `scripts/check-liturgical.js` does the same job for the calendar: it walks every
 year from 1900 to 2100 and checks that each Sunday is named as the Prayer Book

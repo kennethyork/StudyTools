@@ -449,13 +449,13 @@
    "versification": "masoretic"
   },
   {
-   "id": "ASV",
-   "name": "American Standard Version",
+   "id": "ASVM",
+   "name": "American Standard Version, Modernized",
    "versification": "masoretic"
   },
   {
-   "id": "YLT",
-   "name": "Young's Literal Translation",
+   "id": "YLTM",
+   "name": "Young's Literal Translation, Modernized",
    "versification": "masoretic"
   },
   {
@@ -464,8 +464,8 @@
    "versification": "masoretic"
   },
   {
-   "id": "DRC",
-   "name": "Douay-Rheims, Challoner Revision",
+   "id": "DRCM",
+   "name": "Douay-Rheims, Modernized",
    "versification": "vulgate"
   }
  ]
