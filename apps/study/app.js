@@ -187,10 +187,10 @@
           ? "Nothing verse by verse on this book: the site has no commentary on it, and the "
             + "article above is about the book as a whole."
           : book.testament === "DC"
-          ? "No verse-level commentary exists for this book in the public domain. The works " +
-            "bundled here are Protestant in range and stop at the sixty-six books; Haydock " +
-            "(1859), who covers most of the deuterocanon, does not reach this one, and R. H. " +
-            "Charles (1913) exists only as unproofread OCR, so neither is bundled."
+          ? "No commentary exists for this book in the public domain at all: the works " +
+            "bundled here are Protestant in range and stop at the sixty-six books, Haydock " +
+            "(1859) does not reach it, the dictionaries have no article on it, and Charles " +
+            "(1913) treats it only in passing."
           : "No commentary on this chapter in the works bundled here." }));
         return;
       }
@@ -233,10 +233,10 @@
       /* These books have no commentary file at all, so say why rather than
          reporting that a chapter could not be loaded. */
       cbody.textContent = book.testament === "DC"
-        ? "No verse-level commentary exists for this book in the public domain: the works " +
-          "bundled here are Protestant in range and stop at the sixty-six books. Haydock's " +
-          "Catholic Bible Commentary (1859) and R. H. Charles (1913) cover this ground and are " +
-          "public domain, but neither is bundled here."
+        ? "No commentary exists for this book in the public domain at all: the works bundled " +
+          "here are Protestant in range and stop at the sixty-six books, Haydock (1859) does " +
+          "not reach it, the dictionaries have no article on it, and Charles (1913) treats it " +
+          "only in passing."
         : "No commentary on this chapter.";
     });
     els.out.appendChild(cm);

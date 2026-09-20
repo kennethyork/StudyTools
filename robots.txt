@@ -1,0 +1,4 @@
+# Everything here is public domain or openly licensed and meant to be read.
+User-agent: *
+Allow: /
+Sitemap: https://studytools.cc/sitemap.xml

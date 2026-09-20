@@ -347,12 +347,13 @@
                Catholic deuterocanon, does not reach this one either. Say which,
                rather than reporting a load failure for a file never written. */
             cSection.appendChild(ST.el("p", { class: "muted small", style: "margin:0", text:
-              "No verse-level commentary exists for this book in the public domain. " +
-              "Jamieson, Fausset & Brown, Calvin and F. B. Meyer are Protestant in range and " +
-              "stop at the sixty-six books, and Haydock (1859), who covers the Catholic " +
-              "deuterocanon, does not reach this one. R. H. Charles introduced it in 1913, in a " +
-              "volume that exists only as page images and unproofread OCR, so it is not here " +
-              "either \u2014 this panel says so rather than showing you something else." }));
+              "No commentary exists for this book in the public domain at all. Jamieson, " +
+              "Fausset & Brown, Calvin and F. B. Meyer are Protestant in range and stop at " +
+              "the sixty-six books; Haydock (1859) does not reach this one; the dictionaries " +
+              "bundled here have no article on it; and Charles (1913), whose edition covers " +
+              "the rest of the deuterocanon, treats it only in passing \u2014 he gives the " +
+              "Psalms of Solomon instead. So this panel says so rather than showing you " +
+              "something else." }));
             return;
           }
           if (!mine.length) {

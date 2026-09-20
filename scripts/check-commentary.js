@@ -228,6 +228,38 @@ check("a book introduction exists only for a book the reader has",
 /* Four of the twenty deuterocanonical books have no commentary anywhere in the
    public domain, and their panels show a Hastings article instead. A reader has
    to be told that is what it is, so the note is required, not optional. */
+/* A transcription from a scan has to carry three things a reader can check: that
+   it came from a scan, that what it is, is not commentary, and no apparatus —
+   Charles's pages end in versional and collation notes, and those must never
+   arrive as prose. The shapes below are what got through before the filters did. */
+check("a transcribed introduction says where it came from and what it is not",
+  about.every(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    if ((data.source || {}).id !== "charles") { return true; }
+    return typeof data.note === "string" && /scan/i.test(data.note) &&
+      /not a commentary/i.test(data.note);
+  }), about.filter(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    return (data.source || {}).id === "charles";
+  }).map(function (n) { return n.replace(/\.json$/, ""); }).join(", ") || "none shipped");
+check("no apparatus survives in a transcribed introduction",
+  about.every(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    if ((data.source || {}).id !== "charles") { return true; }
+    const text = (data.paragraphs || []).join(" ");
+    /* One siglum in a sentence is scholarship ("extracts from the LXX of 2 Kings");
+       a paragraph of them is the apparatus, which is what the build drops at four.
+       The other shapes have no business in prose at any count. */
+    const sigla = /\b(LXX|Codd?|Vulg|Syr|Targ|MT|Aquila|Symmachus|Theodotion)\b\.?/g;
+    return (data.paragraphs || []).every(function (para) {
+      return (para.match(sigla) || []).length < 3;
+    }) && !/\w+\.\./.test(text) && !/[€|†]/.test(text) &&
+      !/\b(interlined|on erasure|edd|om)\b\.?/.test(text);
+  }), about.filter(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    return (data.source || {}).id === "charles";
+  }).map(function (n) { return n.replace(/\.json$/, ""); }).join(", "));
+
 check("an introduction that is not commentary says so",
   about.every(function (n) {
     const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));

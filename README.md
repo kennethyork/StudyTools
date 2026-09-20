@@ -251,11 +251,21 @@ commentary on its verses — because naming the shelf a text came from is the wh
 point. `check-commentary.js` requires that line: an article that does not say it
 is not commentary fails the build.
 
-Two books still have nothing at all — the Prayer of Manasses and Psalm 151 — and
-the panel says which they are and why: Charles, who introduced both in 1913, exists
-only as page images at CCEL, scan transclusion at Wikisource, and unproofread OCR
-at the Internet Archive. Quoting that beside Scripture is what this site's checks
-exist to prevent, so those two say so plainly instead.
+One book still has nothing at all, and it is not for want of trying: **Psalm 151**.
+No public-domain work this site draws on treats it as a book — Charles mentions it
+once, in passing ("3 and 4 Maccabees and Psalm 151 are found in most manuscripts of
+the LXX"), and gives the Psalms of Solomon instead. So the panel says exactly that
+rather than showing something adjacent and calling it a commentary.
+
+**The Prayer of Manasses** is covered by Charles after all, by his introduction to
+it, transcribed from the one Internet Archive scan of vol. i whose OCR is English:
+20 paragraphs, 9,560 characters, ending in prose where his apparatus begins. The
+transcription is disclosed in the panel — it says the text came from a scan, that a
+few letters are the scanner's, that one Greek word is given in brackets, and that
+it is an introduction rather than commentary — and `check-commentary.js` requires
+that disclosure, rejects a transcribed introduction with apparatus left in it, and
+rejects the scans' own fingerprints (double full stops, a pipe, a euro sign) in a
+panel that sits beside Scripture.
 
 `scripts/check-liturgical.js` does the same job for the calendar: it walks every
 year from 1900 to 2100 and checks that each Sunday is named as the Prayer Book
