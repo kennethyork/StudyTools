@@ -41,6 +41,24 @@ PUBLISHED = ["WEB", "WEBU", "KJV", "KJVA", "RV", "DRC", "ASV", "YLT", "JPS"]
 
 # "yourselves" is present-day English and the pass produces it; not residue.
 ARCHAIC_PRONOUN = re.compile(r"\b(thou|thee|thy|thine|ye|thyself)\b", re.I)
+
+# The words a reader should not be able to meet in a text this project builds.
+# "art" is the noun — the art of the apothecary — and stays, so it is not here.
+# The formal adverbs are included: Bible English keeps them, but the pass removes
+# them, so a text with "therein" in it has not had the pass run over it.
+SHIP_BUILT = {"KJVM", "RVM", "ASVM", "YLTM", "JPSM", "DRCM"}
+# WEBU is eBible.org's own published translation. This project modernizes the
+# editions it builds; it does not rewrite someone else's text under their
+# trademark, so the reader may meet these in it, and they are reported rather
+# than failed. They are the publisher's register, not an oversight of ours.
+SHIP_OTHER = {"WEBU"}
+SHIP_ARCHAIC = re.compile(
+    r"\b(thou|thee|thy|thine|ye|thyself|hast|hath|doth|dost|doest|saith|shalt|wilt|didst|"
+    r"canst|mayest|mightest|couldest|shouldest|wouldest|wast|wert|spake|unto|verily|whilst|"
+    r"whiles|amongst|amidst|aught|naught|peradventure|shew|shewed|sheweth|shewn|brake|sware|"
+    r"drave|gat|whereof|thereof|wherein|wherewith|whereby|whereon|thereon|therein|therewith|"
+    r"thereto|henceforth|hither|thither|whither|thence|whence|wrought|whoso|whosoever|"
+    r"whatsoever|wheresoever|whithersoever|howsoever|whichsoever|whomsoever|whatso)\b", re.I)
 ARCHAIC_WORD = re.compile(
     r"\b(hath|hast|hath|doth|dost|doest|saith|shalt|shalt|wilt|didst|canst|mayest|mightest|"
     r"couldest|shouldest|wouldest|wast|wert|spake|unto|verily|whilst|whiles|amongst|amidst|"
@@ -254,6 +272,32 @@ def main():
 
     for n in notes:
         print("note: " + n)
+    # every text the reader offers, however it was built: a reader should not be
+    # able to meet a "thou" in any of them
+    if not sys.argv[1:]:
+        ids = [t["id"] for t in load(os.path.join(BIBLE, "translations.json"))["translations"]]
+        for tid in ids:
+            found = Counter()
+            books = 0
+            for path in glob.glob(os.path.join(BIBLE, f"*.{tid}.json")):
+                data = load(path)
+                if "chapters" not in data:
+                    continue
+                books += 1
+                for verses in data["chapters"].values():
+                    for text in verses.values():
+                        for m in SHIP_ARCHAIC.finditer(text):
+                            found[m.group(1).lower()] += 1
+            shown = ", ".join(f"{w}×{n}" for w, n in sorted(found.items())) or "none"
+            if tid in SHIP_BUILT:
+                if found:
+                    failures.append(f"{tid}: archaic words in the text it builds — {shown}")
+                else:
+                    print(f"  {tid}: {books} books, no archaic words")
+            else:
+                notes.append(f"{tid} is published by someone else ({books} books); "
+                             f"left as they wrote it — {shown}")
+
     if failures:
         for f in failures:
             print("FAIL: " + f)

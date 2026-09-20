@@ -5,6 +5,14 @@ Source: the Abrahamic Library (kennethyork/AbrahamicLibrary). Its `kjv-bible`
 work is the public-domain King James Version brought to present-day American
 English ("modernized in full"), with the Apocrypha.
 
+That text is nearly modern, not quite: 103 verses still carry a "thee", a "ye",
+a "thou" or a "thine" beside the "you" in the same sentence ("I sent to thee;
+and you have well done that you are come"), and 109 more keep "wrought". So the
+same rule-based pass this repository uses for the Revised Version, the JPS
+Tanakh, the American Standard Version, Young's Literal and the Douay-Rheims
+finishes the text here, and every replacement it makes is recorded in
+scripts/.cache/kjvm-pairs.txt for reading.
+
 The library ships chapters as individual gzip members inside five byte-range
 bundles. GitHub's raw host times out on thousands of small range requests, so
 this script downloads each bundle once, extracts every chapter recorded in the
@@ -15,6 +23,7 @@ The id "KJVM" (KJV Modernized) is this repository's own label for the edition;
 it is not the "Modern King James Version", which is a different translation.
 """
 import gzip
+import importlib.util
 import json
 import os
 import re
@@ -121,15 +130,44 @@ def clean(text):
     return re.sub(r"\s+", " ", text.replace("\u00a0", " ")).strip()
 
 
+def load_pass():
+    """The modernization pass, imported: scripts/modernize.py is the one place
+    these rules live, and the KJVM build uses the same ones rather than a second
+    copy of them."""
+    spec = importlib.util.spec_from_file_location(
+        "modernize", os.path.join(ROOT, "scripts", "modernize.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.load_corpus()
+    return module
+
+
+def write_pairs(module, path):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        for (before, after), n in sorted(module.PAIRS.items(), key=lambda x: -x[1]):
+            f.write("{:6d}  {}  ->  {}\n".format(n, before, after))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(CACHE, exist_ok=True)
 
     print("fetching corpus index ...", flush=True)
-    index = json.loads(retry(lambda: urllib.request.urlopen(
-        urllib.request.Request(INDEX_URL, headers=UA), timeout=240).read().decode("utf-8")))["works"]
-    religion, offset, length = index[WORK_ID]
     meta_path = os.path.join(CACHE, "kjv-meta.bin")
+    try:
+        index = json.loads(retry(lambda: urllib.request.urlopen(
+            urllib.request.Request(INDEX_URL, headers=UA), timeout=240).read().decode("utf-8"),
+            attempts=2, pause=3))["works"]
+        offset, length = index[WORK_ID][1], index[WORK_ID][2]
+    except Exception as exc:
+        # The library is gone, or the network is. The chapter list was cached the
+        # last time it worked and every chapter is already unpacked, so carry on
+        # from the cache rather than failing the build.
+        if not os.path.exists(meta_path):
+            raise
+        print("  index unreachable ({}); using the cached chapter list".format(exc), flush=True)
+        offset, length = 0, os.path.getsize(meta_path)
     if not (os.path.exists(meta_path) and os.path.getsize(meta_path) == length):
         data = retry(lambda: urllib.request.urlopen(
             urllib.request.Request(META_URL, headers=dict(UA, Range="bytes={}-{}".format(offset, offset + length - 1))),
@@ -149,6 +187,7 @@ def main():
     for entry in chapters:
         by_bundle.setdefault(entry[3], []).append(entry)
 
+    finish = load_pass()
     books = {}
     order = []
     done = 0
@@ -157,7 +196,16 @@ def main():
         url = BUNDLE_URL.format(bundle)
         bundle_path = os.path.join(CACHE, "bundle-{}.bin".format(bundle))
         print("bundle {}: {} chapters".format(bundle, len(by_bundle[bundle])), flush=True)
-        download(url, bundle_path)
+        try:
+            download(url, bundle_path)
+        except Exception as exc:
+            unpacked = sum(
+                1 for entry in by_bundle[bundle]
+                if os.path.exists(os.path.join(CACHE, "ch-{}-{}.bin".format(bundle, entry[4]))))
+            if unpacked != len(by_bundle[bundle]):
+                raise
+            print("  bundle unreachable ({}); its {} chapters are already unpacked".format(
+                exc, unpacked), flush=True)
         for entry in by_bundle[bundle]:
             title = entry[1]
             match = re.match(r"^(.*) (\d+)$", title)
@@ -171,7 +219,8 @@ def main():
                 order.append(book_name)
             raw = read_member(bundle_path, off, ln, CACHE, bundle)
             chapter = json.loads(gzip.decompress(raw).decode("utf-8"))
-            books[book_name][local_n] = {str(v["n"]): clean(v["text"]) for v in chapter.get("verses", [])}
+            books[book_name][local_n] = {str(v["n"]): finish.modernize(clean(v["text"]))
+                                         for v in chapter.get("verses", [])}
             done += 1
             if done % 100 == 0 or done == len(chapters):
                 print("  {}/{} chapters ({:.0f}s)".format(done, len(chapters), time.time() - t0), flush=True)
@@ -186,7 +235,9 @@ def main():
                 "modernized": True,
                 "chapters": books[book_name],
             }, f, ensure_ascii=False, separators=(",", ":"))
-    print("wrote {} books".format(len(order)), flush=True)
+    print("wrote {} books; {} distinct replacements by the pass".format(
+        len(order), len(finish.PAIRS)), flush=True)
+    write_pairs(finish, os.path.join(ROOT, "scripts", ".cache", "kjvm-pairs.txt"))
 
     with open(os.path.join(OUT, "books.json"), encoding="utf-8") as f:
         idx = json.load(f)
@@ -194,16 +245,23 @@ def main():
     for book_name in order:
         slug = slugify(book_name)
         if slug in by_slug:
-            trs = set(by_slug[slug].get("translations") or ["KJV", "ASV", "WEB", "YLT"])
-            trs.add(TRANSLATION)
-            by_slug[slug]["translations"] = sorted(trs)
+            # The order in books.json is the order the reader offers, newest and
+            # most complete first, and the first one is what a chapter opens in.
+            # Adding this translation must not reshuffle that.
+            trs = list(by_slug[slug].get("translations") or ["KJV", "ASV", "WEB", "YLT"])
+            if TRANSLATION not in trs:
+                trs.append(TRANSLATION)
+            by_slug[slug]["translations"] = trs
         else:
             idx.append({
                 "name": book_name, "slug": slug, "chapters": len(books[book_name]),
                 "testament": "DC", "deuterocanon": True, "translations": [TRANSLATION],
             })
+    # written the way the rest of the repository keeps it, one book per line, so a
+    # change to it reads as a change rather than as the whole file again
     with open(os.path.join(OUT, "books.json"), "w", encoding="utf-8") as f:
-        json.dump(idx, f, ensure_ascii=False, separators=(",", ":"))
+        json.dump(idx, f, ensure_ascii=False, indent=1)
+        f.write("\n")
     print("books.json: {} books".format(len(idx)))
 
 

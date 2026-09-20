@@ -81,7 +81,12 @@ def main():
                         continue
                     verses += 1
                     vid = verse_id(index_of[b["slug"]], chapter_num, verse_num)
-                    for word in words:
+                    # Sorted, because iterating a set of strings follows the
+                    # interpreter's hash seed: the index would carry the same
+                    # words in a different order every build, and all seven
+                    # files would show up as changed whenever any one of them
+                    # did.
+                    for word in sorted(words):
                         postings.setdefault(word, []).append(vid)
                     if len(sample) < 40 and any(w in words for w in SAMPLE_WORDS):
                         # The whole verse, and this tokeniser's output for it:

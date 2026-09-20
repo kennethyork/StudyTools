@@ -158,7 +158,7 @@ All Scripture texts bundled here are in the **public domain**.
 | Hebrew interlinear | [Open Scriptures Hebrew Bible](https://github.com/openscriptures/morphhb) (morphhb) with [STEPBible](https://github.com/STEPBible/STEPBible-Data) TBESH | CC BY 4.0; the glosses cover about 96% of the words (TBESH itself has no entry for some, e.g. H518 "if") |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |
 | Bible dictionaries | [NEUU bible-dictionary-dataset](https://github.com/neuu-org/bible-dictionary-dataset) (CCEL ThML) | CC BY 4.0; source texts public domain |
-| Modernized King James Version (KJVM) | [Abrahamic Library](https://github.com/kennethyork/AbrahamicLibrary) (`kjv-bible`, "modernized in full") | Public domain text; MIT software |
+| Modernized King James Version (KJVM) | [Abrahamic Library](https://github.com/kennethyork/AbrahamicLibrary) (`kjv-bible`, "modernized in full"; the repository no longer resolves), finished by this project's own rule-based pass | Public domain text; MIT software |
 | World English Bible, Updated (WEBU, 2000) | [eBible.org](https://ebible.org/engwebu/) `engwebu` USFM | Public domain (eBible.org / Michael Paul Johnson); “World English Bible” is a trademark of eBible.org |
 | Greek vocabulary frequency | [eliranwong/OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Hebrew vocabulary frequency | [openscriptures/morphhb](https://github.com/openscriptures/morphhb) (Westminster Leningrad Codex) | CC BY 4.0 |
@@ -173,6 +173,22 @@ is not the "Modern King James Version", which is a different, copyrighted
 translation. The modernized text is drawn from the Abrahamic Library's
 `kjv-bible` work, which uses the King James Version as its public-domain source
 and states the edition is "modernized in full".
+
+It was nearly that: 103 verses still carried a "thee", a "ye", a "thou" or a
+"thine" beside the "you" in the same sentence ("I sent to thee; and you have
+well done that you are come"), 109 kept "wrought", and "Holy Ghost" was still
+"Holy Ghost" throughout. So `build-kjvm.py` finishes the text with the same
+rule-based pass this repository uses for its other editions — `scripts/modernize.py`,
+which is the only place those rules live — and records every replacement in
+`scripts/.cache/kjvm-pairs.txt`. 2,592 of its 36,807 verses change, and
+`verify-modernized.py` fails the build if any text this repository builds reaches
+the reader with an archaic word in it.
+
+That source repository no longer resolves: the GitHub API returns 404 for
+`kennethyork/AbrahamicLibrary`, so KJVM's text cannot be re-fetched. The build
+finishes the chapters in its local cache, which is where the shipped KJVM came
+from, and a fresh clone would need the library to come back before it could be
+rebuilt.
 
 The verse text in `data/devotional/topics.json` is verified by
 `scripts/verify-devotional.py` against the bundled KJV data so the app cannot
