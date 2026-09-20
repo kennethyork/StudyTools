@@ -406,8 +406,27 @@
       "keeps it in your browser. " + STAsk.CAVEAT });
 
     var status = ST.el("p", { class: "muted small", style: "margin:8px 0 0" });
-    var answer = ST.el("div", { class: "ask-answer serif" });
+    var answer = ST.el("div", { class: "ask-thread" });      /* the conversation so far */
     var row = ST.el("div", { class: "row", style: "margin-top:8px" });
+
+    /* The thread is kept so a follow-up question knows what came before. The
+       material is sent with the first question only; after that the question is
+       the question, and the passage stays in the history beside it. Ten turns
+       are kept, which is as far back as a small model follows anyway. */
+    var history = [];
+    function addTurn(role, text) {
+      var block = ST.el("div", { class: "ask-turn " + (role === "user" ? "ask-q" : "ask-a") });
+      if (role === "user") {
+        block.appendChild(ST.el("div", { class: "ask-who", text: "You" }));
+      } else {
+        block.appendChild(ST.el("div", { class: "ask-who", text: "The model" }));
+      }
+      var body = ST.el("div", { class: "ask-body serif", text: text });
+      block.appendChild(body);
+      answer.appendChild(block);
+      block.scrollIntoView({ block: "nearest" });
+      return body;
+    }
 
     /* which kind of question: each one points the model at a different part of
        the material above, and fills the box in so it can be edited */
@@ -510,31 +529,51 @@
       var q = String(text || question.value || "").trim();
       if (!q) { return; }
       asking = true;
-      answer.textContent = "";
       stopBtn.classList.remove("hidden");
       askBtn.disabled = true;
       status.textContent = "Asking\u2026";
-      var messages = STAsk.buildMessages(context, q, modePicker.value);
+      question.value = "";
+      addTurn("user", q);
+      var answerBody = addTurn("model", "");
+
+      history.push({ role: "user", content: history.length
+        ? q
+        : STAsk.contextBlock(context) + "\n\nQuestion: " + q });
+      if (history.length > 20) { history = history.slice(-20); }
+
+      var messages = STAsk.buildMessages(context, q, modePicker.value, history);
       STAsk.ask(engine, messages, function (piece, whole) {
-        answer.textContent = whole;
+        answerBody.textContent = whole;
       }).then(function (whole) {
         asking = false;
         askBtn.disabled = false;
         stopBtn.classList.add("hidden");
         status.textContent = "";
-        if (!answer.querySelector("button")) {
-          var save = ST.el("button", { type: "button", class: "ghost", style: "font-size:.76rem",
-            text: "Save as my note on " + label });
-          save.addEventListener("click", function () {
-            var existing = STNotes.textFor(notes, state.book, state.chapter, verseOfKey(context.noteKey));
-            var addition = "Q: " + q + "\nA: " + whole;
-            saveNote(context.noteKey, existing ? existing + "\n\n" + addition : addition);
-            save.disabled = true;
-            save.textContent = "Saved to your notes";
-            ST.toast("Saved to your note on " + label);
-          });
-          answer.appendChild(ST.el("div", { class: "row", style: "margin-top:8px" }, [save]));
-          answer.appendChild(ST.el("p", { class: "muted small", style: "margin:6px 0 0",
+        history.push({ role: "assistant", content: whole });
+
+        var save = ST.el("button", { type: "button", class: "ghost", style: "font-size:.76rem",
+          text: "Save this answer as my note on " + label });
+        save.addEventListener("click", function () {
+          var existing = STNotes.textFor(notes, state.book, state.chapter, verseOfKey(context.noteKey));
+          var addition = "Q: " + q + "\nA: " + whole;
+          saveNote(context.noteKey, existing ? existing + "\n\n" + addition : addition);
+          save.disabled = true;
+          save.textContent = "Saved to your notes";
+          ST.toast("Saved to your note on " + label);
+        });
+        var row2 = ST.el("div", { class: "row no-print", style: "margin-top:6px" }, [save]);
+        var restart = ST.el("button", { type: "button", class: "ghost", style: "font-size:.76rem",
+          text: "Start over" });
+        restart.title = "Forget this conversation and ask something fresh";
+        restart.addEventListener("click", function () {
+          history = [];
+          answer.innerHTML = "";
+        });
+        row2.appendChild(restart);
+        answerBody.parentNode.appendChild(row2);
+
+        if (!answer.querySelector(".ask-fineprint")) {
+          answer.appendChild(ST.el("p", { class: "muted small ask-fineprint", style: "margin:6px 0 0",
             text: "It cannot verify anything it says. Check it against the text above before you use it." }));
         }
       }).catch(function (err) {
@@ -542,6 +581,7 @@
         askBtn.disabled = false;
         stopBtn.classList.add("hidden");
         status.textContent = err && err.message ? err.message : "The model stopped.";
+        if (answerBody && !answerBody.textContent) { answerBody.parentNode.remove(); }
       });
     }
 
@@ -549,6 +589,7 @@
     question.addEventListener("keydown", function (e) {
       if (e.key === "Enter") { e.preventDefault(); askIt(); }
     });
+    askBtn.title = "Enter asks; ask again to follow up on the answer";
     stopBtn.addEventListener("click", function () {
       /* the model streams into the same engine; throwing the page away stops it */
       asking = false;

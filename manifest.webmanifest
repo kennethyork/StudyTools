@@ -1,0 +1,30 @@
+{
+  "name": "StudyTools — Bible study tools that run on your device",
+  "short_name": "StudyTools",
+  "description": "Read the Bible in seven public-domain translations, search it, write notes on a verse, keep the church's year, and study a passage in the Greek or Hebrew. No account, no server.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f2ea",
+  "theme_color": "#f7f4ed",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

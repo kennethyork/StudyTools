@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1613" media="(prefers-color-scheme: dark)">
+<title>Your Data — StudyTools</title>
+<meta name="description" content="Everything this site has saved in your browser, in one place: export it, import it on another device, or carry it across as a short code. No account, no server.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .k { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0;
+    border-bottom: 1px dashed var(--line); font-size: .92rem; }
+  .k:last-child { border-bottom: 0; }
+  .k .n { color: var(--ink-soft); }
+  .k .v { color: var(--ink-faint); font-size: .82rem; }
+  .code { width: 100%; min-height: 5em; font-family: var(--mono); font-size: .78rem;
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); color: var(--ink); }
+  .report li { margin: 4px 0; font-size: .9rem; }
+  .report .act { font-family: var(--mono); font-size: .74rem; color: var(--accent); }
+  @media print { .no-print, header.page p { display: none !important; } }
+</style>
+</head>
+<body data-root="../../" data-app="sync">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Your Data</h1>
+    <p class="lede">Everything this site has saved in this browser &mdash; notes, plan ticks, memory cards, journals &mdash; in one place. Export it as a file, or carry it to another device as a short code. There is no account and no server: the two devices never meet, you hand the data from one to the other.</p>
+  </header>
+
+  <section class="card">
+    <h2 class="serif" style="margin:0 0 4px;font-size:1.05rem">What is saved here</h2>
+    <p class="muted small" id="summary">&mdash;</p>
+    <div id="keys"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" style="margin:0 0 8px;font-size:1.05rem">Take it with you</h2>
+    <div class="row">
+      <button type="button" id="export-json">Download a backup file</button>
+      <button type="button" class="secondary" id="make-code">Make a sync code</button>
+      <button type="button" class="ghost" id="copy-code" disabled>Copy the code</button>
+    </div>
+    <p class="muted small" style="margin:10px 0 0" id="code-help">A sync code is the same data, compressed, to paste on another device &mdash; or to open as a link there. Codes can be long; they are meant to be copied, not typed.</p>
+    <textarea class="code no-print" id="code" spellcheck="false" placeholder="The code appears here."></textarea>
+    <div class="row no-print" style="margin-top:8px">
+      <button type="button" class="ghost" id="make-link" disabled>Show a link that carries it</button>
+    </div>
+    <p class="muted small" id="link"></p>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" style="margin:0 0 8px;font-size:1.05rem">Bring it in</h2>
+    <p class="muted small" style="margin:0 0 10px">Importing never replaces what is here: it is brought together. Notes take the more recently changed copy, reading-plan ticks add up, memory cards merge and keep the schedule further along, and anything that cannot be merged safely is left as it is and reported below.</p>
+    <div class="row no-print">
+      <label class="btn secondary" style="cursor:pointer">
+        Choose a backup file
+        <input type="file" id="file" accept="application/json,.json" style="display:none">
+      </label>
+      <button type="button" class="secondary" id="use-code" disabled>Import the code above</button>
+    </div>
+    <ol class="report" id="report"></ol>
+  </section>
+
+  <footer class="site">
+    <p>Nothing is uploaded, now or ever: the merge happens on this device, and the code travels by whatever you use to carry it &mdash; a message to yourself, a note, a QR code.</p>
+    <p>Not yet offered: automatic syncing through an account, or through a file in a cloud folder. Both would need something of yours to sit between the devices, which this site does not have.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="../../js/data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

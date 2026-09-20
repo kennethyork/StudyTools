@@ -116,6 +116,31 @@ const taught = A.buildMessages(context, "How would I teach this?", "teach");
 check("a mode's instruction joins the shared rules",
   taught[0].content.indexOf(A.SYSTEM) === 0 && /do not write a sermon/i.test(taught[0].content));
 check("the question is carried through", messages[1].content.indexOf("What does \u201cworld\u201d mean here?") > -1);
+
+/* ---------- the thread ---------- */
+
+const thread = [
+  { role: "user", content: A.contextBlock(context) + "\n\nQuestion: What does this say?" },
+  { role: "assistant", content: "It says that God loved the world." },
+  { role: "user", content: "And what does \u201cworld\u201d mean?" }
+];
+const followed = A.buildMessages(context, "", "plain", thread);
+check("a follow-up keeps the question and both answers in the thread",
+  followed.length === 4 && followed[0].role === "system" &&
+  followed[3].content === "And what does \u201cworld\u201d mean?", JSON.stringify(followed.map(function (m) { return m.role; })));
+check("only the first turn carries the material",
+  followed.filter(function (m) { return m.content.indexOf("871 votes") > -1; }).length === 1,
+  String(followed.filter(function (m) { return m.content.indexOf("871 votes") > -1; }).length));
+check("the thread's first turn still has the translations",
+  followed[1].content.indexOf("World English Bible, Updated: For God so loved") > -1);
+check("a system turn in the history is not passed through twice",
+  A.buildMessages(context, "", "plain", [{ role: "system", content: "x" }, thread[0]])
+    .filter(function (m) { return m.role === "system"; }).length === 1);
+check("an empty thread falls back to carrying the material",
+  A.buildMessages(context, "Why?", "plain", [])[1].content.indexOf("Romans 5:8") > -1);
+check("switching mode mid-conversation rewrites the instructions, not the thread",
+  A.buildMessages(context, "", "teach", thread)[0].content.indexOf("do not write a sermon") > -1 &&
+  A.buildMessages(context, "", "teach", thread).length === 4);
 check("the material is in the same turn as the question",
   messages[1].content.indexOf("Romans 5:8") > -1);
 check("an empty question is still well formed",

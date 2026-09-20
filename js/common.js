@@ -10,6 +10,7 @@
     { id: "lectern", name: "Lectern", href: "apps/lectern/" },
     { id: "search", name: "Search the Bible", href: "apps/search/" },
     { id: "notes", name: "Verse Notes", href: "apps/notes/" },
+    { id: "sync", name: "Your Data", href: "apps/sync/" },
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
@@ -246,6 +247,19 @@
       node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
     });
     return node;
+  }
+
+  /* Installable and usable offline: a service worker, registered from any page
+     that loads this file. It is a bonus, not a requirement — every failure is
+     swallowed, and the site works exactly as before without it. */
+  function registerServiceWorker() {
+    if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) { return; }
+    if (location.protocol !== "http:" && location.protocol !== "https:") { return; }
+    var register = function () {
+      navigator.serviceWorker.register(siteRoot() + "sw.js").catch(function () { /* never mind */ });
+    };
+    if (document.readyState === "complete") { register(); }
+    else { window.addEventListener("load", register); }
   }
 
   function qs(name) {
@@ -499,4 +513,5 @@
   } else {
     autoMount();
   }
+  registerServiceWorker();
 })();

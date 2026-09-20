@@ -163,13 +163,18 @@
     return out.trim();
   }
 
-  function buildMessages(context, question, modeId) {
+  /* A first question carries the material; the turns after it are the thread,
+     and the material is already in it. The system turn is rebuilt every time,
+     so changing the way of asking applies to the conversation from there on. */
+  function buildMessages(context, question, modeId, history) {
     var mode = modeById(modeId);
     var system = mode ? SYSTEM + " " + mode.instruction : SYSTEM;
-    return [
-      { role: "system", content: system },
-      { role: "user", content: contextBlock(context) + "\n\nQuestion: " + String(question || "").trim() }
-    ];
+    var messages = [{ role: "system", content: system }];
+    var thread = (history || []).filter(function (m) { return m && m.role && m.role !== "system"; });
+    if (thread.length) { return messages.concat(thread); }
+    messages.push({ role: "user",
+      content: contextBlock(context) + "\n\nQuestion: " + String(question || "").trim() });
+    return messages;
   }
 
   /* ---------- the engine ---------- */
