@@ -408,10 +408,34 @@
     var status = ST.el("p", { class: "muted small", style: "margin:8px 0 0" });
     var answer = ST.el("div", { class: "ask-answer serif" });
     var row = ST.el("div", { class: "row", style: "margin-top:8px" });
+
+    /* which kind of question: each one points the model at a different part of
+       the material above, and fills the box in so it can be edited */
+    var modePicker = document.createElement("select");
+    modePicker.className = "ask-picker";
+    STAsk.MODES.forEach(function (m) {
+      var o = document.createElement("option");
+      o.value = m.id;
+      o.textContent = m.label;
+      modePicker.appendChild(o);
+    });
+    var ownMode = document.createElement("option");
+    ownMode.value = "own";
+    ownMode.textContent = "My own question";
+    modePicker.appendChild(ownMode);
+    modePicker.value = STAsk.MODES[0].id;
+
     var question = document.createElement("input");
+    question.value = STAsk.MODES[0].question;
+    modePicker.addEventListener("change", function () {
+      var mode = STAsk.modeById(modePicker.value);
+      if (mode) { question.value = mode.question; }
+      question.focus();
+    });
     question.type = "text";
     question.className = "ask-question";
     question.placeholder = "What does this verse mean by \u201cworld\u201d?";
+    row.appendChild(modePicker);
     row.appendChild(question);
     var askBtn = ST.el("button", { type: "button", text: "Ask" });
     var stopBtn = ST.el("button", { type: "button", class: "ghost hidden", text: "Stop" });
@@ -490,7 +514,7 @@
       stopBtn.classList.remove("hidden");
       askBtn.disabled = true;
       status.textContent = "Asking\u2026";
-      var messages = STAsk.buildMessages(context, q);
+      var messages = STAsk.buildMessages(context, q, modePicker.value);
       STAsk.ask(engine, messages, function (piece, whole) {
         answer.textContent = whole;
       }).then(function (whole) {

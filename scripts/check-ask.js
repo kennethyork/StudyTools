@@ -66,12 +66,55 @@ check("no section is headed when it has nothing in it",
   A.contextBlock({ label: "X", translations: [{ name: "T", text: "y" }] }).indexOf("Cross-references") === -1);
 
 const messages = A.buildMessages(context, "What does \u201cworld\u201d mean here?");
+const system = messages[0].content;
 check("there is a system turn and a user turn", messages.length === 2 &&
   messages[0].role === "system" && messages[1].role === "user");
 check("the instructions forbid inventing quotations and references",
-  /never invent/i.test(messages[0].content) && /never quote a translation that is not listed/i.test(messages[0].content));
-check("the instructions ask it to cite", /cite the references/i.test(messages[0].content));
-check("the instructions cover not knowing", /does not answer the question/i.test(messages[0].content));
+  /never invent/i.test(system) && /quote only the translations listed/i.test(system));
+check("the instructions ask it to cite", /cite the references/i.test(system));
+check("the instructions cover not knowing", /does not answer the question/i.test(system));
+
+/* ---------- the instructions think in Bible terms ---------- */
+
+check("it reads a passage as the kind of writing it is",
+  /kind of writing it is/i.test(system) && /narrative/i.test(system));
+check("narrative is not treated as command", /it is not a command/i.test(system));
+check("poetry and prophecy are not read flat", /hyperbole/i.test(system));
+check("letters are read as addressed to particular situations", /particular situations/i.test(system));
+check("apocalyptic is named for what it is", /apocalyptic/i.test(system));
+check("the canon is kept in view", /two testaments/i.test(system) && /shape of the canon/i.test(system));
+check("tradition is separated from the text", /what a tradition reads into it/i.test(system));
+check("a Jewish reading is not silently merged into a Christian one",
+  /jewish reading differs/i.test(system));
+check("it is told not to preach, moralise or speak as God",
+  /do not preach/i.test(system) && /do not speak as God/i.test(system));
+check("it is told not to direct the reader's own life", /reader's own life/i.test(system));
+check("it is told to be brief", /be brief/i.test(system));
+
+/* ---------- the modes ---------- */
+
+check("there are several ways of asking", A.MODES.length >= 4, String(A.MODES.length));
+check("every mode has a name, a question and an instruction",
+  A.MODES.every(function (m) { return m.id && m.label && m.question && m.instruction; }));
+check("mode ids are unique",
+  new Set(A.MODES.map(function (m) { return m.id; })).size === A.MODES.length);
+check("an unknown mode falls back to the shared rules",
+  A.buildMessages(context, "q", "nonsense")[0].content === A.SYSTEM);
+check("the own-question mode adds nothing",
+  A.buildMessages(context, "q", "own")[0].content === A.SYSTEM);
+
+const byId = {};
+A.MODES.forEach(function (m) { byId[m.id] = m; });
+check("the plain-sense mode is about what the text says and how the translations differ",
+  /kind of writing/i.test(byId.plain.instruction) && /translations supplied differ/i.test(byId.plain.instruction));
+check("the story mode uses the cross-references", /cross-references supplied/i.test(byId.story.instruction));
+check("the words mode is restricted to the words supplied", /only the words supplied/i.test(byId.words.instruction));
+check("the church mode refuses to invent a reading", /if none are supplied, say so/i.test(byId.church.instruction));
+check("the teaching mode forbids writing a sermon", /do not write a sermon/i.test(byId.teach.instruction));
+
+const taught = A.buildMessages(context, "How would I teach this?", "teach");
+check("a mode's instruction joins the shared rules",
+  taught[0].content.indexOf(A.SYSTEM) === 0 && /do not write a sermon/i.test(taught[0].content));
 check("the question is carried through", messages[1].content.indexOf("What does \u201cworld\u201d mean here?") > -1);
 check("the material is in the same turn as the question",
   messages[1].content.indexOf("Romans 5:8") > -1);
