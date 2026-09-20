@@ -19,7 +19,8 @@
     { id: "memory", name: "Memory Verses", href: "apps/memory/" },
     { id: "blog", name: "Blog Ideas", href: "apps/blog/" },
     { id: "devotional", name: "Family Devotional", href: "apps/devotional/" },
-    { id: "calendar", name: "Church Calendar", href: "apps/calendar/" }
+    { id: "calendar", name: "Church Calendar", href: "apps/calendar/" },
+    { id: "plan", name: "Reading Plan", href: "apps/plan/" }
   ];
 
   function siteRoot() {
@@ -211,6 +212,15 @@
 
   function translationSub(t) {
     return (t && t.year ? t.year + " \u00b7 " : "") + "public domain";
+  }
+
+  // "THE FIRST SUNDAY IN ADVENT" reads as "The First Sunday in Advent".
+  var SMALL_WORDS = { in: 1, of: 1, the: 1, and: 1, after: 1, before: 1, next: 1, upon: 1, on: 1, at: 1 };
+  function titleCase(text) {
+    return String(text == null ? "" : text).toLowerCase().replace(/\b[a-z][a-z']*/g, function (word, offset) {
+      if (offset > 0 && SMALL_WORDS[word]) { return word; }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).replace(/^[a-z]/, function (c) { return c.toUpperCase(); });
   }
 
   function escapeHTML(s) {
@@ -449,6 +459,7 @@
     translationGroups: translationGroups,
     translationSub: translationSub,
     loadJSON: loadJSON,
+    titleCase: titleCase,
     escapeHTML: escapeHTML,
     el: el,
     qs: qs,

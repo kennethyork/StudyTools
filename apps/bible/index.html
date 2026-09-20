@@ -31,7 +31,45 @@
   .verse-block .num { font-family: var(--mono); font-size: .72rem; color: var(--accent); padding-top: .45em; }
   .verse-block p { margin: 0; font-family: var(--serif); font-size: 1.06rem; line-height: 1.65; }
   .verse-block:target { background: var(--highlight); }
+  .verse-block.tappable { cursor: pointer; }
+  .verse-block.tappable:hover { background: var(--bg-alt); }
+  .verse-block.tappable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .verse-block.open { background: var(--accent-soft); }
   .reader-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 16px; }
+
+  /* the verse panel: a drawer beside the text, a sheet over it on a phone */
+  .verse-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(430px, 92vw); z-index: 40;
+    background: var(--card); border-left: 1px solid var(--line); box-shadow: -8px 0 30px rgba(0,0,0,.16);
+    overflow-y: auto; padding: 16px 18px 28px;
+  }
+  .vp-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+    position: sticky; top: 0; background: var(--card); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .vp-ref { font-size: 1.2rem; }
+  .vp-close { font-size: 1.1rem; line-height: 1; padding: 2px 10px; }
+  .vp-section { margin-top: 16px; }
+  .vp-section h4 { margin: 0 0 6px; font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); }
+  .vp-version { margin-bottom: 10px; }
+  .vp-version .who { font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); }
+  .vp-version .what { font-size: .98rem; line-height: 1.55; }
+  .vp-xrefs, .vp-readings { list-style: none; margin: 0; padding: 0; }
+  .vp-xrefs li, .vp-readings li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap;
+    padding: 5px 0; border-bottom: 1px dashed var(--line); font-size: .9rem; }
+  .vp-xrefs li:last-child, .vp-readings li:last-child { border-bottom: 0; }
+  .vp-xrefs .votes, .vp-xrefs .go { font-size: .72rem; color: var(--ink-faint); }
+  .vp-xrefs .go { margin-left: auto; }
+  .vp-words { display: flex; flex-wrap: wrap; gap: 5px; }
+  .vp-words .word { border: 1px solid var(--line); border-radius: 8px; padding: 3px 7px; background: var(--bg-alt);
+    display: inline-flex; flex-direction: column; line-height: 1.25; }
+  .vp-words .word .g { font-size: .95rem; }
+  .vp-words .word .t { font-size: .62rem; color: var(--ink-faint); }
+  .vp-words .word .e { font-size: .72rem; color: var(--accent); }
+  .vp-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  @media (max-width: 900px) {
+    .verse-panel { top: auto; left: 0; width: auto; max-height: 72vh; border-left: 0;
+      border-top: 1px solid var(--line); box-shadow: 0 -8px 30px rgba(0,0,0,.2); }
+  }
+  @media print { .verse-panel { display: none !important; } }
   @media print {
     .no-print, header.page p, .reader-nav { display: none !important; }
     .card { box-shadow: none; border: 0; padding: 0; }
@@ -44,7 +82,7 @@
 <main class="wrap">
   <header class="page">
     <h1>Read the Bible</h1>
-    <p class="lede">The full Bible in three modern, public-domain translations &mdash; the World English Bible (Updated), the modernized King James Version, and the modernized Revised Version &mdash; every one of them including the Apocrypha &mdash; plus the Jewish Publication Society's Tanakh for the Old Testament. Choose a book, a chapter, and a translation.</p>
+    <p class="lede">The full Bible in three modern, public-domain translations &mdash; the World English Bible (Updated), the modernized King James Version, and the modernized Revised Version &mdash; every one of them including the Apocrypha &mdash; plus the Jewish Publication Society's Tanakh for the Old Testament. Choose a book, a chapter, and a translation, then tap any verse to see it in all three, the cross-references the church has drawn to it, the Greek behind it, and where the Prayer Book reads it.</p>
   </header>
 
   <section class="card no-print">
@@ -73,6 +111,7 @@
 </main>
 
 <script src="../../js/common.js"></script>
+<script src="../../js/liturgy.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

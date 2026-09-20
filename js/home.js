@@ -66,6 +66,76 @@
     });
   }
 
+  /* Today's reading: the plan's day for today, tickable from here. The plan is
+     worked out by js/plan.js, and the ticks are the same store the Reading Plan
+     app keeps, so ticking here shows there and the other way about. */
+  var PLAN_KEY = "reading-plan.v1";
+
+  function planState() {
+    var saved = ST.store(PLAN_KEY) || {};
+    return {
+      id: saved.id && STPlan.byId(saved.id) ? saved.id : STPlan.PLANS[0].id,
+      start: saved.start || ST.todayISO(),
+      done: saved.done && typeof saved.done === "object" ? saved.done : {},
+      tr: saved.tr || "WEBU"
+    };
+  }
+
+  function buildTodaysReading() {
+    var portionEl = document.getElementById("plan-portion");
+    var refEl = document.getElementById("plan-ref");
+    var subEl = document.getElementById("plan-sub");
+    var actions = document.getElementById("plan-actions");
+    if (!portionEl || !refEl || !actions) return;
+
+    ST.loadBooks().then(function (books) {
+      var state = planState();
+      var plan = STPlan.build(books, state.id);
+      var p = STPlan.progress(plan, state.start, state.done, ST.todayISO());
+      actions.innerHTML = "";
+
+      if (p.starts) {
+        refEl.textContent = plan.name;
+        portionEl.textContent = "Starts " + ST.formatDate(state.start, { month: "long", day: "numeric" }) + ".";
+        subEl.textContent = plan.chapters.toLocaleString() + " chapters over " + p.days + " days.";
+        actions.appendChild(ST.el("a", { class: "btn", href: root() + "apps/plan/", text: "Open the plan \u2192" }));
+        return;
+      }
+      if (p.finished) {
+        refEl.textContent = plan.name;
+        portionEl.textContent = "Finished \u2014 well read.";
+        subEl.textContent = p.daysRead + " of " + p.days + " days, " + p.chaptersRead.toLocaleString() +
+          " of " + p.chapters.toLocaleString() + " chapters.";
+        actions.appendChild(ST.el("a", { class: "btn secondary", href: root() + "apps/plan/", text: "See the plan \u2192" }));
+        return;
+      }
+
+      var dateKey = STPlan.addDays(state.start, p.day);
+      var read = !!state.done[dateKey];
+      refEl.textContent = "Day " + (p.day + 1) + " of " + p.days;
+      portionEl.textContent = STPlan.format(p.todayPortion);
+      subEl.textContent = plan.name + " \u00b7 " + p.chaptersRead.toLocaleString() + " of " +
+        p.chapters.toLocaleString() + " chapters read" +
+        (p.streak > 1 ? " \u00b7 " + p.streak + " days in a row" : "");
+
+      var first = p.todayPortion[0];
+      actions.appendChild(ST.el("a", { class: "btn",
+        href: root() + "apps/bible/?book=" + encodeURIComponent(first.slug) + "&chapter=" + first.chapter,
+        text: "Read today's portion \u2192" }));
+      var tick = ST.el("button", { type: "button", class: read ? "secondary" : "",
+        text: read ? "\u2713 Read \u2014 undo" : "Mark as read" });
+      tick.addEventListener("click", function () {
+        var current = planState();
+        if (current.done[dateKey]) { delete current.done[dateKey]; } else { current.done[dateKey] = true; }
+        ST.store(PLAN_KEY, { id: current.id, start: current.start, done: current.done, tr: current.tr });
+        buildTodaysReading();
+      });
+      actions.appendChild(tick);
+    }).catch(function () {
+      portionEl.textContent = "Could not load the book list.";
+    });
+  }
+
   function buildToolGrid() {
     var host = document.getElementById("tools-grid");
     if (!host) return;
@@ -125,6 +195,7 @@
   }
 
   buildVerseOfDay();
+  buildTodaysReading();
   buildToolGrid();
   ST.loadBooks().then(buildBookGrid).catch(function () {
     var host = document.getElementById("book-grid");

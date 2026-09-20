@@ -31,6 +31,7 @@
       <a class='btn' href='apps/bible/' aria-label='Start reading'>Start reading &rarr;</a>
       <a class='btn secondary' href='apps/study/' aria-label='Study a passage'>Study a passage &rarr;</a>
       <a class='btn secondary' href='apps/matrix/' aria-label='Compare translations'>Compare translations &rarr;</a>
+      <a class='btn secondary' href='apps/plan/' aria-label='Reading plan'>Reading plan &rarr;</a>
     </div>
   </section>
 
@@ -43,6 +44,21 @@
       <div class='featured-verse'>
         <span class='v-num' id='votd-ref'>&nbsp;</span>
         <p class='verse-text' id='votd-text'>Loading…</p>
+      </div>
+    </div>
+  </section>
+
+  <section class='featured' id='reading'>
+    <div class='featured-inner'>
+      <div class='featured-head'>
+        <h2 class='featured-title'>Today's Reading</h2>
+        <a class='featured-link' href='apps/plan/' aria-label='Open the reading plan'>Open the plan →</a>
+      </div>
+      <div class='featured-verse'>
+        <span class='v-num' id='plan-ref'>&nbsp;</span>
+        <p class='verse-text' id='plan-portion'>Loading…</p>
+        <p class='lemma-desc' id='plan-sub'></p>
+        <div class='hero-actions' id='plan-actions'></div>
       </div>
     </div>
   </section>
@@ -98,6 +114,7 @@
 </main>
 
 <script src='js/common.js'></script>
+<script src='js/plan.js'></script>
 <script src='js/home.js'></script>
 <script>ST.mountTopbar('bible');</script>
 </body>

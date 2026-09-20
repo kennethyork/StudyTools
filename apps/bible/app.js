@@ -19,6 +19,305 @@
   var bySlug = {};
   var translations = [];
   var state = { book: null, chapter: 1, tr: null, pendingVerse: null };
+  var lastChapter = {};            /* the chapter on screen, for the panel's actions */
+
+  /* ---------- the verse panel ----------
+     Tapping a verse opens what this site already holds on it: the same verse in
+     each translation, the cross-references the church has drawn to it, the Greek
+     behind it (New Testament), and the places the Prayer Book reads it. Every
+     part comes from one of the site's own files — nothing is fetched from
+     anywhere else and nothing is sent anywhere. From there a verse can be
+     studied further, copied, or sent to the memory deck. */
+
+  var panelEl = null;
+  var panelVerse = null;
+  var readingIndexPromise = null;
+
+  function ensurePanel() {
+    if (panelEl) { return panelEl; }
+    panelEl = document.createElement("aside");
+    panelEl.id = "verse-panel";
+    panelEl.className = "verse-panel";
+    panelEl.hidden = true;
+    panelEl.setAttribute("aria-label", "Study this verse");
+    panelEl.innerHTML =
+      '<div class="vp-head">' +
+        '<div style="min-width:0">' +
+          '<div class="vp-ref serif" id="vp-ref">\u2014</div>' +
+          '<div class="muted small" id="vp-sub"></div>' +
+        '</div>' +
+        '<button type="button" class="ghost vp-close" id="vp-close" aria-label="Close the verse panel">\u00d7</button>' +
+      '</div>' +
+      '<div class="vp-body" id="vp-body"></div>';
+    document.body.appendChild(panelEl);
+    document.getElementById("vp-close").addEventListener("click", closePanel);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && panelEl && !panelEl.hidden) { closePanel(); }
+    });
+    return panelEl;
+  }
+
+  function closePanel() {
+    if (!panelEl || panelEl.hidden) { return; }
+    panelEl.hidden = true;
+    if (panelVerse) {
+      var row = document.getElementById("v" + panelVerse);
+      if (row) { row.setAttribute("aria-expanded", "false"); row.classList.remove("open"); }
+    }
+    panelVerse = null;
+  }
+
+  function togglePanel(verse) {
+    if (panelEl && !panelEl.hidden && panelVerse === verse) { closePanel(); return; }
+    openPanel(verse);
+  }
+
+  function refText(to) {
+    var b = bySlug[to.book];
+    var name = b ? b.name : to.book;
+    var out = name + " " + to.chapter;
+    if (to.verseStart) {
+      out += ":" + to.verseStart + (to.verseEnd && to.verseEnd !== to.verseStart ? "-" + to.verseEnd : "");
+    }
+    return out;
+  }
+
+  /* the whole index of where the Prayer Book reads each chapter, built once */
+  function readingIndex() {
+    if (!readingIndexPromise) {
+      readingIndexPromise = ST.loadJSON(ST.siteRoot() + "data/liturgical/bcp1928-daily.json")
+        .then(function (daily) { return STLiturgy.readingIndex(daily, ST.parseRef); })
+        .catch(function () { return {}; });
+    }
+    return readingIndexPromise;
+  }
+
+  function panelSection(title) {
+    var s = document.createElement("section");
+    s.className = "vp-section";
+    var h = document.createElement("h4");
+    h.textContent = title;
+    s.appendChild(h);
+    return s;
+  }
+
+  function wordChip(w) {
+    var chip = document.createElement("span");
+    chip.className = "word";
+    chip.title = (w.l || "") + (w.m ? " \u00b7 " + w.m : "") + (w.s ? " \u00b7 " + w.s : "");
+    var g = document.createElement("span");
+    g.className = "g";
+    g.textContent = w.g || w.t || "";
+    chip.appendChild(g);
+    var t = document.createElement("span");
+    t.className = "t";
+    t.textContent = w.t || "";
+    chip.appendChild(t);
+    if (w.e) {
+      var gloss = document.createElement("a");
+      gloss.className = "e";
+      gloss.textContent = w.e;
+      if (/^[A-Za-z][A-Za-z-]*$/.test(w.e)) {
+        gloss.href = ST.siteRoot() + "apps/dictionary/?term=" + encodeURIComponent(w.e);
+        gloss.title = "Look up \"" + w.e + "\" in the dictionaries";
+      }
+      chip.appendChild(gloss);
+    }
+    return chip;
+  }
+
+  function openPanel(verse) {
+    var book = bySlug[state.book];
+    if (!book) { return; }
+    var slug = state.book, chapter = state.chapter;
+    var verseText = (lastChapter[String(verse)] || "");
+    var label = book.name + " " + chapter + ":" + verse;
+
+    ensurePanel();
+    panelEl.hidden = false;
+    panelVerse = verse;
+    var row = document.getElementById("v" + verse);
+    if (row) { row.setAttribute("aria-expanded", "true"); row.classList.add("open"); }
+    document.getElementById("vp-ref").textContent = label;
+    document.getElementById("vp-sub").textContent = "Loading\u2026";
+    var body = document.getElementById("vp-body");
+    body.innerHTML = "";
+
+    if (window.matchMedia && window.matchMedia("(max-width: 900px)").matches &&
+        row && row.scrollIntoView) {
+      row.scrollIntoView({ block: "center" });
+    }
+
+    var root = ST.siteRoot();
+    var translationsP = ST.loadTranslations().then(function (list) {
+      return Promise.all((list || []).map(function (t) {
+        return ST.loadTranslation(slug, t.id).then(function (data) {
+          return { t: t, text: ((data.chapters || {})[String(chapter)] || {})[String(verse)] || null };
+        }).catch(function () { return { t: t, text: null }; });
+      }));
+    });
+    var crossrefP = ST.loadJSON(root + "data/crossref/" + slug + "/" + chapter + ".json")
+      .catch(function () { return { refs: [] }; });
+    var wordsP = ST.loadJSON(root + "data/interlinear/" + slug + "/" + chapter + ".json")
+      .catch(function () { return null; });
+    var readingsP = readingIndex().then(function (index) {
+      return STLiturgy.readingsFor(index, slug, chapter, verse);
+    });
+
+    Promise.all([translationsP, crossrefP, wordsP, readingsP]).then(function (loaded) {
+      if (panelVerse !== verse) { return; }            /* the reader moved on */
+      var versions = loaded[0];
+      var refs = ((loaded[1] || {}).refs || [])
+        .filter(function (r) { return r.from === verse; })
+        .sort(function (a, b) { return b.votes - a.votes; })
+        .slice(0, 12);
+      var interlinear = loaded[2];
+      var readings = loaded[3];
+
+      document.getElementById("vp-sub").textContent =
+        ST.translationSub(translationById(state.tr)) + " \u00b7 " + book.name + " " + chapter;
+
+      /* the same verse in each translation */
+      var versionsSection = panelSection("The same verse, three translations");
+      versions.forEach(function (v) {
+        if (!v.text) { return; }
+        var item = document.createElement("div");
+        item.className = "vp-version";
+        var who = document.createElement("div");
+        who.className = "who";
+        who.textContent = v.t.name + (v.t.id === state.tr ? " \u00b7 reading now" : "");
+        item.appendChild(who);
+        var text = document.createElement("div");
+        text.className = "what serif";
+        text.textContent = v.text;
+        item.appendChild(text);
+        versionsSection.appendChild(item);
+      });
+      body.appendChild(versionsSection);
+
+      /* the cross-references the church has drawn to this verse */
+      if (refs.length) {
+        var xSection = panelSection("Cross-references");
+        var list = document.createElement("ul");
+        list.className = "vp-xrefs";
+        refs.forEach(function (r) {
+          var text = refText(r.to);
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.href = root + "apps/matrix/?ref=" + encodeURIComponent(text);
+          a.textContent = text;
+          li.appendChild(a);
+          var votes = document.createElement("span");
+          votes.className = "votes";
+          votes.textContent = r.votes + (r.votes === 1 ? " vote" : " votes");
+          li.appendChild(votes);
+          var read = document.createElement("a");
+          read.className = "go";
+          read.href = root + "apps/bible/?ref=" + encodeURIComponent(text);
+          read.textContent = "read\u2009\u2192";
+          li.appendChild(read);
+          list.appendChild(li);
+        });
+        xSection.appendChild(list);
+        body.appendChild(xSection);
+      }
+
+      /* the words behind it, where the site has them */
+      var words = interlinear && interlinear.verses ? interlinear.verses[String(verse)] : null;
+      if (words && words.length) {
+        var wSection = panelSection("The words behind it");
+        var wrap = document.createElement("div");
+        wrap.className = "vp-words";
+        words.forEach(function (w) { wrap.appendChild(wordChip(w)); });
+        wSection.appendChild(wrap);
+        wSection.appendChild(ST.el("p", { class: "muted small", style: "margin:6px 0 0",
+          text: "Greek from OpenGNT; hover a word for its lemma and parsing." }));
+        body.appendChild(wSection);
+      }
+
+      /* where the Prayer Book reads it */
+      if (readings.length) {
+        var rSection = panelSection("Read in the Prayer Book (1928)");
+        var rList = document.createElement("ul");
+        rList.className = "vp-readings";
+        readings.slice(0, 8).forEach(function (h) {
+          var li = document.createElement("li");
+          var where = h.where;
+          var fixed = /^(.*) \((\d\d)-(\d\d)\)$/.exec(where);
+          var movable = /^(.*) \(Easter (\u2212|\+)(\d+)\)$/.exec(where);
+          if (fixed || movable) {
+            var year = new Date().getFullYear();
+            var iso;
+            if (fixed) {
+              iso = year + "-" + fixed[2] + "-" + fixed[3];
+            } else {
+              var sign = movable[2] === "\u2212" ? -1 : 1;
+              var d = STLiturgy.easter(year);
+              d.setDate(d.getDate() + sign * Number(movable[3]));
+              iso = STLiturgy.iso(d);
+            }
+            var a = document.createElement("a");
+            a.href = root + "apps/calendar/?date=" + iso;
+            a.textContent = fixed ? ST.titleCase(fixed[1]) : movable[1];
+            li.appendChild(a);
+            li.appendChild(document.createTextNode(" \u00b7 " + ST.titleCase(h.slot) +
+              " " + h.kind + " \u00b7 " + iso));
+          } else {
+            li.appendChild(document.createTextNode(ST.titleCase(where) + " \u00b7 " +
+              ST.titleCase(h.slot) + " " + h.kind));
+          }
+          rList.appendChild(li);
+        });
+        rSection.appendChild(rList);
+        body.appendChild(rSection);
+      }
+
+      /* what to do with it next */
+      var actions = document.createElement("div");
+      actions.className = "vp-actions";
+      var study = document.createElement("a");
+      study.className = "btn secondary";
+      study.href = root + "apps/study/?ref=" + encodeURIComponent(label);
+      study.textContent = "Study this passage \u2192";
+      actions.appendChild(study);
+      var memorize = document.createElement("button");
+      memorize.type = "button";
+      memorize.className = "ghost";
+      memorize.textContent = "Memorize";
+      memorize.addEventListener("click", function () {
+        memorizeVerse(label, verseText, state.tr);
+      });
+      actions.appendChild(memorize);
+      var copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "ghost";
+      copy.textContent = "Copy";
+      copy.addEventListener("click", function () {
+        ST.copyText(verseText + " (" + label + ", " + state.tr + ")");
+      });
+      actions.appendChild(copy);
+      body.appendChild(actions);
+    }).catch(function () {
+      body.innerHTML = "";
+      body.appendChild(ST.el("p", { class: "notice error", text: "Could not load the verse's material." }));
+    });
+  }
+
+  /* The memory deck's shape is set by apps/memory/app.js; a card is the same
+     fields, so a verse memorized here turns up in the review queue there. */
+  function memorizeVerse(ref, text, translation) {
+    if (!text) { ST.toast("No text to memorize", true); return; }
+    var deck = ST.store("memory-deck.v1") || [];
+    var already = deck.some(function (c) { return c.ref === ref; });
+    if (already) { ST.toast(ref + " is already in your memory deck"); return; }
+    deck.push({
+      id: "v" + Date.now() + Math.random().toString(36).slice(2, 6),
+      ref: ref, text: text, translation: translation,
+      reps: 0, ease: 2.5, interval: 0, due: Date.now(), added: Date.now()
+    });
+    ST.store("memory-deck.v1", deck);
+    ST.toast(ref + " added to your memory deck");
+  }
 
   function translationById(id) {
     for (var i = 0; i < translations.length; i++) {
@@ -180,8 +479,13 @@
     } else {
       nums.forEach(function (n) {
         var row = document.createElement("div");
-        row.className = "verse-block";
+        row.className = "verse-block tappable";
         row.id = "v" + n;
+        /* every verse opens the panel: tap it, or press Enter or Space */
+        row.setAttribute("role", "button");
+        row.setAttribute("tabindex", "0");
+        row.setAttribute("aria-expanded", "false");
+        row.setAttribute("aria-label", book.name + " " + state.chapter + ":" + n + " \u2014 study this verse");
         var num = document.createElement("span");
         num.className = "num";
         num.textContent = String(n);
@@ -189,9 +493,14 @@
         p.textContent = chapterData[String(n)];
         row.appendChild(num);
         row.appendChild(p);
+        row.addEventListener("click", function () { togglePanel(n); });
+        row.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePanel(n); }
+        });
         card.appendChild(row);
       });
     }
+    lastChapter = chapterData;
 
     els.reader.innerHTML = "";
     els.reader.appendChild(card);
@@ -214,6 +523,11 @@
     document.title = book.name + " " + state.chapter + " \u2014 Read the Bible";
     syncUrl();
     scrollToVerse();
+    if (state.pendingPanel) {
+      var verse = state.pendingPanel;
+      state.pendingPanel = null;
+      openPanel(verse);
+    }
   }
 
   function load() {
@@ -297,6 +611,9 @@
         start.chapter = parseInt(ST.qs("chapter"), 10) || 1;
         start.verse = parseInt(ST.qs("verse"), 10) || null;
       }
+
+      var qpanel = parseInt(ST.qs("panel"), 10);
+      if (qpanel > 0) { start.verse = qpanel; state.pendingPanel = qpanel; }
 
       var qtr = ST.qs("tr");
       if (qtr && translationById(qtr)) state.tr = qtr;

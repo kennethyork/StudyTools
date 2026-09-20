@@ -193,6 +193,96 @@
     ];
   }
 
+  /* ---------- readings, as the Prayer Book prints them ---------- */
+
+  /* One printed reading — "Isa. 61:1-3,10-11", "1 Kings 8:22-30,54-63" or a
+     psalm's bare number — as the book, chapter and first verse range it names.
+     The Prayer Book prints alternatives after a comma and whole chapters
+     without verses; the first range is taken, which is what such a reference
+     means. `resolve` turns "Isa 61" into the site's book slug (the caller
+     passes ST.parseRef, so the aliases live in one place). */
+  function parseReading(ref, resolve) {
+    var text = String(ref && ref.ref ? ref.ref : ref || "").trim()
+      .replace(/^\*/, "").replace(/[\u2013\u2014]/g, "-");
+    if (!text) { return null; }
+
+    var psalm = /^(\d+)(?::(\d+)(?:-(\d+))?)?$/.exec(text);
+    if (psalm) {
+      return {
+        slug: "psalms", chapter: Number(psalm[1]),
+        from: psalm[2] ? Number(psalm[2]) : null,
+        to: psalm[3] ? Number(psalm[3]) : (psalm[2] ? Number(psalm[2]) : null)
+      };
+    }
+
+    if (typeof resolve !== "function") { return null; }
+    var m = /^(.+?)\s+(\d+)(?::(\d+)(?:-(\d+))?)?/.exec(text);
+    if (!m) { return null; }
+    var parsed = resolve(m[1] + " " + m[2]);
+    if (!parsed) { return null; }
+    return {
+      slug: parsed.book, chapter: parsed.chapter,
+      from: m[3] ? Number(m[3]) : null,
+      to: m[4] ? Number(m[4]) : (m[3] ? Number(m[3]) : null)
+    };
+  }
+
+  /* Where every reading in the 1928 tables falls, so a verse can be looked up:
+     "John 1:1 is the second lesson on Trinity Sunday". Keyed by chapter, then
+     walked verse by verse.
+
+     The daily tables already carry the Sunday of each week, so the Sunday
+     Lectionary file adds nothing here and would only list everything twice. */
+  function readingIndex(daily, resolve) {
+    var index = {};
+
+    function add(reading, where, slot, kind) {
+      var r = parseReading(reading, resolve);
+      if (!r) { return; }
+      var key = r.slug + " " + r.chapter;
+      (index[key] = index[key] || []).push({
+        where: where, slot: slot, kind: kind, from: r.from, to: r.to
+      });
+    }
+
+    function addOffice(office, where, slot) {
+      if (!office) { return; }
+      (office.psalms || []).forEach(function (p) { add(p, where, slot, "psalm"); });
+      (office.first || []).forEach(function (l) { add(l, where, slot, "first lesson"); });
+      (office.second || []).forEach(function (l) { add(l, where, slot, "second lesson"); });
+    }
+
+    ((daily && daily.weeks) || []).forEach(function (w) {
+      Object.keys(w.days || {}).forEach(function (dow) {
+        ["morning", "evening"].forEach(function (slot) {
+          addOffice((w.days[dow] || {})[slot], w.label + " \u00b7 " + dow, slot);
+        });
+      });
+    });
+    ((daily && daily.fixed) || []).forEach(function (f) {
+      ["morning", "evening"].forEach(function (slot) {
+        addOffice(f[slot], (f.name || "Holy day") + " (" + f.date + ")", slot);
+      });
+    });
+    ((daily && daily.movable) || []).forEach(function (m) {
+      ["morning", "evening"].forEach(function (slot) {
+        addOffice(m[slot], m.name + " (Easter " + (m.offset >= 0 ? "+" : "\u2212") + Math.abs(m.offset) + ")", slot);
+      });
+    });
+    return index;
+  }
+
+  /* The places a verse is read, from a readingIndex. */
+  function readingsFor(index, slug, chapter, verse) {
+    var hits = (index || {})[slug + " " + chapter] || [];
+    return hits.filter(function (h) {
+      if (h.from == null) { return true; }                 /* a whole chapter */
+      if (verse == null) { return true; }
+      var to = h.to == null ? h.from : h.to;
+      return verse >= h.from && verse <= to;
+    });
+  }
+
   /* ---------- the daily office ---------- */
 
   /* Index a loaded bcp1928-daily.json for lookup. */
@@ -333,7 +423,10 @@
     movableFeasts: movableFeasts,
     indexData: indexData,
     feastOn: feastOn,
-    officeFor: officeFor
+    officeFor: officeFor,
+    parseReading: parseReading,
+    readingIndex: readingIndex,
+    readingsFor: readingsFor
   };
 
   if (typeof module !== "undefined" && module.exports) { module.exports = api; }

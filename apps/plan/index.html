@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Plan — StudyTools</title>
+<meta name="description" content="Read the whole Bible, the New Testament, or the Old Testament on a plan worked out from the books this site carries. Tick a day when you have read it; your place is kept in this browser.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .plan-bar { display: grid; grid-template-columns: minmax(0, 2fr) minmax(140px, 1fr) minmax(0, 1.2fr) auto; gap: 10px; align-items: end; }
+  @media (max-width: 760px) { .plan-bar { grid-template-columns: 1fr 1fr; } }
+  .bar { height: 9px; border-radius: 99px; background: var(--bg-alt); overflow: hidden; margin-top: 8px; }
+  .bar span { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s; }
+  .plan-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 18px; align-items: start; }
+  @media (max-width: 940px) { .plan-layout { grid-template-columns: 1fr; } }
+  #days { max-height: 74vh; overflow-y: auto; padding-right: 6px; }
+  @media (max-width: 940px) { #days { max-height: none; } }
+  .month-head { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); margin: 14px 0 6px; position: sticky; top: 0; background: var(--card); padding: 4px 0; }
+  .month-head:first-child { margin-top: 0; }
+  .plan-day { display: grid; grid-template-columns: auto auto 1fr; gap: 4px 9px; align-items: baseline; border-radius: 8px; }
+  .plan-day:hover { background: var(--bg-alt); }
+  .plan-day.today .d-num { color: var(--accent); font-weight: 700; }
+  .plan-day.selected { background: var(--accent-soft); }
+  .tick { background: transparent; border: 1px solid var(--line); border-radius: 50%; width: 22px; height: 22px; padding: 0; line-height: 1; font-size: .72rem; color: var(--ink-faint); cursor: pointer; align-self: center; }
+  .tick[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .day-open { background: transparent; border: 0; text-align: left; padding: 6px 4px; cursor: pointer; color: inherit; font: inherit; display: grid; grid-template-columns: 3.1em 6.5em 1fr; gap: 8px; align-items: baseline; width: 100%; }
+  .day-open .d-num { font-family: var(--mono); font-size: .74rem; color: var(--ink-faint); }
+  .day-open .d-date { font-size: .78rem; color: var(--ink-faint); white-space: nowrap; }
+  .day-open .d-portion { font-family: var(--serif); font-size: .95rem; }
+  .plan-day.done .d-portion { color: var(--ink-faint); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .day-title { font-family: var(--serif); font-size: 1.3rem; margin: 0 0 2px; }
+  .chapter { margin-top: 18px; }
+  .chapter h4 { font-family: var(--serif); font-size: 1.05rem; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+  .verse-block { display: grid; grid-template-columns: 2.6em 1fr; gap: 2px 10px; margin-bottom: 9px; }
+  .verse-block .num { font-family: var(--mono); font-size: .72rem; color: var(--accent); padding-top: .45em; }
+  .verse-block p { margin: 0; font-family: var(--serif); font-size: 1.04rem; line-height: 1.62; }
+  @media print {
+    .no-print, header.page p, #days, footer.site, .day-actions { display: none !important; }
+    .plan-layout { grid-template-columns: 1fr; }
+    .card { box-shadow: none; border: 0; padding: 0; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="plan">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Reading Plan</h1>
+    <p class="lede">The whole Bible in a year, the New Testament in ninety days, or the Old Testament in half a year &mdash; worked out from the books this site carries rather than copied from a table, so no chapter is missed and no day is empty. Tick a day when you have read it; your place is kept in this browser and nothing is sent anywhere.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="plan-bar">
+      <div>
+        <label class="field" for="plan">Plan</label>
+        <select id="plan"></select>
+      </div>
+      <div>
+        <label class="field" for="start">Started on</label>
+        <input type="date" id="start">
+      </div>
+      <div>
+        <label class="field" for="tr">Read in</label>
+        <select id="tr"></select>
+      </div>
+      <button class="ghost" id="reset" type="button">Start again</button>
+    </div>
+    <div style="margin-top:14px">
+      <div class="row" style="justify-content:space-between">
+        <strong id="progress-head" class="serif" style="font-size:1.05rem">&mdash;</strong>
+        <span class="muted small" id="progress-sub"></span>
+      </div>
+      <div class="bar"><span id="progress-fill"></span></div>
+    </div>
+  </section>
+
+  <div class="plan-layout" style="margin-top:18px">
+    <section class="card">
+      <h2 class="serif" style="margin:0 0 10px;font-size:1.05rem">The plan</h2>
+      <div id="days"></div>
+    </section>
+    <section class="card" id="day-card"></section>
+  </div>
+
+  <footer class="site">
+    <p>The plan is derived from the chapter counts in the site's own book list, so it always matches the text you can read here. Progress lives in this browser only, under <code>studytools.reading-plan.v1</code>.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="../../js/plan.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

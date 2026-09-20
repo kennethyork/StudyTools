@@ -26,6 +26,7 @@ never leave the device.
 | **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/RVM/JPSM text for a reference automatically. |
 | **Blog Idea Generator** (`apps/blog/`) | Pick a scope and a writing angle and get a passage, a working title, and an outline. Seven angles (devotional, Bible study, personal story, practical list, honest questions, two passages, church season), saveable and exportable, with one-click send to the sermon notebook. |
 | **Family Devotional Randomizer** (`apps/devotional/`) | Spin a canvas topic wheel and get a public-domain passage, three discussion questions, and a short prayer. Copy the whole devotional to share. |
+| **Reading Plan** (`apps/plan/`) | The whole Bible in a year, the New Testament in 90 days, or the Old Testament in half a year, worked out from the chapter counts in `data/bible/books.json` rather than stored as a table. Read the day's portion on the page or open it in the reader, tick days off, and see days read, chapters read, streak and how far behind you are. Today's portion also appears on the front page. |
 | **Church Calendar Tracker** (`apps/calendar/`) | Liturgical year (Advent, Christmas, Epiphany, Lent, Easter, Whitsunday, the season after Trinity) with the Book of Common Prayer (1928) psalms and lessons for each day's morning and evening office, the Apostles'/Nicene/Athanasian creeds, the Heidelberg Catechism, and the Westminster Shorter Catechism. |
 
 Every page has a light/dark theme toggle in the header. The choice follows the
@@ -42,6 +43,7 @@ css/base.css             shared design system for the apps (light and dark theme
 js/theme.js              pre-paint theme chooser (no flash of wrong theme)
 js/common.js             shared helpers (ref parsing, data loading, storage, toast, header)
 js/liturgy.js            the Christian year: Easter, Advent, the 1928 cycle, the daily office
+js/plan.js               reading plans, worked out from the book list
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
@@ -98,6 +100,8 @@ python3 scripts/modernize.py JPS JPSM
 python3 scripts/build-compare.py      # freezes the compared passages (Qur'an, Tanakh, Book of Mormon)
 python3 scripts/build-lectionary.py   # the BCP 1928 Sunday and daily office tables (public domain)
 node scripts/check-liturgical.js      # re-checks the 1928 cycle, Easter and the feast days (needs node)
+node scripts/check-refs.js            # re-checks reference parsing and the verse-to-office lookup
+node scripts/check-plan.js            # re-checks the reading plans against the book list
 python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
@@ -141,6 +145,14 @@ The verse text in `data/devotional/topics.json` is verified by
 `scripts/verify-devotional.py` against the bundled KJV data so the app cannot
 display a misquoted verse.
 
+`scripts/check-refs.js` and `scripts/check-plan.js` cover the other two pieces
+of arithmetic in the site that a reader would notice getting wrong: the
+references the Prayer Book prints ("Isa. 61:1-3,10-11" is Isaiah 61, verses 1 to
+3, printed with an alternative), where each verse falls in those tables (so
+tapping a verse in the reader can say which office reads it), and the reading
+plans (every chapter once, in order, no day empty, and days that differ by at
+most one chapter).
+
 `scripts/check-liturgical.js` does the same job for the calendar: it walks every
 year from 1900 to 2100 and checks that each Sunday is named as the Prayer Book
 names it, that the names never run backwards through the year, and that every
@@ -153,7 +165,11 @@ counting weeks from Advent runs ahead of the names in a year that uses fewer.
 
 - No analytics, cookies, accounts, or network calls beyond loading the local
   JSON data files.
-- Prayer journal entries, memory cards, reading progress, and vocabulary
+- Prayer journal entries, memory cards, reading-plan ticks, and vocabulary
   mastery are stored in browser `localStorage` under the `studytools.*` prefix.
+  Reading-plan ticks are kept by date (`studytools.reading-plan.v1`), so moving
+  a plan's start date moves which day each tick answers for, and a verse
+  memorized from the reader's verse panel lands in the same deck `apps/memory/`
+  reviews.
 - Exporting to PDF uses the browser's print dialog, which keeps the project
   dependency-free.
