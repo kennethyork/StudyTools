@@ -1,6 +1,6 @@
 /* Study a Passage: one reference, everything the site holds on it - the text in
    three translations, cross-references, the ground it shares with the other
-   traditions, and the Greek word by word. Built for preparing to teach.
+   traditions, and the original text word by word. Built for preparing to teach.
    Depends on js/common.js. */
 (function () {
   "use strict";
@@ -77,7 +77,6 @@
     var tools = ST.el("div", { class: "row no-print", style: "margin-bottom:10px" });
     tools.appendChild(ST.el("a", { class: "btn secondary", href: ROOT + "apps/bible/?book=" + encodeURIComponent(book.slug) + "&chapter=" + ch, text: "Open in the reader \u2192" }));
     tools.appendChild(ST.el("a", { class: "btn secondary", href: ROOT + "apps/matrix/?ref=" + encodeURIComponent(label), text: "Open in the Verse Matrix \u2192" }));
-    tools.appendChild(ST.el("a", { class: "btn secondary", href: ROOT + "apps/lectern/?ref=" + encodeURIComponent(label), text: "Read aloud \u2192" }));
     var printBtn = ST.el("button", { class: "ghost", text: "Print this page" });
     printBtn.addEventListener("click", function () { window.print(); });
     tools.appendChild(printBtn);
@@ -181,15 +180,18 @@
     });
     els.out.appendChild(par);
 
-    /* 5. the Greek, for the New Testament */
-    if (book.testament === "NT") {
-      var gk = block("The Greek, word by word", "Accented form, transliteration, morphology, Strong's number and a gloss.");
+    /* 5. the original text, word by word: Greek New Testament, Hebrew Old
+       Testament — whichever the site has tagged for this book */
+    if (book.testament === "NT" || book.testament === "OT") {
+      var isHebrew = book.testament === "OT";
+      var gk = block(isHebrew ? "The Hebrew, word by word" : "The Greek, word by word",
+        "Text, transliteration, morphology, Strong's number and a gloss.");
       var gbody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
       gk.appendChild(gbody);
       q("il:" + book.slug + ":" + ch, "data/interlinear/" + book.slug + "/" + ch + ".json").then(function (d) {
         gbody.remove();
         if (!d || !d.verses) {
-          gk.appendChild(ST.el("p", { class: "muted small", text: "No interlinear data for this chapter." }));
+          gk.appendChild(ST.el("p", { class: "muted small", text: "No word-by-word text for this chapter." }));
           return;
         }
         var nums = Object.keys(d.verses).map(Number).sort(function (a, b) { return a - b; });

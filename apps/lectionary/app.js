@@ -1,7 +1,7 @@
 /* Sunday Lectionary: the psalms and lessons appointed for every Sunday of the
    Christian year in the Book of Common Prayer (1928), which is in the public
-   domain in the United States. Each reading opens in Study a Passage, or goes
-   to the lectern to be read aloud.
+   domain in the United States. Each reading opens in Study a Passage to
+   prepare from.
 
    The date arithmetic lives in js/liturgy.js, shared with the Church Calendar
    app. Depends on js/common.js. */
@@ -55,13 +55,6 @@
     a.textContent = r.ref;
     a.href = ROOT + "apps/study/?ref=" + encodeURIComponent(r.link || r.ref);
     span.appendChild(a);
-    var read = document.createElement("a");
-    read.textContent = "\u25b6";
-    read.title = "Read aloud in the lectern";
-    read.href = ROOT + "apps/lectern/?ref=" + encodeURIComponent(r.link || r.ref);
-    read.style.marginLeft = "5px";
-    read.style.textDecoration = "none";
-    span.appendChild(read);
     return span;
   }
 

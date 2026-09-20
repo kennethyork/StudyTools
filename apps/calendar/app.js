@@ -136,18 +136,14 @@
 
   /* ---------- the day's office ---------- */
 
-  /* Each reading opens in Study a Passage, or goes to the lectern to be read
-     aloud — the same pairing the Sunday Lectionary uses. */
+  /* Every reading opens in Study a Passage, the same way the Sunday Lectionary
+     does it. */
   function reading(kind, r) {
     var span = ST.el("span", { class: "reading" });
     if (kind) { span.appendChild(ST.el("span", { class: "kind", text: kind })); }
-    var a = ST.el("a", { href: ST.siteRoot() + "apps/study/?ref=" + encodeURIComponent(r.link || r.ref), text: r.ref });
-    span.appendChild(a);
-    var aloud = ST.el("a", { href: ST.siteRoot() + "apps/lectern/?ref=" + encodeURIComponent(r.link || r.ref), text: "\u25b6" });
-    aloud.title = "Read aloud in the lectern";
-    aloud.style.marginLeft = "5px";
-    aloud.style.textDecoration = "none";
-    span.appendChild(aloud);
+    span.appendChild(ST.el("a", {
+      href: ST.siteRoot() + "apps/study/?ref=" + encodeURIComponent(r.link || r.ref), text: r.ref
+    }));
     return span;
   }
 
