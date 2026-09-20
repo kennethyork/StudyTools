@@ -98,16 +98,62 @@
     "references above it.";
 
   /* navigator.gpu can exist without a usable adapter, which is the difference
-     between "this browser knows about WebGPU" and "this machine can run it". */
+     between "this browser knows about WebGPU" and "this machine can run it".
+     Those two are told apart here, because the advice for each is different and
+     the wrong one sends a reader to fix the wrong thing: on Linux the usual
+     cause is that Vulkan is not available to the browser, not that the browser
+     is old. */
   function hasWebGPU() {
     return typeof navigator !== "undefined" && !!navigator.gpu && !!navigator.gpu.requestAdapter;
   }
 
-  function detect() {
-    if (!hasWebGPU()) { return Promise.resolve(false); }
+  function diagnose() {
+    var out = { ok: false, reason: null, detail: "", adapter: null,
+                memory: (typeof navigator !== "undefined" && navigator.deviceMemory) || null };
+    if (typeof navigator === "undefined" || !navigator.gpu) {
+      out.reason = "no-webgpu";
+      out.detail = "This browser does not expose WebGPU at all.";
+      return Promise.resolve(out);
+    }
+    if (!navigator.gpu.requestAdapter) {
+      out.reason = "no-webgpu";
+      out.detail = "This browser's WebGPU is present but incomplete: requestAdapter is missing.";
+      return Promise.resolve(out);
+    }
     return navigator.gpu.requestAdapter().then(function (adapter) {
-      return !!adapter;
-    }).catch(function () { return false; });
+      if (!adapter) {
+        out.reason = "no-adapter";
+        out.detail = "WebGPU is present in this browser, but it reports no usable GPU adapter.";
+        return out;
+      }
+      var info = null;
+      try { info = adapter.info || (adapter.requestAdapterInfo && null); } catch (e) { info = null; }
+      out.ok = true;
+      out.adapter = info ? { vendor: info.vendor || "", architecture: info.architecture || "",
+                             description: info.description || "" } : null;
+      return out;
+    }).catch(function (err) {
+      out.reason = "no-adapter";
+      out.detail = "Asking for a GPU adapter failed: " + (err && err.message ? err.message : "unknown error");
+      return out;
+    });
+  }
+
+  /* kept for callers that only want a yes or no */
+  function detect() {
+    return diagnose().then(function (d) { return d.ok; });
+  }
+
+  /* What to tell a reader whose machine cannot run the model, by cause. */
+  function advice(reason) {
+    if (reason === "no-adapter") {
+      return "The browser has WebGPU but no usable GPU adapter behind it. On Linux that is usually " +
+        "Vulkan not being available to the browser (installing mesa-vulkan-drivers fixes it for most " +
+        "machines), or the GPU being blocklisted. Open chrome://gpu and look for \"WebGPU: Hardware " +
+        "accelerated\"; if it says software only or disabled, Chrome may also accept " +
+        "--enable-unsafe-webgpu. Nothing was downloaded.";
+    }
+    return "Nothing was downloaded, and everything else on this page works without the model.";
   }
 
   function modelById(id) {
@@ -266,6 +312,8 @@
     CAVEAT: CAVEAT,
     WEBLLM_URL: WEBLLM_URL,
     hasWebGPU: hasWebGPU,
+    diagnose: diagnose,
+    advice: advice,
     detect: detect,
     modelById: modelById,
     pickModel: pickModel,

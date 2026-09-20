@@ -719,16 +719,28 @@
     var asking = false;
     var start = null;
 
-    function cannotRun() {
+    /* Two ways this fails, and they need different advice: a browser without
+       WebGPU, and a browser with WebGPU that has no usable adapter behind it —
+       the second being the usual Linux case, and the one that used to be
+       reported as the first. */
+    function cannotRun(diag) {
       gate.remove();
       section.appendChild(ST.el("p", { class: "notice", text:
-        "This machine has no WebGPU, which the model needs to run. Chrome, Edge, Safari 26 and Firefox 141 " +
-        "on Windows have it; Chrome on Linux is still arriving. " }));
+        diag.reason === "no-adapter"
+          ? "This machine cannot run the model: WebGPU is here, but no GPU adapter is behind it."
+          : "This machine cannot run the model: this browser has no WebGPU." }));
+      section.appendChild(ST.el("p", { class: "muted small", text: STAsk.advice(diag.reason) }));
       section.appendChild(ST.el("p", { class: "muted small" }, [
-        document.createTextNode("You can check your browser at "),
+        document.createTextNode("Chrome and Edge 121+, Safari 26 and Firefox 141+ have WebGPU. You can " +
+          "check this browser at "),
         ST.el("a", { href: "https://webgpureport.org/", rel: "noopener", text: "webgpureport.org" }),
-        document.createTextNode(", and everything else on this page works without it.")
+        document.createTextNode(", and everything else on this page works without the model.")
       ]));
+      section.appendChild(ST.el("p", { class: "muted small", style: "margin-top:8px", text:
+        "What this machine reports: " + diag.detail +
+        (diag.adapter ? " Adapter: " + [diag.adapter.vendor, diag.adapter.architecture,
+          diag.adapter.description].filter(Boolean).join(" ") : "") +
+        (diag.memory ? " Device memory: about " + diag.memory + " GB." : "") }));
     }
 
     function canRun() {
@@ -743,8 +755,9 @@
       if (stub) { turnOn(); }
     }
 
-    (stub ? Promise.resolve(true) : STAsk.detect()).then(function (ok) {
-      if (ok) { canRun(); } else { cannotRun(); }
+    (stub ? Promise.resolve({ ok: true, reason: null, detail: "the stub engine" })
+      : STAsk.diagnose()).then(function (diag) {
+      if (diag.ok) { canRun(); } else { cannotRun(diag); }
     });
 
     function turnOn() {
@@ -770,7 +783,8 @@
         status.textContent = "";
         section.appendChild(ST.el("p", { class: "notice error", text:
           "The model could not start: " + (err && err.message ? err.message : "unknown error") +
-          ". Your browser may not have WebGPU, or the download may have been blocked." }));
+          ". The model files come from a public CDN, so a blocker, an offline network or a full disk " +
+          "would each do this; the rest of the page works without it." }));
       });
     }
 

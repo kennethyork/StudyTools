@@ -9,8 +9,11 @@
    itself — that is done on a machine with WebGPU. */
 "use strict";
 
+const fs = require("fs");
 const path = require("path");
+const ROOT = path.join(__dirname, "..");
 const A = require(path.join(__dirname, "..", "js", "ask.js"));
+const readerSource = fs.readFileSync(path.join(ROOT, "apps", "bible", "app.js"), "utf8");
 
 const failures = [];
 function check(name, condition, detail) {
@@ -165,6 +168,31 @@ stubbed.then(function (whole) {
     A.ask(null, [], null).then(function () { return false; }, function () { return true; }) instanceof Promise);
   return A.ask(null, [], null).then(function () { check("no engine should not resolve", false); },
     function (err) { check("no engine gives a useful error", /no model is loaded/i.test(err.message), err.message); });
+}).then(function () {
+  /* ---------- why the model cannot run, and what is said about it ---------- */
+
+  /* "No WebGPU" and "WebGPU but no adapter" are different faults with different
+     fixes. The second was reported as the first, which sends a Linux reader to
+     update their browser when their driver is what is missing. */
+  return A.diagnose().then(function (d) {
+    check("with no navigator in the process, the reason is that WebGPU is absent",
+      d.reason === "no-webgpu", JSON.stringify(d));
+    check("the diagnosis says what the machine reported, for a reader to quote",
+      typeof d.detail === "string" && d.detail.length > 20, d.detail);
+    check("the advice for a missing adapter names the likely cause and where to look",
+      /Vulkan/.test(A.advice("no-adapter")) && /chrome:\/\/gpu/.test(A.advice("no-adapter")),
+      A.advice("no-adapter").slice(0, 70));
+    check("the advice for a browser without WebGPU does not mention drivers",
+      !/Vulkan/.test(A.advice("no-webgpu")), A.advice("no-webgpu").slice(0, 70));
+    check("the reader tells the two apart in what it prints",
+      /no GPU adapter is behind it/.test(readerSource) &&
+      /this browser has no WebGPU/.test(readerSource));
+    check("the reader reports the machine's own words, so it can be quoted back",
+      /What this machine reports:/.test(readerSource));
+    check("every offered model is one the library names",
+      A.MODELS.every(function (m) { return /-MLC$/.test(m.id) && m.size && m.label; }),
+      A.MODELS.map(function (m) { return m.id; }).join(", "));
+  });
 }).then(function () {
   if (failures.length) {
     failures.forEach(function (f) { console.log("FAIL: " + f); });
