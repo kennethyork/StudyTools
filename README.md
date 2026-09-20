@@ -243,12 +243,19 @@ and his introduction to each of those books is shown as *about this book* at the
 top of the panel, because `data/about/` holds what a source wrote before the
 verses rather than on them.
 
-Six of the twenty books still have nothing, and the panel says which and why:
-1 and 2 Esdras, the Prayer of Manasses, Psalm 151 and 3 and 4 Maccabees are
-outside Haydock's range, and R. H. Charles, who introduced them in 1913, exists
+Six of the twenty are outside Haydock's range, and for four of them a *dictionary*
+this site already bundles has something to say: Hastings (1909) on the books of
+Esdras and on the books of the Maccabees. Those articles are shown as *about this
+book*, under a line that says what they are — an article on the book, not a
+commentary on its verses — because naming the shelf a text came from is the whole
+point. `check-commentary.js` requires that line: an article that does not say it
+is not commentary fails the build.
+
+Two books still have nothing at all — the Prayer of Manasses and Psalm 151 — and
+the panel says which they are and why: Charles, who introduced both in 1913, exists
 only as page images at CCEL, scan transclusion at Wikisource, and unproofread OCR
 at the Internet Archive. Quoting that beside Scripture is what this site's checks
-exist to prevent, so those six say so plainly instead.
+exist to prevent, so those two say so plainly instead.
 
 `scripts/check-liturgical.js` does the same job for the calendar: it walks every
 year from 1900 to 2100 and checks that each Sunday is named as the Prayer Book

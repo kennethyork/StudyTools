@@ -98,7 +98,7 @@
     sirach: "sirach", sir: "sirach", ecclesiasticus: "sirach", ecclus: "sirach",
     baruch: "baruch", bar: "baruch",
     "epistleofjeremiah": "epistle-of-jeremiah", "letterofjeremiah": "epistle-of-jeremiah", letjer: "epistle-of-jeremiah",
-    "prayerofazariah": "prayer-of-azariah", "songofthethree": "prayer-of-azariah",
+    "prayerofazariah": "prayer-of-azariah",
     "songofthethreeholychildren": "prayer-of-azariah", "azariah": "prayer-of-azariah",
     susanna: "susanna", sus: "susanna",
     "belandthedragon": "bel-and-the-dragon", bel: "bel-and-the-dragon",
@@ -107,7 +107,20 @@
     "1maccabees": "i-maccabees", "1macc": "i-maccabees", "imaccabees": "i-maccabees", "i maccabees": "i-maccabees",
     "2maccabees": "ii-maccabees", "2macc": "ii-maccabees", "iimaccabees": "ii-maccabees", "ii maccabees": "ii-maccabees",
     maccabees: "i-maccabees", macc: "i-maccabees",
-    "additionalpsalm": "additional-psalm", "psalm151": "additional-psalm",
+    "additionalpsalm": "additional-psalm",
+    "psalm151": "psalm-151", ps151: "psalm-151", psalmcli: "psalm-151",
+    "3maccabees": "iii-maccabees", "3macc": "iii-maccabees",
+    "iiimaccabees": "iii-maccabees", "iii maccabees": "iii-maccabees",
+    "4maccabees": "iv-maccabees", "4macc": "iv-maccabees",
+    "ivmaccabees": "iv-maccabees", "iv maccabees": "iv-maccabees",
+    // names that begin with "The" reach the table with it still attached, because
+    // normalizing removes punctuation and case but not that word
+    "therestofesther": "additions-to-esther",
+    "theepistleofjeremiah": "epistle-of-jeremiah",
+    "thesongofthethreeholychildren": "prayer-of-azariah",
+    "esthergreek": "esther-greek", greekesther: "esther-greek",
+    "danielgreek": "daniel-greek", greekdaniel: "daniel-greek",
+    "songofthethree": "prayer-of-azariah",
     laodiceans: "laodiceans", "epistleoflaodiceans": "laodiceans",
     // Compact abbreviations used by Nave's and Torrey's topical Bibles
     ge: "genesis", ex: "exodus", le: "leviticus", nu: "numbers", num: "numbers",
@@ -136,7 +149,10 @@
     return BOOK_ALIASES[spaced] || null;
   }
 
-  var REF_RE = /^\s*((?:[1-3]|I{1,3})?\s*[A-Za-z][A-Za-z. ]*?)\s+(\d+)(?::(\d+)(?:\s*[-–]\s*(\d+))?)?\s*$/;
+  /* The numeral in front of a book's name runs to 4, because 4 Maccabees is a
+     book this reader ships: with [1-3] here, "4 Maccabees 1:1" could never be
+     parsed at all. IV as well as fourth, for readers who write it that way. */
+  var REF_RE = /^\s*((?:[1-4]|IV|I{1,3})?\s*[A-Za-z][A-Za-z. ]*?)\s+(\d+)(?::(\d+)(?:\s*[-–]\s*(\d+))?)?\s*$/;
 
   function parseRef(text) {
     var m = String(text || "").trim().match(REF_RE);
@@ -144,9 +160,23 @@
     var book = normalizeBook(m[1]);
     if (!book) return null;
     var chapter = parseInt(m[2], 10);
-    // "Psalm 151" is the additional psalm preserved in the Septuagint.
+    /* "Psalm 151" is the additional psalm preserved in the Septuagint, and a book
+       in its own right here. It used to be sent to additional-psalm, which is a
+       placeholder the Douay-Rheims carries with no text in it — so a reader asking
+       for Psalm 151 was taken to an empty page while the psalm itself, in the
+       World English Bible, went unread. A book whose name ends in a number is
+       matched by name first; the fallback stays for a text that has no psalm 151. */
+    var together = normalizeBook(m[1] + " " + m[2]);
+    if (together && together !== book) {
+      return {
+        book: together,
+        chapter: 1,
+        verseStart: m[3] ? parseInt(m[3], 10) : null,
+        verseEnd: m[4] ? parseInt(m[4], 10) : (m[3] ? parseInt(m[3], 10) : null)
+      };
+    }
     if (book === "psalms" && chapter === 151) {
-      book = "additional-psalm";
+      book = "psalm-151";
       chapter = 1;
     }
     return {

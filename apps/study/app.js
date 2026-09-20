@@ -151,21 +151,49 @@
     var cm = block("Commentary", "Public-domain commentary, verse by verse: Jamieson, Fausset & Brown (1871), John Calvin, and F. B. Meyer. A comment is attached to the verse that opens the passage it explains, and the chapter's introduction comes first.");
     var cbody = ST.el("div", { class: "muted small", text: "Loading\u2026" });
     cm.appendChild(cbody);
-    q("about:" + book.slug, "data/about/" + book.slug + ".json").then(function (a) {
-      /* the introduction to the book, where a source wrote one */
+    /* Both are fetched before either is drawn. Inserting the book's
+       introduction next to the loading line raced the commentary fetch, which
+       removes that line — and a promise cannot insert before an element that is
+       already gone. One render, one order. */
+    Promise.all([
+      q("about:" + book.slug, "data/about/" + book.slug + ".json"),
+      q("cm:" + book.slug + ":" + ch, "data/commentary/" + book.slug + "/" + ch + ".json")
+    ]).then(function (loaded) {
+      var a = loaded[0];
+      var d = loaded[1];
+      cbody.remove();
       if (a && (a.paragraphs || []).length) {
+        /* the introduction to the book, where a source wrote one */
         var aw = ST.el("div", { class: "cm-intro" });
         aw.appendChild(ST.el("div", { class: "cm-who",
           text: (a.source.short || "") + (a.source.year ? " \u00b7 " + a.source.year : "") +
             " \u00b7 about this book" }));
+        /* a dictionary article is not a commentary, and says so */
+        if (a.note) {
+          aw.appendChild(ST.el("p", { class: "muted small", style: "margin:0 0 6px", text: a.note }));
+        }
         a.paragraphs.forEach(function (para) {
           aw.appendChild(ST.el("p", { class: "cm-text", style: "margin:0 0 6px", text: para }));
         });
-        cm.insertBefore(aw, cbody);
+        cm.appendChild(aw);
       }
-    }).catch(function () { /* no introduction for this book */ });
-    q("cm:" + book.slug + ":" + ch, "data/commentary/" + book.slug + "/" + ch + ".json").then(function (d) {
-      cbody.remove();
+      if (!d) {
+        /* No file at all for this book. If an article about the book is above,
+           say only what is missing; otherwise say what does exist, rather than
+           failing inside the render and leaving a blank heading where a reader
+           expected text. */
+        var drewArticle = !!(a && (a.paragraphs || []).length);
+        cm.appendChild(ST.el("p", { class: "muted small", text: drewArticle
+          ? "Nothing verse by verse on this book: the site has no commentary on it, and the "
+            + "article above is about the book as a whole."
+          : book.testament === "DC"
+          ? "No verse-level commentary exists for this book in the public domain. The works " +
+            "bundled here are Protestant in range and stop at the sixty-six books; Haydock " +
+            "(1859), who covers most of the deuterocanon, does not reach this one, and R. H. " +
+            "Charles (1913) exists only as unproofread OCR, so neither is bundled."
+          : "No commentary on this chapter in the works bundled here." }));
+        return;
+      }
       var verses = Object.keys((d || {}).verses || {}).map(Number).sort(function (a, b) { return a - b; });
       ((d || {}).introductions || []).forEach(function (intro) {
         var wrap = ST.el("div", { class: "cm-intro" });
@@ -179,7 +207,7 @@
       if (!verses.length) {
         cm.appendChild(ST.el("p", { class: "muted small", text: (d.introductions || []).length
           ? "No comment on a verse of this chapter: these works attach a comment to the verse that opens a passage."
-          : "No commentary on this chapter in the works bundled here." }));
+          : "No verse-by-verse commentary on this chapter in the works bundled here." }));
         return;
       }
       verses.slice(0, 40).forEach(function (v) {

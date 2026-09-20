@@ -39,6 +39,31 @@ function check(name, condition, detail) {
   if (!condition) { failures.push(name + (detail ? " — " + detail : "")); }
 }
 
+/* ---------- every book the reader ships opens by its own name ---------- */
+
+/* A reader types what the book is called. Eight of the eighty-six did not resolve
+   when this check was written — the three Maccabees books, Psalm 151 (which went
+   to an empty placeholder), and the four whose names begin with "The" — so the
+   reader fell back to John 1 or complained about the reference. Names are read
+   from books.json, so a book added without an alias fails here. */
+const catalogue = JSON.parse(
+  fs.readFileSync(path.join(ROOT, "data", "bible", "books.json"), "utf8"));
+const unnamed = catalogue.filter(function (b) {
+  return ST.normalizeBook(b.name) !== b.slug;
+}).map(function (b) { return b.name; });
+check("every book in the reader opens by the name the reader shows",
+  unnamed.length === 0, unnamed.join(", "));
+
+check("Psalm 151 opens Psalm 151, not the empty placeholder",
+  ST.parseRef("Psalm 151").book === "psalm-151", JSON.stringify(ST.parseRef("Psalm 151")));
+check("4 Maccabees opens by number",
+  ST.parseRef("4 Maccabees 1:1").book === "iv-maccabees",
+  JSON.stringify(ST.parseRef("4 Maccabees 1:1")));
+check("a deuterocanonical book with a name that begins with The opens",
+  ST.parseRef("The Rest of Esther 1").book === "additions-to-esther" &&
+  ST.parseRef("The Song of the Three Holy Children 1").book === "prayer-of-azariah",
+  JSON.stringify([ST.parseRef("The Rest of Esther 1"), ST.parseRef("Daniel (Greek) 1")]));
+
 /* ---------- references, as the reader and the apps write them ---------- */
 
 check("plain reference", JSON.stringify(ST.parseRef("John 3:16")) ===

@@ -215,7 +215,7 @@ const ABOUT = path.join(ROOT, "data", "about");
 const about = fs.existsSync(ABOUT) ? fs.readdirSync(ABOUT).filter(function (n) {
   return /\.json$/.test(n);
 }) : [];
-check("book introductions exist for the deuterocanon", about.length >= 8, about.length + " files");
+check("book introductions exist for the deuterocanon", about.length >= 12, about.length + " files");
 check("every book introduction names its source and holds clean paragraphs",
   about.every(function (n) {
     const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
@@ -225,6 +225,19 @@ check("every book introduction names its source and holds clean paragraphs",
   }));
 check("a book introduction exists only for a book the reader has",
   about.every(function (n) { return !!bySlug[n.replace(/\.json$/, "")]; }));
+/* Four of the twenty deuterocanonical books have no commentary anywhere in the
+   public domain, and their panels show a Hastings article instead. A reader has
+   to be told that is what it is, so the note is required, not optional. */
+check("an introduction that is not commentary says so",
+  about.every(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    const id = (data.source || {}).id;
+    if (id !== "has" && id !== "smi" && id !== "eas") { return true; }
+    return typeof data.note === "string" && /not a commentary/i.test(data.note);
+  }), about.filter(function (n) {
+    const data = JSON.parse(fs.readFileSync(path.join(ABOUT, n), "utf8"));
+    return (data.source || {}).id === "has";
+  }).join(", "));
 notes.push(about.length + " book introductions: " + about.map(function (n) {
   return n.replace(/\.json$/, "");
 }).join(", "));

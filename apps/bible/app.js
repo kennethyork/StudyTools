@@ -326,6 +326,12 @@
             ab.appendChild(ST.el("div", { class: "c-who",
               text: (about.source.short || "") + (about.source.year ? " \u00b7 " + about.source.year : "") +
                 " \u00b7 about this book" }));
+            /* where the text is not commentary, say so above it rather than
+               letting a reader take a dictionary article for one */
+            if (about.note) {
+              ab.appendChild(ST.el("p", { class: "muted small", style: "margin:0 0 6px",
+                text: about.note }));
+            }
             about.paragraphs.forEach(function (para) {
               ab.appendChild(ST.el("p", { class: "c-text", style: "margin:0 0 6px", text: para }));
             });
