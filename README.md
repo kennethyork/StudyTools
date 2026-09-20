@@ -12,14 +12,15 @@ never leave the device.
 | --- | --- |
 | **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Books are grouped by canon (Law, History, Wisdom, Prophets, Gospels, Letters, Apocrypha), and the translation switcher offers the **full Bible** (the texts carrying the Apocrypha) as its own option alongside the 66-book canon. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
-| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see three modern, public-domain translations side by side — the World English Bible (Updated), the modernized King James Version, and the Berean Standard Bible — including the deuterocanonical books. The picker groups them by canon, so the full Bible is a distinct option from the 66-book canon. Whole chapters or single verses, with chapter shortcuts and copy/print. |
+| **Parallel Passages** (`apps/parallels/`) | The Bible beside the Qur'an, the Jewish Tanakh and the Book of Mormon on the same figures and events (Adam, Noah, Abraham, Joseph, Moses, Jonah, Mary, Jesus, the Sermon on the Mount, the Ten Commandments, charity, faith). 99 comparisons, each one the Bible against a single other tradition (Tanakh, Qur'an or Book of Mormon), one passage against one passage, quoted from its own public-domain edition and modernized into the same present-day English. Every book of the Tanakh and every book of the Book of Mormon is covered. Only the compared passages are bundled — the full texts are not part of this site. |
+| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see three modern, public-domain translations side by side — the World English Bible (Updated), the modernized King James Version, and the modernized Revised Version — each including the deuterocanonical books — and, for the Old Testament, the Jewish Publication Society's Tanakh. Whole chapters or single verses, with chapter shortcuts and copy/print. |
 | **Cross-Reference Explorer** (`apps/xref/`) | Every passage openbible.info links to the verse you are reading, grouped by destination chapter and ranked by votes. Follow a link to jump to it. |
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
 | **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
 | **Greek Interlinear** (`apps/interlinear/`) | The Greek New Testament word by word: accented text, transliteration, morphology, Strong's number, and a literal English gloss, with a tap-to-highlight both views. |
 | **Biblical Language Flashcards** (`apps/vocab/`) | The 500 most frequent Greek New Testament words and 500 most frequent Hebrew Bible words with glosses, transliteration, morphology, and frequency. Flashcard and browse modes with known-word tracking. |
 | **Prayer Prompt & Journal Clock** (`apps/prayer/`) | A daily rotating prayer focus (Family, Community, Global Missions, Church, Nation, Sick & Suffering, Unbelievers), a focus timer with full-screen mode, and a private journal. |
-| **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/BSB text for a reference automatically. |
+| **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/RVM/JPSM text for a reference automatically. |
 | **Blog Idea Generator** (`apps/blog/`) | Pick a scope and a writing angle and get a passage, a working title, and an outline. Seven angles (devotional, Bible study, personal story, practical list, honest questions, two passages, church season), saveable and exportable, with one-click send to the sermon notebook. |
 | **Family Devotional Randomizer** (`apps/devotional/`) | Spin a canvas topic wheel and get a public-domain passage, three discussion questions, and a short prayer. Copy the whole devotional to share. |
 | **Church Calendar Tracker** (`apps/calendar/`) | Liturgical year (Advent, Christmas, Epiphany, Lent, Easter, Pentecost, Ordinary Time) with the BCP daily office psalms and lessons, the Apostles'/Nicene/Athanasian creeds, the Heidelberg Catechism, and the Westminster Shorter Catechism. |
@@ -41,7 +42,9 @@ js/home.js               Bible-section home: verse of the day, tools grid, book 
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
                          for all 81 books, plus its fonts and lemma data
-data/bible/              per-book WEBU, KJVM, and BSB JSON
+data/bible/              per-book WEBU, KJVM, RVM and JPSM JSON
+data/compare/            the Qur'an / Tanakh / Book of Mormon passages quoted
+                         in the Parallel Passages tool (only these passages)
 data/vocab/              top-500 Greek and Hebrew vocabulary
 data/blog/               blog idea kit (angles, fills, title patterns)
 data/crossref/           openbible.info cross-references, grouped by chapter (30 MB)
@@ -84,7 +87,11 @@ The `scripts/` folder contains the pipeline that produced everything under
 ```sh
 python3 scripts/build-webu.py         # World English Bible, Updated (81 books, with Apocrypha)
 python3 scripts/build-kjvm.py         # modernized KJV (81 books, with Apocrypha)
-python3 scripts/build-bsb.py          # Berean Standard Bible (66 books)
+python3 scripts/build-ebible.py RV    # Revised Version (80 books) from eBible.org
+python3 scripts/build-ebible.py JPS   # JPS Tanakh 1917 (39 books) from eBible.org
+python3 scripts/modernize.py RV RVM   # rule-based modernization of any of the above
+python3 scripts/modernize.py JPS JPSM
+python3 scripts/build-compare.py      # freezes the compared passages (Qur'an, Tanakh, Book of Mormon)
 python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
@@ -100,7 +107,10 @@ All Scripture texts bundled here are in the **public domain**.
 
 | Data | Source | Licence |
 | --- | --- | --- |
-| Berean Standard Bible (BSB, 2023) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain — dedicated to the public domain (CC0) on 30 April 2023 |
+| Revised Version, Modernized (RVM) | [eBible.org](https://ebible.org/eng-rv/) `eng-rv` USFM, modernized by this project | Public domain (the 1895 Revision is public domain; the modernization is this repository's own rule-based pass) |
+| Qur'an, Arabic (uthmani) | [risan/quran-json](https://github.com/risan/quran-json) | The Arabic text, unmodified |
+| Qur'an, Pickthall, Modernized (PKM) | [tanzil.net](https://tanzil.net/trans/en.pickthall) (M. M. Pickthall, 1930), modernized by this project | Public domain in the US since 1 January 2026; the modernization is this repository's own rule-based pass |
+| JPS Tanakh, Modernized (JPSM) | [eBible.org](https://ebible.org/engjps/) `engjps` USFM (JPS 1917), modernized by this project | Public domain (the 1917 JPS translation is public domain; the modernization is this repository's own rule-based pass) |
 | Topical entries | [topical-bible-search](https://github.com/j86schroeder/topical-bible-search) (Nave 1897, Torrey 1897) | MIT pipeline; source works public domain |
 | Greek interlinear | [OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |

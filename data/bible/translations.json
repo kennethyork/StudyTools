@@ -13,10 +13,10 @@
       "deuterocanon": true
     },
     {
-      "id": "BSB",
-      "name": "Berean Standard Bible",
-      "year": 2023,
-      "deuterocanon": false
+      "id": "RVM",
+      "name": "Revised Version, Modernized",
+      "year": 1895,
+      "deuterocanon": true
     }
   ]
 }

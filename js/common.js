@@ -4,6 +4,7 @@
 
   var APPS = [
     { id: "bible", name: "Read the Bible", href: "apps/bible/" },
+    { id: "parallels", name: "Parallel Passages", href: "apps/parallels/" },
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
@@ -25,7 +26,7 @@
   }
 
   var BOOKS = null;
-  var TRANSLATIONS = ["WEBU", "KJVM", "BSB"];
+  var TRANSLATIONS = ["WEBU", "KJVM", "RVM"];
 
   var BOOK_ALIASES = {
     genesis: "genesis", gen: "genesis",
@@ -184,17 +185,25 @@
     });
   }
 
-  // Group translations by canon. Anything carrying the deuterocanonical books
-  // is a "full Bible"; the rest is the 66-book canon.
+  // Group translations by what they actually contain, so the pickers can offer
+  // the full Bible as a distinct option from the 66-book canon and from the
+  // Hebrew Bible on its own (the Jewish translation).
+  var GROUP_LABELS = {
+    full: "Full Bible (with Apocrypha)",
+    canon: "66-book canon",
+    tanakh: "Hebrew Bible \u2014 Jewish translation"
+  };
+  var GROUP_ORDER = ["full", "canon", "tanakh"];
+
   function translationGroups(list) {
-    var full = [], canon = [];
+    var bucket = {};
     (list || []).forEach(function (t) {
-      if (t && t.deuterocanon) full.push(t); else canon.push(t);
+      var key = (t && t.scope) || (t && t.deuterocanon ? "full" : "canon");
+      (bucket[key] = bucket[key] || []).push(t);
     });
-    var groups = [];
-    if (full.length) groups.push({ id: "full", label: "Full Bible (with Apocrypha)", translations: full });
-    if (canon.length) groups.push({ id: "canon", label: "66-book canon", translations: canon });
-    return groups;
+    return GROUP_ORDER.filter(function (k) { return bucket[k]; }).map(function (k) {
+      return { id: k, label: GROUP_LABELS[k] || k, translations: bucket[k] };
+    });
   }
 
   function translationSub(t) {

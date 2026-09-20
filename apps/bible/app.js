@@ -167,7 +167,7 @@
     card.appendChild(head);
 
     if (book.deuterocanon) {
-      card.appendChild(notice("This is a deuterocanonical book. Translations that do not carry the Apocrypha are unavailable here."));
+      card.appendChild(notice("This is a deuterocanonical book. All three translations carry the Apocrypha, but the Jewish and Catholic traditions include slightly different books, so a few appear in only one or two of them."));
     }
 
     var nums = Object.keys(chapterData)

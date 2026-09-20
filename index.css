@@ -375,9 +375,18 @@ a { color: var(--accent); }
 
 .footer-text:last-child { margin-bottom: 0; }
 
+@media (max-width: 1180px) {
+  .topbar nav a { font-size: 0.79rem; padding: 5px 7px; }
+  .brand { font-size: 0.95rem; }
+}
+
+@media (max-width: 1000px) {
+  .topbar-inner { flex-wrap: wrap; }
+  .topbar nav { order: 3; width: 100%; }
+}
+
 @media (max-width: 768px) {
   .featured-verse { align-items: center; }
   .lemma-grid { grid-template-columns: 1fr; }
   .main-study-grid { grid-template-columns: 1fr; }
-  .topbar nav { display: none; }
 }

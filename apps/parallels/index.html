@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parallel Passages — StudyTools</title>
+<meta name="description" content="The Bible compared with one other tradition at a time - Tanakh, Qur'an or Book of Mormon - one passage against one passage.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .par-layout { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 880px) { .par-layout { grid-template-columns: 1fr; } }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters button { font-size: .8rem; padding: 4px 11px; border-radius: 9px; background: transparent;
+    color: var(--ink-soft); border-color: var(--line); }
+  .filters button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); }
+  .par-list { max-height: 62vh; overflow: auto; margin-top: 8px; }
+  .par-item { display: block; width: 100%; text-align: left; background: none; border: 0;
+    border-bottom: 1px solid var(--line); color: var(--ink); padding: 9px 8px; border-radius: 0;
+    font-weight: 400; cursor: pointer; font-size: .9rem; }
+  .par-item:hover, .par-item.active { background: var(--bg-alt); filter: none; }
+  .par-item .tag { display: block; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-faint); margin-top: 2px; }
+  .cols { display: grid; gap: 14px; margin-top: 14px; }
+  .cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .cols-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  @media (max-width: 880px) { .cols { grid-template-columns: 1fr; } }
+  .frozen { font-family: var(--serif); font-size: 1rem; line-height: 1.62; margin: 0; }
+  .src-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+    flex-wrap: wrap; margin-bottom: 8px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .src-head h3 { margin: 0; font-family: var(--serif); font-size: 1.05rem; }
+  .ref { color: var(--ink-faint); font-size: .78rem; }
+  .ar { direction: rtl; text-align: right; font-size: 1.15rem; line-height: 2.05; margin: 0 0 10px;
+    font-family: "Traditional Arabic", "Amiri", "Scheherazade New", "Times New Roman", serif; }
+  .verse-line { display: grid; grid-template-columns: 2.3em 1fr; gap: 2px 8px; margin-bottom: 7px; }
+  .verse-line .n { font-family: var(--mono); font-size: .7rem; color: var(--accent); padding-top: .45em; }
+  .verse-line p { margin: 0; font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; }
+  .also { font-size: .84rem; color: var(--ink-soft); margin-top: 4px; }
+</style>
+</head>
+<body data-root="../../" data-app="parallels">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Parallel Passages</h1>
+    <p class="lede">The Bible read beside the Jewish Tanakh, the Qur'an and the Book of Mormon on the same figures and events. 99 comparisons, every one of them the Bible against a single other tradition &mdash; Tanakh, Qur'an or Book of Mormon &mdash; one passage against one passage. Every book of the Tanakh and every book of the Book of Mormon is covered, and every side is quoted from its own text in the same present-day English, so you can see where the accounts agree and where they part.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="filters" id="filters" role="group" aria-label="Choose a tradition"></div>
+    <div class="row" style="margin-top:12px">
+      <label class="field" for="tr" style="margin:0">Bible translation</label>
+      <select id="tr" style="width:auto"></select>
+    </div>
+  </section>
+
+  <div class="par-layout">
+    <section class="card no-print">
+      <div class="row" style="justify-content:space-between;align-items:baseline">
+        <h2 class="serif" style="margin:0;font-size:1.05rem">Comparisons</h2>
+        <span class="muted small" id="count"></span>
+      </div>
+      <div class="par-list" id="list"></div>
+    </section>
+    <section id="detail"></section>
+  </div>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
