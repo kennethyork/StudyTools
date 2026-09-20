@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Verse Comparative Matrix — StudyTools</title>
-<meta name="description" content="Compare a Bible verse across the public-domain KJV, ASV, WEB, and YLT translations side by side.">
+<meta name="description" content="Compare a Bible verse across three modern public-domain translations side by side: the World English Bible (Updated), the modernized King James Version, and the Berean Standard Bible.">
 <link rel="stylesheet" href="../../css/base.css">
 <script src="../../js/theme.js"></script>
 <style>
@@ -37,10 +37,13 @@
   .suggestions .list button:hover, .suggestions .list button.active { background: var(--bg-alt); filter: none; }
   .missing { color: var(--ink-faint); font-style: italic; font-size: .9rem; }
   .diff { background: var(--highlight); border-radius: 3px; }
-  .tr-choices { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; }
+  .tr-choices { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .tr-group { margin-top: 12px; }
+  .tr-group:first-child { margin-top: 4px; }
+  .tr-group-label { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: 4px; }
   .tr-choice {
     display: inline-flex; align-items: center; gap: 6px; font-size: .86rem; color: var(--ink-soft);
-    padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); cursor: pointer;
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); cursor: pointer;
   }
   .tr-choice input { width: auto; }
   .tr-choice:has(input:checked) { border-color: var(--accent); color: var(--ink); background: var(--accent-soft); }
@@ -57,7 +60,7 @@
 <main class="wrap">
   <header class="page">
     <h1>Verse Comparative Matrix</h1>
-    <p class="lede">Type a reference such as <strong>John 3:16</strong>, <strong>Psalm 23</strong>, or <strong>Sirach 2:1-6</strong> and compare public-domain translations side by side &mdash; including the modernized King James text and the deuterocanonical books.</p>
+    <p class="lede">Type a reference such as <strong>John 3:16</strong>, <strong>Psalm 23</strong>, or <strong>Sirach 2:1-6</strong> and compare three modern, public-domain translations side by side &mdash; the World English Bible (Updated), the modernized King James Version, and the Berean Standard Bible &mdash; including the deuterocanonical books.</p>
   </header>
 
   <section class="card no-print">
@@ -87,7 +90,7 @@
         <label class="field" style="margin:0">Translations</label>
         <span class="muted small">Deuterocanonical books use the translations that contain them</span>
       </div>
-      <div class="tr-choices" id="translation-picker"></div>
+      <div id="translation-picker"></div>
     </div>
   </section>
 

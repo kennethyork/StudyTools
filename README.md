@@ -10,15 +10,16 @@ never leave the device.
 
 | App | What it does |
 | --- | --- |
+| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Books are grouped by canon (Law, History, Wisdom, Prophets, Gospels, Letters, Apocrypha), and the translation switcher offers the **full Bible** (the texts carrying the Apocrypha) as its own option alongside the 66-book canon. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
-| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see the translations you choose side by side — KJV, the modernized KJV, ASV, WEB, YLT, plus KJVA and Douay-Rheims for the deuterocanonical books. Whole chapters or single verses, with chapter shortcuts and copy/print. |
+| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see three modern, public-domain translations side by side — the World English Bible (Updated), the modernized King James Version, and the Berean Standard Bible — including the deuterocanonical books. The picker groups them by canon, so the full Bible is a distinct option from the 66-book canon. Whole chapters or single verses, with chapter shortcuts and copy/print. |
 | **Cross-Reference Explorer** (`apps/xref/`) | Every passage openbible.info links to the verse you are reading, grouped by destination chapter and ranked by votes. Follow a link to jump to it. |
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
 | **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
 | **Greek Interlinear** (`apps/interlinear/`) | The Greek New Testament word by word: accented text, transliteration, morphology, Strong's number, and a literal English gloss, with a tap-to-highlight both views. |
 | **Biblical Language Flashcards** (`apps/vocab/`) | The 500 most frequent Greek New Testament words and 500 most frequent Hebrew Bible words with glosses, transliteration, morphology, and frequency. Flashcard and browse modes with known-word tracking. |
 | **Prayer Prompt & Journal Clock** (`apps/prayer/`) | A daily rotating prayer focus (Family, Community, Global Missions, Church, Nation, Sick & Suffering, Unbelievers), a focus timer with full-screen mode, and a private journal. |
-| **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the KJV/ASV/WEB/YLT text for a reference automatically. |
+| **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/BSB text for a reference automatically. |
 | **Blog Idea Generator** (`apps/blog/`) | Pick a scope and a writing angle and get a passage, a working title, and an outline. Seven angles (devotional, Bible study, personal story, practical list, honest questions, two passages, church season), saveable and exportable, with one-click send to the sermon notebook. |
 | **Family Devotional Randomizer** (`apps/devotional/`) | Spin a canvas topic wheel and get a public-domain passage, three discussion questions, and a short prayer. Copy the whole devotional to share. |
 | **Church Calendar Tracker** (`apps/calendar/`) | Liturgical year (Advent, Christmas, Epiphany, Lent, Easter, Pentecost, Ordinary Time) with the BCP daily office psalms and lessons, the Apostles'/Nicene/Athanasian creeds, the Heidelberg Catechism, and the Westminster Shorter Catechism. |
@@ -34,7 +35,7 @@ css/base.css             shared design system (light and dark themes)
 js/theme.js              pre-paint theme chooser (no flash of wrong theme)
 js/common.js             shared helpers (ref parsing, data loading, storage, toast, header)
 apps/<app>/              one self-contained app per folder
-data/bible/              per-book KJV, KJVM, ASV, WEB, YLT, KJVA, DRC JSON
+data/bible/              per-book WEBU, KJVM, and BSB JSON
 data/vocab/              top-500 Greek and Hebrew vocabulary
 data/blog/               blog idea kit (angles, fills, title patterns)
 data/crossref/           openbible.info cross-references, grouped by chapter (30 MB)
@@ -75,10 +76,9 @@ The `scripts/` folder contains the pipeline that produced everything under
 `scripts/.cache/` (gitignored).
 
 ```sh
-python3 scripts/build-bible.py        # KJV / ASV / YLT / Webster per-book JSON
-python3 scripts/build-web.py          # World English Bible per-book JSON
-python3 scripts/build-deuterocanon.py # KJVA and Douay-Rheims deuterocanon
-python3 scripts/build-kjvm.py         # modernized KJV (all 81 books) from the Abrahamic Library
+python3 scripts/build-webu.py         # World English Bible, Updated (81 books, with Apocrypha)
+python3 scripts/build-kjvm.py         # modernized KJV (81 books, with Apocrypha)
+python3 scripts/build-bsb.py          # Berean Standard Bible (66 books)
 python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
@@ -94,15 +94,13 @@ All Scripture texts bundled here are in the **public domain**.
 
 | Data | Source | Licence |
 | --- | --- | --- |
-| King James Version (1769), American Standard Version (1901), Young's Literal Translation (1862) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain texts; repository under MIT |
-| King James Version with Apocrypha (KJVA, 1769) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
-| Douay-Rheims Bible, Challoner Revision (DRC, 1752) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
+| Berean Standard Bible (BSB, 2023) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain — dedicated to the public domain (CC0) on 30 April 2023 |
 | Topical entries | [topical-bible-search](https://github.com/j86schroeder/topical-bible-search) (Nave 1897, Torrey 1897) | MIT pipeline; source works public domain |
 | Greek interlinear | [OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |
 | Bible dictionaries | [NEUU bible-dictionary-dataset](https://github.com/neuu-org/bible-dictionary-dataset) (CCEL ThML) | CC BY 4.0; source texts public domain |
 | Modernized King James Version (KJVM) | [Abrahamic Library](https://github.com/kennethyork/AbrahamicLibrary) (`kjv-bible`, "modernized in full") | Public domain text; MIT software |
-| World English Bible | [TehShrike/world-english-bible](https://github.com/TehShrike/world-english-bible) | Public domain (eBible.org / Michael Paul Johnson) |
+| World English Bible, Updated (WEBU, 2000) | [eBible.org](https://ebible.org/engwebu/) `engwebu` USFM | Public domain (eBible.org / Michael Paul Johnson); “World English Bible” is a trademark of eBible.org |
 | Greek vocabulary frequency | [eliranwong/OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Hebrew vocabulary frequency | [openscriptures/morphhb](https://github.com/openscriptures/morphhb) (Westminster Leningrad Codex) | CC BY 4.0 |
 | Greek and Hebrew glosses/lexicon | [STEPBible-Data](https://github.com/STEPBible/STEPBible-Data) TBESG / TBESH | CC BY 4.0 |

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — StudyTools</title>
+<meta name="description" content="About StudyTools: free, offline Bible study apps, and the three modern public-domain Bible translations they ship with.">
+<link rel="stylesheet" href="css/base.css">
+<script src="js/theme.js"></script>
+<style>
+  .about-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .attr { width: 100%; border-collapse: collapse; font-size: .89rem; }
+  .attr th, .attr td { text-align: left; padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .attr thead th { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .attr tbody tr:last-child td { border-bottom: 0; }
+  .attr td:first-child { min-width: 11em; }
+  .attr .tagline { color: var(--ink-faint); font-size: .82rem; }
+  .src-list { list-style: none; margin: 0; padding: 0; }
+  .src-list li { padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+  .src-list li:last-child { border-bottom: 0; }
+  .src-list .lic { color: var(--ink-faint); font-size: .82rem; }
+  .card h2 { font-family: var(--serif); font-size: 1.18rem; margin: 0 0 10px; }
+  .card h3 { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); margin: 20px 0 8px; }
+  .card h3:first-child { margin-top: 0; }
+  .card p { margin: 0 0 10px; }
+  .card p:last-child { margin-bottom: 0; }
+  @media (max-width: 620px) { .attr td:first-child { min-width: 0; } }
+</style>
+</head>
+<body data-root="./" data-app="about">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>About StudyTools</h1>
+    <p class="lede">Free Bible study tools that run entirely in your browser &mdash; no accounts, no tracking, no server.</p>
+  </header>
+
+  <section class="card">
+    <h2>What this is</h2>
+    <p>StudyTools is a collection of small, dependency-free Bible study apps. Everything is static HTML, CSS and JavaScript, so the whole site can be served from any static host with no build step and no backend.</p>
+    <p>Notes, journals, memory decks and study progress are saved in your browser's local storage and never leave your device.</p>
+    <div class="about-links">
+      <a class="btn" href="apps/bible/">Read the Bible</a>
+      <a class="btn secondary" href="tools.html">Study Tools</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>The Bible texts</h2>
+    <p>Three translations ship with the site. All three are in modern English and all three are in the public domain, which is why they can be bundled, copied, printed and shared freely.</p>
+
+    <table class="attr">
+      <thead>
+        <tr><th>Translation</th><th>Books</th><th>Public domain because</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>World English Bible, Updated</strong><br><span class="tagline">WEBU</span></td>
+          <td>81<br><span class="tagline">with the Apocrypha</span></td>
+          <td>Not copyrighted. Published by <a href="https://ebible.org/engwebu/" rel="noopener">eBible.org</a> (Michael Paul Johnson). <em>&ldquo;World English Bible&rdquo; is a trademark of eBible.org.</em></td>
+        </tr>
+        <tr>
+          <td><strong>King James Version, Modernized</strong><br><span class="tagline">KJVM</span></td>
+          <td>81<br><span class="tagline">with the Apocrypha</span></td>
+          <td>The classic King James text brought to present-day English, from the <a href="https://github.com/kennethyork/AbrahamicLibrary" rel="noopener">Abrahamic Library</a> <code>kjv-bible</code> work. <code>KJVM</code> is this site's own label for the edition &mdash; it is not the Modern King James Version, which is a different, copyrighted translation.</td>
+        </tr>
+        <tr>
+          <td><strong>Berean Standard Bible</strong><br><span class="tagline">BSB</span></td>
+          <td>66</td>
+          <td>Dedicated to the public domain (CC0) on 30 April 2023 by the Berean Bible Translation Committee. <a href="https://berean.bible/terms.htm" rel="noopener">Terms</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>On numbering</h3>
+    <p>All three use the same chapter and verse numbering, so a reference lines up exactly between them. Editions that follow Vulgate numbering &mdash; where Psalm 22 is the Hebrew Psalm 23 &mdash; were deliberately left out, because they would quietly show the wrong text side by side.</p>
+
+    <p>The World English Bible is not copyrighted; &ldquo;World English Bible&rdquo; is a trademark of eBible.org, and a modified text should not carry that name. Its full notice is at <a href="https://ebible.org/engwebu/" rel="noopener">eBible.org</a>.</p>
+
+    <p style="margin-top:12px">The per-book text under <code>data/bible/</code> is built from these sources by the scripts in <code>scripts/</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Other sources</h2>
+    <p>The study tools draw on these public-domain and openly licensed datasets:</p>
+    <ul class="src-list">
+      <li><strong>Cross-references</strong> &mdash; <a href="https://www.openbible.info/labs/cross-references/" rel="noopener">openbible.info</a> <span class="lic">&middot; CC BY 4.0</span></li>
+      <li><strong>Bible dictionaries</strong> &mdash; Easton (1897), Smith (1863) and Hastings (1909) <span class="lic">&middot; public domain</span></li>
+      <li><strong>Topical Bible</strong> &mdash; Nave's (1897) and Torrey's New Topical Textbook (1897) <span class="lic">&middot; public domain</span></li>
+      <li><strong>Greek interlinear</strong> &mdash; <a href="https://github.com/eliranwong/OpenGNT" rel="noopener">OpenGNT</a> <span class="lic">&middot; CC BY-SA 4.0</span></li>
+      <li><strong>Greek and Hebrew vocabulary</strong> &mdash; OpenGNT and the <a href="https://github.com/openscriptures/morphhb" rel="noopener">Open Scriptures Hebrew Bible</a> <span class="lic">&middot; CC BY 4.0</span></li>
+      <li><strong>Lexicon and glosses</strong> &mdash; <a href="https://github.com/STEPBible/STEPBible-Data" rel="noopener">STEPBible</a> TBESG / TBESH <span class="lic">&middot; CC BY 4.0</span></li>
+      <li><strong>Daily office readings</strong> &mdash; Book of Common Prayer (1979) <span class="lic">&middot; public domain</span></li>
+      <li><strong>Creeds and catechisms</strong> &mdash; Apostles', Nicene and Athanasian; Heidelberg and Westminster Shorter <span class="lic">&middot; public domain</span></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Privacy</h2>
+    <p>Nothing is uploaded. There are no accounts, no cookies, no analytics and no server to talk to. Everything you type &mdash; notes, journals, memory decks, saved ideas &mdash; stays in your browser's local storage, and clearing your browser data removes it.</p>
+  </section>
+
+  <footer class="site">
+    <p>Scripture and study data are public domain or openly licensed, as listed above. See the repository README for the full attribution list.</p>
+  </footer>
+</main>
+
+<script src="js/common.js"></script>
+</body>
+</html>

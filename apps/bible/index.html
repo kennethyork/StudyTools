@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read the Bible — StudyTools</title>
+<meta name="description" content="Read the whole Bible — every book of the World English Bible (Updated) and the modernized King James Version, Apocrypha included — plus the 66-book Berean Standard Bible.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .read-bar { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(90px, .5fr) auto; gap: 10px; align-items: end; }
+  .read-bar .nav { display: flex; gap: 6px; }
+  @media (max-width: 640px) {
+    .read-bar { grid-template-columns: 1fr 1fr; }
+    .read-bar .nav { grid-column: 1 / -1; }
+    .read-bar .nav button { flex: 1; }
+  }
+  #translation-picker { display: flex; flex-direction: column; gap: 10px; margin-top: 2px; }
+  .tr-group-label { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: 4px; }
+  .tr-choices { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .tr-choice {
+    display: inline-flex; align-items: center; gap: 6px; font-size: .86rem; color: var(--ink-soft);
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); cursor: pointer;
+  }
+  .tr-choice input { width: auto; }
+  .tr-choice:has(input:checked) { border-color: var(--accent); color: var(--ink); background: var(--accent-soft); }
+  .tr-choice:has(input:disabled) { opacity: .45; cursor: not-allowed; }
+  .chapter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .chapter-head h2 { font-family: var(--serif); margin: 0; font-size: 1.45rem; }
+  .verse-block { display: grid; grid-template-columns: 2.6em 1fr; gap: 2px 10px; margin-bottom: 9px; border-radius: 6px; }
+  .verse-block .num { font-family: var(--mono); font-size: .72rem; color: var(--accent); padding-top: .45em; }
+  .verse-block p { margin: 0; font-family: var(--serif); font-size: 1.06rem; line-height: 1.65; }
+  .verse-block:target { background: var(--highlight); }
+  .reader-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 16px; }
+  @media print {
+    .no-print, header.page p, .reader-nav { display: none !important; }
+    .card { box-shadow: none; border: 0; padding: 0; }
+  }
+</style>
+</head>
+<body data-root="../../" data-app="bible">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Read the Bible</h1>
+    <p class="lede">The full Bible &mdash; every book of the World English Bible (Updated) and the modernized King James Version, Apocrypha included &mdash; plus the 66-book Berean Standard Bible. Choose a book, a chapter, and a translation.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="read-bar">
+      <div>
+        <label class="field" for="book">Book</label>
+        <select id="book"></select>
+      </div>
+      <div>
+        <label class="field" for="chapter">Chapter</label>
+        <select id="chapter"></select>
+      </div>
+      <div class="nav">
+        <button id="prev" class="ghost" type="button" title="Previous chapter">&larr; Previous</button>
+        <button id="next" class="secondary" type="button" title="Next chapter">Next &rarr;</button>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <label class="field" style="margin:0">Translation</label>
+    <div id="translation-picker"></div>
+  </section>
+
+  <article id="reader" aria-live="polite" style="margin-top:16px"></article>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

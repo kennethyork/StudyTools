@@ -1,19 +1,13 @@
 (function () {
   "use strict";
 
-  var LABELS = {
-    KJV: { name: "King James Version", sub: "1769 · public domain" },
-    KJVM: { name: "KJV, Modernized", sub: "American English · public domain" },
-    ASV: { name: "American Standard Version", sub: "1901 · public domain" },
-    WEB: { name: "World English Bible", sub: "public domain" },
-    YLT: { name: "Young's Literal Translation", sub: "1862 · public domain" },
-    KJVA: { name: "KJV with Apocrypha", sub: "1769 · public domain" },
-    DRC: { name: "Douay-Rheims, Challoner", sub: "1752 · public domain" }
-  };
-
-  var CORE = ["KJV", "KJVM", "ASV", "WEB", "YLT"];
-  var DEUTERO = ["KJVA", "DRC"];
-  var STORAGE_KEY = "matrix-translations.v1";
+  // Filled from data/bible/translations.json by init(). Single source of
+  // truth for which translations exist, their names, and their canon.
+  var translations = [];
+  var LABELS = {};
+  var CORE = [];
+  var DEUTERO = [];
+  var STORAGE_KEY = "matrix-translations.v2";
 
   var els = {
     ref: document.getElementById("ref"),
@@ -58,27 +52,35 @@
   function renderPicker() {
     if (!els.picker) return;
     els.picker.innerHTML = "";
-    var all = CORE.concat(DEUTERO);
-    all.forEach(function (id) {
-      var label = LABELS[id] || { name: id };
-      var input = ST.el("input", { type: "checkbox", id: "tr-" + id, value: id });
-      input.checked = selected.indexOf(id) !== -1;
-      input.addEventListener("change", function () {
-        if (input.checked) {
-          if (selected.indexOf(id) === -1) selected.push(id);
-        } else {
-          selected = selected.filter(function (x) { return x !== id; });
-        }
-        if (!selected.length) selected = ["KJV"];
-        userCustomized = true;
-        ST.store(STORAGE_KEY, selected);
-        run();
+    // Grouped by canon, so the full Bible (the texts that carry the Apocrypha)
+    // is offered as its own option next to the 66-book canon.
+    ST.translationGroups(translations).forEach(function (group) {
+      var wrap = ST.el("div", { class: "tr-group" });
+      wrap.appendChild(ST.el("div", { class: "tr-group-label", text: group.label }));
+      var row = ST.el("div", { class: "tr-choices" });
+      group.translations.forEach(function (t) {
+        var id = t.id;
+        var label = LABELS[id] || { name: t.name || id };
+        var input = ST.el("input", { type: "checkbox", id: "tr-" + id, value: id });
+        input.checked = selected.indexOf(id) !== -1;
+        input.addEventListener("change", function () {
+          if (input.checked) {
+            if (selected.indexOf(id) === -1) selected.push(id);
+          } else {
+            selected = selected.filter(function (x) { return x !== id; });
+          }
+          if (!selected.length) selected = CORE.slice();
+          userCustomized = true;
+          ST.store(STORAGE_KEY, selected);
+          run();
+        });
+        row.appendChild(ST.el("label", { class: "tr-choice", for: "tr-" + id }, [
+          input,
+          ST.el("span", { text: label.name })
+        ]));
       });
-      var cb = ST.el("label", { class: "tr-choice", for: "tr-" + id }, [
-        input,
-        ST.el("span", { text: label.name })
-      ]);
-      els.picker.appendChild(cb);
+      wrap.appendChild(row);
+      els.picker.appendChild(wrap);
     });
   }
 
@@ -262,10 +264,17 @@
   }
 
   function init() {
-    ST.loadBooks().then(function (list) {
-      books = list;
+    Promise.all([ST.loadBooks(), ST.loadTranslations()]).then(function (loaded) {
+      books = loaded[0] || [];
+      translations = loaded[1] || [];
       bySlug = {};
-      list.forEach(function (b) { bySlug[b.slug] = b; });
+      books.forEach(function (b) { bySlug[b.slug] = b; });
+      CORE = translations.map(function (t) { return t.id; });
+      LABELS = {};
+      translations.forEach(function (t) {
+        LABELS[t.id] = { name: t.name, sub: ST.translationSub(t) };
+      });
+      if (!selected.length) selected = CORE.slice();
       renderPicker();
 
       var fromQuery = ST.qs("ref");

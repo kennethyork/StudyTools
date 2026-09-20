@@ -26,7 +26,7 @@
   .xref-text { font-family: var(--serif); font-size: .93rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
   .ref-input { font-family: var(--serif); font-size: 1.05rem; }
   .chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .chip { font-size: .78rem; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink-soft); }
+  .chip { font-size: .78rem; padding: 3px 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--card); color: var(--ink-soft); }
   .chip.active { background: var(--accent); border-color: var(--accent); color: var(--btn-ink); }
   @media print {
     .xref-layout { display: block; }
@@ -65,7 +65,7 @@
     <div class="row" style="margin-top:12px">
       <label class="muted small" for="translation" style="margin:0">Verse text</label>
       <select id="translation" style="width:auto">
-        <option>KJV</option><option>KJVM</option><option>ASV</option><option>WEB</option><option>YLT</option>
+        <option>WEBU</option><option>KJVM</option><option>BSB</option>
       </select>
       <label class="muted small" for="min-votes" style="margin-left:12px">Minimum votes</label>
       <select id="min-votes" style="width:auto">

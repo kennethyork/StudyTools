@@ -1,1 +1,938 @@
-[{"name":"Genesis","slug":"genesis","chapters":50,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Exodus","slug":"exodus","chapters":40,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Leviticus","slug":"leviticus","chapters":27,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Numbers","slug":"numbers","chapters":36,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Deuteronomy","slug":"deuteronomy","chapters":34,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Joshua","slug":"joshua","chapters":24,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Judges","slug":"judges","chapters":21,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Ruth","slug":"ruth","chapters":4,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Samuel","slug":"i-samuel","chapters":31,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Samuel","slug":"ii-samuel","chapters":24,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Kings","slug":"i-kings","chapters":22,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Kings","slug":"ii-kings","chapters":25,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Chronicles","slug":"i-chronicles","chapters":29,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Chronicles","slug":"ii-chronicles","chapters":36,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Ezra","slug":"ezra","chapters":10,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Nehemiah","slug":"nehemiah","chapters":13,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Esther","slug":"esther","chapters":10,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Job","slug":"job","chapters":42,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Psalms","slug":"psalms","chapters":150,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Proverbs","slug":"proverbs","chapters":31,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Ecclesiastes","slug":"ecclesiastes","chapters":12,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Song of Solomon","slug":"song-of-solomon","chapters":8,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Isaiah","slug":"isaiah","chapters":66,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Jeremiah","slug":"jeremiah","chapters":52,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Lamentations","slug":"lamentations","chapters":5,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Ezekiel","slug":"ezekiel","chapters":48,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Daniel","slug":"daniel","chapters":12,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Hosea","slug":"hosea","chapters":14,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Joel","slug":"joel","chapters":3,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Amos","slug":"amos","chapters":9,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Obadiah","slug":"obadiah","chapters":1,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Jonah","slug":"jonah","chapters":4,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Micah","slug":"micah","chapters":7,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Nahum","slug":"nahum","chapters":3,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Habakkuk","slug":"habakkuk","chapters":3,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Zephaniah","slug":"zephaniah","chapters":3,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Haggai","slug":"haggai","chapters":2,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Zechariah","slug":"zechariah","chapters":14,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Malachi","slug":"malachi","chapters":4,"testament":"OT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Matthew","slug":"matthew","chapters":28,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Mark","slug":"mark","chapters":16,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Luke","slug":"luke","chapters":24,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"John","slug":"john","chapters":21,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Acts","slug":"acts","chapters":28,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Romans","slug":"romans","chapters":16,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Corinthians","slug":"i-corinthians","chapters":16,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Corinthians","slug":"ii-corinthians","chapters":13,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Galatians","slug":"galatians","chapters":6,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Ephesians","slug":"ephesians","chapters":6,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Philippians","slug":"philippians","chapters":4,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Colossians","slug":"colossians","chapters":4,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Thessalonians","slug":"i-thessalonians","chapters":5,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Thessalonians","slug":"ii-thessalonians","chapters":3,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Timothy","slug":"i-timothy","chapters":6,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Timothy","slug":"ii-timothy","chapters":4,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Titus","slug":"titus","chapters":3,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Philemon","slug":"philemon","chapters":1,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Hebrews","slug":"hebrews","chapters":13,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"James","slug":"james","chapters":5,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Peter","slug":"i-peter","chapters":5,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II Peter","slug":"ii-peter","chapters":3,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I John","slug":"i-john","chapters":5,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"II John","slug":"ii-john","chapters":1,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"III John","slug":"iii-john","chapters":1,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Jude","slug":"jude","chapters":1,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"Revelation of John","slug":"revelation-of-john","chapters":22,"testament":"NT","translations":["ASV","KJV","KJVM","WEB","YLT"]},{"name":"I Esdras","slug":"i-esdras","chapters":9,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"II Esdras","slug":"ii-esdras","chapters":16,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Tobit","slug":"tobit","chapters":14,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Judith","slug":"judith","chapters":16,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Additions to Esther","slug":"additions-to-esther","chapters":16,"testament":"DC","deuterocanon":true,"translations":["KJVA","KJVM"]},{"name":"Wisdom","slug":"wisdom","chapters":19,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Sirach","slug":"sirach","chapters":51,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Baruch","slug":"baruch","chapters":6,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Prayer of Azariah","slug":"prayer-of-azariah","chapters":1,"testament":"DC","deuterocanon":true,"translations":["KJVA","KJVM"]},{"name":"Susanna","slug":"susanna","chapters":1,"testament":"DC","deuterocanon":true,"translations":["KJVA","KJVM"]},{"name":"Bel and the Dragon","slug":"bel-and-the-dragon","chapters":1,"testament":"DC","deuterocanon":true,"translations":["KJVA","KJVM"]},{"name":"Prayer of Manasses","slug":"prayer-of-manasses","chapters":1,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"I Maccabees","slug":"i-maccabees","chapters":16,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"II Maccabees","slug":"ii-maccabees","chapters":15,"testament":"DC","deuterocanon":true,"translations":["DRC","KJVA","KJVM"]},{"name":"Additional Psalm","slug":"additional-psalm","chapters":1,"testament":"DC","deuterocanon":true,"translations":["DRC"]},{"name":"Laodiceans","slug":"laodiceans","chapters":1,"testament":"DC","deuterocanon":true,"translations":["DRC"]},{"name":"The Epistle of Jeremiah","slug":"epistle-of-jeremiah","chapters":1,"testament":"DC","deuterocanon":true,"translations":["KJVM"]}]
+[
+  {
+    "name": "Genesis",
+    "slug": "genesis",
+    "chapters": 50,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Exodus",
+    "slug": "exodus",
+    "chapters": 40,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Leviticus",
+    "slug": "leviticus",
+    "chapters": 27,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Numbers",
+    "slug": "numbers",
+    "chapters": 36,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Deuteronomy",
+    "slug": "deuteronomy",
+    "chapters": 34,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Joshua",
+    "slug": "joshua",
+    "chapters": 24,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Judges",
+    "slug": "judges",
+    "chapters": 21,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Ruth",
+    "slug": "ruth",
+    "chapters": 4,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Samuel",
+    "slug": "i-samuel",
+    "chapters": 31,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Samuel",
+    "slug": "ii-samuel",
+    "chapters": 24,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Kings",
+    "slug": "i-kings",
+    "chapters": 22,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Kings",
+    "slug": "ii-kings",
+    "chapters": 25,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Chronicles",
+    "slug": "i-chronicles",
+    "chapters": 29,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Chronicles",
+    "slug": "ii-chronicles",
+    "chapters": 36,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Ezra",
+    "slug": "ezra",
+    "chapters": 10,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Nehemiah",
+    "slug": "nehemiah",
+    "chapters": 13,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Esther",
+    "slug": "esther",
+    "chapters": 10,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Job",
+    "slug": "job",
+    "chapters": 42,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Psalms",
+    "slug": "psalms",
+    "chapters": 150,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Proverbs",
+    "slug": "proverbs",
+    "chapters": 31,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Ecclesiastes",
+    "slug": "ecclesiastes",
+    "chapters": 12,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Song of Solomon",
+    "slug": "song-of-solomon",
+    "chapters": 8,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Isaiah",
+    "slug": "isaiah",
+    "chapters": 66,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Jeremiah",
+    "slug": "jeremiah",
+    "chapters": 52,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Lamentations",
+    "slug": "lamentations",
+    "chapters": 5,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Ezekiel",
+    "slug": "ezekiel",
+    "chapters": 48,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Daniel",
+    "slug": "daniel",
+    "chapters": 12,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Hosea",
+    "slug": "hosea",
+    "chapters": 14,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Joel",
+    "slug": "joel",
+    "chapters": 3,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Amos",
+    "slug": "amos",
+    "chapters": 9,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Obadiah",
+    "slug": "obadiah",
+    "chapters": 1,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Jonah",
+    "slug": "jonah",
+    "chapters": 4,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Micah",
+    "slug": "micah",
+    "chapters": 7,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Nahum",
+    "slug": "nahum",
+    "chapters": 3,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Habakkuk",
+    "slug": "habakkuk",
+    "chapters": 3,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Zephaniah",
+    "slug": "zephaniah",
+    "chapters": 3,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Haggai",
+    "slug": "haggai",
+    "chapters": 2,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Zechariah",
+    "slug": "zechariah",
+    "chapters": 14,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Malachi",
+    "slug": "malachi",
+    "chapters": 4,
+    "testament": "OT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Tobit",
+    "slug": "tobit",
+    "chapters": 14,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Judith",
+    "slug": "judith",
+    "chapters": 16,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Esther (Greek)",
+    "slug": "esther-greek",
+    "chapters": 10,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU"
+    ]
+  },
+  {
+    "name": "The Rest of Esther",
+    "slug": "additions-to-esther",
+    "chapters": 7,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Wisdom of Solomon",
+    "slug": "wisdom",
+    "chapters": 19,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Sirach",
+    "slug": "sirach",
+    "chapters": 51,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Baruch",
+    "slug": "baruch",
+    "chapters": 6,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "The Epistle of Jeremiah",
+    "slug": "epistle-of-jeremiah",
+    "chapters": 1,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "KJVM"
+    ]
+  },
+  {
+    "name": "The Song of the Three Holy Children",
+    "slug": "prayer-of-azariah",
+    "chapters": 1,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Susanna",
+    "slug": "susanna",
+    "chapters": 1,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Bel and the Dragon",
+    "slug": "bel-and-the-dragon",
+    "chapters": 1,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Daniel (Greek)",
+    "slug": "daniel-greek",
+    "chapters": 14,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU"
+    ]
+  },
+  {
+    "name": "1 Maccabees",
+    "slug": "i-maccabees",
+    "chapters": 16,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "2 Maccabees",
+    "slug": "ii-maccabees",
+    "chapters": 15,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "1 Esdras",
+    "slug": "i-esdras",
+    "chapters": 9,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "2 Esdras",
+    "slug": "ii-esdras",
+    "chapters": 16,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Prayer of Manasses",
+    "slug": "prayer-of-manasses",
+    "chapters": 1,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU",
+      "KJVM"
+    ]
+  },
+  {
+    "name": "Psalm 151",
+    "slug": "psalm-151",
+    "chapters": 1,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU"
+    ]
+  },
+  {
+    "name": "3 Maccabees",
+    "slug": "iii-maccabees",
+    "chapters": 7,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU"
+    ]
+  },
+  {
+    "name": "4 Maccabees",
+    "slug": "iv-maccabees",
+    "chapters": 18,
+    "testament": "DC",
+    "deuterocanon": true,
+    "translations": [
+      "WEBU"
+    ]
+  },
+  {
+    "name": "Matthew",
+    "slug": "matthew",
+    "chapters": 28,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Mark",
+    "slug": "mark",
+    "chapters": 16,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Luke",
+    "slug": "luke",
+    "chapters": 24,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "John",
+    "slug": "john",
+    "chapters": 21,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Acts",
+    "slug": "acts",
+    "chapters": 28,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Romans",
+    "slug": "romans",
+    "chapters": 16,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Corinthians",
+    "slug": "i-corinthians",
+    "chapters": 16,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Corinthians",
+    "slug": "ii-corinthians",
+    "chapters": 13,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Galatians",
+    "slug": "galatians",
+    "chapters": 6,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Ephesians",
+    "slug": "ephesians",
+    "chapters": 6,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Philippians",
+    "slug": "philippians",
+    "chapters": 4,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Colossians",
+    "slug": "colossians",
+    "chapters": 4,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Thessalonians",
+    "slug": "i-thessalonians",
+    "chapters": 5,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Thessalonians",
+    "slug": "ii-thessalonians",
+    "chapters": 3,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Timothy",
+    "slug": "i-timothy",
+    "chapters": 6,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Timothy",
+    "slug": "ii-timothy",
+    "chapters": 4,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Titus",
+    "slug": "titus",
+    "chapters": 3,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Philemon",
+    "slug": "philemon",
+    "chapters": 1,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Hebrews",
+    "slug": "hebrews",
+    "chapters": 13,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "James",
+    "slug": "james",
+    "chapters": 5,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 Peter",
+    "slug": "i-peter",
+    "chapters": 5,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 Peter",
+    "slug": "ii-peter",
+    "chapters": 3,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "1 John",
+    "slug": "i-john",
+    "chapters": 5,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "2 John",
+    "slug": "ii-john",
+    "chapters": 1,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "3 John",
+    "slug": "iii-john",
+    "chapters": 1,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Jude",
+    "slug": "jude",
+    "chapters": 1,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  },
+  {
+    "name": "Revelation",
+    "slug": "revelation-of-john",
+    "chapters": 22,
+    "testament": "NT",
+    "translations": [
+      "WEBU",
+      "KJVM",
+      "BSB"
+    ]
+  }
+]

@@ -1,124 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyTools — Bible study apps that run entirely in your browser</title>
-<meta name="description" content="A collection of offline-friendly Bible study tools: sermon notes, translation comparison, Greek and Hebrew flashcards, reading plans, prayer journal, SRS memory verses, family devotions, and a church calendar.">
-<link rel="stylesheet" href="css/base.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#f7f4ed" />
+<title>StudyTools — Read and study the World English Bible</title>
+<meta name="description" content="Read the World English Bible (Updated) with Apocrypha, then go deeper with a dozen free study tools: translation comparison, cross-references, dictionaries, interlinear Greek, memory verses, and more. Everything runs in your browser.">
+<link rel="stylesheet" href="index.css" />
 <script src="js/theme.js"></script>
-<style>
-  .hero { padding: 46px 0 8px; }
-  .hero h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 3rem); margin: 0 0 10px; }
-  .hero p { color: var(--ink-soft); max-width: 62ch; font-size: 1.03rem; }
-  .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; margin-top: 26px; }
-  .app-card { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: transform .12s ease, box-shadow .12s ease; }
-  .app-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(60,44,30,.1), 0 14px 34px rgba(60,44,30,.12); }
-  .app-card h2 { font-family: var(--serif); font-size: 1.12rem; margin: 0; }
-  .app-card p { margin: 0; color: var(--ink-soft); font-size: .9rem; }
-  .app-card .arrow { margin-top: auto; color: var(--accent); font-size: .85rem; font-weight: 600; }
-  .group-label { margin: 30px 0 0; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
-  .stats { display: flex; gap: 22px; flex-wrap: wrap; margin: 22px 0 0; }
-  .stat b { display: block; font-family: var(--serif); font-size: 1.35rem; }
-  .stat span { color: var(--ink-faint); font-size: .8rem; }
-</style>
 </head>
-<body data-root="./">
+<body dir='ltr' class='home-screen'>
+
 <div data-topbar></div>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>StudyTools</h1>
-    <p>Twelve free Bible study apps that run entirely in your browser. No accounts, no tracking, no server: everything is static files that work on GitHub Pages, and your notes and progress stay in your own browser.</p>
-    <div class="stats">
-      <div class="stat"><b>7</b><span>public-domain translations</span></div>
-      <div class="stat"><b>83</b><span>books of Scripture offline</span></div>
-      <div class="stat"><b>344k</b><span>cross-references</span></div>
-      <div class="stat"><b>5,941</b><span>topical subjects</span></div>
-      <div class="stat"><b>7,000</b><span>dictionary terms</span></div>
-      <div class="stat"><b>12</b><span>standalone tools</span></div>
+<main class='wrap'>
+
+  <section class='hero'>
+    <h1 class='hero-title'>Read the Bible</h1>
+    <p class='hero-lede'>The whole Bible &mdash; free, offline, and in the public domain &mdash; in three modern translations: the World English Bible (Updated) and the modernized King James Version, both with the Apocrypha, plus the 66-book Berean Standard Bible.</p>
+    <div class='hero-meta'>
+      <span class='pill'>3 translations</span>
+      <span class='pill'>With Apocrypha</span>
+      <span class='pill'>Public domain</span>
+      <span class='pill'>Runs offline</span>
+    </div>
+    <div class='hero-actions'>
+      <a class='btn' href='apps/bible/' aria-label='Start reading'>Start reading &rarr;</a>
+      <a class='btn secondary' href='apps/matrix/' aria-label='Compare translations'>Compare translations &rarr;</a>
     </div>
   </section>
 
-  <p class="group-label">Study &amp; content</p>
-  <div class="app-grid">
-    <a class="card app-card" href="apps/sermon/">
-      <h2>Sermon Notebook &amp; Outline Builder</h2>
-      <p>A markdown notebook made for Sunday mornings. SOAP, inductive, and expository templates, plus one-click PDF export and copy-to-clipboard.</p>
-      <span class="arrow">Open notebook →</span>
-    </a>
-    <a class="card app-card" href="apps/matrix/">
-      <h2>Verse Comparative Matrix</h2>
-      <p>Type a reference and see KJV, KJVM, ASV, WEB, and YLT side by side, plus KJVA and Douay-Rheims for the deuterocanonical books. Compare whole chapters or single verses.</p>
-      <span class="arrow">Compare translations →</span>
-    </a>
-    <a class="card app-card" href="apps/xref/">
-      <h2>Cross-Reference Explorer</h2>
-      <p>Follow the connections the church has drawn for centuries: every passage linked to the verse you are reading, ranked by how often it is cited.</p>
-      <span class="arrow">Follow the links →</span>
-    </a>
-    <a class="card app-card" href="apps/dictionary/">
-      <h2>Bible Dictionary</h2>
-      <p>Search Easton's, Smith's, and Hastings' public-domain dictionaries together. Every Scripture citation links straight into the Verse Matrix.</p>
-      <span class="arrow">Look up a word →</span>
-    </a>
-    <a class="card app-card" href="apps/vocab/">
-      <h2>Biblical Language Flashcards</h2>
-      <p>The 500 most frequent Greek and 500 most frequent Hebrew words, with glosses, transliteration, and morphology. Quiz, browse, and track mastery.</p>
-      <span class="arrow">Study vocabulary →</span>
-    </a>
-    <a class="card app-card" href="apps/memory/">
-      <h2>Scripture Memory (SRS)</h2>
-      <p>Paste verses you want to memorize and review them on a spaced-repetition schedule that grows the interval as you remember.</p>
-      <span class="arrow">Start memorizing →</span>
-    </a>
-    <a class="card app-card" href="apps/topical/">
-      <h2>Topical Bible</h2>
-      <p>Everything Scripture says about a subject, gathered by Nave and Torrey. Search 5,941 topics and open any reference in the Verse Matrix.</p>
-      <span class="arrow">Search a subject →</span>
-    </a>
-    <a class="card app-card" href="apps/interlinear/">
-      <h2>Greek Interlinear</h2>
-      <p>Read the Greek New Testament word by word, with transliteration, morphology, Strong's numbers, and a literal English gloss.</p>
-      <span class="arrow">Read the Greek →</span>
-    </a>
-    <a class="card app-card" href="apps/blog/">
-      <h2>Blog Idea Generator</h2>
-      <p>Pick a book and a writing angle and get a passage, a working title, and an outline you can draft today. Save the ideas worth keeping.</p>
-      <span class="arrow">Generate ideas →</span>
-    </a>
-  </div>
+  <section class='featured'>
+    <div class='featured-inner'>
+      <div class='featured-head'>
+        <h2 class='featured-title'>Verse of the Day</h2>
+        <a class='featured-link' id='votd-links' href='index.html#books' aria-label='Read the verse'>Read the chapter →</a>
+      </div>
+      <div class='featured-verse'>
+        <span class='v-num' id='votd-ref'>&nbsp;</span>
+        <p class='verse-text' id='votd-text'>Loading…</p>
+      </div>
+    </div>
+  </section>
 
-  <p class="group-label">Habits &amp; spiritual disciplines</p>
-  <div class="app-grid">
-    <a class="card app-card" href="apps/prayer/">
-      <h2>Prayer Prompt &amp; Journal Clock</h2>
-      <p>A distraction-free prayer space: a daily rotating set of prayer categories, a focus timer, and a journal that stays on your device.</p>
-      <span class="arrow">Enter prayer →</span>
-    </a>
-  </div>
+  <section class='lemma' id='books'>
+    <div class='section-label'>Bible Study</div>
+    <div class='main-study-grid'>
+      <div class='main-study-card'>
+        <h3 class='main-study-title'>Compare Translations</h3>
+        <p class='main-study-desc'>Type a reference and read it in three modern, public-domain translations side by side — the World English Bible (Updated), the modernized King James Version, and the Berean Standard Bible — including the deuterocanonical books.</p>
+        <div class='main-study-verse'>
+          <div class='verse-text'><span class='v-num'>Jn&nbsp;3:16</span> For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life.</div>
+        </div>
+        <a class='btn' href='apps/matrix/' aria-label='Compare translations'>Open the Verse Matrix →</a>
+      </div>
+      <div class='main-study-card'>
+        <h3 class='main-study-title'>Go Deeper</h3>
+        <p class='main-study-desc'>Read the Greek New Testament word by word with morphology and Strong's numbers, or follow the cross-references the church has drawn for centuries.</p>
+        <div class='hero-actions'>
+          <a class='btn' href='apps/interlinear/' aria-label='Word-by-word Greek'>Word-by-word Greek &rarr;</a>
+          <a class='btn secondary' href='apps/xref/' aria-label='Cross-references'>Cross-references &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p class="group-label">Interactive &amp; family</p>
-  <div class="app-grid">
-    <a class="card app-card" href="apps/devotional/">
-      <h2>Family Devotional Randomizer</h2>
-      <p>Spin the topic wheel and get a Scripture passage, three discussion questions, and a short prayer for your family or small group.</p>
-      <span class="arrow">Roll a topic →</span>
-    </a>
-    <a class="card app-card" href="apps/calendar/">
-      <h2>Church Calendar Tracker</h2>
-      <p>Follow Advent, Christmas, Epiphany, Lent, Easter, and Ordinary Time with daily BCP readings, creeds, and the Heidelberg Catechism.</p>
-      <span class="arrow">Open the calendar →</span>
-    </a>
-  </div>
+  <section class='apocrypha' id='tools'>
+    <div class='section-label'>Study Tools</div>
+    <div class='apocrypha-grid' id='tools-grid'></div>
+  </section>
 
-  <footer class="site">
-    <p>Scripture: King James Version, American Standard Version, World English Bible, and Young's Literal Translation — all public domain. Lexicon data from STEPBible and Open Scriptures; vocabulary frequency from OpenGNT and the Open Scriptures Hebrew Bible. Creeds and catechisms are public-domain texts. See the repository README for full attribution.</p>
-    <p>Your notes, journal entries, and study progress never leave this device; they are stored in your browser's local storage.</p>
-  </footer>
+  <section class='main-study' id='books'>
+    <div class='section-label'>Read the Bible</div>
+    <div class='book-tabs' role='tablist' aria-label='Book groups'>
+      <button class='tab' role='tab' aria-selected='true' data-group='law'>Law</button>
+      <button class='tab' role='tab' aria-selected='false' data-group='history'>History</button>
+      <button class='tab' role='tab' aria-selected='false' data-group='wisdom'>Wisdom</button>
+      <button class='tab' role='tab' aria-selected='false' data-group='prophets'>Prophets</button>
+      <button class='tab' role='tab' aria-selected='false' data-group='gospels'>Gospels</button>
+      <button class='tab' role='tab' aria-selected='false' data-group='letters'>Letters</button>
+      <button class='tab' role='tab' aria-selected='false' data-group='apocrypha'>Apocrypha</button>
+    </div>
+    <div class='apocrypha-grid' id='book-grid' style='margin-top:14px'></div>
+  </section>
+
+  <section class='footer-section'>
+    <div class='footer-inner'>
+      <p class='footer-text'>Scripture: the World English Bible (Updated) and the modernized King James Version, both with the Apocrypha, and the Berean Standard Bible — all public domain. Lexicon data from STEPBible and Open Scriptures; vocabulary frequency from OpenGNT and the Open Scriptures Hebrew Bible.</p>
+      <p class='footer-text'>Notes, journal entries, and study progress never leave this device; they are stored in your browser's local storage.</p>
+    </div>
+  </section>
+
 </main>
 
-<script src="js/common.js"></script>
-<script>ST.mountTopbar(undefined);</script>
+<script src='js/common.js'></script>
+<script src='js/home.js'></script>
+<script>ST.mountTopbar('bible');</script>
 </body>
 </html>

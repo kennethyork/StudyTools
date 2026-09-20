@@ -2,7 +2,7 @@
   "use strict";
 
   var SAVED_KEY = "blog-ideas.v1";
-  var TRANSLATION = "KJV";
+  var TRANSLATION = "KJVM";
 
   var els = {
     scope: document.getElementById("scope"),

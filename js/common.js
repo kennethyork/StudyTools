@@ -3,6 +3,7 @@
   "use strict";
 
   var APPS = [
+    { id: "bible", name: "Read the Bible", href: "apps/bible/" },
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
@@ -24,7 +25,7 @@
   }
 
   var BOOKS = null;
-  var TRANSLATIONS = ["KJV", "ASV", "WEB", "YLT"];
+  var TRANSLATIONS = ["WEBU", "KJVM", "BSB"];
 
   var BOOK_ALIASES = {
     genesis: "genesis", gen: "genesis",
@@ -172,6 +173,34 @@
     return loadJSON(siteRoot() + "data/bible/" + slug + "." + translation + ".json");
   }
 
+  // The translations shipped with the site, straight from translations.json so
+  // there is one source of truth for ids, names and canon coverage.
+  var TRANSLATIONS_DATA = null;
+  function loadTranslations() {
+    if (TRANSLATIONS_DATA) return Promise.resolve(TRANSLATIONS_DATA);
+    return loadJSON(siteRoot() + "data/bible/translations.json").then(function (d) {
+      TRANSLATIONS_DATA = (d && d.translations) || [];
+      return TRANSLATIONS_DATA;
+    });
+  }
+
+  // Group translations by canon. Anything carrying the deuterocanonical books
+  // is a "full Bible"; the rest is the 66-book canon.
+  function translationGroups(list) {
+    var full = [], canon = [];
+    (list || []).forEach(function (t) {
+      if (t && t.deuterocanon) full.push(t); else canon.push(t);
+    });
+    var groups = [];
+    if (full.length) groups.push({ id: "full", label: "Full Bible (with Apocrypha)", translations: full });
+    if (canon.length) groups.push({ id: "canon", label: "66-book canon", translations: canon });
+    return groups;
+  }
+
+  function translationSub(t) {
+    return (t && t.year ? t.year + " \u00b7 " : "") + "public domain";
+  }
+
   function escapeHTML(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -312,26 +341,80 @@
     return btn;
   }
 
+  // Top-level sections of the site. Every page's topbar shows these.
+  var SECTIONS = [
+    { id: "bible", name: "Bible", href: "index.html" },
+    { id: "tools", name: "Study Tools", href: "tools.html" },
+    { id: "about", name: "About", href: "about.html" }
+  ];
+
   function mountTopbar(currentId) {
     var root = siteRoot();
     var host = document.querySelector("[data-topbar]");
     if (!host) return;
     var nav = el("nav");
-    APPS.forEach(function (app) {
-      var a = el("a", { href: root + app.href, text: app.name });
-      if (app.id === currentId) a.setAttribute("aria-current", "page");
+    SECTIONS.forEach(function (section) {
+      var a = el("a", { href: root + section.href, text: section.name });
+      if (section.id === currentId) a.setAttribute("aria-current", "page");
       nav.appendChild(a);
     });
     host.className = "topbar";
     host.innerHTML = "";
     var inner = el("div", { class: "topbar-inner" }, [
-      el("a", { class: "brand", href: root + "index.html", text: "Study Tools" }),
+      el("a", { class: "brand", href: root + "index.html", text: "StudyTools" }),
       el("span", { class: "spacer" }),
       nav,
       themeToggleButton()
     ]);
     host.appendChild(inner);
   }
+
+  // Map from the data/ book slugs to this WEB module's two-to-four letter
+  // division codes (see info.json), so a parsed reference can open the
+  // matching pre-built chapter page (e.g. john 3 -> JN3.html).
+  var WEBU_MODULES = {
+    genesis: "GN", exodus: "EX", leviticus: "LV", numbers: "NU", deuteronomy: "DT",
+    joshua: "JS", judges: "JG", ruth: "RT",
+    "i-samuel": "S1", "ii-samuel": "S2", "i-kings": "K1", "ii-kings": "K2",
+    "i-chronicles": "R1", "ii-chronicles": "R2", ezra: "ER", nehemiah: "NH", esther: "ET",
+    job: "JB", psalms: "PS", proverbs: "PR", ecclesiastes: "EC", "song-of-solomon": "SS",
+    isaiah: "IS", jeremiah: "JR", lamentations: "LM", ezekiel: "EK", daniel: "DN",
+    hosea: "HS", joel: "JL", amos: "AM", obadiah: "OB", jonah: "JH", micah: "MC",
+    nahum: "NM", habakkuk: "HK", zephaniah: "ZP", haggai: "HG", zechariah: "ZC", malachi: "ML",
+    tobit: "TB", judith: "JT", wisdom: "WS", sirach: "SR", baruch: "BR",
+    "i-esdras": "E1", "ii-esdras": "E2", "prayer-of-manasses": "PN", "additional-psalm": "PX",
+    "i-maccabees": "M1", "ii-maccabees": "M2",
+    matthew: "MT", mark: "MK", luke: "LK", john: "JN", acts: "AC",
+    romans: "RM", "i-corinthians": "C1", "ii-corinthians": "C2", galatians: "GL",
+    ephesians: "EP", philippians: "PP", colossians: "CL",
+    "i-thessalonians": "H1", "ii-thessalonians": "H2", "i-timothy": "T1", "ii-timothy": "T2",
+    titus: "TT", philemon: "PM", hebrews: "HB", james: "JM",
+    "i-peter": "P1", "ii-peter": "P2", "i-john": "J1", "ii-john": "J2", "iii-john": "J3",
+    jude: "JD", "revelation-of-john": "RV"
+  };
+
+  function versePageUrl(parsed) {
+    var code = parsed && WEBU_MODULES[parsed.book];
+    return code ? code + parsed.chapter + ".html" : null;
+  }
+
+  // Canonical reading order, grouped for browsing. Shared by the home page
+  // and the Bible reader so the two never drift apart.
+  var BOOK_GROUPS = [
+    { id: "law", label: "Law", slugs: ["genesis", "exodus", "leviticus", "numbers", "deuteronomy"] },
+    { id: "history", label: "History", slugs: ["joshua", "judges", "ruth", "i-samuel", "ii-samuel",
+        "i-kings", "ii-kings", "i-chronicles", "ii-chronicles", "ezra", "nehemiah", "esther"] },
+    { id: "wisdom", label: "Wisdom", slugs: ["job", "psalms", "proverbs", "ecclesiastes", "song-of-solomon"] },
+    { id: "prophets", label: "Prophets", slugs: ["isaiah", "jeremiah", "lamentations", "ezekiel", "daniel",
+        "hosea", "joel", "amos", "obadiah", "jonah", "micah", "nahum", "habakkuk", "zephaniah",
+        "haggai", "zechariah", "malachi"] },
+    { id: "gospels", label: "Gospels", slugs: ["matthew", "mark", "luke", "john"] },
+    { id: "letters", label: "Letters", slugs: ["acts", "romans", "i-corinthians", "ii-corinthians",
+        "galatians", "ephesians", "philippians", "colossians", "i-thessalonians", "ii-thessalonians",
+        "i-timothy", "ii-timothy", "titus", "philemon", "hebrews", "james", "i-peter", "ii-peter",
+        "i-john", "ii-john", "iii-john", "jude", "revelation-of-john"] },
+    { id: "apocrypha", label: "Apocrypha", deuterocanon: true, slugs: [] }
+  ];
 
   window.ST = {
     APPS: APPS,
@@ -340,11 +423,16 @@
     normalizeBook: normalizeBook,
     parseRef: parseRef,
     loadBooks: loadBooks,
+    BOOK_GROUPS: BOOK_GROUPS,
     loadTranslation: loadTranslation,
+    loadTranslations: loadTranslations,
+    translationGroups: translationGroups,
+    translationSub: translationSub,
     loadJSON: loadJSON,
     escapeHTML: escapeHTML,
     el: el,
     qs: qs,
+    versePageUrl: versePageUrl,
     store: store,
     todayISO: todayISO,
     isoAddDays: isoAddDays,
