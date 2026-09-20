@@ -37,7 +37,7 @@ BIBLE = os.path.join(ROOT, "data", "bible")
 PAIRS = [("RV", "RVM"), ("DRC", "DRCM"), ("ASV", "ASVM"), ("YLT", "YLTM"), ("JPS", "JPSM")]
 
 # Text the site ships that no rule wrote, for the invented-word test.
-PUBLISHED = ["WEB", "WEBU", "KJV", "KJVA", "RV", "DRC", "ASV", "YLT"]
+PUBLISHED = ["WEB", "WEBU", "KJV", "KJVA", "RV", "DRC", "ASV", "YLT", "JPS"]
 
 # "yourselves" is present-day English and the pass produces it; not residue.
 ARCHAIC_PRONOUN = re.compile(r"\b(thou|thee|thy|thine|ye|thyself)\b", re.I)

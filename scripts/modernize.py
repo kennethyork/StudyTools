@@ -189,6 +189,29 @@ OVERRIDES = {
     "causest": "cause", "compassest": "compass", "hidest": "hide",
     "inspectest": "inspect", "trampest": "tramp", "lovest": "love",
     "suffocatest": "suffocates", "earneth": "earns", "exerteth": "exerts",
+    # Rare verbs whose base form these texts never use on its own, so the corpus
+    # cannot resolve them and this table has to say so instead. Each was read in
+    # its verse before being listed. The names that also end in -eth — Mephibo-
+    # sheth, Jetheth, Ashtoreth, Koheleth, Topheth — are deliberately absent:
+    # leaving them alone is the point.
+    "abateth": "abates", "allayeth": "allays", "attributeth": "attributes",
+    "backbiteth": "backbites", "beckoneth": "beckons", "beheadeth": "beheads",
+    "beseigeth": "besieges", "bubbleth": "bubbles", "caresseth": "caresses",
+    "carveth": "carves", "comitteth": "commits", "condoleth": "condoles",
+    "conveneth": "convenes", "creaketh": "creaks", "cumbereth": "cumbers",
+    "defineth": "defines", "depastureth": "depastures", "disposeth": "disposes",
+    "divulgeth": "divulges", "enhanceth": "enhances", "escheweth": "eschews",
+    "flaunteth": "flaunts", "flingeth": "flings", "freezeth": "freezes",
+    "glanceth": "glances", "hoppeth": "hops", "impelleth": "impels",
+    "inebriateth": "inebriates", "inebreateth": "inebriates", "inspireth": "inspires",
+    "listeth": "lists", "pranceth": "prances", "pricketh": "pricks",
+    "prieth": "pries", "puffeth": "puffs", "rattleth": "rattles", "raveth": "raves",
+    "rinseth": "rinses", "screaketh": "screaks", "scribbleth": "scribbles",
+    "shrieketh": "shrieks", "sneezeth": "sneezes", "snorteth": "snorts",
+    "sparkleth": "sparkles", "squeezeth": "squeezes", "streweth": "strews",
+    "supplicateth": "supplicates", "suppresseth": "suppresses", "thrasheth": "thrashes",
+    "tracketh": "tracks", "voucheth": "vouches", "weaneth": "weans",
+    "wieldeth": "wields",
 }
 
 # A base form the texts use less often than this is a name, not a verb:
