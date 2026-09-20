@@ -189,6 +189,26 @@ stubbed.then(function (whole) {
       /this browser has no WebGPU/.test(readerSource));
     check("the reader reports the machine's own words, so it can be quoted back",
       /What this machine reports:/.test(readerSource));
+    /* The machine check is a page of its own, because the failure happens in the
+       reader and the explanation does not belong in a verse panel. */
+    const modelPage = path.join(ROOT, "apps", "model", "index.html");
+    const modelSource = fs.existsSync(modelPage)
+      ? fs.readFileSync(modelPage, "utf8") : "";
+    const modelApp = fs.existsSync(path.join(ROOT, "apps", "model", "app.js"))
+      ? fs.readFileSync(path.join(ROOT, "apps", "model", "app.js"), "utf8") : "";
+    check("the machine check is a page that loads the diagnosis",
+      /js\/ask\.js/.test(modelSource) && /diagnose/.test(modelApp) && /advice/.test(modelApp));
+    check("the machine check says it downloads nothing",
+      /Nothing is\s+downloaded here|downloads\s+nothing/i.test(modelSource.replace(/<[^>]+>/g, " ")) ||
+      /Nothing is\s+downloaded here/i.test(modelSource));
+    check("the machine check is registered as an app",
+      /id: "model"/.test(fs.readFileSync(path.join(ROOT, "js", "common.js"), "utf8")));
+    check("and linked from the tools page",
+      /apps\/model\//.test(fs.readFileSync(path.join(ROOT, "tools.html"), "utf8")));
+    check("the sitemap is generated from the apps on disk",
+      /apps\/model\//.test(fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8")) &&
+      fs.existsSync(path.join(ROOT, "scripts", "build-sitemap.py")));
+
     check("every offered model is one the library names",
       A.MODELS.every(function (m) { return /-MLC$/.test(m.id) && m.size && m.label; }),
       A.MODELS.map(function (m) { return m.id; }).join(", "));

@@ -24,6 +24,7 @@ never leave the device.
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
 | **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
 | **Interlinear** (`apps/interlinear/`) | Every word of the original text behind the translation: the Greek New Testament (OpenGNT) and, by the same tags, the Hebrew Old Testament (Open Scriptures Hebrew Bible with STEPBible's glosses) — accented text, transliteration, morphology, Strong's number, and a literal English gloss, with a tap-to-highlight both views. The reader's verse panel uses the same data for whichever verse you tap. Every word with a Strong's number is also a **concordance**: open it and you get every verse that word appears in — 14,039 words and 373,363 word-in-verse entries, built by re-reading the interlinear rather than from any new source. A word used in a handful of verses is listed verse by verse; one used in hundreds is counted chapter by chapter, so the page stays readable. |
+| **Model Check** (`apps/model/`) | Can this machine run the local model? It asks the browser about WebGPU and reports what it said — whether WebGPU is there, whether an adapter is behind it, the adapter's vendor and the device memory — and gives the fix that fits the answer: Vulkan and `chrome://gpu` when the adapter is missing, a newer browser when WebGPU is. Nothing is downloaded. The reader's AI panel links here, and prints the same line so a reader can quote it. |
 | **Biblical Language Flashcards** (`apps/vocab/`) | The 500 most frequent Greek New Testament words and 500 most frequent Hebrew Bible words with glosses, transliteration, morphology, and frequency. Flashcard and browse modes with known-word tracking. |
 | **Prayer Prompt & Journal Clock** (`apps/prayer/`) | A daily rotating prayer focus (Family, Community, Global Missions, Church, Nation, Sick & Suffering, Unbelievers), a focus timer with full-screen mode, and a private journal. |
 | **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/RVM/JPSM text for a reference automatically. |
@@ -134,6 +135,7 @@ node scripts/check-ask.js             # re-checks the model list, its instructio
 node scripts/check-yourdata.js        # re-checks the merge of two devices' reading, and the code
 node scripts/check-commentary.js      # re-checks the commentary against the verses it comments on
 python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms the Vulgate's way
+python3 scripts/build-sitemap.py      # sitemap.xml, from the pages the site actually ships
 python3 scripts/build-commentary.py   # the public-domain commentary, verse by verse
 python3 scripts/build-haydock.py      # Haydock (1859) on the deuterocanon, and his book introductions
 python3 scripts/build-content.py      # creeds, catechisms

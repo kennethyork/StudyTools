@@ -16,6 +16,7 @@
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
     { id: "dictionary", name: "Dictionary", href: "apps/dictionary/" },
     { id: "vocab", name: "Greek & Hebrew Cards", href: "apps/vocab/" },
+    { id: "model", name: "Model Check", href: "apps/model/" },
     { id: "interlinear", name: "Interlinear", href: "apps/interlinear/" },
     { id: "topical", name: "Topical Bible", href: "apps/topical/" },
     { id: "prayer", name: "Prayer Clock", href: "apps/prayer/" },

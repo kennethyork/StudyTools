@@ -731,6 +731,10 @@
           : "This machine cannot run the model: this browser has no WebGPU." }));
       section.appendChild(ST.el("p", { class: "muted small", text: STAsk.advice(diag.reason) }));
       section.appendChild(ST.el("p", { class: "muted small" }, [
+        ST.el("a", { href: ST.siteRoot() + "apps/model/",
+          text: "What each part means, and how to fix it \u2192" })
+      ]));
+      section.appendChild(ST.el("p", { class: "muted small" }, [
         document.createTextNode("Chrome and Edge 121+, Safari 26 and Firefox 141+ have WebGPU. You can " +
           "check this browser at "),
         ST.el("a", { href: "https://webgpureport.org/", rel: "noopener", text: "webgpureport.org" }),
