@@ -20,8 +20,8 @@
   }
 
   function bookCode(book) {
-    var page = ST.versePageUrl({ book: book.slug, chapter: 1 });
-    if (page) return page.replace(/[0-9]+\.html$/, "");
+    var code = ST.moduleCode(book.slug);
+    if (code) return code;
     var initials = book.name.replace(/[^A-Za-z ]/g, "").split(/\s+/)
       .map(function (w) { return w.charAt(0); }).join("");
     return initials.slice(0, 3).toUpperCase();

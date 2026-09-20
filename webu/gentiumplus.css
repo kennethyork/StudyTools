@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'gentiumw';
+    src: url('fonts/gentiumplus.woff') format('woff'),
+         url('fonts/gentiumplus.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+div.gentium_plus,body.gentium_plus,.gentium_plus	{font-family: 'gentiumw','Gentium Plus','Gentium','Gentium Basic','Times','serif';}
+h1 { font-weight: normal; }

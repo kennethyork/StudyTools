@@ -369,9 +369,10 @@
     host.appendChild(inner);
   }
 
-  // Map from the data/ book slugs to this WEB module's two-to-four letter
-  // division codes (see info.json), so a parsed reference can open the
-  // matching pre-built chapter page (e.g. john 3 -> JN3.html).
+  // Map from the data/ book slugs to the WEB module's two-to-four letter
+  // division codes (see webu/info.json), so a book can link to its pre-built
+  // chapter page in webu/ (e.g. john 3 -> webu/JN3.html). The same codes
+  // supply the short badges on the home page's book grid.
   var WEBU_MODULES = {
     genesis: "GN", exodus: "EX", leviticus: "LV", numbers: "NU", deuteronomy: "DT",
     joshua: "JS", judges: "JG", ruth: "RT",
@@ -393,9 +394,16 @@
     jude: "JD", "revelation-of-john": "RV"
   };
 
+  var WEBU_DIR = "webu/";
+
+  function moduleCode(slug) {
+    return WEBU_MODULES[slug] || null;
+  }
+
+  // The module's pre-built chapter page for a book, e.g. "webu/GN1.html".
   function versePageUrl(parsed) {
-    var code = parsed && WEBU_MODULES[parsed.book];
-    return code ? code + parsed.chapter + ".html" : null;
+    var code = moduleCode(parsed && parsed.book);
+    return code ? WEBU_DIR + code + parsed.chapter + ".html" : null;
   }
 
   // Canonical reading order, grouped for browsing. Shared by the home page
@@ -433,6 +441,7 @@
     el: el,
     qs: qs,
     versePageUrl: versePageUrl,
+    moduleCode: moduleCode,
     store: store,
     todayISO: todayISO,
     isoAddDays: isoAddDays,

@@ -30,11 +30,17 @@ system setting until the reader picks one, then it is remembered.
 ## Repository layout
 
 ```
-index.html               hub page linking every app
-css/base.css             shared design system (light and dark themes)
+index.html               Bible section: verse of the day, study tools, book grid
+tools.html               hub page linking every study app
+about.html               about page and translation attributions
+index.css                styles for the Bible section
+css/base.css             shared design system for the apps (light and dark themes)
 js/theme.js              pre-paint theme chooser (no flash of wrong theme)
 js/common.js             shared helpers (ref parsing, data loading, storage, toast, header)
+js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
+webu/                    the eBible.org World English Bible (Updated) chapter pages
+                         for all 81 books, plus its fonts and lemma data
 data/bible/              per-book WEBU, KJVM, and BSB JSON
 data/vocab/              top-500 Greek and Hebrew vocabulary
 data/blog/               blog idea kit (angles, fills, title patterns)
