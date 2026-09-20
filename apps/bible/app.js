@@ -141,10 +141,16 @@
     return s;
   }
 
+  /* A word of the original text. When it carries a Strong's number, the chip is
+     a link to every other verse that word appears in, which is the concordance */
   function wordChip(w) {
-    var chip = document.createElement("span");
+    var chip = document.createElement(w.s ? "a" : "span");
     chip.className = "word";
     chip.title = (w.l || "") + (w.m ? " \u00b7 " + w.m : "") + (w.s ? " \u00b7 " + w.s : "");
+    if (w.s) {
+      chip.href = ST.siteRoot() + "apps/interlinear/?strong=" + w.s;
+      chip.title += " \u2014 every verse it appears in";
+    }
     var g = document.createElement("span");
     g.className = "g";
     g.textContent = w.g || w.t || "";
@@ -351,7 +357,7 @@
         words.forEach(function (w) { wrap.appendChild(wordChip(w)); });
         wSection.appendChild(wrap);
         wSection.appendChild(ST.el("p", { class: "muted small", style: "margin:6px 0 0",
-          text: "Greek from OpenGNT; hover a word for its lemma and parsing." }));
+          text: "Greek from OpenGNT, Hebrew from the Open Scriptures Hebrew Bible; hover a word for its lemma and parsing, or open it for every verse it appears in." }));
         body.appendChild(wSection);
       }
 

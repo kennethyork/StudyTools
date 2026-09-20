@@ -94,6 +94,9 @@
   .vp-words .word .g { font-size: .95rem; }
   .vp-words .word .t { font-size: .62rem; color: var(--ink-faint); }
   .vp-words .word .e { font-size: .72rem; color: var(--accent); }
+  /* a word with a Strong's number is a link: every verse it appears in */
+  .vp-words a.word { text-decoration: none; color: inherit; }
+  .vp-words a.word:hover { border-color: var(--accent); }
   .vp-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 
   /* asking the local model */
