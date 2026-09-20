@@ -1,25 +1,25 @@
+/* Church Calendar Tracker: where a date falls in the Christian year, and the
+   psalms and lessons the Book of Common Prayer (1928) appoints for its morning
+   and evening office. The date arithmetic lives in js/liturgy.js; the tables
+   come from data/liturgical/bcp1928-daily.json. */
 (function () {
   "use strict";
 
-  var DAY = 86400000;
+  var L = STLiturgy;
+  var DAY_NAMES = L.DAY_NAMES;
 
   var SEASONS = {
     advent: { key: "advent", name: "Advent", cls: "season-advent", color: "#4b3670", desc: "A season of waiting and preparation, beginning four Sundays before Christmas. The church remembers Israel's longing for the Messiah and looks for Christ's return." },
     christmas: { key: "christmas", name: "Christmas", cls: "season-christmas", color: "#9a2f2f", desc: "The twelve days from Christmas Eve to Epiphany, celebrating the Word made flesh." },
     epiphany: { key: "epiphany", name: "Epiphany", cls: "season-epiphany", color: "#356b6f", desc: "From January 6 until Ash Wednesday, the season of light and revelation: Christ shown to the Gentiles." },
     lent: { key: "lent", name: "Lent", cls: "season-lent", color: "#5d4370", desc: "Forty days of repentance and preparation from Ash Wednesday to Easter, walking with Christ toward the cross." },
-    easter: { key: "easter", name: "Easter", cls: "season-easter", color: "#b8863b", desc: "Fifty days of resurrection joy from Easter Day to Pentecost, ending with the gift of the Holy Spirit." },
-    pentecost: { key: "pentecost", name: "Pentecost", cls: "season-pentecost", color: "#a8442f", desc: "The birthday of the church: the risen Christ pours out the Holy Spirit on His people." },
-    ordinary: { key: "ordinary", name: "Ordinary Time", cls: "season-ordinary", color: "#3f7a52", desc: "The growing season after Epiphany and after Pentecost, ordered by Trinity Sunday and Christ the King." }
+    easter: { key: "easter", name: "Easter", cls: "season-easter", color: "#b8863b", desc: "Fifty days of resurrection joy from Easter Day to Whitsunday, ending with the gift of the Holy Spirit." },
+    pentecost: { key: "pentecost", name: "Whitsunday", cls: "season-pentecost", color: "#a8442f", desc: "The birthday of the church: the risen Christ pours out the Holy Spirit on His people." },
+    ordinary: { key: "ordinary", name: "After Trinity", cls: "season-ordinary", color: "#3f7a52", desc: "The long green season after Whitsunday, counted by the Sundays after Trinity and closing with the three Sundays before Advent." }
   };
 
-  var MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  var DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  var HOLY_DAYS = null;
-  var OFFICES = {};
-  var HOLY_MAP = {};
-  var FIXED_MAP = { 1: {}, 2: {} };
+  var OFFICE = null;              /* the 1928 tables, indexed for lookup */
+  var SOURCE = "";
   var CREEDS = null;
   var CATECHISMS = {};
 
@@ -29,239 +29,69 @@
   var viewMonth = current.getMonth();
   var activeSource = "heidelberg";
 
-  function pad(n) { return String(n).padStart(2, "0"); }
-  function isoOf(y, m, d) { return y + "-" + pad(m + 1) + "-" + pad(d); }
-  function addDays(date, days) { var d = new Date(date.getTime()); d.setDate(d.getDate() + days); return d; }
-  function dayName(date) { return DAY_NAMES[date.getDay()]; }
-  function monthDay(date) { return MONTHS_SHORT[date.getMonth()] + " " + date.getDate(); }
-  function sameDay(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+  /* ?date=YYYY-MM-DD opens the calendar on a particular day, so a date can be
+     linked to and checked. */
+  (function () {
+    var wanted = /(?:^|[?&])date=(\d{4}-\d{2}-\d{2})/.exec(location.search);
+    if (!wanted) { return; }
+    var p = wanted[1].split("-").map(Number);
+    if (isNaN(p[0]) || isNaN(p[1]) || isNaN(p[2])) { return; }
+    selected = wanted[1];
+    current = new Date(p[0], p[1] - 1, p[2]);
+    viewYear = p[0];
+    viewMonth = p[1] - 1;
+  })();
 
-  /* ---------- Movable feasts ---------- */
+  function isoOf(date) { return L.iso(date); }
 
-  function easterDate(year) {
-    var a = year % 19, b = Math.floor(year / 100), c = year % 100;
-    var d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
-    var g = Math.floor((b - f + 1) / 3);
-    var h = (19 * a + b - d - g + 15) % 30;
-    var i = Math.floor(c / 4), k = c % 4;
-    var l = (32 + 2 * e + 2 * i - h - k) % 7;
-    var m = Math.floor((a + 11 * h + 22 * l) / 451);
-    var month = Math.floor((h + l - 7 * m + 114) / 31);
-    var day = ((h + l - 7 * m + 114) % 31) + 1;
-    return new Date(year, month - 1, day);
+  var SMALL_WORDS = { in: 1, of: 1, the: 1, and: 1, after: 1, before: 1, next: 1, upon: 1 };
+  function titleCase(text) {
+    return text.toLowerCase().replace(/\b[a-z][a-z']*/g, function (w, i) {
+      if (i > 0 && SMALL_WORDS[w]) { return w; }
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    }).replace(/^[a-z]/, function (c) { return c.toUpperCase(); });
   }
 
-  function advent1(year) {
-    var christmas = new Date(year, 11, 25);
-    var offset = christmas.getDay() === 0 ? 28 : 21 + christmas.getDay();
-    var d = addDays(christmas, -offset);
-    while (d.getDay() !== 0) d = addDays(d, -1);
-    return d;
-  }
+  /* ---------- the season banner ---------- */
 
-  function seasonFor(date) {
-    var year = date.getFullYear();
-    var easter = easterDate(year);
-    var ashWednesday = addDays(easter, -46);
-    var pentecost = addDays(easter, 49);
-    var epiphany = new Date(year, 0, 6);
-    var christmasEve = new Date(year, 11, 24);
-    var d = new Date(year, date.getMonth(), date.getDate());
-
-    if (d >= advent1(year) && d < christmasEve) return SEASONS.advent;
-    if (d >= christmasEve) return SEASONS.christmas;
-    if (d < epiphany) return SEASONS.christmas;
-    if (d >= epiphany && d < ashWednesday) return SEASONS.epiphany;
-    if (d >= ashWednesday && d < easter) return SEASONS.lent;
-    if (d >= easter && d < pentecost) return SEASONS.easter;
-    if (d >= pentecost && d < addDays(pentecost, 1)) return SEASONS.pentecost;
-    return SEASONS.ordinary;
-  }
-
-  function seasonRange(season, date) {
-    var year = date.getFullYear();
-    var easter = easterDate(year);
-    switch (season.key) {
-      case "advent": return [advent1(year), addDays(new Date(year, 11, 24), -1)];
-      case "christmas": return [new Date(year, 11, 24), addDays(new Date(year, 0, 6), -1)];
-      case "epiphany": return [new Date(year, 0, 6), addDays(easter, -47)];
-      case "lent": return [addDays(easter, -46), addDays(easter, -1)];
-      case "easter": return [easter, addDays(easter, 49)];
-      case "pentecost": return [addDays(easter, 49), addDays(easter, 49)];
-      default: return [addDays(easter, 50), addDays(advent1(year), -1)];
+  function seasonSpan(date) {
+    var key = L.season(date);
+    var y = date.getFullYear();
+    var eve = L.addDays(L.christmas(y), -1);
+    var january = date.getMonth() === 0;
+    switch (key) {
+      case "advent": return [L.advent1(y), L.addDays(eve, -1)];
+      case "christmas":
+        return january
+          ? [new Date(y - 1, 11, 24), L.addDays(L.epiphany(y), -1)]
+          : [eve, new Date(y, 0, 5)];
+      case "epiphany": return [L.epiphany(y), L.addDays(L.ashWednesday(y), -1)];
+      case "lent": return [L.ashWednesday(y), L.addDays(L.easter(y), -1)];
+      case "easter": return [L.easter(y), L.addDays(L.easter(y), 48)];
+      case "pentecost": return [L.pentecost(y), L.pentecost(y)];
+      default: return [L.addDays(january ? L.pentecost(y - 1) : L.pentecost(y), 1), L.addDays(L.advent1(y), -1)];
     }
   }
-
-  /* ---------- Office lookup ---------- */
-
-  function loadOffices() {
-    return Promise.all([1, 2].map(function (n) {
-      return ST.loadJSON(ST.siteRoot() + "data/liturgical/daily-office-year-" + n + ".json").then(function (data) {
-        OFFICES[n] = data.entries;
-        data.entries.forEach(function (e) {
-          if (e.day && /^[A-Z][a-z]{2} \d+$/.test(e.day)) {
-            FIXED_MAP[n][e.day] = e;
-          }
-        });
-      });
-    })).then(function () {
-      return ST.loadJSON(ST.siteRoot() + "data/liturgical/daily-office-holy-days.json").then(function (data) {
-        HOLY_DAYS = data.entries;
-        data.entries.forEach(function (e) {
-          if (e.day) HOLY_MAP[e.day] = e;
-        });
-      });
-    });
-  }
-
-  function liturgicalYear(date) {
-    var year = date.getFullYear();
-    if (date >= advent1(year)) return year % 2 === 0 ? 1 : 2;
-    return (year - 1) % 2 === 0 ? 1 : 2;
-  }
-
-  function find(entries, criteria) {
-    for (var i = 0; i < entries.length; i++) {
-      var e = entries[i];
-      if (criteria.season !== undefined && e.season !== criteria.season) continue;
-      if (criteria.week !== undefined && e.week !== criteria.week) continue;
-      if (criteria.day !== undefined && e.day !== criteria.day) continue;
-      if (criteria.title !== undefined && e.title !== criteria.title) continue;
-      return e;
-    }
-    return null;
-  }
-
-  function officeFor(date) {
-    var dow = dayName(date);
-    var isSunday = date.getDay() === 0;
-    var yearNum = liturgicalYear(date);
-    var entries = OFFICES[yearNum] || [];
-    var season = seasonFor(date);
-    var md = monthDay(date);
-
-    var seasonal = seasonalOffice(date, season, entries, dow);
-
-    // Sundays take precedence over lesser holy days; the principal feasts
-    // (Christmas, Epiphany, Easter, Pentecost, All Saints) are already
-    // represented by the seasonal office for their dates.
-    if (!isSunday && HOLY_MAP[md]) return { entry: HOLY_MAP[md], kind: "holy" };
-    if (seasonal) return { entry: seasonal, kind: "office" };
-    if (HOLY_MAP[md]) return { entry: HOLY_MAP[md], kind: "holy" };
-    return null;
-  }
-
-  function seasonalOffice(date, season, entries, dow) {
-    var isSunday = date.getDay() === 0;
-    var year = date.getFullYear();
-    var easter = easterDate(year);
-
-    if (season.key === "advent") {
-      var adventWeek = Math.floor((date - advent1(year)) / (7 * DAY)) + 1;
-      return find(entries, { season: "Advent", week: "Week of " + adventWeek + " Advent", day: dow });
-    }
-
-    if (season.key === "christmas") {
-      if (isSunday) {
-        var anchorYear = date.getMonth() === 0 ? year - 1 : year;
-        var ordinal = 1;
-        var cursor = new Date(anchorYear, 11, 25);
-        cursor = addDays(cursor, (7 - cursor.getDay()) % 7);
-        while (cursor < date) { cursor = addDays(cursor, 7); ordinal += 1; }
-        var title = ordinal === 1 ? "The First Sunday after Christmas" : "The Second Sunday after Christmas";
-        return find(entries, { season: "Christmas", title: title }) ||
-          find(entries, { season: "Christmas", week: "Christmas Day and Following", day: "Sunday" });
-      }
-      if (FIXED_MAP[liturgicalYear(date)][monthDay(date)]) {
-        return FIXED_MAP[liturgicalYear(date)][monthDay(date)];
-      }
-      return find(entries, { season: "Christmas", week: "Christmas Day and Following", day: dow });
-    }
-
-    if (season.key === "epiphany") {
-      var epiphany = new Date(year, 0, 6);
-      var baptism = addDays(epiphany, ((7 - epiphany.getDay()) % 7) || 7);
-      if (date < baptism) {
-        if (FIXED_MAP[liturgicalYear(date)][monthDay(date)]) {
-          return FIXED_MAP[liturgicalYear(date)][monthDay(date)];
-        }
-        return find(entries, { season: "Epiphany", week: "The Epiphany and Following", day: dow });
-      }
-      var weekNum = Math.floor((date - baptism) / (7 * DAY)) + 1;
-      var week = find(entries, { season: "Epiphany", week: "Week of " + weekNum + " Epiphany", day: dow });
-      if (week) return week;
-      if (isSunday) {
-        return find(entries, { season: "Epiphany", week: "Week of Last Epiphany", day: "Sunday" });
-      }
-      return null;
-    }
-
-    if (season.key === "lent") {
-      var ashWednesday = addDays(easter, -46);
-      var firstLentSunday = addDays(ashWednesday, 4);
-      if (date < firstLentSunday) {
-        return find(entries, { season: "Lent", week: "Ash Wednesday and Following", day: dow });
-      }
-      var lentWeek = Math.floor((date - firstLentSunday) / (7 * DAY)) + 1;
-      var holyWeek = find(entries, { season: "Lent", week: "Holy Week", day: dow });
-      if (holyWeek) return holyWeek;
-      return find(entries, { season: "Lent", week: "Week of " + lentWeek + " Lent", day: dow });
-    }
-
-    if (season.key === "easter") {
-      var daysAfter = Math.floor((date - easter) / DAY);
-      if (daysAfter < 7) {
-        return find(entries, { season: "Easter", week: "Easter Week", day: dow });
-      }
-      var weekNum2 = Math.floor(daysAfter / 7) + 1;
-      var eWeek = find(entries, { season: "Easter", week: "Week of " + weekNum2 + " Easter", day: dow });
-      if (eWeek) return eWeek;
-      if (daysAfter >= 49) return find(entries, { season: "Easter", week: "Pentecost", day: "Sunday" });
-      return null;
-    }
-
-    if (season.key === "pentecost") {
-      return find(entries, { season: "Easter", week: "Pentecost", day: "Sunday" });
-    }
-
-    // Ordinary Time: after the Epiphany, or after Pentecost.
-    if (date < easter) {
-      var epiphany2 = new Date(year, 0, 6);
-      var baptism2 = addDays(epiphany2, ((7 - epiphany2.getDay()) % 7) || 7);
-      var wk = Math.floor((date - baptism2) / (7 * DAY)) + 1;
-      var o1 = find(entries, { season: "Epiphany", week: "Week of " + wk + " Epiphany", day: dow });
-      if (o1) return o1;
-      if (isSunday) return find(entries, { season: "Epiphany", week: "Week of Last Epiphany", day: "Sunday" });
-      return null;
-    }
-
-    var lastSaturday = addDays(advent1(date.getFullYear()), -1);
-    var proper = 29 - Math.floor((lastSaturday - date) / (7 * DAY));
-    proper = Math.max(1, Math.min(29, proper));
-    var properEntry = find(entries, { season: "The Season after Pentecost", week: "Proper " + proper, day: dow });
-    if (properEntry) return properEntry;
-    if (isSunday) {
-      var trinity = find(entries, { season: "The Season after Pentecost", title: "The First Sunday after Pentecost: Trinity Sunday" });
-      if (trinity) return trinity;
-      var properSunday = find(entries, { season: "The Season after Pentecost", week: "Proper " + proper, day: "Sunday" });
-      if (properSunday) return properSunday;
-    }
-    return find(entries, { season: "The Season after Pentecost", week: "Proper 1", day: dow });
-  }
-
-  /* ---------- Rendering ---------- */
 
   function renderBanner() {
-    var season = seasonFor(current);
-    var range = seasonRange(season, current);
+    var season = SEASONS[L.season(current)];
+    var span = seasonSpan(current);
     var host = document.getElementById("banner");
     host.innerHTML = "";
     host.appendChild(ST.el("div", { class: "season-banner " + season.cls }, [
       ST.el("span", { class: "color-dot", style: "background:" + season.color }),
       ST.el("h2", { text: season.name }),
-      ST.el("div", { class: "dates", text: ST.formatDate(isoOf(range[0].getFullYear(), range[0].getMonth(), range[0].getDate()), { month: "long", day: "numeric" }) + " – " + ST.formatDate(isoOf(range[1].getFullYear(), range[1].getMonth(), range[1].getDate()), { month: "long", day: "numeric", year: "numeric" }) }),
+      ST.el("div", { class: "dates", text: ST.formatDate(isoOf(span[0]), { month: "long", day: "numeric" }) +
+        " \u2013 " + ST.formatDate(isoOf(span[1]), { month: "long", day: "numeric", year: "numeric" }) }),
       ST.el("div", { class: "desc", text: season.desc })
     ]));
+  }
+
+  /* ---------- the month grid ---------- */
+
+  function feastName(entry) {
+    if (!entry) { return ""; }
+    return entry.name || entry.eveningName || "";
   }
 
   function renderCalendar() {
@@ -275,26 +105,27 @@
     });
 
     var first = new Date(viewYear, viewMonth, 1);
-    var start = addDays(first, -first.getDay());
+    var start = L.addDays(first, -first.getDay());
     var todayISO = ST.todayISO();
 
     for (var i = 0; i < 42; i++) {
-      var d = addDays(start, i);
-      var iso = isoOf(d.getFullYear(), d.getMonth(), d.getDate());
-      var season = seasonFor(d);
-      var holy = HOLY_MAP[monthDay(d)];
+      var d = L.addDays(start, i);
+      var iso = isoOf(d);
+      var season = SEASONS[L.season(d)];
+      var feast = feastName(L.feastOn(d, OFFICE));
       var cls = "day";
       if (d.getMonth() !== viewMonth) cls += " outside";
       if (iso === todayISO) cls += " today";
       if (iso === selected) cls += " selected";
       var btn = ST.el("button", { type: "button", class: cls, "data-iso": iso });
       btn.appendChild(ST.el("span", { text: d.getDate() }));
-      btn.appendChild(ST.el("span", { class: "dot", style: "background:" + (holy ? "#a8442f" : season.color) }));
-      btn.appendChild(ST.el("span", { class: "feast", text: holy ? holy.title : "" }));
+      btn.appendChild(ST.el("span", { class: "dot", style: "background:" + (feast ? "#a8442f" : season.color) }));
+      btn.appendChild(ST.el("span", { class: "feast", text: feast }));
       btn.addEventListener("click", function () {
         selected = this.getAttribute("data-iso");
         var parts = selected.split("-").map(Number);
         current = new Date(parts[0], parts[1] - 1, parts[2]);
+        if (window.history && history.replaceState) { history.replaceState(null, "", "?date=" + selected); }
         renderBanner();
         renderCalendar();
         renderDay();
@@ -303,61 +134,79 @@
     }
   }
 
+  /* ---------- the day's office ---------- */
+
+  /* Each reading opens in Study a Passage, or goes to the lectern to be read
+     aloud — the same pairing the Sunday Lectionary uses. */
+  function reading(kind, r) {
+    var span = ST.el("span", { class: "reading" });
+    if (kind) { span.appendChild(ST.el("span", { class: "kind", text: kind })); }
+    var a = ST.el("a", { href: ST.siteRoot() + "apps/study/?ref=" + encodeURIComponent(r.link || r.ref), text: r.ref });
+    span.appendChild(a);
+    var aloud = ST.el("a", { href: ST.siteRoot() + "apps/lectern/?ref=" + encodeURIComponent(r.link || r.ref), text: "\u25b6" });
+    aloud.title = "Read aloud in the lectern";
+    aloud.style.marginLeft = "5px";
+    aloud.style.textDecoration = "none";
+    span.appendChild(aloud);
+    return span;
+  }
+
+  function slotBlock(slot, officeSlots) {
+    var readings = officeSlots[slot];
+    if (!readings || !readings.office) { return null; }
+    var o = readings.office;
+    var wrap = ST.el("div", { class: "office-block" });
+    var heading = slot === "morning" ? "Morning Prayer" : "Evening Prayer";
+    if (readings.feast) { heading += " \u00b7 " + readings.feast; }
+    wrap.appendChild(ST.el("h4", { text: heading }));
+
+    if (o.psalms && o.psalms.length) {
+      var tags = ST.el("div", { class: "psalm-tags" });
+      o.psalms.forEach(function (p) { tags.appendChild(reading("psalm", p)); });
+      wrap.appendChild(tags);
+    }
+    /* The Prayer Book prints more than one lesson for some days (alternatives
+       marked with an asterisk, and the older tables run several); they are
+       shown in the order printed, as the old calendar app did. */
+    var lessons = ST.el("ul", { class: "lesson-list" });
+    [["first", "First lesson"], ["second", "Second lesson"]].forEach(function (pair) {
+      var set = o[pair[0]] || [];
+      if (!set.length) { return; }
+      var cell = ST.el("li", {}, [ST.el("span", { class: "label", text: pair[1] })]);
+      set.forEach(function (l, i) {
+        if (i) { cell.appendChild(document.createTextNode(", ")); }
+        cell.appendChild(reading(null, l));
+      });
+      lessons.appendChild(cell);
+    });
+    if (lessons.childNodes.length) { wrap.appendChild(lessons); }
+    return wrap;
+  }
+
   function renderDay() {
     var parts = selected.split("-").map(Number);
     var date = new Date(parts[0], parts[1] - 1, parts[2]);
-    var season = seasonFor(date);
+    var season = SEASONS[L.season(date)];
     document.getElementById("day-title").textContent = ST.formatDate(selected, { weekday: "long", month: "long", day: "numeric" });
     document.getElementById("day-season").textContent = season.name;
 
     var body = document.getElementById("day-body");
     body.innerHTML = "";
 
-    var office = officeFor(date);
+    var office = L.officeFor(date, OFFICE);
     if (!office) {
       body.appendChild(ST.el("p", { class: "muted", text: "No daily office selection is available for this date in the bundled lectionary." }));
     } else {
-      var e = office.entry;
-      if (office.kind === "holy" || e.title) {
-        body.appendChild(ST.el("p", { class: "serif", style: "font-size:1.05rem;margin:0 0 10px", text: e.title || "Holy day" }));
+      var heading = office.feast || (office.week ? titleCase(office.week) + " \u00b7 " + office.weekday : office.weekday);
+      body.appendChild(ST.el("p", { class: "serif", style: "font-size:1.05rem;margin:0 0 10px", text: heading }));
+      if (office.transferred) {
+        body.appendChild(ST.el("p", { class: "muted small", style: "margin:0 0 10px", text: titleCase(office.transferred) +
+          " falls on this Sunday, and the Prayer Book transfers it: the Sunday's own service is said." }));
       }
-      if (e.psalms) {
-        var psWrap = ST.el("div", { class: "office-block" }, [ST.el("h4", { text: "Psalms" })]);
-        var tags = ST.el("div", { class: "psalm-tags" });
-        if (e.psalms.morning) tags.appendChild(ST.el("span", { text: "Morning: " + e.psalms.morning.join(", ") }));
-        if (e.psalms.evening) tags.appendChild(ST.el("span", { text: "Evening: " + e.psalms.evening.join(", ") }));
-        if (!e.psalms.morning && Array.isArray(e.psalms)) tags.appendChild(ST.el("span", { text: e.psalms.join(", ") }));
-        psWrap.appendChild(tags);
-        body.appendChild(psWrap);
-      }
-      if (e.lessons) {
-        var lessons = ST.el("div", { class: "office-block" }, [ST.el("h4", { text: "Lessons" })]);
-        var list = ST.el("ul", { class: "lesson-list" });
-        var flat = e.lessons;
-        var addLesson = function (label, text) {
-          list.appendChild(ST.el("li", {}, [ST.el("span", { class: "label", text: label }), ST.el("span", { text: String(text) })]));
-        };
-        if (flat.morning || flat.evening) {
-          ["morning", "evening"].forEach(function (slot) {
-            if (!flat[slot]) return;
-            Object.keys(flat[slot]).forEach(function (kind) {
-              addLesson(slot + " " + kind, flat[slot][kind]);
-            });
-          });
-        } else {
-          ["first", "second", "third", "gospel"].forEach(function (kind) {
-            if (flat[kind]) addLesson(kind === "first" ? "Old Testament" : kind === "second" ? "Epistle" : kind, flat[kind]);
-            var altKey = "alt" + kind.charAt(0).toUpperCase() + kind.slice(1);
-            if (flat[altKey]) addLesson("alternative", flat[altKey]);
-          });
-          Object.keys(flat).forEach(function (kind) {
-            var known = ["first", "second", "third", "gospel", "altFirst", "altSecond", "altThird", "altGospel", "morning", "evening"];
-            if (known.indexOf(kind) === -1 && typeof flat[kind] === "string") addLesson(kind, flat[kind]);
-          });
-        }
-        lessons.appendChild(list);
-        body.appendChild(lessons);
-      }
+      ["morning", "evening"].forEach(function (slot) {
+        var block = slotBlock(slot, office);
+        if (block) { body.appendChild(block); }
+      });
     }
 
     body.appendChild(ST.el("div", { class: "notice", style: "margin-top:12px", text: "Liturgical color: " + seasonColor(season) + ". " + season.desc }));
@@ -370,6 +219,8 @@
     if (season.key === "epiphany") return "green, white on Epiphany";
     return "green";
   }
+
+  /* ---------- creeds and catechisms ---------- */
 
   function renderSource() {
     var body = document.getElementById("source-body");
@@ -396,8 +247,8 @@
             hc.items.forEach(function (item) {
               if (item.lordsDay !== prev) {
                 prev = item.lordsDay;
-                var host = document.getElementById("source-body");
-                host.appendChild(ST.el("h3", { class: "serif", style: "font-size:1rem;margin:14px 0 4px", text: "Lord's Day " + prev }));
+                document.getElementById("source-body").appendChild(
+                  ST.el("h3", { class: "serif", style: "font-size:1rem;margin:14px 0 4px", text: "Lord's Day " + prev }));
               }
               document.getElementById("source-body").appendChild(ST.el("div", { class: "qa-item" }, [
                 ST.el("div", { class: "q", text: "Q" + item.number + ". " + item.question }),
@@ -458,6 +309,13 @@
     });
   }
 
+  function loadOffices() {
+    return ST.loadJSON(ST.siteRoot() + "data/liturgical/bcp1928-daily.json").then(function (data) {
+      OFFICE = L.indexData(data);
+      SOURCE = data.source || "";
+    });
+  }
+
   function init() {
     Promise.all([
       loadOffices(),
@@ -469,6 +327,8 @@
       renderCalendar();
       renderDay();
       renderSource();
+      var footer = document.querySelector("footer.site");
+      if (footer && SOURCE) { footer.appendChild(ST.el("p", { class: "muted small", text: SOURCE })); }
     }).catch(function (err) {
       var host = document.getElementById("banner");
       host.innerHTML = "";

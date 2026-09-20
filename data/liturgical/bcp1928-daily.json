@@ -1,5 +1,5 @@
 {
-  "source": "The Book of Common Prayer (1928), Episcopal Church - public domain in the United States since 1 January 2024. Transcribed by github.com/vovchykbratyk/BCP_1928.",
+  "source": "The Book of Common Prayer (1928), Episcopal Church - public domain in the United States since 1 January 2024. Tables transcribed by github.com/vovchykbratyk/BCP_1928. Readings are given as the Prayer Book prints them.",
   "weeks": [
     {
       "label": "FIRST SUNDAY IN ADVENT",
@@ -872,6 +872,52 @@
             ]
           }
         },
+        "Wednesday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "1",
+                "link": "1"
+              },
+              {
+                "ref": "15",
+                "link": "15"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Jer. 23:9–15",
+                "link": "Jer 23:9-15"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Luke 12:35–48",
+                "link": "Luke 12:35-48"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "92",
+                "link": "92"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Jer. 23:16–22",
+                "link": "Jer 23:16-22"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Matt. 28:16",
+                "link": "Matt 28:16"
+              }
+            ]
+          }
+        },
         "Thursday": {
           "morning": {
             "psalms": [
@@ -914,6 +960,94 @@
               {
                 "ref": "Rev. 20:1–6",
                 "link": "Rev 20:1-6"
+              }
+            ]
+          }
+        },
+        "Friday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "40:1–16",
+                "link": "40:1-16"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Jer. 23:23–32",
+                "link": "Jer 23:23-32"
+              }
+            ],
+            "second": [
+              {
+                "ref": "2 Cor. 5:5",
+                "link": "2 Cor 5:5"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "51",
+                "link": "51"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Jer. 26:1–7,10-15",
+                "link": "Jer 26:1-7"
+              }
+            ],
+            "second": [
+              {
+                "ref": "2 Tim. 3:14–4:8",
+                "link": "2 Tim 3:14-4:8"
+              }
+            ]
+          }
+        },
+        "Saturday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "42",
+                "link": "42"
+              },
+              {
+                "ref": "43",
+                "link": "43"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Mal. 2:1–9",
+                "link": "Mal 2:1-9"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Matt. 9:35–10:15",
+                "link": "Matt 9:35-10:15"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "103",
+                "link": "103"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Mal. 3:1–6",
+                "link": "Mal 3:1-6"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Heb. 4:14–5:10",
+                "link": "Heb 4:14-5:10"
               }
             ]
           }
@@ -4657,6 +4791,52 @@
             ]
           }
         },
+        "Wednesday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "26",
+                "link": "26"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ezek. 2",
+                "link": "Ezek 2"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Matt. 9:1–13",
+                "link": "Matt 9:1-13"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "4",
+                "link": "4"
+              },
+              {
+                "ref": "16",
+                "link": "16"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ezek. 3:16",
+                "link": "Ezek 3:16"
+              }
+            ],
+            "second": [
+              {
+                "ref": "2 Cor. 4",
+                "link": "2 Cor 4"
+              }
+            ]
+          }
+        },
         "Thursday": {
           "morning": {
             "psalms": [
@@ -4695,6 +4875,98 @@
               {
                 "ref": "John 10:1–10",
                 "link": "John 10:1-10"
+              }
+            ]
+          }
+        },
+        "Friday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "95",
+                "link": "95"
+              },
+              {
+                "ref": "84",
+                "link": "84"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ezek. 34:1–16",
+                "link": "Ezek 34:1-16"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Matt. 10:24–33,37–42",
+                "link": "Matt 10:24-33"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "77",
+                "link": "77"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ezek. 37:1–14",
+                "link": "Ezek 37:1-14"
+              }
+            ],
+            "second": [
+              {
+                "ref": "1 Tim. 4",
+                "link": "1 Tim 4"
+              }
+            ]
+          }
+        },
+        "Saturday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "101",
+                "link": "101"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ezek. 34:17–25,30-31",
+                "link": "Ezek 34:17-25"
+              }
+            ],
+            "second": [
+              {
+                "ref": "2 Tim. 2:1–15",
+                "link": "2 Tim 2:1-15"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "19",
+                "link": "19"
+              },
+              {
+                "ref": "23",
+                "link": "23"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ezek. 37:21b",
+                "link": "Ezek 37:21b"
+              }
+            ],
+            "second": [
+              {
+                "ref": "1 Tim. 6:6",
+                "link": "1 Tim 6:6"
               }
             ]
           }
@@ -8438,6 +8710,48 @@
             ]
           }
         },
+        "Wednesday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "132",
+                "link": "132"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Ecclus. 39:1–8",
+                "link": "Ecclus 39:1-8"
+              }
+            ],
+            "second": [
+              {
+                "ref": "1 Cor. 2",
+                "link": "1 Cor 2"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "84",
+                "link": "84"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Wisdom 9:9–11,17–18",
+                "link": "Wisdom 9:9-11"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Acts 5:12–28",
+                "link": "Acts 5:12-28"
+              }
+            ]
+          }
+        },
         "Thursday": {
           "morning": {
             "psalms": [
@@ -8476,6 +8790,78 @@
               {
                 "ref": "Acts 5:29",
                 "link": "Acts 5:29"
+              }
+            ]
+          }
+        },
+        "Friday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "122",
+                "link": "122"
+              },
+              {
+                "ref": "125",
+                "link": "125"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Isa. 61:1-9",
+                "link": "Isa 61:1-9"
+              }
+            ],
+            "second": [
+              {
+                "ref": "2 Cor. 3",
+                "link": "2 Cor 3"
+              }
+            ]
+          },
+          "evening": {
+            "psalms": [
+              {
+                "ref": "43",
+                "link": "43"
+              },
+              {
+                "ref": "134",
+                "link": "134"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Isa. 52:1–10",
+                "link": "Isa 52:1-10"
+              }
+            ],
+            "second": [
+              {
+                "ref": "Acts 6",
+                "link": "Acts 6"
+              }
+            ]
+          }
+        },
+        "Saturday": {
+          "morning": {
+            "psalms": [
+              {
+                "ref": "19",
+                "link": "19"
+              }
+            ],
+            "first": [
+              {
+                "ref": "Micah 3:5–8",
+                "link": "Micah 3:5-8"
+              }
+            ],
+            "second": [
+              {
+                "ref": "2 Tim. 1:1–14",
+                "link": "2 Tim 1:1-14"
               }
             ]
           }
@@ -15520,7 +15906,7 @@
             "second": [
               {
                 "ref": "Matt. 16:1—12",
-                "link": "Matt 16:1—12"
+                "link": "Matt 16:1-12"
               }
             ]
           }
@@ -15601,7 +15987,7 @@
             "first": [
               {
                 "ref": "Jer. 5:7—19",
-                "link": "Jer 5:7—19"
+                "link": "Jer 5:7-19"
               },
               {
                 "ref": "Wisdom 12:12-19",
@@ -15701,13 +16087,13 @@
             "first": [
               {
                 "ref": "Job 38:1—11,16—18",
-                "link": "Job 38:1—11"
+                "link": "Job 38:1-11"
               }
             ],
             "second": [
               {
                 "ref": "Matt. 17:1—13",
-                "link": "Matt 17:1—13"
+                "link": "Matt 17:1-13"
               }
             ]
           }
@@ -15793,13 +16179,13 @@
             "first": [
               {
                 "ref": "Job 38:31—38",
-                "link": "Job 38:31—38"
+                "link": "Job 38:31-38"
               }
             ],
             "second": [
               {
                 "ref": "Matt. 18:1—14",
-                "link": "Matt 18:1—14"
+                "link": "Matt 18:1-14"
               }
             ]
           }
@@ -15889,13 +16275,13 @@
             "first": [
               {
                 "ref": "Job 42:1—9",
-                "link": "Job 42:1—9"
+                "link": "Job 42:1-9"
               }
             ],
             "second": [
               {
                 "ref": "Matt. 19:1—15",
-                "link": "Matt 19:1—15"
+                "link": "Matt 19:1-15"
               }
             ]
           }
@@ -15980,7 +16366,7 @@
             "first": [
               {
                 "ref": "Jer. 31:31—37",
-                "link": "Jer 31:31—37"
+                "link": "Jer 31:31-37"
               },
               {
                 "ref": "Jer. 2:1-9,13",
@@ -15994,7 +16380,7 @@
             "second": [
               {
                 "ref": "John 13:31—35",
-                "link": "John 13:31—35"
+                "link": "John 13:31-35"
               },
               {
                 "ref": "Matt. 22:1-14",
@@ -16088,13 +16474,13 @@
             "first": [
               {
                 "ref": "Eccles. 2:1—11",
-                "link": "Eccles 2:1—11"
+                "link": "Eccles 2:1-11"
               }
             ],
             "second": [
               {
                 "ref": "Matt. 20:1—16",
-                "link": "Matt 20:1—16"
+                "link": "Matt 20:1-16"
               }
             ]
           }
@@ -16164,7 +16550,7 @@
             "first": [
               {
                 "ref": "Eccles. 3:1—2,9-15",
-                "link": "Eccles 3:1—2"
+                "link": "Eccles 3:1-2"
               }
             ],
             "second": [
@@ -16240,7 +16626,7 @@
             "first": [
               {
                 "ref": "Eccles. 5:1—7",
-                "link": "Eccles 5:1—7"
+                "link": "Eccles 5:1-7"
               }
             ],
             "second": [
@@ -16327,7 +16713,7 @@
             "first": [
               {
                 "ref": "Gen. 15:1—6",
-                "link": "Gen 15:1—6"
+                "link": "Gen 15:1-6"
               },
               {
                 "ref": "2 Kings 5:1-15a",
@@ -16439,7 +16825,7 @@
             "first": [
               {
                 "ref": "Eccles. 6:1—2,7—12",
-                "link": "Eccles 6:1—2"
+                "link": "Eccles 6:1-2"
               }
             ],
             "second": [
@@ -18809,10 +19195,600 @@
       }
     }
   ],
-  "holyDays": [
+  "fixed": [
+    {
+      "date": "01-01",
+      "name": "The Circumcision of Christ",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "103",
+            "link": "103"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 30:1–10",
+            "link": "Deut 30:1-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Eph. 2:11",
+            "link": "Eph 2:11"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "148",
+            "link": "148"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 30:11",
+            "link": "Deut 30:11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rev. 19:11–16",
+            "link": "Rev 19:11-16"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-02",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "37:26",
+            "link": "37:26"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 63:7–14",
+            "link": "Isa 63:7-14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 3:1–11",
+            "link": "1 John 3:1-11"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "2",
+            "link": "2"
+          },
+          {
+            "ref": "110",
+            "link": "110"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 63:15–64:1",
+            "link": "Isa 63:15-64:1"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 4:1–13",
+            "link": "Heb 4:1-13"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-03",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "66",
+            "link": "66"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 64:4",
+            "link": "Isa 64:4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 3:13",
+            "link": "1 John 3:13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "34",
+            "link": "34"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 65:8–16",
+            "link": "Isa 65:8-16"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 4:14–5:14",
+            "link": "Heb 4:14-5:14"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-04",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "92",
+            "link": "92"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 65:17",
+            "link": "Isa 65:17"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 4",
+            "link": "1 John 4"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "91",
+            "link": "91"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 66:1–2,5–13",
+            "link": "Isa 66:1-2"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 6:1–12",
+            "link": "Heb 6:1-12"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-05",
+      "name": "Epiphany Eve",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "144",
+            "link": "144"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 66:18–23",
+            "link": "Isa 66:18-23"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 5",
+            "link": "1 John 5"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "29",
+            "link": "29"
+          },
+          {
+            "ref": "98",
+            "link": "98"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 49:1–7",
+            "link": "Isa 49:1-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 3:15–22",
+            "link": "Luke 3:15-22"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-06",
+      "name": "The Epiphany",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "46",
+            "link": "46"
+          },
+          {
+            "ref": "100",
+            "link": "100"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 60:1–9",
+            "link": "Isa 60:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 4:1–6",
+            "link": "2 Cor 4:1-6"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "72",
+            "link": "72"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 61",
+            "link": "Isa 61"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 15:8–21",
+            "link": "Rom 15:8-21"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-07",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "85",
+            "link": "85"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 42:1–9",
+            "link": "Isa 42:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 3:13",
+            "link": "Matt 3:13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "97",
+            "link": "97"
+          },
+          {
+            "ref": "99",
+            "link": "99"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 43:1–12",
+            "link": "Isa 43:1-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 11:1–18",
+            "link": "Acts 11:1-18"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-08",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "65",
+            "link": "65"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 45:20",
+            "link": "Isa 45:20"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Mark 9:2–13",
+            "link": "Mark 9:2-13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "93",
+            "link": "93"
+          },
+          {
+            "ref": "96",
+            "link": "96"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 48:12–21",
+            "link": "Isa 48:12-21"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 26:1, 13–23",
+            "link": "Acts 26:1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-09",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "22:23",
+            "link": "22:23"
+          },
+          {
+            "ref": "24",
+            "link": "24"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 49:8–13,22–23",
+            "link": "Isa 49:8-13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 1:1–9",
+            "link": "1 John 1:1-9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "48",
+            "link": "48"
+          },
+          {
+            "ref": "117",
+            "link": "117"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 54:1–10",
+            "link": "Isa 54:1-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 28:23",
+            "link": "Acts 28:23"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-10",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "67",
+            "link": "67"
+          },
+          {
+            "ref": "87",
+            "link": "87"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 19:19",
+            "link": "Isa 19:19"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Col. 2:6–17",
+            "link": "Col 2:6-17"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "138",
+            "link": "138"
+          },
+          {
+            "ref": "146",
+            "link": "146"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Zech. 8:11–13,20-23",
+            "link": "Zech 8:11-13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 10:1–20",
+            "link": "Rom 10:1-20"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-11",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "102:15",
+            "link": "102:15"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jonah 4",
+            "link": "Jonah 4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Pet. 1:1–9",
+            "link": "Pet 1:1-9"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "147",
+            "link": "147"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Tobit 13:1b–5,7–11",
+            "link": "Tobit 13:1b-5"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 11:13–27",
+            "link": "Rom 11:13-27"
+          }
+        ]
+      }
+    },
+    {
+      "date": "01-12",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "50",
+            "link": "50"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Mal. 1:11",
+            "link": "Mal 1:11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Thess. 1",
+            "link": "2 Thess 1"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 9:2–7",
+            "link": "Isa 9:2-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Gal. 3:27–4:7",
+            "link": "Gal 3:27-4:7"
+          }
+        ]
+      }
+    },
     {
       "date": "01-24",
-      "feast": "ST. PAUL EVE",
+      "name": "The Eve of St. Paul",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -18840,7 +19816,9 @@
     },
     {
       "date": "01-25",
-      "feast": "ST. PAUL",
+      "name": "St. Paul",
+      "kind": "holy day",
+      "rank": "lesser",
       "morning": {
         "psalms": [
           {
@@ -18888,7 +19866,9 @@
     },
     {
       "date": "02-01",
-      "feast": "PURIFICATION OF THE BVM EVE",
+      "name": "The Eve of Purification of the Blessed Virgin Mary",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -18916,7 +19896,9 @@
     },
     {
       "date": "02-02",
-      "feast": "PURIFICATION OF THE BVM",
+      "name": "Purification of the Blessed Virgin Mary",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -18964,7 +19946,9 @@
     },
     {
       "date": "02-23",
-      "feast": "ST. MATTHIAS EVE",
+      "name": "The Eve of St. Matthias",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -18988,7 +19972,9 @@
     },
     {
       "date": "02-24",
-      "feast": "ST. MATTHIAS",
+      "name": "St. Matthias",
+      "kind": "holy day",
+      "rank": "lesser",
       "morning": {
         "psalms": [
           {
@@ -19036,7 +20022,9 @@
     },
     {
       "date": "03-24",
-      "feast": "ANNUNCIATION OF THE BVM EVE",
+      "name": "The Eve of Annunciation of the Blessed Virgin Mary",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -19064,7 +20052,9 @@
     },
     {
       "date": "03-25",
-      "feast": "ANNUNCIATION OF THE BVM",
+      "name": "Annunciation of the Blessed Virgin Mary",
+      "kind": "holy day",
+      "rank": "lesser",
       "morning": {
         "psalms": [
           {
@@ -19116,7 +20106,9 @@
     },
     {
       "date": "04-24",
-      "feast": "ST. MARK EVE",
+      "name": "The Eve of St. Mark",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19144,7 +20136,9 @@
     },
     {
       "date": "04-25",
-      "feast": "ST. MARK",
+      "name": "St. Mark",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19192,7 +20186,9 @@
     },
     {
       "date": "04-30",
-      "feast": "ST. PHILIP AND ST. JAMES EVE",
+      "name": "The Eve of St. Philip and St. James",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -19216,7 +20212,9 @@
     },
     {
       "date": "05-01",
-      "feast": "ST. PHILIP AND ST. JAMES",
+      "name": "St. Philip and St. James",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19260,7 +20258,9 @@
     },
     {
       "date": "06-10",
-      "feast": "ST. BARNABAS EVE",
+      "name": "The Eve of St. Barnabas",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19288,7 +20288,9 @@
     },
     {
       "date": "06-11",
-      "feast": "ST. BARNABAS",
+      "name": "St. Barnabas",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19340,7 +20342,9 @@
     },
     {
       "date": "06-23",
-      "feast": "ST. JOHN THE BAPTIST EVE",
+      "name": "The Eve of St. John the Baptist",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19364,7 +20368,9 @@
     },
     {
       "date": "06-24",
-      "feast": "ST. JOHN THE BAPTIST",
+      "name": "St. John the Baptist",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19416,7 +20422,9 @@
     },
     {
       "date": "06-28",
-      "feast": "ST. PETER EVE",
+      "name": "The Eve of St. Peter",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19440,7 +20448,9 @@
     },
     {
       "date": "06-29",
-      "feast": "ST. PETER",
+      "name": "St. Peter",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19492,7 +20502,9 @@
     },
     {
       "date": "07-24",
-      "feast": "ST. JAMES EVE",
+      "name": "The Eve of St. James",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19520,7 +20532,9 @@
     },
     {
       "date": "07-25",
-      "feast": "ST. JAMES",
+      "name": "St. James",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19564,7 +20578,9 @@
     },
     {
       "date": "08-05",
-      "feast": "TRANSFIGURATION OF OUR LORD EVE",
+      "name": "The Eve of Transfiguration of our Lord",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19592,7 +20608,9 @@
     },
     {
       "date": "08-06",
-      "feast": "TRANSFIGURATION OF OUR LORD",
+      "name": "Transfiguration of our Lord",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19640,7 +20658,9 @@
     },
     {
       "date": "08-23",
-      "feast": "ST. BARTHOLOMEW EVE",
+      "name": "The Eve of St. Bartholomew",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19668,7 +20688,9 @@
     },
     {
       "date": "08-24",
-      "feast": "ST. BARTHOLOMEW",
+      "name": "St. Bartholomew",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19716,7 +20738,9 @@
     },
     {
       "date": "09-20",
-      "feast": "ST. MATTHEW EVE",
+      "name": "The Eve of St. Matthew",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19744,7 +20768,9 @@
     },
     {
       "date": "09-21",
-      "feast": "ST. MATTHEW",
+      "name": "St. Matthew",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19792,7 +20818,9 @@
     },
     {
       "date": "09-28",
-      "feast": "ST. MICHAEL AND ALL ANGELS EVE",
+      "name": "The Eve of St. Michael and All Angels",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19820,7 +20848,9 @@
     },
     {
       "date": "09-29",
-      "feast": "ST. MICHAEL AND ALL ANGELS",
+      "name": "St. Michael and All Angels",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19868,7 +20898,9 @@
     },
     {
       "date": "10-17",
-      "feast": "ST. LUKE EVE",
+      "name": "The Eve of St. Luke",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19892,7 +20924,9 @@
     },
     {
       "date": "10-18",
-      "feast": "ST. LUKE",
+      "name": "St. Luke",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -19940,7 +20974,9 @@
     },
     {
       "date": "10-27",
-      "feast": "ST. SIMON AND ST. JUDE EVE",
+      "name": "The Eve of St. Simon and St. Jude",
+      "kind": "holy day",
+      "rank": "greater",
       "evening": {
         "psalms": [
           {
@@ -19964,7 +21000,9 @@
     },
     {
       "date": "10-28",
-      "feast": "ST. SIMON AND ST. JUDE",
+      "name": "St. Simon and St. Jude",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -20012,7 +21050,9 @@
     },
     {
       "date": "10-31",
-      "feast": "ALL SAINTS EVE",
+      "name": "The Eve of All Saints",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -20040,7 +21080,9 @@
     },
     {
       "date": "11-01",
-      "feast": "ALL SAINTS",
+      "name": "All Saints",
+      "kind": "holy day",
+      "rank": "greater",
       "morning": {
         "psalms": [
           {
@@ -20092,7 +21134,9 @@
     },
     {
       "date": "11-29",
-      "feast": "ST. ANDREW EVE",
+      "name": "The Eve of St. Andrew",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -20120,7 +21164,9 @@
     },
     {
       "date": "11-30",
-      "feast": "ST. ANDREW",
+      "name": "St. Andrew",
+      "kind": "holy day",
+      "rank": "lesser",
       "morning": {
         "psalms": [
           {
@@ -20168,7 +21214,9 @@
     },
     {
       "date": "12-20",
-      "feast": "ST. THOMAS EVE",
+      "name": "The Eve of St. Thomas",
+      "kind": "holy day",
+      "rank": "lesser",
       "evening": {
         "psalms": [
           {
@@ -20196,7 +21244,9 @@
     },
     {
       "date": "12-21",
-      "feast": "ST. THOMAS",
+      "name": "St. Thomas",
+      "kind": "holy day",
+      "rank": "lesser",
       "morning": {
         "psalms": [
           {
@@ -20241,6 +21291,1205 @@
           }
         ]
       }
+    },
+    {
+      "date": "12-24",
+      "name": "Christmas Eve",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "50",
+            "link": "50"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Baruch 4:36–5:9",
+            "link": "Baruch 4:36-5:9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 1:67",
+            "link": "Luke 1:67"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "85",
+            "link": "85"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Zech. 2:10",
+            "link": "Zech 2:10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 1:18",
+            "link": "Matt 1:18"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-25",
+      "name": "Christmas Day",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "89:1–30",
+            "link": "89:1-30"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 9:2–7",
+            "link": "Isa 9:2-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 2:1–20",
+            "link": "Luke 2:1-20"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "45",
+            "link": "45"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Micah 4:1–5,5:2-4",
+            "link": "Micah 4:1-5"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 4:7–14",
+            "link": "1 John 4:7-14"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-26",
+      "name": "St. Stephen",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "118",
+            "link": "118"
+          }
+        ],
+        "first": [
+          {
+            "ref": "2 Chron. 24:17–22",
+            "link": "2 Chron 24:17-22"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 6",
+            "link": "Acts 6"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "30",
+            "link": "30"
+          },
+          {
+            "ref": "31:1–6",
+            "link": "31:1-6"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 4:7–15",
+            "link": "Wisdom 4:7-15"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 7:59–8:8",
+            "link": "Acts 7:59-8:8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-27",
+      "name": "St. John the Evangelist",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "23",
+            "link": "23"
+          },
+          {
+            "ref": "24",
+            "link": "24"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Exod. 33:12",
+            "link": "Exod 33:12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 13:20-26,31–35",
+            "link": "John 13:20-26"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "97",
+            "link": "97"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 6:1-8",
+            "link": "Isa 6:1-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rev. 1",
+            "link": "Rev 1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-28",
+      "name": "The Holy Innocents",
+      "kind": "Christmas and Epiphany",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "8",
+            "link": "8"
+          },
+          {
+            "ref": "26",
+            "link": "26"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 31:1–6,15–16",
+            "link": "Jer 31:1-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 18:1–14",
+            "link": "Matt 18:1-14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "19",
+            "link": "19"
+          },
+          {
+            "ref": "126",
+            "link": "126"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 54:1–13",
+            "link": "Isa 54:1-13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Mark 10:13–16,23-31",
+            "link": "Mark 10:13-16"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-29",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "27",
+            "link": "27"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 56:1–8",
+            "link": "Isa 56:1-8"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 1",
+            "link": "1 John 1"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "20",
+            "link": "20"
+          },
+          {
+            "ref": "21:1–6",
+            "link": "21:1-6"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 57:13",
+            "link": "Isa 57:13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 1",
+            "link": "Heb 1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-30",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "33",
+            "link": "33"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 59:1–3, 15b–21",
+            "link": "Isa 59:1-3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 2:1–17",
+            "link": "1 John 2:1-17"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "111",
+            "link": "111"
+          },
+          {
+            "ref": "112",
+            "link": "112"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 60:13",
+            "link": "Isa 60:13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 2",
+            "link": "Heb 2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "12-31",
+      "name": null,
+      "kind": "Christmas and Epiphany",
+      "rank": "lesser",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "147",
+            "link": "147"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 62",
+            "link": "Isa 62"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 2:18",
+            "link": "1 John 2:18"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "90",
+            "link": "90"
+          },
+          {
+            "ref": "150",
+            "link": "150"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 10:12–11:1",
+            "link": "Deut 10:12-11:1"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 3",
+            "link": "Heb 3"
+          }
+        ]
+      }
+    }
+  ],
+  "movable": [
+    {
+      "offset": -46,
+      "name": "Ash Wednesday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "32",
+            "link": "32"
+          },
+          {
+            "ref": "143",
+            "link": "143"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 58:1–12",
+            "link": "Isa 58:1-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 12:1–14",
+            "link": "Heb 12:1-14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "102",
+            "link": "102"
+          },
+          {
+            "ref": "130",
+            "link": "130"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jonah 3,4",
+            "link": "Jonah 3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 15:10",
+            "link": "Luke 15:10"
+          }
+        ]
+      }
+    },
+    {
+      "offset": -6,
+      "name": "Monday before Easter",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "71",
+            "link": "71"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 42:1–7",
+            "link": "Isa 42:1-7"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 14:1–14",
+            "link": "John 14:1-14"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "42",
+            "link": "42"
+          },
+          {
+            "ref": "43",
+            "link": "43"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Lam. 1:7–12",
+            "link": "Lam 1:7-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 14:15",
+            "link": "John 14:15"
+          }
+        ]
+      }
+    },
+    {
+      "offset": -5,
+      "name": "Tuesday before Easter",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "6",
+            "link": "6"
+          },
+          {
+            "ref": "12",
+            "link": "12"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Hosea 14",
+            "link": "Hosea 14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 15:1–16",
+            "link": "John 15:1-16"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "51",
+            "link": "51"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Lam. 2:10,13–19",
+            "link": "Lam 2:10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 15:17",
+            "link": "John 15:17"
+          }
+        ]
+      }
+    },
+    {
+      "offset": -4,
+      "name": "Wednesday before Easter",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "94",
+            "link": "94"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Zech. 12:9-10,13:1,7-9",
+            "link": "Zech 12:9-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 16:1–15",
+            "link": "John 16:1-15"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "74",
+            "link": "74"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Lam. 3:1,14–33",
+            "link": "Lam 3:1"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 16:16",
+            "link": "John 16:16"
+          }
+        ]
+      }
+    },
+    {
+      "offset": -3,
+      "name": "Maundy Thursday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "116",
+            "link": "116"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 31:31–34",
+            "link": "Jer 31:31-34"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 13:18",
+            "link": "John 13:18"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "142",
+            "link": "142"
+          },
+          {
+            "ref": "143",
+            "link": "143"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Lam. 3:40-58",
+            "link": "Lam 3:40-58"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 17",
+            "link": "John 17"
+          }
+        ]
+      }
+    },
+    {
+      "offset": -2,
+      "name": "Good Friday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "22",
+            "link": "22"
+          },
+          {
+            "ref": "40:1–16",
+            "link": "40:1-16"
+          },
+          {
+            "ref": "54",
+            "link": "54"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Gen. 22:1–18",
+            "link": "Gen 22:1-18"
+          },
+          {
+            "ref": "Wisdom 2:1,12-24",
+            "link": "Wisdom 2:1"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 18",
+            "link": "John 18"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "69:1–22",
+            "link": "69:1-22"
+          },
+          {
+            "ref": "88",
+            "link": "88"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 52:13–53:12",
+            "link": "Isa 52:13-53:12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Pet. 2:11",
+            "link": "1 Pet 2:11"
+          }
+        ]
+      }
+    },
+    {
+      "offset": -1,
+      "name": "Easter Even",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "14",
+            "link": "14"
+          },
+          {
+            "ref": "16",
+            "link": "16"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Job 14:1–14",
+            "link": "Job 14:1-14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 19:38",
+            "link": "John 19:38"
+          },
+          {
+            "ref": "Heb. 4",
+            "link": "Heb 4"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "27",
+            "link": "27"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Job 19:21–27a",
+            "link": "Job 19:21-27a"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 6:3–11",
+            "link": "Rom 6:3-11"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 0,
+      "name": "Easter Day",
+      "rank": "greater"
+    },
+    {
+      "offset": 1,
+      "name": "Easter Monday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "2",
+            "link": "2"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 61:1–3,10–11",
+            "link": "Isa 61:1-3"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 24:1–12",
+            "link": "Luke 24:1-12"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "103",
+            "link": "103"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Exod. 15:1–13",
+            "link": "Exod 15:1-13"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 20:1–10",
+            "link": "John 20:1-10"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 2,
+      "name": "Easter Tuesday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "30",
+            "link": "30"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Dan. 12:1–4,13",
+            "link": "Dan 12:1-4"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Thess. 4:13",
+            "link": "1 Thess 4:13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "115",
+            "link": "115"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 30:18–21",
+            "link": "Isa 30:18-21"
+          }
+        ],
+        "second": [
+          {
+            "ref": "John 20:11–18",
+            "link": "John 20:11-18"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 36,
+      "name": "Rogation Monday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "104",
+            "link": "104"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 8:1–11,17–20",
+            "link": "Deut 8:1-11"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 6:5–15",
+            "link": "Matt 6:5-15"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "34",
+            "link": "34"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 28:1–14",
+            "link": "Deut 28:1-14"
+          }
+        ],
+        "second": [
+          {
+            "ref": "James 1:1–17",
+            "link": "James 1:1-17"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 37,
+      "name": "Rogation Tuesday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "80",
+            "link": "80"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 11:10-17",
+            "link": "Deut 11:10-17"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Matt. 6:24",
+            "link": "Matt 6:24"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "65",
+            "link": "65"
+          },
+          {
+            "ref": "67",
+            "link": "67"
+          }
+        ],
+        "first": [
+          {
+            "ref": "1 Kings 8:22–30",
+            "link": "1 Kings 8:22-30"
+          }
+        ],
+        "second": [
+          {
+            "ref": "James 4:8",
+            "link": "James 4:8"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 38,
+      "name": "Rogation Wednesday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "144",
+            "link": "144"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 14:1–9",
+            "link": "Jer 14:1-9"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 John 5:5–15",
+            "link": "1 John 5:5-15"
+          }
+        ]
+      },
+      "eveningName": "Ascension Eve",
+      "evening": {
+        "psalms": [
+          {
+            "ref": "99",
+            "link": "99"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Three Children 29-37",
+            "link": "Three Children 29-37"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Luke 24:44",
+            "link": "Luke 24:44"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 39,
+      "name": "Ascension Day",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "96",
+            "link": "96"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Dan. 7:9–10,13–14",
+            "link": "Dan 7:9-10"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Eph. 4:1–16",
+            "link": "Eph 4:1-16"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "24",
+            "link": "24"
+          },
+          {
+            "ref": "47",
+            "link": "47"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Isa. 33:5–6,17,20-22",
+            "link": "Isa 33:5-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Heb. 4:14–5:10",
+            "link": "Heb 4:14-5:10"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 48,
+      "name": "Whitsun Eve",
+      "rank": "greater",
+      "evening": {
+        "psalms": [
+          {
+            "ref": "46",
+            "link": "46"
+          },
+          {
+            "ref": "133",
+            "link": "133"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Deut. 16:9-12",
+            "link": "Deut 16:9-12"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Rom. 8:12–18",
+            "link": "Rom 8:12-18"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 49,
+      "name": "Whitsunday",
+      "rank": "greater"
+    },
+    {
+      "offset": 50,
+      "name": "Whit Monday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "139",
+            "link": "139"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Wisdom 9:1–6",
+            "link": "Wisdom 9:1-6"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 3:9-17",
+            "link": "1 Cor 3:9-17"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "103",
+            "link": "103"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Jer. 31:31–34",
+            "link": "Jer 31:31-34"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 4:13–22",
+            "link": "Acts 4:13-22"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 51,
+      "name": "Whit Tuesday",
+      "rank": "greater",
+      "morning": {
+        "psalms": [
+          {
+            "ref": "148",
+            "link": "148"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Ezek. 36:22–28",
+            "link": "Ezek 36:22-28"
+          }
+        ],
+        "second": [
+          {
+            "ref": "1 Cor. 12:1–13",
+            "link": "1 Cor 12:1-13"
+          }
+        ]
+      },
+      "evening": {
+        "psalms": [
+          {
+            "ref": "145",
+            "link": "145"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Num. 11:16–17,24–30",
+            "link": "Num 11:16-17"
+          }
+        ],
+        "second": [
+          {
+            "ref": "Acts 4:23",
+            "link": "Acts 4:23"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 55,
+      "name": "Trinity Eve",
+      "rank": "greater",
+      "evening": {
+        "psalms": [
+          {
+            "ref": "111",
+            "link": "111"
+          },
+          {
+            "ref": "113",
+            "link": "113"
+          }
+        ],
+        "first": [
+          {
+            "ref": "Num. 6:22",
+            "link": "Num 6:22"
+          }
+        ],
+        "second": [
+          {
+            "ref": "2 Cor. 13:5",
+            "link": "2 Cor 13:5"
+          }
+        ]
+      }
+    },
+    {
+      "offset": 56,
+      "name": "Trinity Sunday",
+      "rank": "greater"
     }
   ]
 }

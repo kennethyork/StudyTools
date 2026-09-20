@@ -26,7 +26,7 @@ never leave the device.
 | **Scripture Memory (SRS)** (`apps/memory/`) | Paste verses and review them with a simplified SM-2 spaced-repetition schedule. Can load the WEBU/KJVM/RVM/JPSM text for a reference automatically. |
 | **Blog Idea Generator** (`apps/blog/`) | Pick a scope and a writing angle and get a passage, a working title, and an outline. Seven angles (devotional, Bible study, personal story, practical list, honest questions, two passages, church season), saveable and exportable, with one-click send to the sermon notebook. |
 | **Family Devotional Randomizer** (`apps/devotional/`) | Spin a canvas topic wheel and get a public-domain passage, three discussion questions, and a short prayer. Copy the whole devotional to share. |
-| **Church Calendar Tracker** (`apps/calendar/`) | Liturgical year (Advent, Christmas, Epiphany, Lent, Easter, Pentecost, Ordinary Time) with the BCP daily office psalms and lessons, the Apostles'/Nicene/Athanasian creeds, the Heidelberg Catechism, and the Westminster Shorter Catechism. |
+| **Church Calendar Tracker** (`apps/calendar/`) | Liturgical year (Advent, Christmas, Epiphany, Lent, Easter, Whitsunday, the season after Trinity) with the Book of Common Prayer (1928) psalms and lessons for each day's morning and evening office, the Apostles'/Nicene/Athanasian creeds, the Heidelberg Catechism, and the Westminster Shorter Catechism. |
 
 Every page has a light/dark theme toggle in the header. The choice follows the
 system setting until the reader picks one, then it is remembered.
@@ -41,6 +41,7 @@ index.css                styles for the Bible section
 css/base.css             shared design system for the apps (light and dark themes)
 js/theme.js              pre-paint theme chooser (no flash of wrong theme)
 js/common.js             shared helpers (ref parsing, data loading, storage, toast, header)
+js/liturgy.js            the Christian year: Easter, Advent, the 1928 cycle, the daily office
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
@@ -57,7 +58,7 @@ data/interlinear/        OpenGNT word-by-word Greek New Testament
 data/catechism/          Heidelberg and Westminster Shorter
 data/creeds/             Apostles', Nicene, Athanasian
 data/devotional/         topic wheel content
-data/liturgical/         BCP 1979 daily office (Year One, Year Two, holy days)
+data/liturgical/         BCP 1928 daily office and Sunday tables (public domain)
 scripts/                 data build scripts (Python 3, no third-party deps)
 ```
 
@@ -95,7 +96,8 @@ python3 scripts/build-ebible.py JPS   # JPS Tanakh 1917 (39 books) from eBible.o
 python3 scripts/modernize.py RV RVM   # rule-based modernization of any of the above
 python3 scripts/modernize.py JPS JPSM
 python3 scripts/build-compare.py      # freezes the compared passages (Qur'an, Tanakh, Book of Mormon)
-python3 scripts/build-lectionary.py   # the BCP 1928 Sunday tables (public domain)
+python3 scripts/build-lectionary.py   # the BCP 1928 Sunday and daily office tables (public domain)
+node scripts/check-liturgical.js      # re-checks the 1928 cycle, Easter and the feast days (needs node)
 python3 scripts/build-vocab.py        # top-500 Greek and Hebrew vocabulary
 python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
@@ -124,7 +126,7 @@ All Scripture texts bundled here are in the **public domain**.
 | Greek vocabulary frequency | [eliranwong/OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Hebrew vocabulary frequency | [openscriptures/morphhb](https://github.com/openscriptures/morphhb) (Westminster Leningrad Codex) | CC BY 4.0 |
 | Greek and Hebrew glosses/lexicon | [STEPBible-Data](https://github.com/STEPBible/STEPBible-Data) TBESG / TBESH | CC BY 4.0 |
-| BCP 1979 Daily Office Lectionary (Year One, Year Two, Holy Days) | [reubenlillie/daily-office](https://github.com/reubenlillie/daily-office) | MIT |
+| BCP 1928 Daily Office and Sunday tables | [vovchykbratyk/BCP_1928](https://github.com/vovchykbratyk/BCP_1928) | The 1928 Book of Common Prayer is public domain in the United States since 1 January 2024; the tables are transcribed from it |
 | Heidelberg Catechism (1975 CRC translation) | [ldweeks/Heidelberg-Catechism](https://github.com/ldweeks/Heidelberg-Catechism) | Base text public domain |
 | Westminster Shorter Catechism | Wikisource | Public domain |
 | Apostles', Nicene, Athanasian creeds | Book of Common Prayer (1662) | Public domain |
@@ -138,6 +140,14 @@ and states the edition is "modernized in full".
 The verse text in `data/devotional/topics.json` is verified by
 `scripts/verify-devotional.py` against the bundled KJV data so the app cannot
 display a misquoted verse.
+
+`scripts/check-liturgical.js` does the same job for the calendar: it walks every
+year from 1900 to 2100 and checks that each Sunday is named as the Prayer Book
+names it, that the names never run backwards through the year, and that every
+date has both a morning and an evening office. Naming a Sunday comes before
+looking its week up in the tables, because the 1928 cycle holds the Sundays a
+year *may* have — six after the Epiphany and twenty-four after Trinity — and
+counting weeks from Advent runs ahead of the names in a year that uses fewer.
 
 ## Notes
 
