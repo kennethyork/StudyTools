@@ -365,11 +365,14 @@
     return btn;
   }
 
-  // Top-level sections of the site. Every page's topbar shows these.
+  /* Top-level sections of the site: every page's top bar shows these. A section
+     may point at another site — Witness lives on its own subdomain — so an
+     absolute URL is left alone instead of being rooted like a page of this one. */
   var SECTIONS = [
     { id: "bible", name: "Bible", href: "index.html" },
     { id: "tools", name: "Study Tools", href: "tools.html" },
-    { id: "about", name: "About", href: "about.html" }
+    { id: "about", name: "About", href: "about.html" },
+    { id: "witness", name: "Witness \u2197", href: "https://witness.studytools.cc/", external: true }
   ];
 
   function mountTopbar(currentId) {
@@ -378,8 +381,10 @@
     if (!host) return;
     var nav = el("nav");
     SECTIONS.forEach(function (section) {
-      var a = el("a", { href: root + section.href, text: section.name });
+      var href = /^[a-z]+:/i.test(section.href) ? section.href : root + section.href;
+      var a = el("a", { href: href, text: section.name });
       if (section.id === currentId) a.setAttribute("aria-current", "page");
+      if (section.external) { a.setAttribute("rel", "noopener"); a.title = "Witness, on its own site"; }
       nav.appendChild(a);
     });
     host.className = "topbar";
