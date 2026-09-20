@@ -72,7 +72,12 @@ KEEP_EST = {"greatest", "youngest", "strongest", "highest", "lowest", "oldest", 
             "heaviest", "easiest", "sittest", "surest", "safest", "purest", "sorest"}
 KEEP_ETH = {"teeth", "nazareth", "twentieth", "beneath", "underneath", "seth", "heath",
             "sheath", "wreath", "breath", "death", "sabbath", "forth", "fourth",
-            "tashheth", "azmaveth", "basshebeth", "zoheth", "hareseth"}
+            "tashheth", "azmaveth", "basshebeth", "zoheth", "hareseth",
+            # The ordinals. "Twentieth" was protected, but its siblings were not,
+            # and the rule that only verbs take -eth turned "the thirtieth year"
+            # into "the thirties year" in Ezekiel, Kings, Chronicles and more.
+            "thirtieth", "fortieth", "fiftieth", "sixtieth", "seventieth",
+            "eightieth", "ninetieth"}
 
 WORDS = {"unto": "to", "yea": "yes", "nay": "no", "verily": "truly", "spake": "spoke",
          "brake": "broke", "sware": "swore", "drave": "drove", "gat": "got",

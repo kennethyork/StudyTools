@@ -12,7 +12,7 @@ never leave the device.
 | --- | --- |
 | **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in all seven translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
 | **Verse Notes** (`apps/notes/`) | What you write against a verse. A note is kept per verse (`studytools.verse-notes.v1`), written in the reader's verse panel, marked in the margin so you can see where you have written, and gathered here to read, edit, delete, filter and export as Markdown or JSON. The same store the reader writes, so either side shows the other's changes. |
-| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Seven public-domain translations, offered in four groups: the **full Bible with the Apocrypha** (WEBU, KJVM, RVM), the **66-book canon** (American Standard Version, Young's Literal Translation), the **Hebrew Bible** (JPS Tanakh 1917, modernized — Old Testament only) and the **Douay-Rheims**, which keeps the Vulgate's numbering and is therefore read on its own: chapters are numbered as it numbers them, the reader says which Hebrew psalm you are in, and a shared link is turned into the psalm it calls by that number. Tap a verse for every translation that carries it, the cross-references, the Greek or Hebrew, where the Prayer Book reads it, and to write a note. Chapter navigation runs across book boundaries. |
+| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader, with an optional local model you can ask about a verse (off by default, runs on your device, Llama 3.2 3B by default, grounded in the verse text, cross-references, original words and Prayer Book readings the panel already holds). Pick a book and chapter and switch translations as you read. Seven public-domain translations, offered in four groups: the **full Bible with the Apocrypha** (WEBU, KJVM, RVM), the **66-book canon** (American Standard Version, Young's Literal Translation), the **Hebrew Bible** (JPS Tanakh 1917, modernized — Old Testament only) and the **Douay-Rheims**, which keeps the Vulgate's numbering and is therefore read on its own: chapters are numbered as it numbers them, the reader says which Hebrew psalm you are in, and a shared link is turned into the psalm it calls by that number. Tap a verse for every translation that carries it, the cross-references, the Greek or Hebrew, where the Prayer Book reads it, and to write a note. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
 | **Sunday Lectionary** (`apps/lectionary/`) | The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage to prepare from. |
 | **Lectern** (`apps/lectern/`) | One passage in large type with nothing else on the screen, for reading aloud in a service. Arrow keys move by chapter, verse numbers can be hidden, and the text can be enlarged. |
@@ -48,6 +48,7 @@ js/liturgy.js            the Christian year: Easter, Advent, the 1928 cycle, the
 js/plan.js               reading plans, worked out from the book list
 js/search.js             the search index format, tokeniser and querying
 js/versification.js      the Vulgate's psalm numbering, and how it maps to the Hebrew's
+js/ask.js                the optional local model: what it is told, and how it is run
 js/notes.js              verse notes: keys, the store rules, ordering, export
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
@@ -118,6 +119,7 @@ node scripts/check-search.js          # re-checks the index against the text it 
 python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms the Vulgate's way
 node scripts/check-versification.js   # re-checks that numbering against the texts
 node scripts/check-notes.js           # re-checks the verse-note rules and the Markdown export
+node scripts/check-ask.js             # re-checks the model list, its instructions and the streaming path
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -185,7 +187,10 @@ counting weeks from Advent runs ahead of the names in a year that uses fewer.
 ## Notes
 
 - No analytics, cookies, accounts, or network calls beyond loading the local
-  JSON data files.
+  JSON data files — with one exception the reader chooses: the optional local
+  model in the verse panel downloads its weights once from Hugging Face and then
+  runs on the device through WebGPU. Nothing typed or read is sent anywhere; the
+  model is off until it is turned on, and the download size is shown first.
 - Prayer journal entries, memory cards, reading-plan ticks, verse notes, and
   vocabulary mastery are stored in browser `localStorage` under the `studytools.*` prefix.
   Reading-plan ticks are kept by date (`studytools.reading-plan.v1`), so moving

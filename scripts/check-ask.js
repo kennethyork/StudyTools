@@ -1,0 +1,110 @@
+#!/usr/bin/env node
+/* Checks the local-model side of the reader: what the model is told, which
+   model is picked, and that the streaming path works. Run with:
+
+     node scripts/check-ask.js
+
+   None of this needs a GPU or a download: js/ask.js is pure functions plus a
+   stub engine, and this exercises both. What it cannot check is the model
+   itself — that is done on a machine with WebGPU. */
+"use strict";
+
+const path = require("path");
+const A = require(path.join(__dirname, "..", "js", "ask.js"));
+
+const failures = [];
+function check(name, condition, detail) {
+  if (!condition) { failures.push(name + (detail ? " — " + detail : "")); }
+}
+
+/* ---------- which model, and whether it can run ---------- */
+
+check("Llama 3.2 3B is the default", A.MODELS[0].id === "Llama-3.2-3B-Instruct-q4f16_1-MLC", A.MODELS[0].id);
+check("the default sizes are stated", /GB/.test(A.MODELS[0].size), A.MODELS[0].size);
+check("every model has a name, a size and a note",
+  A.MODELS.every(function (m) { return m.id && m.label && m.size && m.note; }));
+check("a browser without WebGPU reports that, and detect() resolves false",
+  typeof navigator === "undefined" ? A.hasWebGPU() === false : true);
+
+/* pickModel keeps a wrong id from being a hard failure */
+check("the preferred model is used when the library has it",
+  A.pickModel([{ model_id: "Llama-3.2-1B-Instruct-q4f16_1-MLC" },
+               { model_id: "Llama-3.2-3B-Instruct-q4f16_1-MLC" }]) === "Llama-3.2-3B-Instruct-q4f16_1-MLC");
+check("another offered size is used when the first is missing",
+  A.pickModel([{ model_id: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC" }]) === "Qwen2.5-1.5B-Instruct-q4f16_1-MLC");
+check("failing that, something three-billion-ish",
+  A.pickModel([{ model_id: "Phi-3.5-mini-instruct-q4f16_1-MLC" }]) === "Phi-3.5-mini-instruct-q4f16_1-MLC");
+check("an empty list still yields the preferred id", A.pickModel([]) === A.MODELS[0].id);
+check("plain strings are accepted as a model list", A.pickModel(["Llama-3.2-3B-Instruct-q4f16_1-MLC"]) ===
+  "Llama-3.2-3B-Instruct-q4f16_1-MLC");
+
+/* ---------- what the model is told ---------- */
+
+const context = {
+  label: "John 3:16",
+  translations: [
+    { name: "World English Bible, Updated", text: "For God so loved the world, that he gave his only born Son." },
+    { name: "Douay-Rheims", text: "For God so loved the world, as to give his only begotten Son." }
+  ],
+  references: [{ ref: "Romans 5:8", votes: 871 }, { ref: "1 John 4:9-10", votes: 618 }],
+  words: [{ g: "\u1f20\u03b3\u03ac\u03c0\u03b7\u03c3\u03b5\u03bd", t: "e\u0304gape\u0304sen", e: "to love" }],
+  readings: ["TRINITY SUNDAY \u00b7 Sunday \u00b7 morning second lesson"]
+};
+const block = A.contextBlock(context);
+check("the passage is named", block.indexOf("John 3:16") > -1);
+check("every translation is given to the model",
+  block.indexOf("World English Bible, Updated: For God so loved") > -1 && block.indexOf("Douay-Rheims:") > -1);
+check("the cross-references are given, with their votes",
+  block.indexOf("Romans 5:8 (871 votes)") > -1);
+check("the original words are given, with their transliteration and gloss",
+  block.indexOf("to love") > -1 && block.indexOf(context.words[0].t) > -1 &&
+  block.indexOf(context.words[0].g) > -1, block.split("\n").filter(function (l) { return l.indexOf("love") > -1; })[0]);
+check("where the Prayer Book reads it is given", block.indexOf("TRINITY SUNDAY") > -1);
+check("an empty context says so rather than pretending",
+  A.contextBlock({ label: "Obadiah 1" }).indexOf("no translation text was available") > -1);
+check("no section is headed when it has nothing in it",
+  A.contextBlock({ label: "X", translations: [{ name: "T", text: "y" }] }).indexOf("Cross-references") === -1);
+
+const messages = A.buildMessages(context, "What does \u201cworld\u201d mean here?");
+check("there is a system turn and a user turn", messages.length === 2 &&
+  messages[0].role === "system" && messages[1].role === "user");
+check("the instructions forbid inventing quotations and references",
+  /never invent/i.test(messages[0].content) && /never quote a translation that is not listed/i.test(messages[0].content));
+check("the instructions ask it to cite", /cite the references/i.test(messages[0].content));
+check("the instructions cover not knowing", /does not answer the question/i.test(messages[0].content));
+check("the question is carried through", messages[1].content.indexOf("What does \u201cworld\u201d mean here?") > -1);
+check("the material is in the same turn as the question",
+  messages[1].content.indexOf("Romans 5:8") > -1);
+check("an empty question is still well formed",
+  A.buildMessages(context, "").length === 2);
+
+/* ---------- the streaming path, through the stub ---------- */
+
+const stub = A.stubEngine();
+const stubbed = A.ask(stub, A.buildMessages(context, "What does this say?"), null);
+check("the stub answers", typeof stubbed.then === "function");
+
+stubbed.then(function (whole) {
+  check("the answer streams out whole", whole.indexOf("stub engine") > -1, whole.slice(0, 60));
+  check("the question reached the model", whole.indexOf("What does this say?") > -1, whole.slice(-60));
+
+  let pieces = 0;
+  return A.ask(A.stubEngine(), A.buildMessages(context, "q"), function () { pieces++; }).then(function () {
+    check("tokens are handed over as they arrive", pieces > 3, pieces + " pieces");
+  });
+}).then(function () {
+  check("asking with no engine fails loudly rather than silently",
+    A.ask(null, [], null).then(function () { return false; }, function () { return true; }) instanceof Promise);
+  return A.ask(null, [], null).then(function () { check("no engine should not resolve", false); },
+    function (err) { check("no engine gives a useful error", /no model is loaded/i.test(err.message), err.message); });
+}).then(function () {
+  if (failures.length) {
+    failures.forEach(function (f) { console.log("FAIL: " + f); });
+    console.log(failures.length + " failure(s)");
+    process.exit(1);
+  }
+  console.log("checked the model list, the prompt, and the streaming path; all checks passed");
+}).catch(function (err) {
+  console.log("FAIL: the checks threw — " + err.message);
+  process.exit(1);
+});

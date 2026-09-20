@@ -18,7 +18,11 @@
   var books = [];
   var bySlug = {};
   var translations = [];
-  var state = { book: null, chapter: 1, tr: null, pendingVerse: null };
+  /* stubModel / stubQuestion come from ?fakeModel= and ?askStub=, read at load
+     because the reader rewrites its own query string afterwards. They exist so
+     the page can be checked without a GPU; nothing else uses them. */
+  var state = { book: null, chapter: 1, tr: null, pendingVerse: null,
+                stubModel: false, stubQuestion: null };
   var lastChapter = {};            /* the chapter on screen, for the panel's actions */
   var notes = ST.store(STNotes.STORE_KEY) || {};   /* what the reader has written */
 
@@ -359,10 +363,183 @@
       });
       actions.appendChild(copy);
       body.appendChild(actions);
+
+      /* Asking a local model about this verse. Off until the reader turns it
+         on, told plainly what it costs and what it cannot do, and given the
+         material assembled above so it has something to answer from. */
+      body.appendChild(askSection({
+        label: label,
+        translations: comparable.filter(function (v) { return v.text; })
+          .map(function (v) { return { name: v.t.name, text: v.text }; }),
+        references: refs.map(function (r) { return { ref: refText(r.to), votes: r.votes }; }),
+        words: (words || []).map(function (w) { return { g: w.g, t: w.t, e: w.e }; }),
+        readings: readings.map(function (h) { return h.where + " \u00b7 " + h.slot + " " + h.kind; }),
+        noteKey: noteKey
+      }, label));
     }).catch(function () {
       body.innerHTML = "";
       body.appendChild(ST.el("p", { class: "notice error", text: "Could not load the verse's material." }));
     });
+  }
+
+  /* ---------- asking a local model ---------- */
+
+  function askSection(context, label) {
+    var section = panelSection("Ask about this verse");
+    var stub = !!state.stubModel;
+
+    var chosen = ST.store("ask-model.v1") || STAsk.MODELS[0].id;
+    var picker = document.createElement("select");
+    picker.className = "ask-picker";
+    STAsk.MODELS.forEach(function (m) {
+      var o = document.createElement("option");
+      o.value = m.id;
+      o.textContent = m.label + " · " + m.size + " — " + m.note;
+      picker.appendChild(o);
+    });
+    picker.value = chosen;
+
+    var intro = ST.el("p", { class: "muted small", style: "margin:0 0 8px", text:
+      "A model can read this verse with you \u2014 the text, the cross-references, the original words and " +
+      "where the Prayer Book reads it are handed to it. It runs on your device: nothing you type is sent " +
+      "anywhere. The first time, it downloads a model (" + STAsk.MODELS[0].size + " for the default) and " +
+      "keeps it in your browser. " + STAsk.CAVEAT });
+
+    var status = ST.el("p", { class: "muted small", style: "margin:8px 0 0" });
+    var answer = ST.el("div", { class: "ask-answer serif" });
+    var row = ST.el("div", { class: "row", style: "margin-top:8px" });
+    var question = document.createElement("input");
+    question.type = "text";
+    question.className = "ask-question";
+    question.placeholder = "What does this verse mean by \u201cworld\u201d?";
+    row.appendChild(question);
+    var askBtn = ST.el("button", { type: "button", text: "Ask" });
+    var stopBtn = ST.el("button", { type: "button", class: "ghost hidden", text: "Stop" });
+    row.appendChild(askBtn);
+    row.appendChild(stopBtn);
+
+    section.appendChild(intro);
+    var gate = ST.el("p", { class: "muted small", text: "Checking whether this machine can run it\u2026" });
+    section.appendChild(gate);
+
+    var engine = null;
+    var asking = false;
+    var start = null;
+
+    function cannotRun() {
+      gate.remove();
+      section.appendChild(ST.el("p", { class: "notice", text:
+        "This machine has no WebGPU, which the model needs to run. Chrome, Edge, Safari 26 and Firefox 141 " +
+        "on Windows have it; Chrome on Linux is still arriving. " }));
+      section.appendChild(ST.el("p", { class: "muted small" }, [
+        document.createTextNode("You can check your browser at "),
+        ST.el("a", { href: "https://webgpureport.org/", rel: "noopener", text: "webgpureport.org" }),
+        document.createTextNode(", and everything else on this page works without it.")
+      ]));
+    }
+
+    function canRun() {
+      gate.remove();
+      section.appendChild(picker);
+      start = ST.el("button", { type: "button", text: "Turn on the model" });
+      section.appendChild(ST.el("div", { class: "row", style: "margin-top:8px" }, [start]));
+      section.appendChild(status);
+      start.addEventListener("click", turnOn);
+      /* ?fakeModel=1 turns the stub on by itself, so the page can be checked
+         without a GPU; it never runs on its own for a reader. */
+      if (stub) { turnOn(); }
+    }
+
+    (stub ? Promise.resolve(true) : STAsk.detect()).then(function (ok) {
+      if (ok) { canRun(); } else { cannotRun(); }
+    });
+
+    function turnOn() {
+      chosen = picker.value;
+      ST.store("ask-model.v1", chosen);
+      picker.disabled = true;
+      start.disabled = true;
+      status.textContent = "Starting\u2026";
+      STAsk.load(chosen, function (report) {
+        if (report.text) { status.textContent = report.text; }
+        else if (typeof report.progress === "number") {
+          status.textContent = "Downloading and starting: " + Math.round(report.progress * 100) + "%";
+        }
+      }, stub).then(function (e) {
+        engine = e;
+        start.remove();
+        picker.remove();
+        section.appendChild(row);
+        section.appendChild(answer);
+        status.textContent = "The model is running on your device.";
+        if (stub && state.stubQuestion) { askIt(state.stubQuestion); }
+      }).catch(function (err) {
+        status.textContent = "";
+        section.appendChild(ST.el("p", { class: "notice error", text:
+          "The model could not start: " + (err && err.message ? err.message : "unknown error") +
+          ". Your browser may not have WebGPU, or the download may have been blocked." }));
+      });
+    }
+
+    function askIt(text) {
+      if (asking || !engine) { return; }
+      var q = String(text || question.value || "").trim();
+      if (!q) { return; }
+      asking = true;
+      answer.textContent = "";
+      stopBtn.classList.remove("hidden");
+      askBtn.disabled = true;
+      status.textContent = "Asking\u2026";
+      var messages = STAsk.buildMessages(context, q);
+      STAsk.ask(engine, messages, function (piece, whole) {
+        answer.textContent = whole;
+      }).then(function (whole) {
+        asking = false;
+        askBtn.disabled = false;
+        stopBtn.classList.add("hidden");
+        status.textContent = "";
+        if (!answer.querySelector("button")) {
+          var save = ST.el("button", { type: "button", class: "ghost", style: "font-size:.76rem",
+            text: "Save as my note on " + label });
+          save.addEventListener("click", function () {
+            var existing = STNotes.textFor(notes, state.book, state.chapter, verseOfKey(context.noteKey));
+            var addition = "Q: " + q + "\nA: " + whole;
+            saveNote(context.noteKey, existing ? existing + "\n\n" + addition : addition);
+            save.disabled = true;
+            save.textContent = "Saved to your notes";
+            ST.toast("Saved to your note on " + label);
+          });
+          answer.appendChild(ST.el("div", { class: "row", style: "margin-top:8px" }, [save]));
+          answer.appendChild(ST.el("p", { class: "muted small", style: "margin:6px 0 0",
+            text: "It cannot verify anything it says. Check it against the text above before you use it." }));
+        }
+      }).catch(function (err) {
+        asking = false;
+        askBtn.disabled = false;
+        stopBtn.classList.add("hidden");
+        status.textContent = err && err.message ? err.message : "The model stopped.";
+      });
+    }
+
+    askBtn.addEventListener("click", function () { askIt(); });
+    question.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); askIt(); }
+    });
+    stopBtn.addEventListener("click", function () {
+      /* the model streams into the same engine; throwing the page away stops it */
+      asking = false;
+      askBtn.disabled = false;
+      stopBtn.classList.add("hidden");
+      status.textContent = "Stopped. Reload the page to start the model again.";
+      STAsk.unload();
+      engine = null;
+    });
+    return section;
+  }
+
+  function verseOfKey(key) {
+    var parsed = STNotes.parseKey(key);
+    return parsed ? parsed.verse : 0;
   }
 
   /* The memory deck's shape is set by apps/memory/app.js; a card is the same
@@ -707,6 +884,9 @@
 
       var qpanel = parseInt(ST.qs("panel"), 10);
       if (qpanel > 0) { start.verse = qpanel; state.pendingPanel = qpanel; }
+
+      state.stubModel = !!ST.qs("fakeModel");
+      state.stubQuestion = ST.qs("askStub");
 
       var qtr = ST.qs("tr");
       if (qtr && translationById(qtr)) state.tr = qtr;
