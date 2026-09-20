@@ -4,19 +4,52 @@
       "id": "WEBU",
       "name": "World English Bible, Updated",
       "year": 2000,
-      "deuterocanon": true
+      "deuterocanon": true,
+      "versification": "masoretic"
     },
     {
       "id": "KJVM",
       "name": "King James Version, Modernized",
       "year": null,
-      "deuterocanon": true
+      "deuterocanon": true,
+      "versification": "masoretic"
     },
     {
       "id": "RVM",
       "name": "Revised Version, Modernized",
       "year": 1895,
-      "deuterocanon": true
+      "deuterocanon": true,
+      "versification": "masoretic"
+    },
+    {
+      "id": "ASV",
+      "name": "American Standard Version",
+      "year": 1901,
+      "deuterocanon": false,
+      "versification": "masoretic"
+    },
+    {
+      "id": "YLT",
+      "name": "Young's Literal Translation",
+      "year": 1862,
+      "deuterocanon": false,
+      "versification": "masoretic"
+    },
+    {
+      "id": "JPSM",
+      "name": "JPS Tanakh, Modernized",
+      "year": 1917,
+      "scope": "tanakh",
+      "versification": "masoretic"
+    },
+    {
+      "id": "DRC",
+      "name": "Douay-Rheims, Challoner Revision",
+      "year": 1752,
+      "deuterocanon": false,
+      "versification": "vulgate",
+      "note": "Keeps the Vulgate's numbering: its Psalm 22 is the Hebrew Psalm 23, and Daniel and Esther carry their additions as chapters. Shown in the reader on its own, and kept out of the side-by-side comparisons.",
+      "scope": "vulgate"
     }
   ]
 }

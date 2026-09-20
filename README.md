@@ -10,15 +10,15 @@ never leave the device.
 
 | App | What it does |
 | --- | --- |
-| **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in the three translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
+| **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in all seven translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
 | **Verse Notes** (`apps/notes/`) | What you write against a verse. A note is kept per verse (`studytools.verse-notes.v1`), written in the reader's verse panel, marked in the margin so you can see where you have written, and gathered here to read, edit, delete, filter and export as Markdown or JSON. The same store the reader writes, so either side shows the other's changes. |
-| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Books are grouped by canon (Law, History, Wisdom, Prophets, Gospels, Letters, Apocrypha), and the translation switcher offers the **full Bible** (the texts carrying the Apocrypha) as its own option alongside the 66-book canon. Chapter navigation runs across book boundaries. |
+| **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Seven public-domain translations, offered in four groups: the **full Bible with the Apocrypha** (WEBU, KJVM, RVM), the **66-book canon** (American Standard Version, Young's Literal Translation), the **Hebrew Bible** (JPS Tanakh 1917, modernized — Old Testament only) and the **Douay-Rheims**, which keeps the Vulgate's numbering and is therefore read on its own: chapters are numbered as it numbers them, the reader says which Hebrew psalm you are in, and a shared link is turned into the psalm it calls by that number. Tap a verse for every translation that carries it, the cross-references, the Greek or Hebrew, where the Prayer Book reads it, and to write a note. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
 | **Sunday Lectionary** (`apps/lectionary/`) | The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage to prepare from. |
 | **Lectern** (`apps/lectern/`) | One passage in large type with nothing else on the screen, for reading aloud in a service. Arrow keys move by chapter, verse numbers can be hidden, and the text can be enlarged. |
 | **Study a Passage** (`apps/study/`) | Type a reference and get everything the site holds on it in one place: the text in three translations, the cross-references drawn to those verses ranked by votes, the comparisons in the other traditions that touch the chapter, and the original text word by word — Greek for the New Testament, Hebrew for the Old. Printable as a teaching handout. |
 | **Parallel Passages** (`apps/parallels/`) | The Bible beside the Qur'an, the Jewish Tanakh and the Book of Mormon on the same figures and events (Adam, Noah, Abraham, Joseph, Moses, Jonah, Mary, Jesus, the Sermon on the Mount, the Ten Commandments, charity, faith). 99 comparisons, each one the Bible against a single other tradition (Tanakh, Qur'an or Book of Mormon), one passage against one passage, quoted from its own public-domain edition and modernized into the same present-day English. Every book of the Tanakh and every book of the Book of Mormon is covered. Only the compared passages are bundled — the full texts are not part of this site. |
-| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see three modern, public-domain translations side by side — the World English Bible (Updated), the modernized King James Version, and the modernized Revised Version — each including the deuterocanonical books — and, for the Old Testament, the Jewish Publication Society's Tanakh. Whole chapters or single verses, with chapter shortcuts and copy/print. |
+| **Verse Comparative Matrix** (`apps/matrix/`) | Type a reference and see every translation the site carries side by side — the World English Bible (Updated), the modernized King James Version and the modernized Revised Version (each with the deuterocanonical books), the American Standard Version, Young's Literal Translation, and the JPS Tanakh for the Old Testament — with a book a translation does not carry simply left out. Whole chapters or single verses, with chapter shortcuts and copy/print. |
 | **Cross-Reference Explorer** (`apps/xref/`) | Every passage openbible.info links to the verse you are reading, grouped by destination chapter and ranked by votes. Follow a link to jump to it. |
 | **Bible Dictionary** (`apps/dictionary/`) | Search Easton's (1897), Smith's (1863), and Hastings' (1909) dictionaries together. Scripture citations link straight into the Verse Matrix. |
 | **Topical Bible** (`apps/topical/`) | Nave's Topical Bible and Torrey's New Topical Textbook together: 5,941 subjects, searchable, with every reference linked to the verse. |
@@ -47,12 +47,13 @@ js/common.js             shared helpers (ref parsing, data loading, storage, toa
 js/liturgy.js            the Christian year: Easter, Advent, the 1928 cycle, the daily office
 js/plan.js               reading plans, worked out from the book list
 js/search.js             the search index format, tokeniser and querying
+js/versification.js      the Vulgate's psalm numbering, and how it maps to the Hebrew's
 js/notes.js              verse notes: keys, the store rules, ordering, export
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
                          for all 81 books, plus its fonts and lemma data
-data/bible/              per-book WEBU, KJVM, RVM and JPSM JSON
+data/bible/              per-book JSON for the seven translations
 data/compare/            the Qur'an / Tanakh / Book of Mormon passages quoted
                          in the Parallel Passages tool (only these passages)
 data/vocab/              top-500 Greek and Hebrew vocabulary
@@ -114,6 +115,8 @@ python3 scripts/build-topical.py      # Nave's and Torrey's topical Bibles
 python3 scripts/build-interlinear.py  # the Greek and Hebrew interlinear (OpenGNT, morphhb + TBESH)
 python3 scripts/build-search.py       # the word index behind Search the Bible
 node scripts/check-search.js          # re-checks the index against the text it indexes
+python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms the Vulgate's way
+node scripts/check-versification.js   # re-checks that numbering against the texts
 node scripts/check-notes.js           # re-checks the verse-note rules and the Markdown export
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
@@ -130,6 +133,9 @@ All Scripture texts bundled here are in the **public domain**.
 | Qur'an, Pickthall, Modernized (PKM) | [tanzil.net](https://tanzil.net/trans/en.pickthall) (M. M. Pickthall, 1930), modernized by this project | Public domain in the US since 1 January 2026; the modernization is this repository's own rule-based pass |
 | JPS Tanakh, Modernized (JPSM) | [eBible.org](https://ebible.org/engjps/) `engjps` USFM (JPS 1917), modernized by this project | Public domain (the 1917 JPS translation is public domain; the modernization is this repository's own rule-based pass) |
 | Topical entries | [topical-bible-search](https://github.com/j86schroeder/topical-bible-search) (Nave 1897, Torrey 1897) | MIT pipeline; source works public domain |
+| American Standard Version (1901) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
+| Douay-Rheims, Challoner (1752) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain; Vulgate numbering, so it is read on its own and kept out of the side-by-side views |
+| Young's Literal Translation (1862) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) | Public domain |
 | Greek interlinear | [OpenGNT](https://github.com/eliranwong/OpenGNT) | CC BY-SA 4.0 |
 | Hebrew interlinear | [Open Scriptures Hebrew Bible](https://github.com/openscriptures/morphhb) (morphhb) with [STEPBible](https://github.com/STEPBible/STEPBible-Data) TBESH | CC BY 4.0; the glosses cover about 96% of the words (TBESH itself has no entry for some, e.g. H518 "if") |
 | Cross-reference pairs | [openbible.info](https://www.openbible.info/labs/cross-references/) | CC BY 4.0 |

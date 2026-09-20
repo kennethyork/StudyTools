@@ -435,15 +435,38 @@
  "translations": [
   {
    "id": "WEBU",
-   "name": "World English Bible, Updated"
+   "name": "World English Bible, Updated",
+   "versification": "masoretic"
   },
   {
    "id": "KJVM",
-   "name": "King James Version, Modernized"
+   "name": "King James Version, Modernized",
+   "versification": "masoretic"
   },
   {
    "id": "RVM",
-   "name": "Revised Version, Modernized"
+   "name": "Revised Version, Modernized",
+   "versification": "masoretic"
+  },
+  {
+   "id": "ASV",
+   "name": "American Standard Version",
+   "versification": "masoretic"
+  },
+  {
+   "id": "YLT",
+   "name": "Young's Literal Translation",
+   "versification": "masoretic"
+  },
+  {
+   "id": "JPSM",
+   "name": "JPS Tanakh, Modernized",
+   "versification": "masoretic"
+  },
+  {
+   "id": "DRC",
+   "name": "Douay-Rheims, Challoner Revision",
+   "versification": "vulgate"
   }
  ]
 }

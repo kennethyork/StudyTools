@@ -103,18 +103,31 @@
     ]);
   }
 
+  /* A translation with its own numbering is searched and shown in that
+     numbering: a hit in the Douay-Rheims opens the Douay-Rheims, and the
+     study link is left off, because Study a Passage works in the site's
+     numbering and would look the verse up in the wrong place. */
+  function vulgate() {
+    var t = null;
+    (meta.translations || []).forEach(function (x) { if (x.id === state.translation) { t = x; } });
+    return STVersification.isVulgate(t);
+  }
+
   function resultRow(ref, text) {
     var row = ST.el("div", { class: "result" });
     row.appendChild(ST.el("a", { class: "ref",
-      href: ST.siteRoot() + "apps/bible/?ref=" + encodeURIComponent(ref.label), text: ref.label }));
+      href: ST.siteRoot() + "apps/bible/?ref=" + encodeURIComponent(ref.label) +
+        "&tr=" + encodeURIComponent(state.translation), text: ref.label }));
     var body = ST.el("div", { class: "text" });
     STSearch.mark(text, state.terms).forEach(function (piece) {
       if (piece.hit) { body.appendChild(ST.el("mark", { class: "hit", text: piece.text })); }
       else { body.appendChild(document.createTextNode(piece.text)); }
     });
     row.appendChild(body);
-    row.appendChild(ST.el("a", { class: "go",
-      href: ST.siteRoot() + "apps/study/?ref=" + encodeURIComponent(ref.label), text: "study \u2192" }));
+    if (!vulgate()) {
+      row.appendChild(ST.el("a", { class: "go",
+        href: ST.siteRoot() + "apps/study/?ref=" + encodeURIComponent(ref.label), text: "study \u2192" }));
+    }
     return row;
   }
 
@@ -123,6 +136,10 @@
     out.innerHTML = "";
     var shown = ids.slice(0, state.shown);
 
+    if (vulgate()) {
+      out.appendChild(ST.el("p", { class: "notice", text: "References are the " + nameOf(translation) +
+        "'s own: it keeps the Vulgate's numbering, so its Psalm 22 is the Hebrew Psalm 23." }));
+    }
     out.appendChild(ST.el("p", { class: "count", text: ids.length.toLocaleString() +
       (ids.length === 1 ? " verse" : " verses") + " in the " + nameOf(translation) +
       (book ? ", in " + bookName(book) : "") +

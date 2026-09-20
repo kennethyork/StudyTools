@@ -60,9 +60,9 @@
 
   <section class="card">
     <h2>The Bible texts</h2>
-    <p>Three translations ship with the site: the World English Bible (Updated), the modernized King James Version and the modernized Revised Version. Each is in modern English, each is in the public domain, and each carries the Apocrypha &mdash; which is why they can be bundled, copied, printed and shared freely.</p>
+    <p>Seven translations ship with the site, all in the public domain, which is why they can be bundled, copied, printed and shared freely. Three are modern and carry the Apocrypha: the World English Bible (Updated), the modernized King James Version and the modernized Revised Version. Two keep to the sixty-six book canon: the American Standard Version (1901) and Young's Literal Translation. One is Jewish: the Jewish Publication Society's Tanakh of 1917, modernized, for the Old Testament &mdash; the same reading the Parallel Passages tool sets beside a Christian one. One is Catholic and older: the Douay-Rheims of 1752, which reads the Latin Vulgate and numbers it the Vulgate's way (see below).</p>
     <p>The Parallel Passages tool quotes the Qur'an, the Jewish Tanakh and the Book of Mormon beside the Bible on the same figures and events. Only the passages it compares are bundled here — the full texts are deliberately not part of this site — and each is quoted from its own public-domain edition, modernized the same way as the Bibles above.</p>
-    <p><span class="tagline">Note:</span> the three are genuinely independent texts, not editions of one another. Measured against each other, under 2% of verses are word-for-word identical between WEBU and RVM, and about 12% between KJVM and RVM. All three Bibles carry the Apocrypha, though they present it differently: WEBU has the Greek Esther and Daniel, Psalm 151 and 3&ndash;4 Maccabees, while KJVM and RVM keep the additions to Daniel as separate books (Susanna, Bel and the Dragon, the Prayer of Azariah). </p>
+    <p><span class="tagline">Note:</span> the three modern texts are genuinely independent translations, not editions of one another. Measured against each other, under 2% of verses are word-for-word identical between WEBU and RVM, and about 12% between KJVM and RVM. All three of those carry the Apocrypha, though they present it differently: WEBU has the Greek Esther and Daniel, Psalm 151 and 3&ndash;4 Maccabees, while KJVM and RVM keep the additions to Daniel as separate books (Susanna, Bel and the Dragon, the Prayer of Azariah). </p>
 
     <table class="attr">
       <thead>
@@ -84,11 +84,31 @@
           <td>80<br><span class="tagline">with the Apocrypha</span></td>
           <td>The Revised Version of 1895 &mdash; public domain, from <a href="https://ebible.org/eng-rv/" rel="noopener">eBible.org</a> &mdash; brought into present-day English by this project. <code>scripts/build-rvm.py</code> updates the second-person pronouns and verb forms (<em>thou knowest</em> &rarr; <em>you know</em>, <em>goeth</em> &rarr; <em>goes</em>) and leaves the wording otherwise untouched. <code>RVM</code> is this site's own label for the edition.</td>
         </tr>
+        <tr>
+          <td><strong>American Standard Version</strong><br><span class="tagline">ASV</span></td>
+          <td>66<br><span class="tagline">canon only</span></td>
+          <td>The 1901 revision that the Revised Standard Version and the New American Standard Bible descend from &mdash; formal equivalence, still widely quoted. Text from <a href="https://github.com/scrollmapper/bible_databases" rel="noopener">scrollmapper/bible_databases</a>.</td>
+        </tr>
+        <tr>
+          <td><strong>Young's Literal Translation</strong><br><span class="tagline">YLT</span></td>
+          <td>66<br><span class="tagline">canon only</span></td>
+          <td>Robert Young's 1862 rendering, deliberately mechanical &mdash; it keeps the tense and the word order of the original, which is what makes it useful beside the interlinear. Text from the same <a href="https://github.com/scrollmapper/bible_databases" rel="noopener">scrollmapper</a> collection as the American Standard Version.</td>
+        </tr>
+        <tr>
+          <td><strong>Douay-Rheims, Challoner Revision</strong><br><span class="tagline">DRC &middot; Vulgate numbering</span></td>
+          <td>73<br><span class="tagline">with the deuterocanon</span></td>
+          <td>The Catholic English Bible of 1582&ndash;1610 in Bishop Challoner's revision of 1752, translated from the Latin Vulgate, so it reads differently as well as numbering differently &mdash; it has verses the critical text dropped (Acts 8:37, the Comma Johanneum). Text from <a href="https://github.com/scrollmapper/bible_databases" rel="noopener">scrollmapper/bible_databases</a>. Read on its own, never placed beside the others.</td>
+        </tr>
+        <tr>
+          <td><strong>JPS Tanakh, Modernized</strong><br><span class="tagline">JPSM</span></td>
+          <td>39<br><span class="tagline">Hebrew Bible</span></td>
+          <td>The Jewish Publication Society's 1917 translation of the Hebrew Bible, brought into present-day English by this project's rule-based pass like the Revised Version. The only translation here made from within the Jewish tradition rather than a Christian one.</td>
+        </tr>
       </tbody>
     </table>
 
     <h3>On numbering</h3>
-    <p>All three use the same chapter and verse numbering, so a reference lines up exactly between them. Editions that follow Vulgate numbering &mdash; where Psalm 22 is the Hebrew Psalm 23 &mdash; were deliberately left out, because they would quietly show the wrong text side by side.</p>
+    <p>The six Masoretic-numbered translations use the same chapter and verse numbering, so a reference lines up exactly between them. The Douay-Rheims does not: it keeps the Vulgate's, where Psalm 22 is the Hebrew Psalm 23, where Psalms 9 and 10 are one psalm and 114 and 115 are another, and where Daniel and Esther carry their additions as chapters. It is therefore read on its own &mdash; the reader says so on every chapter, names the Hebrew psalm you are actually in, and turns a shared link like <em>Psalm 23</em> into the psalm the Douay-Rheims calls 22 &mdash; and it is kept out of the Verse Matrix, the verse panel and the study page, so that nothing is placed beside the wrong verse. That is the whole reason it is offered this way rather than dropped.</p>
 
     <p>The World English Bible is not copyrighted; &ldquo;World English Bible&rdquo; is a trademark of eBible.org, and a modified text should not carry that name. Its full notice is at <a href="https://ebible.org/engwebu/" rel="noopener">eBible.org</a>.</p>
 

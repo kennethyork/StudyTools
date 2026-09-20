@@ -49,12 +49,20 @@
     return chosen;
   }
 
+  /* Translations with their own numbering stay out of the columns on purpose:
+     the point of this page is to place texts beside each other, and the
+     Vulgate's verses do not line up with these. They can be read in the reader,
+     which says so where it matters. */
+  function comparable() {
+    return translations.filter(function (t) { return !STVersification.isVulgate(t); });
+  }
+
   function renderPicker() {
     if (!els.picker) return;
     els.picker.innerHTML = "";
     // Grouped by canon, so the full Bible (the texts that carry the Apocrypha)
     // is offered as its own option next to the 66-book canon.
-    ST.translationGroups(translations).forEach(function (group) {
+    ST.translationGroups(comparable()).forEach(function (group) {
       var wrap = ST.el("div", { class: "tr-group" });
       wrap.appendChild(ST.el("div", { class: "tr-group-label", text: group.label }));
       var row = ST.el("div", { class: "tr-choices" });
@@ -269,7 +277,7 @@
       translations = loaded[1] || [];
       bySlug = {};
       books.forEach(function (b) { bySlug[b.slug] = b; });
-      CORE = translations.map(function (t) { return t.id; });
+      CORE = comparable().map(function (t) { return t.id; });
       LABELS = {};
       translations.forEach(function (t) {
         LABELS[t.id] = { name: t.name, sub: ST.translationSub(t) };

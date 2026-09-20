@@ -197,9 +197,10 @@
   var GROUP_LABELS = {
     full: "Full Bible (with Apocrypha)",
     canon: "66-book canon",
-    tanakh: "Hebrew Bible \u2014 Jewish translation"
+    tanakh: "Hebrew Bible \u2014 Jewish translation",
+    vulgate: "Vulgate numbering \u2014 read on its own, never beside the others"
   };
-  var GROUP_ORDER = ["full", "canon", "tanakh"];
+  var GROUP_ORDER = ["full", "canon", "tanakh", "vulgate"];
 
   function translationGroups(list) {
     var bucket = {};

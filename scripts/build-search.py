@@ -104,6 +104,7 @@ def main():
         payload = {
             "translation": t["id"],
             "name": t["name"],
+            "versification": t.get("versification", "masoretic"),
             "verses": verses,
             "words": len(encoded),
             "postings": encoded,
@@ -117,7 +118,11 @@ def main():
         json.dump({
             "source": "The site's own translations of the public-domain texts it carries.",
             "books": book_table,
-            "translations": [{"id": t["id"], "name": t["name"]} for t in translations],
+            # the versification travels with the translation, so the app can tell
+            # that a numbering is its own and label the results accordingly
+            "translations": [{"id": t["id"], "name": t["name"],
+                              "versification": t.get("versification", "masoretic")}
+                             for t in translations],
         }, f, ensure_ascii=False, indent=1)
         f.write("\n")
 

@@ -195,9 +195,11 @@
       document.getElementById("vp-sub").textContent =
         ST.translationSub(translationById(state.tr)) + " \u00b7 " + book.name + " " + chapter;
 
-      /* the same verse in each translation */
-      var versionsSection = panelSection("The same verse, three translations");
-      versions.forEach(function (v) {
+      /* the same verse in each translation — translations with their own
+         numbering stay out of this, because their verse 5 is not this verse 5 */
+      var comparable = versions.filter(function (v) { return !STVersification.isVulgate(v.t); });
+      var versionsSection = panelSection("The same verse in each translation");
+      comparable.forEach(function (v) {
         if (!v.text) { return; }
         var item = document.createElement("div");
         item.className = "vp-version";
@@ -211,6 +213,10 @@
         item.appendChild(text);
         versionsSection.appendChild(item);
       });
+      if (versions.length !== comparable.length) {
+        versionsSection.appendChild(ST.el("p", { class: "muted small", style: "margin:8px 0 0",
+          text: "The Douay-Rheims is not shown here: it keeps the Vulgate's numbering, so its verses do not line up with these. Open it in the reader to read it in its own." }));
+      }
       body.appendChild(versionsSection);
 
       /* the cross-references the church has drawn to this verse */
@@ -434,16 +440,23 @@
     });
   }
 
+  function fillChapterList(list) {
+    els.chapter.innerHTML = "";
+    list.forEach(function (n) {
+      var o = document.createElement("option");
+      o.value = String(n);
+      o.textContent = String(n);
+      els.chapter.appendChild(o);
+    });
+    if (list.indexOf(state.chapter) > -1) { els.chapter.value = String(state.chapter); }
+  }
+
   function fillChapters(slug) {
     var b = bySlug[slug];
     var total = b ? b.chapters : 1;
-    els.chapter.innerHTML = "";
-    for (var i = 1; i <= total; i++) {
-      var o = document.createElement("option");
-      o.value = String(i);
-      o.textContent = String(i);
-      els.chapter.appendChild(o);
-    }
+    var list = [];
+    for (var i = 1; i <= total; i++) { list.push(i); }
+    fillChapterList(list);
   }
 
   function renderPicker() {
@@ -521,8 +534,23 @@
     head.appendChild(meta);
     card.appendChild(head);
 
+    /* A translation with its own numbering says so here, and says what the
+       chapter the reader is looking at is called in the other numbering. */
+    if (STVersification.isVulgate(t)) {
+      var psalmNote = "";
+      if (book.slug === "psalms") {
+        var hebrew = STVersification.hebrewPsalm(state.chapter, 1);
+        if (hebrew) {
+          psalmNote = " Its Psalm " + state.chapter + " is the Hebrew Psalm " + hebrew.chapter + ".";
+        }
+      }
+      card.appendChild(notice("The " + t.name + " keeps the Vulgate's numbering: references below are its own." +
+        psalmNote + " It is kept out of the side-by-side views, so that nothing is placed beside the wrong verse."));
+    }
+    if (state.refNote) { card.appendChild(notice(state.refNote)); }
+
     if (book.deuterocanon) {
-      card.appendChild(notice("This is a deuterocanonical book. All three translations carry the Apocrypha, but the Jewish and Catholic traditions include slightly different books, so a few appear in only one or two of them."));
+      card.appendChild(notice("This is a deuterocanonical book. The World English Bible (Updated), the modernized King James Version and the modernized Revised Version carry the Apocrypha; the American Standard Version, Young's Literal Translation and the JPS Tanakh keep to the Hebrew and Greek canons, so they have no text here. The Jewish and Catholic traditions include slightly different books, so a few of these appear in only one or two translations."));
     }
 
     var nums = Object.keys(chapterData)
@@ -597,6 +625,14 @@
     renderPicker();
 
     ST.loadTranslation(state.book, state.tr).then(function (data) {
+      /* A translation with its own numbering may have a different number of
+         chapters (the Vulgate's Daniel and Esther run longer); the dropdown is
+         rebuilt from the file's own chapters so the reader never offers one the
+         text does not have. */
+      var chapters = Object.keys(data.chapters || {}).map(Number).sort(function (a, b) { return a - b; });
+      if (chapters.length && chapters.length !== els.chapter.options.length) {
+        fillChapterList(chapters);
+      }
       renderChapter(book, t, data);
     }).catch(function () {
       els.reader.innerHTML = "";
@@ -676,6 +712,23 @@
       if (qtr && translationById(qtr)) state.tr = qtr;
       else if (stored && translationById(stored)) state.tr = stored;
       if (!state.tr) state.tr = availableFor(start.book)[0] || (translations[0] && translations[0].id);
+
+      /* A link into a translation with its own numbering is read in that
+         numbering: ask for Psalm 23 in the Douay-Rheims and it opens its
+         Psalm 22, saying so. */
+      if (start.verse !== null && start.verse !== undefined && start.verse !== false &&
+          STVersification.isVulgate(translationById(state.tr))) {
+        var mapped = STVersification.mapReference({
+          book: start.book, chapter: start.chapter,
+          verseStart: start.verse, verseEnd: start.verse
+        }, "masoretic", "vulgate");
+        if (mapped.mapped) {
+          start.book = mapped.parsed.book;
+          start.chapter = mapped.parsed.chapter;
+          start.verse = mapped.parsed.verseStart;
+          state.refNote = mapped.note;
+        }
+      }
 
       go(start.book, start.chapter, start.verse);
     }).catch(function () {
