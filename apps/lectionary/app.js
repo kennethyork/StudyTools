@@ -35,6 +35,98 @@
     }).replace(/^[a-z]/, function (c) { return c.toUpperCase(); });
   }
 
+
+  /* ---------- the liturgical year, computed ----------
+     Dates are arithmetic, so the calendar can be worked out rather than
+     copied: Easter by the usual computus, and everything else from it. */
+
+  function easter(year) {
+    var a = year % 19, b = Math.floor(year / 100), c = year % 100;
+    var d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4), k = c % 4;
+    var l = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31);
+    var day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+  }
+
+  function iso(date) {
+    return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") +
+      "-" + String(date.getDate()).padStart(2, "0");
+  }
+
+  function addDays(date, n) {
+    var d = new Date(date.getTime());
+    d.setDate(d.getDate() + n);
+    return d;
+  }
+
+  function advent1(year) {
+    /* the fourth Sunday before Christmas: the Sunday on or after 27 November */
+    var nov27 = new Date(year, 10, 27);
+    var shift = (7 - nov27.getDay()) % 7;
+    return addDays(nov27, shift);
+  }
+
+  function liturgicalYear(date) {
+    var y = date.getFullYear();
+    return date >= advent1(y) ? y : y - 1;
+  }
+
+  function seasonOn(date) {
+    var y = date.getFullYear();
+    var thisChristmas = new Date(y, 11, 25);
+    var a1 = advent1(y);
+
+    /* Advent runs from Advent Sunday until Christmas Eve */
+    if (date >= a1 && date < thisChristmas) { return { name: "Advent", start: a1 }; }
+
+    /* Christmas runs from 25 December to 5 January */
+    var lastChristmas = date >= thisChristmas ? thisChristmas : new Date(y - 1, 11, 25);
+    var epiphany = new Date(lastChristmas.getFullYear() + 1, 0, 6);   /* Epiphany falls the January after */
+    if (date < epiphany) { return { name: "Christmas", start: lastChristmas }; }
+
+    /* from Epiphany to the next Advent */
+    var e = easter(epiphany.getFullYear());
+    var ash = addDays(e, -46), whitsun = addDays(e, 49), trinity = addDays(e, 56);
+    if (date < ash) { return { name: "Epiphany", start: epiphany }; }
+    if (date < e) { return { name: "Lent", start: ash }; }
+    if (date < whitsun) { return { name: "Easter", start: e }; }
+    if (date < trinity) { return { name: "Whitsunday & Trinity", start: whitsun }; }
+    return { name: "After Trinity", start: trinity };
+  }
+
+  /* where today sits in the Prayer Book's cycle: the Sunday of its week */
+  function sundayOf(date) {
+    var d = new Date(date.getTime());
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - d.getDay());
+    return d;
+  }
+
+  function weekIndex(sunday, year) {
+    var i = 0;
+    var s = new Date(advent1(year).getTime());
+    while (s < sunday) { s = addDays(s, 7); i++; }
+    return i;                                   /* 0 = the first Sunday in Advent */
+  }
+
+  function upcomingDates() {
+    var y = new Date().getFullYear();
+    var e = easter(y);
+    var a1 = advent1(y);
+    return [
+      { label: "Ash Wednesday", date: addDays(e, -46) },
+      { label: "Easter Day", date: e },
+      { label: "Ascension Day", date: addDays(e, 39) },
+      { label: "Whitsunday", date: addDays(e, 49) },
+      { label: "Trinity Sunday", date: addDays(e, 56) },
+      { label: "First Sunday in Advent", date: a1 }
+    ];
+  }
+
   function readingEl(kind, r) {
     var span = document.createElement("span");
     span.className = "reading";
@@ -83,6 +175,65 @@
         b.addEventListener("click", function () { filter = o.id; render(); });
         els.seasons.appendChild(b);
       });
+  }
+
+  function renderToday() {
+    var host = document.getElementById("today");
+    host.innerHTML = "";
+    var today = new Date();
+    var sunday = sundayOf(today);
+    var ly = sunday >= advent1(sunday.getFullYear()) ? sunday.getFullYear() : sunday.getFullYear() - 1;
+    var idx = weekIndex(sunday, ly);
+    var week = data.weeks[idx] || null;
+    var season = seasonOn(today);
+
+    var card = document.createElement("section");
+    card.className = "card";
+    var h2 = document.createElement("h2");
+    h2.className = "serif";
+    h2.style.margin = "0 0 4px";
+    h2.style.fontSize = "1.1rem";
+    h2.textContent = "This week \u2014 " + ST.formatDate(iso(sunday), { weekday: "long", month: "long", day: "numeric" });
+    card.appendChild(h2);
+    var sub = document.createElement("p");
+    sub.className = "sub";
+    sub.textContent = "Season: " + season.name;
+    card.appendChild(sub);
+    if (week) {
+      var h3 = document.createElement("h3");
+      h3.style.fontFamily = "var(--serif)";
+      h3.style.margin = "6px 0 2px";
+      h3.textContent = titleCase(week.label);
+      card.appendChild(h3);
+      if (week.morning) { card.appendChild(officeBlock(week.morning, "Morning Prayer")); }
+      if (week.evening) { card.appendChild(officeBlock(week.evening, "Evening Prayer")); }
+    } else {
+      card.appendChild(ST.el("p", { class: "muted small", text: "No office found for this week." }));
+    }
+    host.appendChild(card);
+
+    var dates = document.createElement("section");
+    dates.className = "card";
+    var dh = document.createElement("h2");
+    dh.className = "serif";
+    dh.style.margin = "0 0 8px";
+    dh.style.fontSize = "1.1rem";
+    dh.textContent = "The moveable feasts this year";
+    dates.appendChild(dh);
+    var list = document.createElement("div");
+    list.className = "readings";
+    upcomingDates().forEach(function (f) {
+      var span = document.createElement("span");
+      span.className = "reading";
+      span.appendChild(ST.el("span", { class: "kind", text: f.label }));
+      span.appendChild(document.createTextNode(ST.formatDate(iso(f.date), { month: "long", day: "numeric" }) +
+        (f.date < today ? " (past)" : "")));
+      list.appendChild(span);
+    });
+    dates.appendChild(list);
+    dates.appendChild(ST.el("p", { class: "muted small", style: "margin-top:8px",
+      text: "Worked out from Easter by the usual computus \u2014 dates, not tables." }));
+    host.appendChild(dates);
   }
 
   function render() {
@@ -140,6 +291,7 @@
   ST.loadJSON(ROOT + "data/liturgical/bcp1928.json").then(function (d) {
     data = d;
     render();
+    renderToday();
   }).catch(function () {
     els.out.appendChild(ST.el("div", { class: "card" }, [
       ST.el("div", { class: "notice error", text: "Could not load the lectionary. Serve the folder over HTTP." })

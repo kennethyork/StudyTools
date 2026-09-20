@@ -12,6 +12,8 @@
   .years button { font-size: .84rem; padding: 5px 13px; background: transparent; color: var(--ink-soft); border-color: var(--line); }
   .years button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); }
   .next { border-left: 3px solid var(--accent-2); }
+  .sub { color: var(--ink-faint); font-size: .82rem; margin: 0 0 4px; }
+  #today { margin-bottom: 16px; }
   .day { border-bottom: 1px solid var(--line); padding: 12px 0; }
   .day:last-child { border-bottom: 0; }
   .day h3 { font-family: var(--serif); font-size: 1.02rem; margin: 0 0 2px; }
@@ -36,6 +38,8 @@
   <section class="card no-print">
     <div class="years" id="seasons" role="group" aria-label="Choose a season"></div>
   </section>
+
+  <section id="today"></section>
 
   <section id="out"></section>
 </main>
