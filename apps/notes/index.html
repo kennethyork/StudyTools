@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verse Notes — StudyTools</title>
+<meta name="description" content="Every note you have written against a verse, in one place: read them, edit them, and export the lot as Markdown or JSON. Kept in this browser, nothing sent anywhere.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .note-bar { display: grid; grid-template-columns: minmax(0, 2fr) minmax(140px, 1fr) auto auto; gap: 10px; align-items: end; }
+  @media (max-width: 760px) { .note-bar { grid-template-columns: 1fr 1fr; } }
+  .note { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .note:last-child { border-bottom: 0; }
+  .note-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .note-head .ref { font-family: var(--serif); font-size: 1.02rem; }
+  .note-head .when { font-size: .72rem; color: var(--ink-faint); }
+  .note-head .actions { margin-left: auto; display: flex; gap: 8px; }
+  .note textarea { width: 100%; min-height: 4.5em; margin-top: 6px; font-family: inherit; font-size: .94rem;
+    line-height: 1.55; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+    background: var(--bg); color: var(--ink); }
+  .note blockquote { margin: 6px 0 0; padding-left: 10px; border-left: 3px solid var(--line);
+    font-family: var(--serif); font-size: .95rem; color: var(--ink-soft); }
+  @media print { .no-print, header.page p, .note-head .actions { display: none !important; }
+    .note textarea { border: 0; padding: 0; min-height: 0; } }
+</style>
+</head>
+<body data-root="../../" data-app="notes">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Verse Notes</h1>
+    <p class="lede">Every note you have written against a verse, in one place. Tap a verse in the reader and write; it appears here. Edit or delete one here and the reader shows the change. They are kept in this browser, and the export buttons are the way to get them out.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="note-bar">
+      <div>
+        <label class="field" for="filter">Find</label>
+        <input type="search" id="filter" placeholder="a word, or John 3" autocomplete="off">
+      </div>
+      <div>
+        <label class="field" for="sort">Order</label>
+        <select id="sort">
+          <option value="recent">Recently changed</option>
+          <option value="scripture">Scripture order</option>
+        </select>
+      </div>
+      <button type="button" class="secondary" id="export-md">Export Markdown</button>
+      <button type="button" class="ghost" id="export-json">Export JSON</button>
+    </div>
+    <p class="muted small" id="summary" style="margin:10px 0 0"></p>
+  </section>
+
+  <section class="card" id="out"></section>
+
+  <footer class="site">
+    <p>Notes are stored under <code>studytools.verse-notes.v1</code> in this browser, like the rest of the site's private data — no account, no server, nothing sent anywhere.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="../../js/notes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

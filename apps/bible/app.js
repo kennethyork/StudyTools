@@ -20,6 +20,24 @@
   var translations = [];
   var state = { book: null, chapter: 1, tr: null, pendingVerse: null };
   var lastChapter = {};            /* the chapter on screen, for the panel's actions */
+  var notes = ST.store(STNotes.STORE_KEY) || {};   /* what the reader has written */
+
+  /* A note belongs to book, chapter and verse; the margin marks the ones that
+     have one. Kept in the same store the Notes app reads, so either can write. */
+  function saveNote(k, text) {
+    notes = STNotes.put(notes, k, text);
+    ST.store(STNotes.STORE_KEY, notes);
+    markNoted();
+  }
+
+  function markNoted() {
+    var chapterNotes = STNotes.forChapter(notes, state.book, state.chapter);
+    var rows = document.querySelectorAll(".verse-block.tappable");
+    for (var i = 0; i < rows.length; i++) {
+      var verse = Number(rows[i].id.replace(/^v/, ""));
+      rows[i].classList.toggle("has-note", !!chapterNotes[verse]);
+    }
+  }
 
   /* ---------- the verse panel ----------
      Tapping a verse opens what this site already holds on it: the same verse in
@@ -272,6 +290,44 @@
         body.appendChild(rSection);
       }
 
+      /* a note on this verse, kept with every other note the site holds */
+      var noteKey = STNotes.key(state.book, chapter, verse);
+      var existing = STNotes.get(notes, noteKey);
+      var noteBox = panelSection("Your note");
+      var area = document.createElement("textarea");
+      area.className = "note-area";
+      area.rows = 4;
+      area.value = existing ? existing.text : "";
+      area.placeholder = "What do you want to remember about this verse?";
+      noteBox.appendChild(area);
+      var noteRow = ST.el("div", { class: "row", style: "margin-top:8px" });
+      var noteStatus = ST.el("span", { class: "muted small" });
+      var save = ST.el("button", { type: "button", text: "Save note" });
+      save.addEventListener("click", function () {
+        saveNote(noteKey, area.value);
+        noteStatus.textContent = area.value.trim() ? "Saved " + label + "." : "Note removed.";
+        setTimeout(function () { noteStatus.textContent = ""; }, 4000);
+      });
+      noteRow.appendChild(save);
+      if (existing) {
+        var drop = ST.el("button", { type: "button", class: "ghost", text: "Delete" });
+        drop.addEventListener("click", function () {
+          notes = STNotes.remove(notes, noteKey);
+          ST.store(STNotes.STORE_KEY, notes);
+          markNoted();
+          area.value = "";
+          noteStatus.textContent = "Note removed.";
+        });
+        noteRow.appendChild(drop);
+      }
+      noteBox.appendChild(noteRow);
+      noteBox.appendChild(noteStatus);
+      noteBox.appendChild(ST.el("p", { class: "muted small", style: "margin:6px 0 0" }, [
+        document.createTextNode("Notes stay in this browser. "),
+        ST.el("a", { href: ST.siteRoot() + "apps/notes/", text: "Open all your notes \u2192" })
+      ]));
+      body.appendChild(noteBox);
+
       /* what to do with it next */
       var actions = document.createElement("div");
       actions.className = "vp-actions";
@@ -283,7 +339,7 @@
       var memorize = document.createElement("button");
       memorize.type = "button";
       memorize.className = "ghost";
-      memorize.textContent = "Memorize";
+      memorize.textContent = "Memorize this verse";
       memorize.addEventListener("click", function () {
         memorizeVerse(label, verseText, state.tr);
       });
@@ -504,6 +560,7 @@
 
     els.reader.innerHTML = "";
     els.reader.appendChild(card);
+    markNoted();            /* after the verses are in the page */
 
     var nav = document.createElement("div");
     nav.className = "reader-nav no-print";

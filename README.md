@@ -11,6 +11,7 @@ never leave the device.
 | App | What it does |
 | --- | --- |
 | **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in the three translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
+| **Verse Notes** (`apps/notes/`) | What you write against a verse. A note is kept per verse (`studytools.verse-notes.v1`), written in the reader's verse panel, marked in the margin so you can see where you have written, and gathered here to read, edit, delete, filter and export as Markdown or JSON. The same store the reader writes, so either side shows the other's changes. |
 | **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Books are grouped by canon (Law, History, Wisdom, Prophets, Gospels, Letters, Apocrypha), and the translation switcher offers the **full Bible** (the texts carrying the Apocrypha) as its own option alongside the 66-book canon. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
 | **Sunday Lectionary** (`apps/lectionary/`) | The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage to prepare from. |
@@ -46,6 +47,7 @@ js/common.js             shared helpers (ref parsing, data loading, storage, toa
 js/liturgy.js            the Christian year: Easter, Advent, the 1928 cycle, the daily office
 js/plan.js               reading plans, worked out from the book list
 js/search.js             the search index format, tokeniser and querying
+js/notes.js              verse notes: keys, the store rules, ordering, export
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
@@ -112,6 +114,7 @@ python3 scripts/build-topical.py      # Nave's and Torrey's topical Bibles
 python3 scripts/build-interlinear.py  # the Greek and Hebrew interlinear (OpenGNT, morphhb + TBESH)
 python3 scripts/build-search.py       # the word index behind Search the Bible
 node scripts/check-search.js          # re-checks the index against the text it indexes
+node scripts/check-notes.js           # re-checks the verse-note rules and the Markdown export
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -177,8 +180,8 @@ counting weeks from Advent runs ahead of the names in a year that uses fewer.
 
 - No analytics, cookies, accounts, or network calls beyond loading the local
   JSON data files.
-- Prayer journal entries, memory cards, reading-plan ticks, and vocabulary
-  mastery are stored in browser `localStorage` under the `studytools.*` prefix.
+- Prayer journal entries, memory cards, reading-plan ticks, verse notes, and
+  vocabulary mastery are stored in browser `localStorage` under the `studytools.*` prefix.
   Reading-plan ticks are kept by date (`studytools.reading-plan.v1`), so moving
   a plan's start date moves which day each tick answers for, and a verse
   memorized from the reader's verse panel lands in the same deck `apps/memory/`

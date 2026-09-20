@@ -32,6 +32,9 @@
   .verse-block p { margin: 0; font-family: var(--serif); font-size: 1.06rem; line-height: 1.65; }
   .verse-block:target { background: var(--highlight); }
   .verse-block.tappable { cursor: pointer; }
+  .verse-block.has-note .num::after { content: "\2022"; color: var(--accent); margin-left: 3px; }
+  .note-area { width: 100%; min-height: 5.5em; font-family: inherit; font-size: .92rem; line-height: 1.5;
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); color: var(--ink); }
   .verse-block.tappable:hover { background: var(--bg-alt); }
   .verse-block.tappable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .verse-block.open { background: var(--accent-soft); }
@@ -82,7 +85,7 @@
 <main class="wrap">
   <header class="page">
     <h1>Read the Bible</h1>
-    <p class="lede">The full Bible in three modern, public-domain translations &mdash; the World English Bible (Updated), the modernized King James Version, and the modernized Revised Version &mdash; every one of them including the Apocrypha &mdash; plus the Jewish Publication Society's Tanakh for the Old Testament. Choose a book, a chapter, and a translation, then tap any verse to see it in all three, the cross-references the church has drawn to it, the Greek behind it, and where the Prayer Book reads it.</p>
+    <p class="lede">The full Bible in three modern, public-domain translations &mdash; the World English Bible (Updated), the modernized King James Version, and the modernized Revised Version &mdash; every one of them including the Apocrypha &mdash; plus the Jewish Publication Society's Tanakh for the Old Testament. Choose a book, a chapter, and a translation, then tap any verse to see it in all three, the cross-references the church has drawn to it, the Greek behind it, and where the Prayer Book reads it &mdash; and to write a note of your own.</p>
   </header>
 
   <section class="card no-print">
@@ -112,6 +115,7 @@
 
 <script src="../../js/common.js"></script>
 <script src="../../js/liturgy.js"></script>
+<script src="../../js/notes.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
