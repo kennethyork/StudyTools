@@ -10,6 +10,7 @@ never leave the device.
 
 | App | What it does |
 | --- | --- |
+| **Search the Bible** (`apps/search/`) | Word search over the whole Bible, Apocrypha included, in the three translations: every word must be in the verse (an AND search), results grouped by book with the matches marked, narrowing by book or translation, and a reference typed in the box jumps instead of searching. The index is built at build time (`scripts/build-search.py`) and read whole by the browser, so nothing typed leaves the machine. |
 | **Read the Bible** (`apps/bible/`) | The whole Bible in the site's own reader: pick a book and chapter and switch translations as you read. Books are grouped by canon (Law, History, Wisdom, Prophets, Gospels, Letters, Apocrypha), and the translation switcher offers the **full Bible** (the texts carrying the Apocrypha) as its own option alongside the 66-book canon. Chapter navigation runs across book boundaries. |
 | **Sermon Notebook & Outline Builder** (`apps/sermon/`) | Markdown notebook for Sunday notes with SOAP, inductive, expository, and blank templates, live preview, one-click PDF (print) export, copy markdown/outline, and download `.md`. |
 | **Sunday Lectionary** (`apps/lectionary/`) | The psalms and lessons appointed for every Sunday of the Christian year in the Book of Common Prayer (1928), public domain, each reading opening in Study a Passage to prepare from. |
@@ -44,6 +45,7 @@ js/theme.js              pre-paint theme chooser (no flash of wrong theme)
 js/common.js             shared helpers (ref parsing, data loading, storage, toast, header)
 js/liturgy.js            the Christian year: Easter, Advent, the 1928 cycle, the daily office
 js/plan.js               reading plans, worked out from the book list
+js/search.js             the search index format, tokeniser and querying
 js/home.js               Bible-section home: verse of the day, tools grid, book grid
 apps/<app>/              one self-contained app per folder
 webu/                    the eBible.org World English Bible (Updated) chapter pages
@@ -57,6 +59,7 @@ data/crossref/           openbible.info cross-references, grouped by chapter (30
 data/dictionary/         Easton, Smith, and Hastings dictionary entries
 data/topical/            Nave's and Torrey's topical entries, by initial
 data/interlinear/        word-by-word Greek New Testament and Hebrew Old Testament
+data/search/             the word index for Search the Bible (one file per translation)
 data/catechism/          Heidelberg and Westminster Shorter
 data/creeds/             Apostles', Nicene, Athanasian
 data/devotional/         topic wheel content
@@ -107,6 +110,8 @@ python3 scripts/build-crossref.py     # openbible.info cross-references (30 MB)
 python3 scripts/build-dictionary.py   # Easton / Smith / Hastings dictionaries
 python3 scripts/build-topical.py      # Nave's and Torrey's topical Bibles
 python3 scripts/build-interlinear.py  # the Greek and Hebrew interlinear (OpenGNT, morphhb + TBESH)
+python3 scripts/build-search.py       # the word index behind Search the Bible
+node scripts/check-search.js          # re-checks the index against the text it indexes
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -145,6 +150,12 @@ and states the edition is "modernized in full".
 The verse text in `data/devotional/topics.json` is verified by
 `scripts/verify-devotional.py` against the bundled KJV data so the app cannot
 display a misquoted verse.
+
+`scripts/check-search.js` does the same for search: it re-reads the translation
+files, tokenises them with the JavaScript, and compares whole posting lists
+against the shipped index, so an index built with different rules — or one that
+has fallen behind the text — fails instead of returning wrong verses. It also
+pins the two tokenisers together with a fixture written by the build.
 
 `scripts/check-refs.js` and `scripts/check-plan.js` cover the other two pieces
 of arithmetic in the site that a reader would notice getting wrong: the

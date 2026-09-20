@@ -8,6 +8,7 @@
     { id: "study", name: "Study a Passage", href: "apps/study/" },
     { id: "lectionary", name: "Sunday Lectionary", href: "apps/lectionary/" },
     { id: "lectern", name: "Lectern", href: "apps/lectern/" },
+    { id: "search", name: "Search the Bible", href: "apps/search/" },
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
