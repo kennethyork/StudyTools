@@ -57,6 +57,31 @@ check("every page loads a stylesheet", noStylesheet.length === 0, noStylesheet.j
 check("every page has a title", noTitle.length === 0, noTitle.join(", "));
 check("every page describes itself", noDescription.length === 0, noDescription.join(", "));
 check("every app page loads the shared client", noCommon.length === 0, noCommon.join(", "));
+/* A count of the apps written into prose goes stale the moment one is added —
+   this page said twelve study apps and thirteen tools while twenty-three were
+   shipping. It has to be derived from the list the site actually uses. */
+const toolsPage = fs.readFileSync(path.join(ROOT, "tools.html"), "utf8");
+check("the tools page counts the apps it lists rather than asserting a number",
+  /id="app-count"/.test(toolsPage) && /id="tool-count"/.test(toolsPage) &&
+  /ST\.APPS\.length/.test(toolsPage), "no derived count found");
+const appFolders = fs.readdirSync(path.join(ROOT, "apps"))
+  .filter(function (n) { return fs.statSync(path.join(ROOT, "apps", n)).isDirectory(); }).length;
+const appCount = (toolsPage.match(/id="app-count"[^>]*>\s*(\d+)\s*</) || [])[1];
+const toolCount = (toolsPage.match(/id="tool-count"[^>]*>\s*(\d+)\s*</) || [])[1];
+check("the numbers it writes before the script runs are the true ones",
+  Number(appCount) === appFolders - 1 && Number(toolCount) === appFolders,
+  "study apps " + appCount + " of " + (appFolders - 1) + ", tools " + toolCount + " of " + appFolders);
+/* and nothing else in the copy may claim a count: strip the two derived ones and
+   look for a number spelled out beside the word */
+const prose = toolsPage
+  .replace(/<script[\s\S]*?<\/script>/g, " ")      /* code, not copy */
+  .replace(/<style[\s\S]*?<\/style>/g, " ")
+  .replace(/id="app-count"[^>]*>[^<]*</, ">")
+  .replace(/id="tool-count"[^>]*>[^<]*</, ">");
+const spelledOut = prose.match(/\b(twelve|thirteen|fourteen|fifteen|twenty|dozen)\b[^<]{0,24}(apps|tools)/i);
+check("and no other sentence spells out a stale one", !spelledOut,
+  spelledOut ? spelledOut[0] : "");
+
 check("a page without base.css styles a bare <button> itself",
   bareButton.length === 0, bareButton.join(", "));
 notes.push(pages.length + " pages checked, " + (pages.length - noStylesheet.length) +
