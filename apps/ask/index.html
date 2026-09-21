@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1613" media="(prefers-color-scheme: dark)">
+<title>Ask the site — StudyTools</title>
+<meta name="description" content="Ask about a verse, a word, a person or a topic and see what this site's own commentary, dictionaries, cross-references, topical Bibles, interlinear and concordance say — cited, with no model and nothing sent anywhere.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .ask-form { display: flex; gap: 10px; align-items: stretch; }
+  .ask-form input { flex: 1 1 auto; font-family: var(--serif); font-size: 1.05rem; }
+  .ask-form button { flex: 0 0 auto; }
+  .suggest { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .suggest button { font-size: .82rem; padding: 6px 12px; }
+  .turn { margin-top: 22px; }
+  .turn-q { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; }
+  .turn-q .who { font-family: var(--sans); font-size: .68rem; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 2px; }
+  .answer-block { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; }
+  .answer-block h3 { margin: 0 0 8px; font-size: .8rem; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  .answer-line { margin: 0 0 8px; font-family: var(--serif); font-size: .97rem; line-height: 1.6; }
+  .answer-line .who { font-family: var(--sans); font-size: .72rem; color: var(--accent); margin-right: 6px; }
+  .answer-cite { font-size: .78rem; color: var(--ink-faint); margin: 0 0 10px; line-height: 1.5; }
+  .answer-links { display: flex; flex-wrap: wrap; gap: 10px; font-size: .86rem; }
+  .notamodel { border-left: 2px solid var(--accent); padding: 2px 0 2px 10px; color: var(--ink-soft); }
+</style>
+</head>
+<body data-root="../../" data-app="ask">
+<main class="wrap">
+  <header class="page">
+    <h1>Ask the site</h1>
+    <p class="lede">Ask about a verse, a word, a person or a topic. This does not use a language model:
+      it searches what this site already holds &mdash; the public-domain commentary, the dictionaries,
+      the cross-references, the topical Bibles, the Greek and Hebrew interlinear and the concordance
+      &mdash; and shows you what they say, with each part cited to the book it came from. Nothing is
+      written for you, nothing is downloaded, and nothing leaves the page.</p>
+  </header>
+
+  <section class="card">
+    <form class="ask-form" id="ask-form" autocomplete="off">
+      <input id="q" type="text" aria-label="Your question"
+        placeholder="John 3:16 · what does grace mean · H7225 · baptism">
+      <button type="submit" class="btn">Ask</button>
+    </form>
+    <div class="suggest" id="suggest"></div>
+  </section>
+
+  <div id="thread"></div>
+
+  <section class="card" style="margin-top:22px">
+    <h2>What it can and cannot do</h2>
+    <p class="notamodel">It can find a passage and show you the text in this site's translations, what
+      the commentators said on it, the cross-references the church has drawn to it, the Hebrew or Greek
+      behind it, and where the Prayer Book reads it. It can look a word, person or place up in the
+      dictionaries and the topical Bibles, and it can list every verse a Strong's number appears in.</p>
+    <p class="muted small">It cannot reason, summarise, or answer a question that is not in those
+      files &mdash; and it will say so rather than writing something plausible. If you want a
+      conversation, the reader offers a small model that runs on your device, which needs WebGPU:
+      <a href="../model/">check whether this machine can run it</a>.</p>
+  </section>
+</main>
+<script src="../../js/common.js"></script>
+<script src="../../js/liturgy.js"></script>
+<script src="../../js/answer.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

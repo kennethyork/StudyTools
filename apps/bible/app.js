@@ -539,6 +539,9 @@
          material assembled above so it has something to answer from. */
       body.appendChild(askSection({
         label: label,
+        /* the reference the site's own files are keyed to, which is the Hebrew one
+           when the reader is in a translation that numbers differently */
+        dataLabel: dataLabel,
         translations: comparable.filter(function (v) { return v.text; })
           .map(function (v) { return { name: v.t.name, text: v.text }; }),
         references: refs.map(function (r) { return { ref: refText(r.to), votes: r.votes }; }),
@@ -655,6 +658,17 @@
       "anywhere. The first time, it downloads a model (" + STAsk.MODELS[0].size + " for the default) and " +
       "keeps it in your browser. " + STAsk.CAVEAT });
 
+    /* no model needed for any of this, and it works on a machine the model cannot
+       run on, so the offer comes first rather than in the failure message */
+    var noModel = ST.el("p", { class: "muted small", style: "margin:0 0 10px" }, [
+      document.createTextNode("No model needed: "),
+      ST.el("a", { href: ST.siteRoot() + "apps/ask/?q=" +
+        encodeURIComponent(context.dataLabel || context.label || label),
+        text: "ask the site about this verse \u2192" }),
+      document.createTextNode(" \u2014 the commentary, the cross-references, the original words and " +
+        "the dictionaries, cited, with nothing generated.")
+    ]);
+
     var status = ST.el("p", { class: "muted small", style: "margin:8px 0 0" });
     var answer = ST.el("div", { class: "ask-thread" });      /* the conversation so far */
     var row = ST.el("div", { class: "row", style: "margin-top:8px" });
@@ -712,6 +726,7 @@
     row.appendChild(stopBtn);
 
     section.appendChild(intro);
+    section.appendChild(noModel);
     var gate = ST.el("p", { class: "muted small", text: "Checking whether this machine can run it\u2026" });
     section.appendChild(gate);
 
