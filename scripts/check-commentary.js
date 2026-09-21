@@ -173,6 +173,23 @@ let aligned = 0, checked = 0;
 });
 check("the remarks filed under a verse are about that verse",
   checked >= 5 && aligned === checked, aligned + " of " + checked + " aligned");
+/* The app's dropdown lists the Fathers by name. Every name in it has to appear in
+   a remark, and the data's names have to be in it, or a reader is offered a name
+   that leads nowhere. */
+const appSource = fs.readFileSync(path.join(ROOT, "apps", "commentary", "app.js"), "utf8");
+const listed = (appSource.match(/var FATHERS = \[([\s\S]*?)\];/) || ["", ""])[1]
+  .match(/"([^"]+)"/g);
+const listedNames = (listed || []).map(function (n) { return n.replace(/"/g, ""); });
+const missingFromData = listedNames.filter(function (n) { return !fathers.has(n); });
+const notInTheList = Array.from(fathers).filter(function (n) { return listedNames.indexOf(n) === -1; });
+check("the commentary page is registered as an app and carded",
+  /id: "commentary"/.test(fs.readFileSync(path.join(ROOT, "js", "common.js"), "utf8")) &&
+  /apps\/commentary\//.test(fs.readFileSync(path.join(ROOT, "tools.html"), "utf8")));
+check("every Father the commentary page offers is one the data has",
+  listedNames.length > 20 && missingFromData.length === 0, missingFromData.join(", "));
+check("every Father in the data is offered by the page",
+  notInTheList.length === 0, notInTheList.join(", "));
+
 notes.push("Catena: " + catenaRemarks.toLocaleString() + " remarks, " + fathers.size +
   " Fathers, " + Array.from(fathers).sort().slice(0, 8).join(", ") + " …");
 

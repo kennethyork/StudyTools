@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1613" media="(prefers-color-scheme: dark)">
+<title>Commentary — StudyTools</title>
+<meta name="description" content="Read the commentary on a chapter rather than one verse at a time: Jamieson, Fausset & Brown, Calvin, Meyer, Haydock on the deuterocanon, and the church fathers on the Gospels, each remark attributed and filterable.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .cm-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+  .cm-controls label { display: flex; flex-direction: column; gap: 4px; font-size: .78rem;
+    color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
+  .cm-controls select { min-width: 12em; font-size: .95rem; }
+  .cm-verse { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 16px; }
+  .cm-verse:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+  .cm-ref { font-family: var(--mono); font-size: .74rem; color: var(--accent); }
+  .cm-text { font-family: var(--serif); font-size: 1rem; line-height: 1.6; color: var(--ink); margin: 4px 0 10px; }
+  .cm-remark { margin: 0 0 12px; }
+  .cm-remark .who { font-size: .68rem; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--ink-faint); display: block; margin-bottom: 2px; }
+  .cm-remark p { margin: 0; font-size: .95rem; line-height: 1.6; color: var(--ink-soft); }
+  @media print { .no-print, header.page p { display: none !important; } .card { break-inside: avoid; box-shadow: none; } }
+</style>
+</head>
+<body data-root="../../" data-app="commentary">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Commentary</h1>
+    <p class="lede">Every remark this site holds on a chapter, in order, each one attributed to the work
+      it came from &mdash; Jamieson, Fausset &amp; Brown (1871), Calvin, F. B. Meyer, Haydock (1859) on the
+      deuterocanon, and the church fathers on Matthew and Mark. The reader shows you the remark on one
+      verse; this shows you the chapter, and lets you read a single writer through it.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="cm-controls">
+      <label>Book <select id="book"></select></label>
+      <label>Chapter <select id="chapter"></select></label>
+      <label>Whose remarks <select id="who"></select></label>
+      <button type="button" class="btn secondary" id="print">Print this chapter</button>
+    </div>
+  </section>
+
+  <div id="out"></div>
+
+  <footer class="site">
+    <p>Commentary from Jamieson, Fausset &amp; Brown (1871), John Calvin (1550s), F. B. Meyer, Haydock
+      (1859) on the deuterocanonical books, and the Catena Aurea of Aquinas in the Oxford translation of
+      1842 for the church fathers on Matthew and Mark &mdash; all public domain, and each remark shown
+      under the name of the work it came from. Verse text from the public-domain translations this site
+      bundles. The <a href="../../about.html">About page</a> has the full list with licences.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@
     { id: "parallels", name: "Parallel Passages", href: "apps/parallels/" },
     { id: "study", name: "Study a Passage", href: "apps/study/" },
     { id: "ask", name: "Ask the Site", href: "apps/ask/" },
+    { id: "commentary", name: "Commentary", href: "apps/commentary/" },
     { id: "lectionary", name: "Sunday Lectionary", href: "apps/lectionary/" },
     { id: "lectern", name: "Lectern", href: "apps/lectern/" },
     { id: "search", name: "Search the Bible", href: "apps/search/" },
