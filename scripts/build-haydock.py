@@ -322,7 +322,10 @@ def write_index():
         meta = names.get(sid) or {}
         index["sources"].append({
             "id": sid,
-            "short": item["short"],
+            # what the file declares beats what the first remark happened to be
+            # signed: the Catena's remarks are signed by the Father who wrote each
+            # one, and the source is the Catena.
+            "short": meta.get("short") or item["short"],
             "name": meta.get("name", sid),
             "year": item["year"] or meta.get("year"),
             "books": len(item["books"]),

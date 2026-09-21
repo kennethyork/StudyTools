@@ -141,6 +141,7 @@ python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms t
 python3 scripts/build-sitemap.py      # sitemap.xml, from the pages the site actually ships
 python3 scripts/build-commentary.py   # the public-domain commentary, verse by verse
 python3 scripts/build-haydock.py      # Haydock (1859) on the deuterocanon, and his book introductions
+python3 scripts/build-catena.py       # the Catena Aurea: the church fathers on Matthew and Mark
 python3 scripts/build-content.py      # creeds, catechisms
 python3 scripts/verify-devotional.py  # re-checks every devotional verse against the KJV data
 ```
@@ -160,6 +161,7 @@ All Scripture texts bundled here are in the **public domain**.
 | Douay-Rheims, Modernized (DRCM) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) (Challoner 1752), modernized by this project | Public domain; Vulgate numbering, so it is read on its own and kept out of the side-by-side views |
 | Young's Literal Translation, Modernized (YLTM) | [scrollmapper/bible_databases](https://github.com/scrollmapper/bible_databases) (Young 1862), modernized by this project | Public domain (Young's 1862 translation is public domain; the modernization is this repository's own rule-based pass) |
 | Commentary: Jamieson, Fausset & Brown (1871), on the canon | [HelloAO Bible API](https://bible.helloao.org/) `jamieson-fausset-brown` | Public domain (the API carries the public-domain mark) |
+| Commentary: Catena Aurea (Aquinas, 1842), on Matthew and Mark | the Oxford translation as transcribed at [CCEL](https://ccel.org/ccel/aquinas/catena1) | Public domain (Aquinas died 1274; the translation is 1842). Each remark is attributed to the Father who made it — 25 of them — and CCEL holds no text volume for Luke or John, so those two Gospels have no Catena here |
 | Commentary: Haydock (1859), on the deuterocanon | the 1859 edition as transcribed at [ecatholic2000.com](https://www.ecatholic2000.com/haydock/title.shtml) | Public domain (Haydock died in 1849; the edition is 1859). His verses follow the Douay-Rheims, and a remark is kept only where some translation of that book has the verse |
 | Commentary: John Calvin (1550s) | [HelloAO Bible API](https://bible.helloao.org/) `calvin` | Public domain (the API carries the public-domain mark) |
 | Commentary: F. B. Meyer (1900s) | [HelloAO Bible API](https://bible.helloao.org/) `fbmeyer` | Public domain (the API carries the public-domain mark) |
@@ -237,7 +239,19 @@ JFB also writes front matter before most chapters — 1,178 introductions — wh
 sometimes the only place he touches a verse (his note on Genesis 1:1 is in the
 introduction, not on the verse) and, in the Song of Solomon, all he wrote: that
 book has all eight of its chapters as introductions and no verse comments at all,
-which is why it is now covered rather than absent.
+which is why it is now covered rather than absent. Sixty-eight thousand comments
+sit behind the seven panels now.
+
+The Gospels also carry **the church fathers**: the Catena Aurea, Aquinas' chain of
+patristic commentary verse by verse, in the Oxford translation of 1842 — 33,660
+remarks on Matthew and Mark, each attributed to the Father who wrote it, 25 of them
+named (Chrysostom, Augustine, Jerome, Bede, Origen, Gregory, Ambrose, Cyril,
+Cyprian, Cassian, Anselm…). CCEL holds no text volume for Luke and John, so those
+two Gospels have none, and `scripts/check-catena`… is folded into
+`check-commentary.js`, which requires the remarks filed under a verse to be about
+that verse — the parse had to survive a missing chapter heading, a heading with
+escaped markup welded to it, and a citation read as a verse number before it could
+be trusted.
 
 The deuterocanon is **Haydock's**: his Catholic Bible Commentary (1859) goes
 through it verse by verse, following the Douay-Rheims text and numbering, and

@@ -11,6 +11,26 @@
    "introductions": 0
   },
   {
+   "id": "catena",
+   "short": "Catena",
+   "name": "Catena Aurea (Aquinas)",
+   "year": "1842",
+   "books": 2,
+   "chapters": 44,
+   "verses": 33660,
+   "introductions": 0
+  },
+  {
+   "id": "charles",
+   "short": "Charles",
+   "name": "charles",
+   "year": "1913",
+   "books": 1,
+   "chapters": 0,
+   "verses": 0,
+   "introductions": 1
+  },
+  {
    "id": "fbmeyer",
    "short": "Meyer",
    "name": "F. B. Meyer",
@@ -19,6 +39,16 @@
    "chapters": 973,
    "verses": 1940,
    "introductions": 0
+  },
+  {
+   "id": "has",
+   "short": "Hastings",
+   "name": "has",
+   "year": 1909,
+   "books": 4,
+   "chapters": 0,
+   "verses": 0,
+   "introductions": 4
   },
   {
    "id": "haydock",

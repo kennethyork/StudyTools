@@ -26,8 +26,16 @@ const index = JSON.parse(fs.readFileSync(path.join(OUT, "index.json"), "utf8"));
 const sourceIds = index.sources.map(function (s) { return s.id; });
 
 check("the index names its sources", sourceIds.length >= 3, sourceIds.join(", "));
+/* A source may cover a book with an introduction and no verse remarks — Charles on
+   the Prayer of Manasses does exactly that — so "says how much it covers" means
+   books and *some* content, not chapters and verses. */
 check("each source says how much it covers",
-  index.sources.every(function (s) { return s.books > 0 && s.chapters > 0 && s.verses > 0; }));
+  index.sources.every(function (s) {
+    return s.books > 0 && (s.chapters > 0 || s.introductions > 0) &&
+      (s.verses > 0 || s.introductions > 0);
+  }), JSON.stringify(index.sources.filter(function (s) {
+    return !(s.books > 0 && (s.chapters > 0 || s.introductions > 0)); }).map(
+      function (s) { return s.short; })));
 notes.push(index.sources.map(function (s) {
   return s.short + ": " + s.books + " books, " + s.chapters + " chapters, " + s.verses + " verses";
 }).join(" | "));
@@ -104,6 +112,69 @@ check("no markup is left in the text", markup === 0, markup + " with markup");
 check("every introduction is written as paragraphs", badIntro === 0, badIntro + " with none");
 notes.push(files + " chapter files, " + entries.toLocaleString() + " comments, " +
   intros.toLocaleString() + " chapter introductions in " + introParagraphs.toLocaleString() + " paragraphs");
+
+/* ---------- the Catena: the fathers, attributed ---------- */
+
+/* Aquinas' chain of the Fathers on the Gospels, parsed out of a transcription
+   that is not tidy — a missing chapter heading, a heading with escaped markup, a
+   citation read as a verse number. Each of those was a fault while it was being
+   built, so each is checked now. */
+
+const catena = index.sources.filter(function (s) { return s.id === "catena"; })[0];
+check("the index lists the Catena with what it covers",
+  !!catena && catena.books === 2 && catena.verses > 30000,
+  catena ? JSON.stringify(catena) : "absent");
+check("and names the work rather than the first Father who signed a remark",
+  !!catena && /Catena Aurea/.test(catena.name || ""), catena ? catena.name : "");
+
+const fathers = new Set();
+let catenaRemarks = 0;
+["matthew", "mark"].forEach(function (slug) {
+  const dir = path.join(OUT, slug);
+  if (!fs.existsSync(dir)) { return; }
+  fs.readdirSync(dir).forEach(function (name) {
+    const data = JSON.parse(fs.readFileSync(path.join(dir, name), "utf8"));
+    Object.keys(data.verses || {}).forEach(function (v) {
+      (data.verses[v] || []).forEach(function (entry) {
+        if (entry.source === "catena") { catenaRemarks++; fathers.add(entry.short); }
+      });
+    });
+  });
+});
+check("every Catena remark is signed by a Father", fathers.size >= 12 && catenaRemarks > 30000,
+  fathers.size + " names, " + catenaRemarks + " remarks");
+check("the names are the ones the printed volume uses",
+  ["Chrysostom", "Augustine", "Jerome", "Bede", "Origen", "Gregory", "Ambrose"].every(
+    function (n) { return fathers.has(n); }),
+  Array.from(fathers).sort().join(", "));
+check("Augustine is not called 'Aug.' and Chrysostom is not called 'Chrys.'",
+  !fathers.has("Aug.") && !fathers.has("Chrys.") && !fathers.has("Gloss."));
+
+/* The alignment that matters: the remarks attached to a verse are about that
+   verse. The Catena prints the verse above its remarks, so the words of our own
+   text should be in what was filed under it. */
+let aligned = 0, checked = 0;
+[["matthew", "1", "1"], ["matthew", "5", "3"], ["matthew", "6", "9"], ["matthew", "27", "46"],
+ ["mark", "1", "1"], ["mark", "4", "39"], ["mark", "15", "34"]].forEach(function (ref) {
+  const data = JSON.parse(fs.readFileSync(path.join(OUT, ref[0], ref[1] + ".json"), "utf8"));
+  const mine = JSON.parse(fs.readFileSync(
+    path.join(ROOT, "data", "bible", ref[0] + ".KJVM.json"), "utf8"));
+  const ours = ((mine.chapters || {})[ref[1]] || {})[ref[2]];
+  const entries = ((data.verses || {})[ref[2]] || []).filter(function (e) {
+    return e.source === "catena"; });
+  if (!ours || !entries.length) { return; }
+  checked++;
+  const want = new Set(String(ours).toLowerCase().match(/[a-z]{4,}/g) || []);
+  const got = new Set((entries.map(function (e) { return e.text; }).join(" ") || "")
+    .toLowerCase().match(/[a-z]{4,}/g) || []);
+  let shared = 0;
+  want.forEach(function (w) { if (got.has(w)) { shared++; } });
+  if (want.size && shared / want.size >= 0.4) { aligned++; }
+});
+check("the remarks filed under a verse are about that verse",
+  checked >= 5 && aligned === checked, aligned + " of " + checked + " aligned");
+notes.push("Catena: " + catenaRemarks.toLocaleString() + " remarks, " + fathers.size +
+  " Fathers, " + Array.from(fathers).sort().slice(0, 8).join(", ") + " …");
 
 /* ---------- what a reader will actually see ---------- */
 
@@ -273,6 +344,37 @@ check("an introduction that is not commentary says so",
 notes.push(about.length + " book introductions: " + about.map(function (n) {
   return n.replace(/\.json$/, "");
 }).join(", "));
+
+/* A chapter file for a chapter the book does not have is always a parse fault:
+   it came from a number read somewhere it was not a verse number, or from a
+   heading counted twice. Matthew 29 existed for ten minutes that way. */
+const strayChapters = [];
+index.books.forEach(function (slug) {
+  const dir = path.join(OUT, slug);
+  const book = bySlug[slug];
+  if (!book || !fs.existsSync(dir)) { return; }
+  /* A chapter counts as real if some translation that carries the book has it:
+     the Douay-Rheims numbers Esther in sixteen chapters where the Hebrew has ten,
+     and a remark on Esther 16 is a remark on a chapter a reader can open — in
+     that translation. The book's own count is the Hebrew one. */
+  let most = book.chapters;
+  (book.translations || []).forEach(function (t) {
+    const file = path.join(ROOT, "data", "bible", slug + "." + t + ".json");
+    if (!fs.existsSync(file)) { return; }
+    let data;
+    try { data = JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { return; }
+    Object.keys(data.chapters || {}).forEach(function (k) {
+      const n = Number(k);
+      if (n > most) { most = n; }
+    });
+  });
+  fs.readdirSync(dir).forEach(function (name) {
+    const chapter = Number(String(name).replace(/\.json$/, ""));
+    if (chapter > most) { strayChapters.push(slug + " " + chapter); }
+  });
+});
+check("no commentary file for a chapter the book does not have",
+  strayChapters.length === 0, strayChapters.join(", "));
 
 check("the index's book list matches what is on disk",
   index.books.every(function (slug) { return fs.existsSync(path.join(OUT, slug)); }));
