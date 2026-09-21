@@ -28,6 +28,7 @@ const pages = ["index.html", "tools.html", "about.html"].concat(
     .filter(function (rel) { return fs.existsSync(path.join(ROOT, rel)); }));
 
 const noStylesheet = [], noTitle = [], noDescription = [], bareButton = [], noCommon = [];
+const noTopbar = [], noFooter = [];
 pages.forEach(function (rel) {
   const html = fs.readFileSync(path.join(ROOT, rel), "utf8");
   const css = (html.match(/<link[^>]+href="([^"]+\.css)"/g) || []).join(" ");
@@ -51,6 +52,11 @@ pages.forEach(function (rel) {
   }
   /* Every app page mounts the shared top bar and helpers. */
   if (rel.indexOf("apps/") === 0 && !/js\/common\.js/.test(html)) { noCommon.push(rel); }
+  /* The site's own chrome: two pages were written without it, which is why they
+     had no way back and nothing to say where their text came from. */
+  if (!/data-topbar/.test(html)) { noTopbar.push(rel); }
+  /* single or double quotes, and the class need not be alone */
+  if (!/<footer[^>]*class=["'][^"']*\bsite\b/.test(html)) { noFooter.push(rel); }
 });
 
 check("every page loads a stylesheet", noStylesheet.length === 0, noStylesheet.join(", "));
@@ -82,6 +88,19 @@ const spelledOut = prose.match(/\b(twelve|thirteen|fourteen|fifteen|twenty|dozen
 check("and no other sentence spells out a stale one", !spelledOut,
   spelledOut ? spelledOut[0] : "");
 
+/* One page is chrome-free on purpose: the Lectern is one passage in large type
+   with nothing else on the screen, which is what it is for. It has to say so,
+   though, and that is what is checked instead of a top bar. */
+const lectern = "apps/lectern/index.html";
+const chromeFree = noTopbar.filter(function (rel) { return rel !== lectern; });
+check("every page carries the site's top bar",
+  chromeFree.length === 0, chromeFree.join(", "));
+check("the one page without it is the Lectern, which says why",
+  !noTopbar.length || (noTopbar.indexOf(lectern) !== -1 &&
+    /nothing else on the screen/.test(fs.readFileSync(path.join(ROOT, lectern), "utf8"))),
+  noTopbar.join(", "));
+check("every page carries a footer naming its sources", noFooter.length === 0,
+  noFooter.join(", "));
 check("a page without base.css styles a bare <button> itself",
   bareButton.length === 0, bareButton.join(", "));
 notes.push(pages.length + " pages checked, " + (pages.length - noStylesheet.length) +
