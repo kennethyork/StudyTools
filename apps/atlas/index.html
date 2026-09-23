@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1613" media="(prefers-color-scheme: dark)">
+<title>Atlas — StudyTools</title>
+<meta name="description" content="Every place named in the Bible, on a map drawn from public-domain coastlines — no tiles, no network — with the verses each place appears in, linked into the reader.">
+<link rel="stylesheet" href="../../css/base.css">
+<script src="../../js/theme.js"></script>
+<style>
+  .atlas-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .atlas-bar input { flex: 1 1 12em; font-family: var(--serif); }
+  .atlas-bar button { font-size: .82rem; padding: 6px 12px; }
+  .atlas-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .atlas-layout { grid-template-columns: 1fr; } }
+  #map { width: 100%; height: 460px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; touch-action: none; cursor: grab; }
+  #map.dragging { cursor: grabbing; }
+  .land { fill: var(--card); stroke: var(--line); stroke-width: .4; }
+  .water-line { fill: none; stroke: var(--accent-2); stroke-width: .5; opacity: .8; }
+  .place { fill: var(--accent); opacity: .75; cursor: pointer; }
+  .place.water { fill: var(--accent-2); }
+  .place:hover, .place.on { opacity: 1; stroke: var(--ink); stroke-width: 1; }
+  .place-label { font-family: var(--sans); font-size: 7px; fill: var(--ink-soft); pointer-events: none; }
+  .atlas-hint { font-size: .8rem; color: var(--ink-faint); }
+  .place-card h2 { margin: 0 0 4px; font-size: 1.15rem; }
+  .place-card .meta { font-size: .78rem; color: var(--ink-faint); margin: 0 0 8px; }
+  .place-verses { display: flex; flex-wrap: wrap; gap: 6px; font-size: .84rem; }
+  .place-verses a { font-family: var(--mono); }
+  @media print { .no-print { display: none !important; } #map { height: 380px; } }
+</style>
+</head>
+<body data-root="../../" data-app="atlas">
+<div data-topbar></div>
+
+<main class="wrap">
+  <header class="page">
+    <h1>Atlas</h1>
+    <p class="lede">Every place named in the Bible, on a map drawn from public-domain coastlines
+      &mdash; no map tiles, nothing fetched while you read. Click a place to see the verses it appears
+      in, each one opening in the reader.</p>
+  </header>
+
+  <section class="card no-print">
+    <div class="atlas-bar">
+      <input id="find" type="search" placeholder="Find a place — Jerusalem, Nineveh, Damascus" aria-label="Find a place">
+      <button type="button" class="btn secondary" id="lands">The Bible lands</button>
+      <button type="button" class="btn secondary" id="world">The whole world</button>
+      <button type="button" class="btn secondary" id="zoom-in">Zoom in</button>
+      <button type="button" class="btn secondary" id="zoom-out">Zoom out</button>
+    </div>
+    <p class="atlas-hint" id="hint" style="margin:10px 0 0">Loading the map\u2026</p>
+  </section>
+
+  <div class="atlas-layout">
+    <section class="card" style="padding:10px">
+      <svg id="map" role="img" aria-label="Map of the places named in the Bible"></svg>
+    </section>
+    <aside id="side"></aside>
+  </div>
+
+  <footer class="site">
+    <p>Places, their types and the verses they appear in are from the
+      <a href="https://github.com/openbibleinfo/Bible-Geocoding-Data" rel="noopener">OpenBible.info Bible
+      Geocoding dataset</a> (CC BY 4.0; its own sources number in the hundreds, and some identifications
+      are contested). The coastline, lakes and rivers of the base map are
+      <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> 1:110m, public domain.
+      The map is a plain equirectangular plot of those coordinates drawn here, not a historical atlas:
+      it shows where the dataset puts each place today, and the borders of no period at all.</p>
+  </footer>
+</main>
+
+<script src="../../js/common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
