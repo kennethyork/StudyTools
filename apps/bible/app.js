@@ -745,10 +745,9 @@
           ? "This machine cannot run the model: WebGPU is here, but no GPU adapter is behind it."
           : "This machine cannot run the model: this browser has no WebGPU." }));
       section.appendChild(ST.el("p", { class: "muted small", text: STAsk.advice(diag.reason) }));
-      section.appendChild(ST.el("p", { class: "muted small" }, [
-        ST.el("a", { href: ST.siteRoot() + "apps/model/",
-          text: "What each part means, and how to fix it \u2192" })
-      ]));
+      section.appendChild(ST.el("p", { class: "muted small", text:
+        "Everything else on this page works without the model: the commentary, the concordance, " +
+        "the original languages and your notes are all plain files." }));
       section.appendChild(ST.el("p", { class: "muted small" }, [
         document.createTextNode("Chrome and Edge 121+, Safari 26 and Firefox 141+ have WebGPU. You can " +
           "check this browser at "),
