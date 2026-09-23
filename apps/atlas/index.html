@@ -18,13 +18,27 @@
   @media (max-width: 900px) { .atlas-layout { grid-template-columns: 1fr; } }
   #map { width: 100%; height: 460px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; touch-action: none; cursor: grab; }
   #map.dragging { cursor: grabbing; }
-  .land { fill: var(--card); stroke: var(--line); stroke-width: .4; }
-  .water-line { fill: none; stroke: var(--accent-2); stroke-width: .5; opacity: .8; }
+  .sea { fill: var(--bg-alt); }
+  .land { fill: var(--card); stroke: var(--line); stroke-width: .6; }
+  .lake { fill: var(--accent-soft); stroke: var(--line); stroke-width: .3; }
+  .river { fill: none; stroke: var(--accent-2); stroke-width: .6; opacity: .85; }
+  .border { fill: none; stroke: var(--line); stroke-width: .5; stroke-dasharray: 3 2; }
+  .graticule line { stroke: var(--line); stroke-width: .3; opacity: .55; }
+  .grat-label { font-family: var(--mono); font-size: 7px; fill: var(--ink-faint); }
+  .city { fill: var(--ink-faint); }
+  .city-label { font-family: var(--sans); font-size: 7.5px; fill: var(--ink-faint); }
+  .sea-label { font-family: var(--sans); font-size: 8px; font-style: italic; fill: var(--ink-faint); letter-spacing: .04em; }
   .place { fill: var(--accent); opacity: .75; cursor: pointer; }
   .place.water { fill: var(--accent-2); }
   .place:hover, .place.on { opacity: 1; stroke: var(--ink); stroke-width: 1; }
   .place-label { font-family: var(--sans); font-size: 7px; fill: var(--ink-soft); pointer-events: none; }
   .atlas-hint { font-size: .8rem; color: var(--ink-faint); }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: .78rem; color: var(--ink-faint); }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--accent); }
+  .legend i.city { background: var(--ink-faint); width: 6px; height: 6px; }
+  .legend i.river { background: var(--accent-2); width: 14px; height: 2px; border-radius: 0; }
+  .legend i.border { background: none; border-top: 2px dashed var(--line); width: 14px; height: 0; border-radius: 0; }
   .place-card h2 { margin: 0 0 4px; font-size: 1.15rem; }
   .place-card .meta { font-size: .78rem; color: var(--ink-faint); margin: 0 0 8px; }
   .place-verses { display: flex; flex-wrap: wrap; gap: 6px; font-size: .84rem; }
@@ -52,6 +66,12 @@
       <button type="button" class="btn secondary" id="zoom-out">Zoom out</button>
     </div>
     <p class="atlas-hint" id="hint" style="margin:10px 0 0">Loading the map\u2026</p>
+    <div class="legend">
+      <span><i></i> a place named in the Bible</span>
+      <span><i class="city"></i> a modern city, to place yourself</span>
+      <span><i class="river"></i> river</span>
+      <span><i class="border"></i> a border of today &mdash; not of any biblical period</span>
+    </div>
   </section>
 
   <div class="atlas-layout">
@@ -68,7 +88,10 @@
       are contested). The coastline, lakes and rivers of the base map are
       <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> 1:110m, public domain.
       The map is a plain equirectangular plot of those coordinates drawn here, not a historical atlas:
-      it shows where the dataset puts each place today, and the borders of no period at all.</p>
+      it shows where the dataset puts each place today, with the borders of no period at all &mdash;
+      the ones drawn are today's, and are there only to help you find your way. The names of the seas
+      and the regions are this site's own, placed by hand; the coastlines, rivers, lakes, borders and
+      modern cities are Natural Earth's.</p>
   </footer>
 </main>
 

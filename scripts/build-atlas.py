@@ -33,10 +33,21 @@ UA = {"User-Agent": "StudyTools-build/1.0 (openly licensed map data)"}
 KML = "https://raw.githubusercontent.com/openbibleinfo/Bible-Geocoding-Data/main/all.kml"
 ANCIENT = ("https://raw.githubusercontent.com/openbibleinfo/Bible-Geocoding-Data/"
            "main/data/ancient.jsonl")
-LAND = ("https://raw.githubusercontent.com/martynafford/natural-earth-geojson/"
-        "master/110m/physical/ne_110m_land.json")
-LAKES = ("https://raw.githubusercontent.com/martynafford/natural-earth-geojson/"
-         "master/110m/physical/ne_110m_lakes.json")
+BASE = "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/"
+# The Bible lands at 1:50m, where the coastlines have islands and the rivers have
+# names; the world at 1:110m, which is all a world view needs.
+LAYERS = {
+    "land-region": ("50m/physical/ne_50m_land.json", "land", True),
+    "lakes-region": ("50m/physical/ne_50m_lakes.json", "polygon", True),
+    "rivers-region": ("50m/physical/ne_50m_rivers_lake_centerlines.json", "line", True),
+    "borders-region": ("50m/cultural/ne_50m_admin_0_boundary_lines_land.json", "line", True),
+    "cities-region": ("50m/cultural/ne_50m_populated_places_simple.json", "point", True),
+    "land-world": ("110m/physical/ne_110m_land.json", "land", False),
+    "lakes-world": ("110m/physical/ne_110m_lakes.json", "polygon", False),
+}
+# The window the region layers are cut to: the eastern Mediterranean and
+# Mesopotamia, with room to spare, because that is where the places are.
+REGION = (-16, 78, 6, 56)
 
 # OSIS book code to the slug this reader uses.
 OSIS = {
@@ -78,6 +89,34 @@ def fetch(url, name, least=1000):
 def tag(block, name):
     m = re.search(r"<" + name + r">(.*?)</" + name + r">", block, re.S)
     return m.group(1).strip() if m else ""
+
+
+def clip(collection, region):
+    """Drop what is outside the region and keep the rest whole.
+
+    Cutting polygons to a rectangle is a different job from simplifying them, and
+    a coastline cut wrongly is worse than a coastline that extends past the edge:
+    the view crop it anyway. So a feature stays if any of its coordinates is inside
+    the window, and it is left with all its points.
+    """
+    lon0, lon1, lat0, lat1 = region
+    kept = []
+    for feature in collection.get("features", []):
+        geom = feature.get("geometry") or {}
+        coords = geom.get("coordinates")
+        if coords is None:
+            continue
+        flat = []
+        def gather(node):
+            if isinstance(node, (list, tuple)) and node and isinstance(node[0], (int, float)):
+                flat.append(node)
+            elif isinstance(node, (list, tuple)):
+                for child in node:
+                    gather(child)
+        gather(coords)
+        if any(lon0 <= pt[0] <= lon1 and lat0 <= pt[1] <= lat1 for pt in flat[:4000]):
+            kept.append(feature)
+    return {"type": "FeatureCollection", "features": kept}
 
 
 def points(text):
@@ -157,17 +196,58 @@ def main():
     joined = read_places(markers)
     os.makedirs(OUT, exist_ok=True)
 
-    land = json.loads(fetch(LAND, "ne_110m_land.json", least=100_000).decode("utf-8"))
-    lakes = json.loads(fetch(LAKES, "ne_110m_lakes.json", least=10_000).decode("utf-8"))
-    for lake in lakes.get("features", []):
-        geom = lake.get("geometry") or {}
-        rings = geom.get("coordinates") or []
-        if geom.get("type") == "Polygon":
-            rings = [rings]
-        for poly in rings:
-            for ring in poly[:1]:
-                if len(ring) > 2:
-                    water.append([(round(x, 4), round(y, 4)) for x, y in ring])
+    layers = {}
+    for name, (rel, kind, in_region) in LAYERS.items():
+        collection = json.loads(fetch(BASE + rel, rel.split("/")[-1], least=20_000)
+                                .decode("utf-8"))
+        if in_region:
+            collection = clip(collection, REGION)
+        simplified = {"type": "FeatureCollection", "features": []}
+        for feature in collection.get("features", []):
+            geom = feature.get("geometry") or {}
+            gtype = geom.get("type")
+            if kind == "land" and gtype != "Polygon":
+                continue
+            if kind == "polygon" and gtype not in ("Polygon", "MultiPolygon"):
+                continue
+            if kind == "line" and gtype not in ("LineString", "MultiLineString"):
+                continue
+            if kind == "point" and gtype != "Point":
+                continue
+            keep = []
+            props = feature.get("properties") or {}
+            if kind == "point":
+                keep = [round(geom["coordinates"][0], 4), round(geom["coordinates"][1], 4),
+                        props.get("name") or "", int(props.get("pop_max") or 0)]
+            elif kind == "line":
+                lines = geom["coordinates"] if gtype == "MultiLineString" else [geom["coordinates"]]
+                keep = [[[round(x, 4), round(y, 4)] for x, y in line] for line in lines
+                        if len(line) > 1]
+            elif gtype == "Polygon":
+                keep = [[[round(x, 4), round(y, 4)] for x, y in ring] for ring in
+                        geom["coordinates"] if len(ring) > 3]
+            else:
+                keep = [[[[round(x, 4), round(y, 4)] for x, y in ring] for ring in poly
+                         if len(ring) > 3] for poly in geom["coordinates"]]
+            if not keep:
+                continue
+            item = {"t": gtype if kind != "land" else "Polygon", "c": keep}
+            if kind == "point":
+                item["n"] = keep[2]
+                item["p"] = keep[3]
+                item["c"] = keep[:2]
+            simplified["features"].append(item)
+        layers[name] = simplified
+        print("  {:<16} {:>4} features  {:>6.2f} MB".format(
+            name, len(simplified["features"]),
+            len(json.dumps(simplified)) / 1e6))
+
+    with open(os.path.join(OUT, "layers.json"), "w", encoding="utf-8") as f:
+        json.dump(layers, f, ensure_ascii=False, separators=(",", ":"))
+    for old in ("land.json", "water.json"):
+        path = os.path.join(OUT, old)
+        if os.path.exists(path):
+            os.remove(path)
 
     places = sorted(markers.values(), key=lambda p: p["name"])
     with open(os.path.join(OUT, "places.json"), "w", encoding="utf-8") as f:
@@ -179,17 +259,13 @@ def main():
             "count": len(places),
             "places": places,
         }, f, ensure_ascii=False, separators=(",", ":"))
-    with open(os.path.join(OUT, "land.json"), "w", encoding="utf-8") as f:
-        json.dump(land, f, ensure_ascii=False, separators=(",", ":"))
-    with open(os.path.join(OUT, "water.json"), "w", encoding="utf-8") as f:
-        json.dump(water, f, ensure_ascii=False, separators=(",", ":"))
 
     named = sum(1 for p in places if p.get("verses"))
     print("  {:,} places with a position, {:,} of them named in verses".format(
         len(places), named))
     print("  {:,} joined to the verse lists by name".format(joined))
     print("  {} water lines".format(len(water)))
-    for name in ("places.json", "land.json", "water.json"):
+    for name in ("places.json", "layers.json"):
         print("  {:<12} {:>7.2f} MB".format(
             name, os.path.getsize(os.path.join(OUT, name)) / 1e6))
 

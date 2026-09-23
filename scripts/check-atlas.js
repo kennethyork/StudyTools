@@ -23,9 +23,9 @@ function check(name, condition, detail) {
 function load(rel) { return JSON.parse(fs.readFileSync(path.join(ROOT, rel), "utf8")); }
 
 const atlas = load("data/atlas/places.json");
-const land = load("data/atlas/land.json");
-const water = load("data/atlas/water.json");
+const layers = load("data/atlas/layers.json");
 const books = load("data/bible/books.json");
+const app = fs.readFileSync(path.join(ROOT, "apps", "atlas", "app.js"), "utf8");
 const bySlug = {};
 books.forEach(function (b) { bySlug[b.slug] = b; });
 
@@ -88,28 +88,113 @@ check("every verse a place claims exists in the reader", badRefs.length === 0,
   badRefs.join("; "));
 notes.push(refs.toLocaleString() + " place-verses checked against the text");
 
-/* The map: a coastline that draws, and water lines that have a shape. */
-const landRings = [];
-(land.features || []).forEach(function (f) {
-  const geom = f.geometry || {};
-  if (geom.type !== "Polygon") { return; }
-  geom.coordinates.forEach(function (ring) { landRings.push(ring.length); });
-});
-check("the coastline is a set of polygons with area",
-  landRings.length > 50 && landRings.every(function (n) { return n >= 4; }),
-  landRings.length + " rings, shortest " + Math.min.apply(null, landRings));
-check("the water lines are lines", water.length > 50 && water.every(function (l) {
-  return Array.isArray(l) && l.length >= 2 && l.every(function (pt) {
-    return pt.length === 2 && Math.abs(pt[0]) <= 180 && Math.abs(pt[1]) <= 90;
+/* The map: land with area, rivers and borders as lines, cities as points, and a
+   world set for when the view is wider than the region. A layer that arrived empty
+   would leave the map a blank rectangle with dots on it, which is what it was. */
+/* Land arrives as Polygon or MultiPolygon, rivers and borders as LineString or
+   MultiLineString: Natural Earth uses both, and the map draws both. */
+const EXPECTED = {
+  "land-region": ["Polygon", "MultiPolygon"],
+  "lakes-region": ["Polygon", "MultiPolygon"],
+  "rivers-region": ["LineString", "MultiLineString"],
+  "borders-region": ["LineString", "MultiLineString"],
+  "cities-region": ["Point"],
+  "land-world": ["Polygon", "MultiPolygon"],
+  "lakes-world": ["Polygon", "MultiPolygon"]
+};
+const ringCounts = [];
+Object.keys(EXPECTED).forEach(function (name) {
+  const layer = layers[name];
+  check("the atlas ships the " + name + " layer", !!(layer && layer.features && layer.features.length),
+    layer ? layer.features.length + " features" : "missing");
+  if (!layer || !layer.features) { return; }
+  const wrong = layer.features.filter(function (f) { return EXPECTED[name].indexOf(f.t) === -1; });
+  check(name + " holds the right kind of shape", wrong.length === 0,
+    wrong.slice(0, 2).map(function (f) { return f.t; }).join(", "));
+  let points = 0;
+  layer.features.forEach(function (f) {
+    points += (JSON.stringify(f.c).match(/\[/g) || []).length;
+    if (EXPECTED[name].indexOf("Polygon") !== -1) {
+      /* a Polygon is a list of rings; a MultiPolygon a list of those */
+      const polys = f.t === "Polygon" ? [f.c] : f.c;
+      polys.forEach(function (poly) {
+        (poly || []).forEach(function (ring) { ringCounts.push(ring.length); });
+      });
+    }
   });
-}), water.length + " lines");
-notes.push(landRings.length + " land rings, " + water.length + " water lines");
+  check(name + " carries coordinates", points > 0, String(points));
+});
+check("the coastlines are polygons with area",
+  ringCounts.length > 50 && ringCounts.every(function (n) { return n >= 4; }),
+  ringCounts.length + " rings, shortest " + Math.min.apply(null, ringCounts));
+check("the cities carry names to label them",
+  (layers["cities-region"].features || []).every(function (f) { return f.n && f.n.length > 1; }),
+  (layers["cities-region"].features || []).filter(function (f) { return !f.n; }).length + " unnamed");
+notes.push(ringCounts.length + " land rings, " + Object.keys(EXPECTED).length + " layers");
+
+/* The geometry itself, tested by asking it questions with known answers: Cairo is
+   on land, and a point in the middle of the Mediterranean is not. This is what a
+   clipped or mis-assembled coastline fails, and it is cheaper than looking. */
+function inRing(lon, lat, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], yi = ring[i][1], xj = ring[j][0], yj = ring[j][1];
+    if (((yi > lat) !== (yj > lat)) &&
+        (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)) { inside = !inside; }
+  }
+  return inside;
+}
+function inLayer(name, lon, lat) {
+  const layer = layers[name];
+  return (layer.features || []).some(function (f) {
+    const polys = f.t === "Polygon" ? [f.c] : f.c;
+    return (polys || []).some(function (poly) {
+      return (poly || []).some(function (ring) { return inRing(lon, lat, ring); });
+    });
+  });
+}
+check("the coastline has Cairo on it", inLayer("land-region", 31.24, 30.05));
+check("and Jerusalem", inLayer("land-region", 35.23, 31.78));
+check("and does not have the middle of the Mediterranean on it",
+  !inLayer("land-region", 30, 34.5));
+check("the rivers reach the sea, at least at one end",
+  (layers["rivers-region"].features || []).some(function (f) {
+    const lines = f.t === "LineString" ? [f.c] : f.c;
+    return lines.some(function (line) {
+      return line.length > 20;
+    });
+  }));
+
+/* And the projection the page uses: Cairo has to land inside the box for the
+   Bible-lands view. The first version of this put the whole map below the bottom
+   edge, because the vertical scale was divided by the wrong span. */
+const WINDOW = { lon: -12, lat: 45, width: 74 };
+const boxAspect = 0.62;
+function px(lon, lat) {
+  const span = WINDOW.width * boxAspect;
+  return [(lon - WINDOW.lon) / WINDOW.width * 1000,
+          (WINDOW.lat - lat) / span * 1000 * boxAspect];
+}
+const cairo = px(31.24, 30.05);
+const jeru = px(35.23, 31.78);
+check("the projection puts the Bible lands inside the frame",
+  cairo[0] > 0 && cairo[0] < 1000 && cairo[1] > 0 && cairo[1] < 1000 * boxAspect &&
+  jeru[0] > cairo[0] && jeru[0] < 1000 && jeru[1] < cairo[1],
+  "Cairo at " + cairo.map(function (n) { return Math.round(n); }) + ", Jerusalem at " +
+  jeru.map(function (n) { return Math.round(n); }));
+check("and the page uses that same projection",
+  /span = view\.width \* aspect/.test(app) &&
+  /\(view\.lat - lat\) \/ span \* 1000 \* aspect/.test(app));
 
 /* The page the data is for. */
 const page = fs.readFileSync(path.join(ROOT, "apps", "atlas", "index.html"), "utf8");
-const app = fs.readFileSync(path.join(ROOT, "apps", "atlas", "app.js"), "utf8");
 check("the atlas is a page that loads the map data",
-  /data\/atlas\/places\.json/.test(app) && /data\/atlas\/land\.json/.test(app));
+  /data\/atlas\/places\.json/.test(app) && /data\/atlas\/layers\.json/.test(app));
+check("it draws a graticule and a scale, so a reader can place themselves",
+  /graticule/.test(app) && /km across/.test(app));
+check("it says the borders are today's rather than any period's",
+  /borders are today's|not of any biblical period/i.test(page) &&
+  /borders are today's/.test(app));
 check("it says no tiles are fetched", /no map tiles|No tiles/i.test(page));
 check("it does not hard-code a count of places", !/1,3\d\d/.test(app + page));
 check("it is registered and carded",
