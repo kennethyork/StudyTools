@@ -26,6 +26,7 @@ const atlas = load("data/atlas/places.json");
 const layers = load("data/atlas/layers.json");
 const books = load("data/bible/books.json");
 const app = fs.readFileSync(path.join(ROOT, "apps", "atlas", "app.js"), "utf8");
+const page = fs.readFileSync(path.join(ROOT, "apps", "atlas", "index.html"), "utf8");
 const bySlug = {};
 books.forEach(function (b) { bySlug[b.slug] = b; });
 
@@ -197,11 +198,39 @@ check("the rivers reach the sea, at least at one end",
     });
   }));
 
+/* The Bible lands: the box the page frames when it opens, and the window that
+   framing makes of it in a panel of a given shape. Read out of the page, so that a
+   window changed there without thought for the ground below it fails here. */
+const landsMatch = /var BIBLE_LANDS = \{ lon0: (-?[\d.]+), lon1: (-?[\d.]+), lat0: (-?[\d.]+), lat1: (-?[\d.]+) \}/.exec(app);
+check("the page declares the window it opens on", !!landsMatch,
+  "BIBLE_LANDS not found in apps/atlas/app.js");
+const LANDS = landsMatch
+  ? { lon0: +landsMatch[1], lon1: +landsMatch[2], lat0: +landsMatch[3], lat1: +landsMatch[4] }
+  : { lon0: 0, lon1: 0, lat0: 0, lat1: 0 };
+const landsPlaces = atlas.places.filter(function (p) {
+  return p.lon >= LANDS.lon0 && p.lon <= LANDS.lon1 && p.lat >= LANDS.lat0 && p.lat <= LANDS.lat1;
+});
+check("and the Bible-lands window holds nearly every place in the dataset",
+  landsPlaces.length > atlas.places.length * 0.98,
+  landsPlaces.length + " of " + atlas.places.length + " places inside it");
+
+/* fitBox() as the page does it: the box with a little room, widened when the panel
+   is wider than the box. The panel's shape is the only thing that changes it. */
+function landsWindow(boxAspect) {
+  const pad = 1.04;
+  const w = (LANDS.lon1 - LANDS.lon0) * pad;
+  const h = (LANDS.lat1 - LANDS.lat0) * pad;
+  const width = w < h / boxAspect ? h / boxAspect : w;
+  return { lon: (LANDS.lon0 + LANDS.lon1) / 2 - width / 2,
+           lat: (LANDS.lat0 + LANDS.lat1) / 2 + width * boxAspect / 2,
+           width: width };
+}
+
 /* And the projection the page uses: Cairo has to land inside the box for the
    Bible-lands view. The first version of this put the whole map below the bottom
    edge, because the vertical scale was divided by the wrong span. */
-const WINDOW = { lon: -12, lat: 45, width: 74 };
 const boxAspect = 0.62;
+const WINDOW = landsWindow(boxAspect);
 function px(lon, lat) {
   const span = WINDOW.width * boxAspect;
   return [(lon - WINDOW.lon) / WINDOW.width * 1000,
@@ -217,16 +246,125 @@ check("the projection puts the Bible lands inside the frame",
 check("and the page uses that same projection",
   /span = view\.width \* aspect/.test(app) &&
   /\(view\.lat - lat\) \/ span \* 1000 \* aspect/.test(app));
+check("and frames the window with the same arithmetic as this check",
+  /function fitBox/.test(app) && /if \(w < h \/ aspect\) \{ w = h \/ aspect; \}/.test(app) &&
+  /function lands\(\) \{ go\(fitBox\(BIBLE_LANDS\)\); \}/.test(app));
+
+/* The basemap. Two faults here are invisible in a screenshot and fatal on the map:
+   the raster missing or half-downloaded, and the box the builder cropped it to
+   disagreeing with the box the page draws it at, which leaves the ground beside the
+   places. So the builder's constants, the page's constants and the JPEG's own
+   dimensions are compared with each other. */
+const reliefPath = path.join(ROOT, "data", "atlas", "relief.jpg");
+check("the basemap ships with the site", fs.existsSync(reliefPath),
+  "data/atlas/relief.jpg is not there, and the map would fall back to a plain coast");
+const reliefBytes = fs.existsSync(reliefPath) ? fs.readFileSync(reliefPath) : Buffer.alloc(0);
+check("the basemap is a JPEG", reliefBytes.length > 4 && reliefBytes[0] === 0xff &&
+  reliefBytes[1] === 0xd8 && reliefBytes[reliefBytes.length - 2] === 0xff &&
+  reliefBytes[reliefBytes.length - 1] === 0xd9,
+  reliefBytes.slice(0, 4).toString("hex") + " (no JPEG start or end marker)");
+check("it is a size a browser can read whole",
+  reliefBytes.length > 20000 && reliefBytes.length < 2000000,
+  Math.round(reliefBytes.length / 1024) + " KB");
+
+/* the frame header of a baseline or progressive JPEG: 0xFFC0..0xFFCF, skipping the
+   four markers that share that range but carry no frame */
+function jpegSize(buf) {
+  let i = 2;
+  while (i + 8 < buf.length) {
+    if (buf[i] !== 0xff) { i++; continue; }
+    const marker = buf[i + 1];
+    if (marker === 0xd8 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) { i += 2; continue; }
+    const length = buf.readUInt16BE(i + 2);
+    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 &&
+        marker !== 0xcc) {
+      return { height: buf.readUInt16BE(i + 5), width: buf.readUInt16BE(i + 7) };
+    }
+    i += 2 + length;
+  }
+  return null;
+}
+const jpeg = reliefBytes.length ? jpegSize(reliefBytes) : null;
+check("its size can be read out of it", !!jpeg, "no JPEG frame header found");
+
+const cropMatch = /RELIEF_CROP = \((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)/.exec(
+  fs.readFileSync(path.join(ROOT, "scripts", "build-atlas.py"), "utf8"));
+check("the builder crops the basemap to a stated box", !!cropMatch,
+  "RELIEF_CROP not found in scripts/build-atlas.py");
+const crop = cropMatch ? [+cropMatch[1], +cropMatch[2], +cropMatch[3], +cropMatch[4]] : [0, 0, 0, 0];
+const reliefMatch = /var RELIEF = \{ file: "([^"]+)", lon0: (-?[\d.]+), lon1: (-?[\d.]+), lat0: (-?[\d.]+), lat1: (-?[\d.]+) \}/.exec(app);
+check("the page names the basemap file and the box to draw it at", !!reliefMatch,
+  "RELIEF not found in apps/atlas/app.js");
+if (reliefMatch) {
+  check("the page asks for the file the builder writes",
+    reliefMatch[1] === "data/atlas/relief.jpg", reliefMatch[1]);
+  const same = [+reliefMatch[2], +reliefMatch[3], +reliefMatch[4], +reliefMatch[5]]
+    .every(function (n, i) { return Math.abs(n - crop[i]) < 0.01; });
+  check("and draws it at the box the builder cropped it to", same,
+    "builder " + crop.join(", ") + " against page " +
+    [reliefMatch[2], reliefMatch[3], reliefMatch[4], reliefMatch[5]].join(", "));
+}
+if (jpeg) {
+  /* a grid of degrees is square: the crop's shape and the JPEG's shape have to be
+     the same shape, or the ground is stretched against the places on it */
+  const degreeRatio = (crop[1] - crop[0]) / (crop[3] - crop[2]);
+  const pixelRatio = jpeg.width / jpeg.height;
+  check("the basemap carries its degrees square, not stretched",
+    Math.abs(degreeRatio - pixelRatio) < 0.02,
+    "crop " + degreeRatio.toFixed(3) + " against image " + pixelRatio.toFixed(3));
+  check("the basemap is worth its bytes, not a thumbnail",
+    jpeg.width >= 1200 && jpeg.height >= 700, jpeg.width + "x" + jpeg.height);
+}
+/* The ground has to hold the whole window the page opens on, or the map opens with
+   a plain coastline where Egypt should be. The panel is 100% of a 1080px column
+   less the 340px the place list takes, so it is never shorter than about 0.67 — and
+   never taller than the page's own clamp of 1.4 — so this walks what it can be. */
+const uncovered = [0.6, 0.672, 0.7, 0.85, 1.0, 1.2, 1.4].filter(function (a) {
+  const w = landsWindow(a);
+  return !(crop[0] <= w.lon && crop[1] >= w.lon + w.width &&
+           crop[2] <= w.lat - w.width * a && crop[3] >= w.lat);
+});
+/* 1.4 is the page's own clamp on the panel's shape, so no window it can open on is
+   taller than that and none of them runs off the ground */
+check("and covers that window at any shape the panel can take", uncovered.length === 0,
+  "uncovered at panel ratios " + uncovered.join(", "));
+check("the page clamps the panel's shape, so there is no taller window than that",
+  /Math\.min\(1\.4, box\.height \/ box\.width\)/.test(app));
+check("the page falls back to the coastline when the raster cannot reach or resolve",
+  /RELIEF_PX_PER_DEGREE/.test(app) && /pxPerDegree <= RELIEF_PX_PER_DEGREE \* 3/.test(app) &&
+  /reliefOk = false; draw\(\)/.test(app));
+check("the coastline is drawn under the basemap, so no view is a blue rectangle",
+  app.indexOf("land.features.forEach") > 0 &&
+  app.indexOf("land.features.forEach") < app.indexOf("if (showRelief)"));
+check("the raster's own water is not covered by sand-filled lakes",
+  /else \{[\s\S]{0,200}lakes.features.forEach/.test(app) &&
+  /\.lake \{ fill: var\(--sea\)/.test(page));
+
+/* The two controls a reader will reach for, and the fault they had: the borders
+   checkbox taking the rivers with it, and the zoom buttons leaving the middle. */
+check("the borders are a checkbox that starts off",
+  /<input type="checkbox" id="borders">/.test(page) &&
+  /var bordersOn = false;/.test(app) && /if \(!world && bordersOn\) \{/.test(app));
+check("the rivers are drawn whatever the borders are set to",
+  app.indexOf("rivers.features.forEach") > 0 &&
+  app.indexOf("rivers.features.forEach") < app.indexOf("if (!world && bordersOn)"),
+  "the rivers are inside the borders block again");
+check("zooming keeps the middle of the panel where it was",
+  /function zoomBy\(factor\)/.test(app) && /zoomBy\(0\.7\)/.test(app) &&
+  /view\.lon \+= \(view\.width - width\) \/ 2;/.test(app));
+check("the page says where its ground came from, and that it is not a period map",
+  /shaded relief/.test(page) && /Natural Earth/.test(page) && /public domain/.test(page) &&
+  /terrain is the terrain as it is now/.test(page) &&
+  /1:50m/.test(page) && !/1:110m/.test(page));
 
 /* The page the data is for. */
-const page = fs.readFileSync(path.join(ROOT, "apps", "atlas", "index.html"), "utf8");
 check("the atlas is a page that loads the map data",
   /data\/atlas\/places\.json/.test(app) && /data\/atlas\/layers\.json/.test(app));
 check("it draws a graticule and a scale, so a reader can place themselves",
   /graticule/.test(app) && /km across/.test(app));
 check("it says the borders are today's rather than any period's",
-  /borders are today's|not of any biblical period/i.test(page) &&
-  /borders are today's/.test(app));
+  /not of any biblical period/i.test(page) && /today's borders/i.test(page) &&
+  /borders of any period/.test(app));
 check("it says no tiles are fetched", /no map tiles|No tiles/i.test(page));
 check("it does not hard-code a count of places", !/1,3\d\d/.test(app + page));
 check("it is registered and carded",

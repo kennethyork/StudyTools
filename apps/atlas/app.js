@@ -1,9 +1,10 @@
 /* The atlas: places, verses, and a map drawn from public-domain data.
 
-   No tiles and no tile server: the coastline is Natural Earth GeoJSON shipped with
-   the site, the places are OpenBible.info's representative points, and the whole
-   thing is a plain equirectangular plot in one SVG. Pan by dragging, zoom with the
-   buttons or the wheel, click a place for its verses. */
+   No tiles and no tile server: the ground is Natural Earth's shaded-relief raster
+   shipped with the site as a JPEG, the coastlines, rivers and borders are Natural
+   Earth GeoJSON, the places are OpenBible.info's representative points, and the
+   whole thing is a plain equirectangular plot in one SVG. Pan by dragging, zoom
+   with the buttons or the wheel, click a place for its verses. */
 (function () {
   "use strict";
 
@@ -14,17 +15,33 @@
   var hint = document.getElementById("hint");
   var find = document.getElementById("find");
   var els = {
+    borders: document.getElementById("borders"),
     route: document.getElementById("route"),
     findBook: document.getElementById("find-book"),
     findChapter: document.getElementById("find-chapter")
   };
 
-  /* the window of the world on screen: lon/lat of the left/top corner, and how
-     many degrees wide */
-  var LAND_WINDOW = { lon: -12, lat: 45, width: 74 };
+  /* The Bible lands: the ground this atlas is for, and what the "Bible lands"
+     button frames — Egypt and the Nile, Canaan, Phoenicia, Syria, Anatolia,
+     Mesopotamia and Persia, from Malta to Susa. The places run 14°E to 48°E and
+     23°N to 41°N (first to ninety-ninth percentile), so this holds them with room
+     to spare; the old window was 74° wide and left two-thirds of the panel empty
+     desert and ocean. */
+  var BIBLE_LANDS = { lon0: 12, lon1: 52, lat0: 14, lat1: 44 };
   var WORLD = { lon: -180, lat: 84, width: 360 };
-  var view = { lon: LAND_WINDOW.lon, lat: LAND_WINDOW.lat, width: LAND_WINDOW.width };
+  /* the window of the world on screen: lon/lat of the left/top corner, and how
+     many degrees wide. fitBox() sets it before the first draw. */
+  var view = { lon: BIBLE_LANDS.lon0, lat: BIBLE_LANDS.lat1, width: 40 };
   var layers = null, places = [], routes = [], chosen = null, route = null;
+  /* The basemap, and the box in degrees the builder cropped it to: the two have to
+     agree to the degree, or the ground lands beside the places. */
+  var RELIEF = { file: "data/atlas/relief.jpg", lon0: -2, lon1: 66, lat0: -2, lat1: 60 };
+  /* Natural Earth's 1:50m raster is about 30 pixels to the degree. It is drawn
+     while the view is within three times that; closer in it is only a blur, and
+     the plain coastline is more honest. */
+  var RELIEF_PX_PER_DEGREE = 30;
+  var reliefOk = true;          /* false if the basemap will not load */
+  var bordersOn = false;        /* today's borders, off by default */
   var filter = { slug: "", chapter: "" };
   var aspect = 0.62;          /* height / width of the plot, changed on resize */
 
@@ -50,6 +67,24 @@
   }
 
   function round(n) { return Math.round(n * 1000) / 1000; }
+
+  /* The window that frames a box of the world in the panel as the panel is now:
+     the box with a little room, widened when the panel is wider than the box. The
+     panel's shape decides the vertical span, exactly as the projection assumes. */
+  function fitBox(box) {
+    var pad = 1.04;
+    var w = (box.lon1 - box.lon0) * pad;
+    var h = (box.lat1 - box.lat0) * pad;
+    if (w < h / aspect) { w = h / aspect; }
+    return { lon: (box.lon0 + box.lon1) / 2 - w / 2,
+             lat: (box.lat0 + box.lat1) / 2 + w * aspect / 2,
+             width: w };
+  }
+
+  /* put a point in the middle of the panel, at a given width in degrees */
+  function centreOn(lon, lat, width) {
+    view = { lon: lon - width / 2, lat: lat + width * aspect / 2, width: width };
+  }
 
   /* Cities named at every zoom: the ones a reader of the Bible places himself by. */
   var ALWAYS = ["Jerusalem", "Damascus", "Baghdad", "Cairo", "Istanbul", "Amman", "Beirut",
@@ -110,6 +145,13 @@
     svg.innerHTML = "";
 
     var world = view.width > 120;
+    /* The basemap: the raster relief wherever it reaches and is still sharp enough
+       to read, the vector coastline for the world and for close work, where the
+       raster would be a stamp or a blur. */
+    var pxPerDegree = box.width ? box.width / view.width : 0;
+    var showRelief = !world && reliefOk && pxPerDegree <= RELIEF_PX_PER_DEGREE * 3 &&
+      view.lon < RELIEF.lon1 && view.lon + view.width > RELIEF.lon0 &&
+      view.lat > RELIEF.lat0 && view.lat - view.width * aspect < RELIEF.lat1;
     var land = layers[world ? "land-world" : "land-region"] || { features: [] };
     var lakes = layers[world ? "lakes-world" : "lakes-region"] || { features: [] };
     var rivers = layers[world ? "rivers-region" : "rivers-region"] || { features: [] };
@@ -141,25 +183,46 @@
     }
     svg.appendChild(g);
 
+    /* the coastline goes under the basemap — the world's or the region's, whichever
+       this view uses: where the raster reaches it is hidden, and where it does not
+       (the whole world, or a pinch of it so close in that the ground falls back) the
+       map is still a map and not a blue rectangle. */
     land.features.forEach(function (f) {
       ringsOf(f).forEach(function (ring) {
         svg.appendChild(el("path", { class: "land", d: pathOf(ring, true) }));
       });
     });
-    lakes.features.forEach(function (f) {
-      ringsOf(f).forEach(function (ring) {
-        svg.appendChild(el("path", { class: "lake", d: pathOf(ring, true) }));
-      });
-    });
-    if (!world) {
-      borders.features.forEach(function (f) {
-        linesOf(f).forEach(function (line) {
-          svg.appendChild(el("path", { class: "border", d: pathOf(line, false) }));
+    if (showRelief) {
+      var tl = px(RELIEF.lon0, RELIEF.lat1);
+      var br = px(RELIEF.lon1, RELIEF.lat0);
+      var image = el("image", { class: "relief", x: tl[0], y: tl[1], width: br[0] - tl[0],
+        height: br[1] - tl[1], preserveAspectRatio: "none",
+        href: root + RELIEF.file });
+      image.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", root + RELIEF.file);
+      image.addEventListener("error", function () { reliefOk = false; draw(); });
+      svg.appendChild(image);
+    } else {
+      /* the raster carries its own water; the vector lakes are only for the views
+         it does not cover, where their sand fill would otherwise sit on blue sea */
+      lakes.features.forEach(function (f) {
+        ringsOf(f).forEach(function (ring) {
+          svg.appendChild(el("path", { class: "lake", d: pathOf(ring, true) }));
         });
       });
+    }
+    /* the rivers are drawn whatever the borders are set to: they are geography,
+       and the legend has always promised them. */
+    if (!world) {
       rivers.features.forEach(function (f) {
         linesOf(f).forEach(function (line) {
           svg.appendChild(el("path", { class: "river", d: pathOf(line, false) }));
+        });
+      });
+    }
+    if (!world && bordersOn) {
+      borders.features.forEach(function (f) {
+        linesOf(f).forEach(function (line) {
+          svg.appendChild(el("path", { class: "border", d: pathOf(line, false) }));
         });
       });
     }
@@ -266,14 +329,23 @@
       });
     }
 
+    /* a north arrow, because a map has one */
+    var nx = 1000 - 26, ny = 22;
+    svg.appendChild(el("path", { class: "north", d: "M" + nx + " " + (ny - 10) + " l5 14 l-5 -4 l-5 4 Z" }));
+    var north = el("text", { x: nx, y: ny + 20, class: "north-label", "text-anchor": "middle" });
+    north.textContent = "N";
+    svg.appendChild(north);
+
     /* a scale: the width of the plot in kilometres at this latitude */
     var kmPerDegree = 111.32;
     var midLat = view.lat - view.width * aspect / 2;
     var km = view.width * kmPerDegree * Math.cos(midLat * Math.PI / 180);
     hint.textContent = drawn + " of " + places.length + " places in view \u00b7 about " +
       Math.round(km).toLocaleString() + " km across, " + step + "\u00b0 of grid \u00b7 drag to move, " +
-      "wheel or the buttons to zoom. Coastlines, rivers and borders are Natural Earth (public domain): " +
-      "the borders are today's, for orientation only.";
+      "wheel or the buttons to zoom. The ground, coasts, rivers and borders are Natural Earth " +
+      "(public domain)" + (showRelief ? "; the ground is modern terrain, and the borders of any period " +
+      "are not drawn" : (world ? "; at world scale the ground is drawn as a plain coastline" :
+      "; this close in, the ground is drawn as a plain coastline")) + ".";
   }
 
   /* Labels are placed after everything else and never on top of one another: at a
@@ -390,6 +462,27 @@
 
   function go(win) { view = { lon: win.lon, lat: win.lat, width: win.width }; draw(); }
 
+  function lands() { go(fitBox(BIBLE_LANDS)); }
+
+  /* Zoom about the middle of the panel. Changing the width alone holds the corner
+     still, which slid the place you were looking at out of the frame — "zoom in"
+     twice and the map was open sea. */
+  function zoomBy(factor) {
+    var width = Math.min(360, Math.max(1.2, view.width * factor));
+    view.lon += (view.width - width) / 2;
+    view.lat -= (view.width - width) * aspect / 2;
+    view.width = width;
+    draw();
+  }
+
+  /* frame a journey: its stops, in the middle of the panel */
+  function frameRoute(journey) {
+    var lons = journey.stops.map(function (s) { return s.lon; });
+    var lats = journey.stops.map(function (s) { return s.lat; });
+    go(fitBox({ lon0: Math.min.apply(null, lons) - 3, lon1: Math.max.apply(null, lons) + 3,
+                lat0: Math.min.apply(null, lats) - 3, lat1: Math.max.apply(null, lats) + 3 }));
+  }
+
   var books = [];
 
   /* pan by dragging */
@@ -423,27 +516,21 @@
     draw();
   }, { passive: false });
 
-  document.getElementById("lands").addEventListener("click", function () { go(LAND_WINDOW); });
+  document.getElementById("lands").addEventListener("click", lands);
   document.getElementById("world").addEventListener("click", function () { go(WORLD); });
-  document.getElementById("zoom-in").addEventListener("click", function () {
-    view.width = Math.max(1.2, view.width * 0.7); draw();
-  });
-  document.getElementById("zoom-out").addEventListener("click", function () {
-    view.width = Math.min(360, view.width / 0.7); draw();
+  document.getElementById("zoom-in").addEventListener("click", function () { zoomBy(0.7); });
+  document.getElementById("zoom-out").addEventListener("click", function () { zoomBy(1 / 0.7); });
+
+  els.borders.addEventListener("change", function () {
+    bordersOn = els.borders.checked;
+    draw();
   });
 
   els.route.addEventListener("change", function () {
     route = null;
     routes.forEach(function (r) { if (r.name === els.route.value) { route = r; } });
     if (route && route.stops.length) {
-      var lons = route.stops.map(function (s) { return s.lon; });
-      var lats = route.stops.map(function (s) { return s.lat; });
-      var pad = 6;
-      var width = Math.max(12, Math.max.apply(null, lons) - Math.min.apply(null, lons) + pad * 2);
-      var height = Math.max.apply(null, lats) - Math.min.apply(null, lats) + pad * 2;
-      view.width = Math.min(120, Math.max(width, height / aspect));
-      view.lon = Math.min.apply(null, lons) - pad;
-      view.lat = Math.max.apply(null, lats) + pad;
+      frameRoute(route);
       side.innerHTML = "";
       side.appendChild(ST.el("div", { class: "card place-card" }, [
         ST.el("h2", { class: "serif", text: route.name }),
@@ -512,7 +599,7 @@
       ]));
       return;
     }
-    go({ lon: hit.lon - 6, lat: hit.lat + 6 * aspect, width: 12 });
+    centreOn(hit.lon, hit.lat, 12);
     show(hit);
   });
 
@@ -530,11 +617,14 @@
     nearHere(view.lon + fx * view.width, view.lat - fy * view.width * aspect, box);
   });
 
-  function fit() {
+  /* the panel's shape, which the projection and fitBox() both need. Kept apart from
+     the draw so that the first view can be framed before anything is drawn. */
+  function measure() {
     var box = svg.getBoundingClientRect();
     if (box.width) { aspect = Math.max(0.35, Math.min(1.4, box.height / box.width)); }
-    draw();
   }
+
+  function fit() { measure(); draw(); }
   window.addEventListener("resize", fit);
 
   Promise.all([
@@ -563,24 +653,18 @@
     if (qPlace) {
       var hit = places.filter(function (p) { return p.name.toLowerCase() === qPlace.toLowerCase(); })[0];
       if (hit) {
-        view = { lon: hit.lon - 6, lat: hit.lat + 6 * aspect, width: 12 };
+        centreOn(hit.lon, hit.lat, 12);
         chosen = hit;
       }
     }
-    fit();
+    measure();
     if (route) {
-      /* frame the journey */
-      var lons = route.stops.map(function (s) { return s.lon; });
-      var lats = route.stops.map(function (s) { return s.lat; });
-      var pad = 6;
-      view.width = Math.min(120, Math.max(12, Math.max.apply(null, lons) - Math.min.apply(null, lons) + pad * 2));
-      view.lon = Math.min.apply(null, lons) - pad;
-      view.lat = Math.max.apply(null, lats) + pad;
+      frameRoute(route);
       if (route.stops.length) { showByName(route.stops[0].name); }
     } else if (chosen) {
       show(chosen);
     } else {
-      go(LAND_WINDOW);
+      lands();
       var jerusalem = places.filter(function (p) { return p.name === "Jerusalem"; })[0];
       if (jerusalem) { show(jerusalem); }
     }

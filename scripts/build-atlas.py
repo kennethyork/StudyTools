@@ -9,16 +9,20 @@ Two openly licensed datasets, no tiles and no network at read time:
     (CC BY 4.0), the same publisher as the cross-references this site already
     carries. Its all.kml holds every place with a representative point, and its
     ancient.jsonl holds the verses each place is named in.
-  * The land itself: Natural Earth, 1:110m, public domain, as GeoJSON.
+  * The land itself: Natural Earth, public domain — 1:50m for the Bible lands
+    and the world at 1:110m, as GeoJSON, and Natural Earth's 1:50m raster of
+    hypsometric tints, shaded relief and water for the ground they stand on.
 
-Both are reduced here to what a browser can read whole — a coastline of a few
-hundred kilobytes and a place list with its verses — so the atlas opens offline,
-like the rest of the site, and no tile server ever learns what you are reading.
+All of it is reduced here to what a browser can read whole — a relief JPEG of a
+few hundred kilobytes, a coastline of the same order, and a place list with its
+verses — so the atlas opens offline, like the rest of the site, and no tile
+server ever learns what you are reading.
 
 Output:
   data/atlas/places.json   every place: name, position, what it is, its verses
-  data/atlas/land.json     Natural Earth 110m land, as GeoJSON
-  data/atlas/water.json    the rivers and lakes of the dataset, as lines
+  data/atlas/layers.json   the coast, lakes, rivers, borders and cities to draw
+  data/atlas/routes.json   the journeys, as stops in order
+  data/atlas/relief.jpg    the basemap: the ground itself, as a raster
 """
 import json
 import os
@@ -48,6 +52,22 @@ LAYERS = {
 # The window the region layers are cut to: the eastern Mediterranean and
 # Mesopotamia, with room to spare, because that is where the places are.
 REGION = (-16, 78, 6, 56)
+
+# The ground itself: Natural Earth's 1:50m raster with hypsometric tints, shaded
+# relief and water — the look of the physical maps printed in the back of a Bible.
+# It is 175 MB at source, so it is cropped to the same window and reduced to a
+# JPEG the browser can read: the basemap, with everything else drawn over it.
+RELIEF = ("https://raw.githubusercontent.com/nvkelso/natural-earth-raster/master/"
+          "50m_rasters/HYP_50M_SR_W/HYP_50M_SR_W.tif", "relief.tif")
+# The crop has to hold the whole "Bible lands" window the page opens on, or the
+# ground stops part-way up the map and the rest of it is a plain coastline. That
+# window frames lon 12..52, lat 14..44, and takes the panel's shape — a tall panel
+# reaches lat 60 at the top and -2 at the bottom, which is what this covers, so no
+# window the page can open on runs off the edge of the raster. The raster is 30
+# pixels to the degree, so RELIEF_WIDTH at 2040 holds the crop's 68 degrees at
+# their native resolution.
+RELIEF_CROP = (-2.0, 66.0, -2.0, 60.0)     # lon0, lon1, lat0, lat1
+RELIEF_WIDTH = 2040
 
 # OSIS book code to the slug this reader uses.
 OSIS = {
@@ -245,6 +265,33 @@ def routes_of(places):
     return out
 
 
+def make_relief():
+    """The basemap: raster relief, cropped to the region and made small."""
+    out = os.path.join(OUT, "relief.jpg")
+    os.makedirs(OUT, exist_ok=True)
+    source = os.path.join(CACHE, RELIEF[1])
+    if not os.path.exists(source):
+        fetch(RELIEF[0], RELIEF[1], least=1_000_000)
+    try:
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None
+        image = Image.open(source)
+        width, height = image.size
+        lon0, lon1, lat0, lat1 = RELIEF_CROP
+        box = (int((lon0 + 180) / 360 * width), int((90 - lat1) / 180 * height),
+               int((lon1 + 180) / 360 * width), int((90 - lat0) / 180 * height))
+        cropped = image.crop(box)
+        sized = cropped.resize((RELIEF_WIDTH,
+                               round(RELIEF_WIDTH * cropped.size[1] / cropped.size[0])),
+                               Image.LANCZOS)
+        sized.save(out, "JPEG", quality=82, optimize=True, progressive=True)
+        print("  relief.jpg   {:>4}x{:<4}  {:>6.2f} MB  lon {}..{}, lat {}..{}".format(
+            sized.size[0], sized.size[1], os.path.getsize(out) / 1e6,
+            lon0, lon1, lat0, lat1))
+    except ImportError:
+        print("  Pillow is not here, so the basemap was not rebuilt")
+
+
 def main():
     markers, water = read_kml()
     joined = read_places(markers)
@@ -296,6 +343,7 @@ def main():
             name, len(simplified["features"]),
             len(json.dumps(simplified)) / 1e6))
 
+    make_relief()
     with open(os.path.join(OUT, "layers.json"), "w", encoding="utf-8") as f:
         json.dump(layers, f, ensure_ascii=False, separators=(",", ":"))
     for old in ("land.json", "water.json"):
@@ -315,7 +363,8 @@ def main():
         json.dump({
             "source": {
                 "places": "OpenBible.info Bible Geocoding (CC BY 4.0)",
-                "land": "Natural Earth 1:110m (public domain)",
+                "land": "Natural Earth 1:50m, and 1:110m for the world (public domain)",
+                "ground": "Natural Earth 1:50m raster HYP_50M_SR_W (public domain)",
             },
             "count": len(places),
             "places": places,

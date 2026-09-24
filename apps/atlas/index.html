@@ -7,20 +7,29 @@
 <meta name="theme-color" content="#f7f4ed" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1613" media="(prefers-color-scheme: dark)">
 <title>Atlas — StudyTools</title>
-<meta name="description" content="Every place named in the Bible, on a map drawn from public-domain coastlines — no tiles, no network — with the verses each place appears in, linked into the reader.">
+<meta name="description" content="Every place named in the Bible, on the lands themselves — Natural Earth's public-domain shaded relief, cropped to the Bible lands and shipped with the site, no tiles and no network — with the verses each place appears in, linked into the reader.">
 <link rel="stylesheet" href="../../css/base.css">
 <script src="../../js/theme.js"></script>
 <style>
+  /* the water of the basemap, for the sea beyond where the raster reaches */
+  html { --sea: #a2c4e0; }
+  html[data-theme="dark"] { --sea: #16232c; }
   .atlas-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .atlas-bar input { flex: 1 1 12em; font-family: var(--serif); }
   .atlas-bar button { font-size: .82rem; padding: 6px 12px; }
   .atlas-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 16px; align-items: start; }
   @media (max-width: 900px) { .atlas-layout { grid-template-columns: 1fr; } }
-  #map { width: 100%; height: 460px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; touch-action: none; cursor: grab; }
+  #map { width: 100%; height: 460px; border: 1px solid var(--line); border-radius: 8px; touch-action: none; cursor: grab; }
   #map.dragging { cursor: grabbing; }
-  .sea { fill: var(--bg-alt); }
+  /* the sea is the colour the basemap draws its water in, so that the water is the
+     same water where the raster stops */
+  .sea { fill: var(--sea); }
   .land { fill: var(--card); stroke: var(--line); stroke-width: .6; }
-  .lake { fill: var(--accent-soft); stroke: var(--line); stroke-width: .3; }
+  /* a raster of a bright desert on a dark page: a shade less glaring */
+  html[data-theme="dark"] .relief { opacity: .86; }
+  /* lakes are water, and a sand-filled Dead Sea beside a blue sea is a hole in
+     the map. Only drawn where the raster does not reach, which carries its own. */
+  .lake { fill: var(--sea); stroke: var(--line); stroke-width: .3; }
   .river { fill: none; stroke: var(--accent-2); stroke-width: .6; opacity: .85; }
   .border { fill: none; stroke: var(--line); stroke-width: .5; stroke-dasharray: 3 2; }
   .graticule line { stroke: var(--line); stroke-width: .3; opacity: .55; }
@@ -28,17 +37,26 @@
   .city { fill: var(--ink-faint); }
   .city-label { font-family: var(--sans); font-size: 7.5px; fill: var(--ink-faint); }
   .sea-label { font-family: var(--sans); font-size: 8px; font-style: italic; fill: var(--ink-faint); letter-spacing: .04em; }
+  /* every name is written with a halo of the page behind it: over shaded relief a
+     bare label disappears into the mountains it is naming */
+  .grat-label, .city-label, .sea-label, .place-label, .route-num {
+    paint-order: stroke; stroke: var(--bg); stroke-width: 2.4px; stroke-linejoin: round; }
   .place { fill: var(--accent); opacity: .75; cursor: pointer; }
   .place.water { fill: var(--accent-2); }
   .place:hover, .place.on { opacity: 1; stroke: var(--ink); stroke-width: 1; }
   .place-label { font-family: var(--sans); font-size: 7px; fill: var(--ink-soft); pointer-events: none; }
   .atlas-hint { font-size: .8rem; color: var(--ink-faint); }
   .atlas-select { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem;
-    color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
-  .atlas-select select { font-size: .86rem; min-width: 9em; }
+    white-space: nowrap; color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
+  .atlas-select select { font-size: .86rem; min-width: 9em; text-transform: none; }
+  .atlas-check { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem;
+    white-space: nowrap; color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
+  .atlas-check input { margin: 0; }
   .route-line { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 5 3; opacity: .8; }
   .route-stop { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
   .route-num { font-family: var(--mono); font-size: 6.5px; fill: var(--accent); }
+  .north { fill: var(--accent); }
+  .north-label { font-family: var(--sans); font-size: 8px; fill: var(--accent); }
   .place.dim { opacity: .18; }
   .place.hit { opacity: 1; stroke: var(--ink); stroke-width: 1.2; }
   .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: .78rem; color: var(--ink-faint); }
@@ -47,6 +65,7 @@
   .legend i.city { background: var(--ink-faint); width: 6px; height: 6px; }
   .legend i.river { background: var(--accent-2); width: 14px; height: 2px; border-radius: 0; }
   .legend i.border { background: none; border-top: 2px dashed var(--line); width: 14px; height: 0; border-radius: 0; }
+  .legend i.ground { background: linear-gradient(135deg, #cfc0a2, #8d7f66 60%, #a2c4e0); width: 14px; height: 10px; border-radius: 2px; }
   .place-card h2 { margin: 0 0 4px; font-size: 1.15rem; }
   .place-card .meta { font-size: .78rem; color: var(--ink-faint); margin: 0 0 8px; }
   .place-verses { display: flex; flex-wrap: wrap; gap: 6px; font-size: .84rem; }
@@ -60,9 +79,10 @@
 <main class="wrap">
   <header class="page">
     <h1>Atlas</h1>
-    <p class="lede">Every place named in the Bible, on a map drawn from public-domain coastlines
-      &mdash; no map tiles, nothing fetched while you read. Click a place to see the verses it appears
-      in, each one opening in the reader.</p>
+    <p class="lede">Every place named in the Bible, on a map of the lands themselves &mdash; the
+      ground is Natural Earth's public-domain shaded relief, cropped to the Bible lands and shipped
+      with the site, so there are no tiles and nothing is fetched while you read. Click a place for the
+      verses it appears in, each one opening in the reader.</p>
   </header>
 
   <section class="card no-print">
@@ -81,13 +101,15 @@
       <label class="atlas-select">chapter <select id="find-chapter">
         <option value="">any</option>
       </select></label>
+      <label class="atlas-check"><input type="checkbox" id="borders"> today's borders</label>
     </div>
-    <p class="atlas-hint" id="hint" style="margin:10px 0 0">Loading the map\u2026</p>
+    <p class="atlas-hint" id="hint" style="margin:10px 0 0">Loading the map&hellip;</p>
     <div class="legend">
+      <span><i class="ground"></i> the ground: Natural Earth shaded relief</span>
       <span><i></i> a place named in the Bible</span>
       <span><i class="city"></i> a modern city, to place yourself</span>
       <span><i class="river"></i> river</span>
-      <span><i class="border"></i> a border of today &mdash; not of any biblical period</span>
+      <span><i class="border"></i> a border of today, if you turn them on &mdash; not of any biblical period</span>
       <span><i class="river" style="background:var(--accent)"></i> a journey, drawn stop to stop</span>
     </div>
   </section>
@@ -103,15 +125,20 @@
     <p>Places, their types and the verses they appear in are from the
       <a href="https://github.com/openbibleinfo/Bible-Geocoding-Data" rel="noopener">OpenBible.info Bible
       Geocoding dataset</a> (CC BY 4.0; its own sources number in the hundreds, and some identifications
-      are contested). The coastline, lakes and rivers of the base map are
-      <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> 1:110m, public domain.
-      The map is a plain equirectangular plot of those coordinates drawn here, not a historical atlas:
-      Click anywhere on the map for the places near that point, pick a journey to follow it, or pick
-      a book and chapter to see only the places that chapter names. It shows where the dataset puts
-      each place today, with the borders of no period at all &mdash;
-      the ones drawn are today's, and are there only to help you find your way. The names of the seas
-      and the regions are this site's own, placed by hand; the coastlines, rivers, lakes, borders and
-      modern cities are Natural Earth's.</p>
+      are contested). Click anywhere on the map for the places near that point, pick a journey to follow
+      it, or pick a book and chapter to see only the places that chapter names.</p>
+    <p>The ground the places stand on is Natural Earth's
+      <a href="https://www.naturalearthdata.com/downloads/50m-raster-data/50m-shaded-relief-and-water/" rel="noopener">1:50m
+      shaded relief and water</a> &mdash; hypsometric tints with hill shading, the look of the physical
+      maps printed in the back of a Bible &mdash; cropped to these lands and reduced to one JPEG that
+      ships with this site, so there are still no tiles and nothing is fetched while you read. The
+      coastlines, lakes, rivers, today's borders and the modern cities are Natural Earth 1:50m too, all
+      public domain. The map remains a plain equirectangular plot of those coordinates rather than a
+      historical atlas: the terrain is the terrain as it is now, and the borders you can turn on are
+      today's, there only to help you find your way. No dataset in this project holds the political
+      lines of any biblical period, so none are drawn. Zoomed in past what the raster can resolve, the
+      ground falls back to the plain coastline. The names of the seas and the regions, which no dataset
+      here carries, are this site's own, placed by hand.</p>
   </footer>
 </main>
 
