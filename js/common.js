@@ -13,7 +13,6 @@
     { id: "lectern", name: "Lectern", href: "apps/lectern/" },
     { id: "search", name: "Search the Bible", href: "apps/search/" },
     { id: "notes", name: "Verse Notes", href: "apps/notes/" },
-    { id: "sync", name: "Your Data", href: "apps/sync/" },
     { id: "sermon", name: "Sermon Notebook", href: "apps/sermon/" },
     { id: "matrix", name: "Verse Matrix", href: "apps/matrix/" },
     { id: "xref", name: "Cross-References", href: "apps/xref/" },
@@ -26,8 +25,9 @@
     { id: "blog", name: "Blog Ideas", href: "apps/blog/" },
     { id: "devotional", name: "Family Devotional", href: "apps/devotional/" },
     { id: "calendar", name: "Church Calendar", href: "apps/calendar/" },
-    { id: "plan", name: "Reading Plan", href: "apps/plan/" }
-  ];
+    { id: "plan", name: "Reading Plan", href: "apps/plan/" },
+    { id: "sync", name: "Your Data", href: "apps/sync/" }
+];
 
   function siteRoot() {
     // Every app page includes a <body data-root="../.."> style marker.

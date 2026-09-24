@@ -12,7 +12,7 @@
    is not this worker's business.
 
    Bump CACHE when the shell changes; old caches are deleted on activate. */
-var CACHE = "studytools-shell-v19";
+var CACHE = "studytools-shell-v20";
 
 var SHELL = [
   "./",
