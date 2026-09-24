@@ -140,6 +140,7 @@ node scripts/check-yourdata.js        # re-checks the merge of two devices' read
 node scripts/check-answer.js          # re-checks the deterministic Ask against the site's own files
 node scripts/check-pages.js           # re-checks what each page loads and says about itself
 node scripts/check-commentary.js      # re-checks the commentary against the verses it comments on
+node scripts/check-sw.js              # re-checks the service worker's rules and the shell it installs
 python3 scripts/build-douay-rheims.py # the Douay-Rheims, which numbers psalms the Vulgate's way
 python3 scripts/build-sitemap.py      # sitemap.xml, from the pages the site actually ships
 python3 scripts/build-commentary.py   # the public-domain commentary, verse by verse
