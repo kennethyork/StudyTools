@@ -125,6 +125,17 @@
     return bookName + " " + chapter + (verse ? ":" + verse : "");
   }
 
+  /* A reading from the Prayer Book, named as plainly as can be when the lectionary
+     that knows how to name them is not handed in. This block used to ask for
+     r.label || r.name || String(r) — and a reading carries `where`, `slot` and
+     `kind`, none of them a label — so every line of the block came out as
+     "[object Object]". */
+  function readingLine(h, ctx) {
+    if (ctx && ctx.readingLabel) { return ctx.readingLabel(h); }
+    if (!h) { return ""; }
+    return [h.where, h.slot, h.kind].filter(Boolean).join(" \u00b7 ");
+  }
+
   /* The text of one verse, or undefined. It used to hand back the whole chapter
      when it was asked for an undefined verse — a parsed reference carries
      verseStart, not verse — and every line of the passage came out as
@@ -229,8 +240,11 @@
       return ctx.readings(ref.book, ref.chapter, ref.verse != null ? ref.verse : ref.verseStart)
         .then(function (readings) {
           if (readings && readings.length) {
+            /* no source on this block: the title already says whose readings these
+               are, and a source is printed after the title as well as in the sources
+               line, where it would then read twice */
             done.push(block("Read in the Prayer Book (1928)",
-              readings.slice(0, 6).map(function (r) { return { text: r.label || r.name || String(r) }; }),
+              readings.slice(0, 6).map(function (r) { return { text: readingLine(r, ctx) }; }),
               [{ href: "apps/lectionary/", text: "The lectionary" }]));
           }
           return null;
@@ -393,7 +407,8 @@
         [{ href: "apps/search/", text: "Search the text for a word instead" },
          { href: "apps/dictionary/", text: "Look a word up in the dictionaries" },
          { href: "apps/topical/", text: "Browse the topical Bibles" }],
-        { who: "This is not a model", text: "It searches the commentary, dictionaries, " +
+        { who: "This is not a model", note: true,
+          text: "It searches the commentary, dictionaries, " +
           "cross-references, topical Bibles, interlinear and concordance this site holds and shows " +
           "you what they say. Nothing is written for you, and nothing leaves the page." })];
       if (hints.length) {
@@ -434,12 +449,17 @@
     });
   }
 
+  /* What an answer is made of: the works it came from, each named once, in the order
+     they were used. This used to paste the first 120 characters of each source's own
+     text after its name — which is the remark printed in full a few lines above it —
+     so the line read as an essay cut off mid-word. A citation names the book. */
   function citations(blocks) {
     var out = [];
     (blocks || []).forEach(function (b) {
-      if (b.source && b.source.who) {
-        out.push(b.source.who + (b.source.text ? " \u2014 " + b.source.text.slice(0, 120) : ""));
-      }
+      var src = b.source;
+      if (!src || !src.who || src.note) { return; }
+      var name = String(src.who) + (src.year ? ", " + src.year : "");
+      if (out.indexOf(name) === -1) { out.push(name); }
     });
     return out;
   }

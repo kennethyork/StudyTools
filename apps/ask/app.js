@@ -55,7 +55,10 @@
     },
     vocab: function (language) { return json(root + "data/vocab/" + language + ".json"); },
     concordance: function (letter) { return json(root + "data/concordance/" + letter.toLowerCase() + ".json"); },
-    readings: readings
+    readings: readings,
+    /* how a reading is named: the lectionary knows, and the reader's verse panel
+       asks it the same question rather than keeping its own copy of the rules */
+    readingLabel: function (h) { return STLiturgy.readingLabel(h, ST.titleCase); }
   };
 
   function el(tag, attrs, kids) { return ST.el(tag, attrs, kids); }

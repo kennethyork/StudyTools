@@ -283,6 +283,42 @@
     });
   }
 
+  /* When a reading is read, and what that day is called. The where of a reading is
+     written as "Whit Sunday (Easter +49)" or "Saints' Day (06-24)" — the date in
+     brackets — and a week's office carries no date at all, being read every day of
+     that week. Returns { where, date }, date null when there is no single day. */
+  function readingWhen(h, year) {
+    var where = String((h && h.where) || "");
+    var y = year || new Date().getFullYear();
+    var fixed = /^(.*) \((\d\d)-(\d\d)\)$/.exec(where);
+    if (fixed) { return { where: fixed[1], date: y + "-" + fixed[2] + "-" + fixed[3] }; }
+    var movable = /^(.*) \(Easter (\u2212|\+)(\d+)\)$/.exec(where);
+    if (movable) {
+      var d = easter(y);
+      d.setDate(d.getDate() + (movable[2] === "\u2212" ? -1 : 1) * Number(movable[3]));
+      return { where: movable[1], date: iso(d) };
+    }
+    return { where: where, date: null };
+  }
+
+  /* How a reading is named on a page: the day, which office, which lesson, and the
+     date when it has one — "The fourth Sunday in Advent · morning · first lesson".
+     Both the reader's verse panel and the site's own Ask name readings, so the
+     naming lives here with the fields it reads; Ask used to reach for a label the
+     index does not carry and print "[object Object]" for every line of it.
+
+     `format` is how the caller prints the day's name; the reader's panel has always
+     title-cased it. */
+  function readingLabel(h, format) {
+    if (!h) { return ""; }
+    var when = readingWhen(h);
+    /* a week's office is written in capitals in the tables; the page decides how to
+       print it, and whether it wants the date on the end */
+    var parts = [format ? format(when.where) : when.where, h.slot, h.kind];
+    if (when.date) { parts.push(when.date); }
+    return parts.filter(Boolean).join(" \u00b7 ");
+  }
+
   /* ---------- the daily office ---------- */
 
   /* Index a loaded bcp1928-daily.json for lookup. */
@@ -426,7 +462,9 @@
     officeFor: officeFor,
     parseReading: parseReading,
     readingIndex: readingIndex,
-    readingsFor: readingsFor
+    readingsFor: readingsFor,
+    readingWhen: readingWhen,
+    readingLabel: readingLabel
   };
 
   if (typeof module !== "undefined" && module.exports) { module.exports = api; }

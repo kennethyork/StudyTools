@@ -408,29 +408,20 @@
         var rList = document.createElement("ul");
         rList.className = "vp-readings";
         readings.slice(0, 8).forEach(function (h) {
+          /* the day this reading falls on this year, and what that day is called:
+             read out of the lectionary rather than picked apart here, because the
+             site's own Ask names the same readings and the two must agree */
           var li = document.createElement("li");
-          var where = h.where;
-          var fixed = /^(.*) \((\d\d)-(\d\d)\)$/.exec(where);
-          var movable = /^(.*) \(Easter (\u2212|\+)(\d+)\)$/.exec(where);
-          if (fixed || movable) {
-            var year = new Date().getFullYear();
-            var iso;
-            if (fixed) {
-              iso = year + "-" + fixed[2] + "-" + fixed[3];
-            } else {
-              var sign = movable[2] === "\u2212" ? -1 : 1;
-              var d = STLiturgy.easter(year);
-              d.setDate(d.getDate() + sign * Number(movable[3]));
-              iso = STLiturgy.iso(d);
-            }
+          var when = STLiturgy.readingWhen(h);
+          if (when.date) {
             var a = document.createElement("a");
-            a.href = root + "apps/calendar/?date=" + iso;
-            a.textContent = fixed ? ST.titleCase(fixed[1]) : movable[1];
+            a.href = root + "apps/calendar/?date=" + when.date;
+            a.textContent = ST.titleCase(when.where);
             li.appendChild(a);
             li.appendChild(document.createTextNode(" \u00b7 " + ST.titleCase(h.slot) +
-              " " + h.kind + " \u00b7 " + iso));
+              " " + h.kind + " \u00b7 " + when.date));
           } else {
-            li.appendChild(document.createTextNode(ST.titleCase(where) + " \u00b7 " +
+            li.appendChild(document.createTextNode(ST.titleCase(when.where) + " \u00b7 " +
               ST.titleCase(h.slot) + " " + h.kind));
           }
           rList.appendChild(li);
@@ -546,7 +537,9 @@
           .map(function (v) { return { name: v.t.name, text: v.text }; }),
         references: refs.map(function (r) { return { ref: refText(r.to), votes: r.votes }; }),
         words: (words || []).map(function (w) { return { g: w.g, t: w.t, e: w.e }; }),
-        readings: readings.map(function (h) { return h.where + " \u00b7 " + h.slot + " " + h.kind; }),
+        /* named the same way the panel names them and the site's Ask names them:
+           one function, in the lectionary, so the three cannot drift apart */
+        readings: readings.map(function (h) { return STLiturgy.readingLabel(h, ST.titleCase); }),
         noteKey: noteKey
       }, label));
     }).catch(function () {

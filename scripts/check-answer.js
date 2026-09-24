@@ -43,6 +43,8 @@ function load(rel) {
   catch (e) { return Promise.resolve(null); }
 }
 
+const LIT = require(path.join(ROOT, "js", "liturgy.js"));
+
 const ctx = {
   parseRef: ST.parseRef,
   normalizeBook: ST.normalizeBook,
@@ -54,8 +56,18 @@ const ctx = {
   dictionary: function (letter) { return load("data/dictionary/" + letter + ".json"); },
   topical: function (source, letter) { return load("data/topical/" + source + "/" + letter + ".json"); },
   vocab: function (language) { return load("data/vocab/" + language + ".json"); },
-  concordance: function (letter) { return load("data/concordance/" + letter.toLowerCase() + ".json"); }
+  concordance: function (letter) { return load("data/concordance/" + letter.toLowerCase() + ".json"); },
+  /* the lectionary, and how a reading is named. The answers that read the Prayer
+     Book were built here without it at first, so nothing checked them — and one
+     of them printed "[object Object]" where the reading should be. */
+  readings: function (slug, chapter, verse) {
+    if (!liturgyIndex) { return Promise.resolve([]); }
+    return Promise.resolve(LIT.readingsFor(liturgyIndex, slug, chapter, verse) || []);
+  },
+  readingLabel: function (h) { return LIT.readingLabel(h, ST.titleCase); }
 };
+
+let liturgyIndex = null;
 
 let books = [];
 const classify = function (q) { return A.classify(q, ST.parseRef, ST.normalizeBook); };
@@ -104,6 +116,29 @@ check("an empty question is harmless", classify("").askedFor.length === 0);
    page loads before it can ask anything. */
 load("data/bible/books.json").then(function (data) {
   books = data || [];
+  return load("data/liturgical/bcp1928-daily.json");
+}).then(function (daily) {
+  liturgyIndex = daily ? LIT.readingIndex(daily, ST.parseRef) : null;
+  check("the lectionary can be indexed for the answers that read it",
+    !!(liturgyIndex && Object.keys(liturgyIndex).length > 100),
+    liturgyIndex ? Object.keys(liturgyIndex).length + " passages" : "none");
+  /* Naming a reading, and the day it falls on: the arithmetic the reader's verse
+     panel and these answers both go through, against dates worked out by hand. */
+  check("a fixed holy day is named with this year's date",
+    JSON.stringify(LIT.readingWhen({ where: "Trinity Sunday (06-01)" }, 2026)) ===
+      JSON.stringify({ where: "Trinity Sunday", date: "2026-06-01" }),
+    JSON.stringify(LIT.readingWhen({ where: "Trinity Sunday (06-01)" }, 2026)));
+  check("a movable one is counted from Easter (Whit Sunday 2026, Easter + 49)",
+    LIT.readingWhen({ where: "Whit Sunday (Easter +49)" }, 2026).date === "2026-05-24",
+    String(LIT.readingWhen({ where: "Whit Sunday (Easter +49)" }, 2026).date));
+  check("a week's office has no single date on it",
+    LIT.readingWhen({ where: "FIRST SUNDAY IN ADVENT \u00b7 Sunday" }, 2026).date === null);
+  check("and a reading is named with its office and its lesson",
+    LIT.readingLabel({ where: "FIRST SUNDAY IN ADVENT \u00b7 Sunday", slot: "morning",
+      kind: "first lesson" }, ST.titleCase) ===
+      "First Sunday in Advent \u00b7 Sunday \u00b7 morning \u00b7 first lesson",
+    LIT.readingLabel({ where: "FIRST SUNDAY IN ADVENT \u00b7 Sunday", slot: "morning",
+      kind: "first lesson" }, ST.titleCase));
   return A.answer("John 3:16", ctx);
 }).then(function (result) {
   const body = texts(result);
@@ -151,11 +186,52 @@ load("data/bible/books.json").then(function (data) {
     return (b.lines || []).length; }).sort(function (a, b) { return b - a; })[0];
   check("a comparison answers with several translations", who >= 3, String(who));
 }).then(function () {
+  /* A passage the Prayer Book does read, taken out of the index rather than written
+     down here, so this follows the data. The block that answers with these readings
+     was built with no lectionary behind it in this check, so nothing ever looked at
+     it — and it printed "[object Object]" for every one of them. */
+  const keys = Object.keys(liturgyIndex || {}).filter(function (k) {
+    return (liturgyIndex[k] || []).some(function (h) { return h.from === 1; }) &&
+      books.some(function (b) { return b.slug === k.split(" ")[0]; });
+  });
+  check("the Prayer Book reads verses in the books this site ships", keys.length > 0,
+    String(keys.length));
+  if (!keys.length) { return null; }
+  const parts = keys[0].split(" ");
+  const book = books.filter(function (b) { return b.slug === parts[0]; })[0];
+  const question = "is " + book.name + " " + parts[1] + " in the office?";
+  return A.answer(question, ctx).then(function (result) {
+    const rb = (result.blocks || []).filter(function (b) {
+      return /Prayer Book/.test(b.title); })[0];
+    check("a passage the office reads is answered with the readings", !!rb,
+      question + " → " + titles(result));
+    const lines = rb ? (rb.lines || []).map(function (l) { return String(l.text); }) : [];
+    check("and each reading is named: the day, the office and which lesson",
+      lines.length > 0 && lines.every(function (t) {
+        return t.indexOf(" \u00b7 ") !== -1 && /\b(morning|evening)\b/.test(t) &&
+          /(psalm|first lesson|second lesson)/.test(t) && !/object Object/.test(t);
+      }), JSON.stringify(lines.slice(0, 3)));
+    check("and the block names the Prayer Book as where they come from",
+      rb && /Prayer Book/.test(rb.title), rb ? rb.title : "no block");
+  });
+}).then(function () {
+  return A.answer("John 3:16", ctx);
+}).then(function (result) {
+  /* A citation names the book. This line used to paste the first 120 characters of
+     each source's own text after its name, which is the remark printed above it. */
+  check("the sources listed are works, not quotations",
+    (result.citations || []).length > 0 && (result.citations || []).every(function (c) {
+      return c.length <= 60 && c.indexOf("\u2014") === -1;
+    }), JSON.stringify(result.citations));
+}).then(function () {
   return A.answer("asdfgh qwerty", ctx);
 }).then(function (result) {
   check("nothing found says so, and says what it can answer",
     result.nothingFound === true && /What this can answer/.test(titles(result)), titles(result));
   check("and says plainly that it is not a model", /not a model/.test(texts(result)));
+  check("and that note is not listed as one of the sources",
+    (result.citations || []).every(function (c) { return !/not a model/i.test(c); }),
+    JSON.stringify(result.citations));
   check("its suggestions are names, not one-letter headwords",
     (result.blocks || []).every(function (b) {
       return (b.lines || []).every(function (l) { return String(l.text || "").length > 12; });
@@ -177,6 +253,28 @@ load("data/bible/books.json").then(function (data) {
         unknown.length === 0, unknown.join(", "));
       return null;
     });
+  });
+}).then(function () {
+  /* Every question a reader is likely to ask, and every part of every answer looked
+     at for a stringified object. Two faults of exactly this shape have been found in
+     this file by hand — a chapter handed back where a verse was wanted, and a
+     reading asked for a label it does not carry — so the sweep is here to catch the
+     next one without anyone having to look at the screen. */
+  const questions = ["John 3:16", "what does grace mean", "baptism", "H7225",
+    "compare John 1:1 in the translations", "who was Melchizedek", "Psalm 23:1-4",
+    "asdfgh qwerty", "Melchizedek", "grace", "is Psalm 23 in the office?",
+    "where does the Prayer Book read Isaiah 40?"];
+  let chain = Promise.resolve();
+  const stringified = [];
+  questions.forEach(function (q) {
+    chain = chain.then(function () { return A.answer(q, ctx); }).then(function (r) {
+      if (/object Object/.test(JSON.stringify(r))) { stringified.push(q); }
+      return null;
+    }).catch(function () { return null; });
+  });
+  return chain.then(function () {
+    check("no answer hands back a stringified object", stringified.length === 0,
+      stringified.join(", "));
   });
 }).then(function () {
   if (failures.length) {
