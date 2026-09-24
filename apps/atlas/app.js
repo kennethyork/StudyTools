@@ -36,10 +36,23 @@
   /* The basemap, and the box in degrees the builder cropped it to: the two have to
      agree to the degree, or the ground lands beside the places. */
   var RELIEF = { file: "data/atlas/relief.jpg", lon0: -2, lon1: 66, lat0: -2, lat1: 60 };
-  /* Natural Earth's 1:50m raster is about 30 pixels to the degree. It is drawn
-     while the view is within three times that; closer in it is only a blur, and
-     the plain coastline is more honest. */
+  /* Natural Earth's 1:50m raster is about 30 pixels to the degree. Past that it is
+     being stretched, and it is faded rather than switched off: a soft ground behind
+     sharp coastlines and rivers reads better than a white plain with no ground. */
   var RELIEF_PX_PER_DEGREE = 30;
+  var RELIEF_MIN_OPACITY = 0.3;
+
+  /* The map's name sizes, in the map's own units, and the same numbers as the
+     stylesheet: the collision boxes below are measured with them, and
+     check-atlas.js compares the two sets. They are units, not pixels — the panel
+     draws 1000 units across it, so 13 units is about 9 pixels on a 700-pixel map
+     and the 7 this used to be was under 5, which nobody can read. */
+  var LABEL_SIZE = { "place-label": 13, "sea-label": 14, "city-label": 12,
+    "route-num": 11, "grat-label": 12, "scale-label": 12 };
+
+  /* everything the map draws, in one group, so that a drag can move it as a picture
+     and the map itself is redrawn once, when the pointer is let go */
+  var scene = null;
   var reliefOk = true;          /* false if the basemap will not load */
   var bordersOn = false;        /* today's borders, off by default */
   var filter = { slug: "", chapter: "" };
@@ -59,14 +72,6 @@
     var span = view.width * aspect;
     return [(lon - view.lon) / view.width * 1000, (view.lat - lat) / span * 1000 * aspect];
   }
-
-  function project(lon, lat, box) {
-    box = box || svg.getBoundingClientRect();
-    var width = view.width * aspect;
-    return [(lon - view.lon) / view.width, (view.lat - lat) / width];
-  }
-
-  function round(n) { return Math.round(n * 1000) / 1000; }
 
   /* The window that frames a box of the world in the panel as the panel is now:
      the box with a little room, widened when the panel is wider than the box. The
@@ -145,13 +150,16 @@
     svg.innerHTML = "";
 
     var world = view.width > 120;
-    /* The basemap: the raster relief wherever it reaches and is still sharp enough
-       to read, the vector coastline for the world and for close work, where the
-       raster would be a stamp or a blur. */
+    /* The basemap: the raster relief wherever the crop reaches, faded as it is
+       stretched past its own resolution, drawn over the vector coastline and under
+       the rivers. */
     var pxPerDegree = box.width ? box.width / view.width : 0;
-    var showRelief = !world && reliefOk && pxPerDegree <= RELIEF_PX_PER_DEGREE * 3 &&
+    var showRelief = !world && reliefOk &&
       view.lon < RELIEF.lon1 && view.lon + view.width > RELIEF.lon0 &&
       view.lat > RELIEF.lat0 && view.lat - view.width * aspect < RELIEF.lat1;
+    var stretch = pxPerDegree / RELIEF_PX_PER_DEGREE;   /* 1 is the raster's own size */
+    var reliefOpacity = stretch <= 1.5 ? 1 :
+      Math.max(RELIEF_MIN_OPACITY, 1 - (stretch - 1.5) / 5 * (1 - RELIEF_MIN_OPACITY));
     var land = layers[world ? "land-world" : "land-region"] || { features: [] };
     var lakes = layers[world ? "lakes-world" : "lakes-region"] || { features: [] };
     var rivers = layers[world ? "rivers-region" : "rivers-region"] || { features: [] };
@@ -160,11 +168,15 @@
 
     svg.appendChild(el("rect", { x: 0, y: 0, width: 1000, height: Math.round(1000 * aspect),
       class: "sea" }));
+    scene = el("g", { class: "scene" });
+    svg.appendChild(scene);
 
-    /* the graticule: every degree when close, five or ten when further out, with
-       the degrees written on it, because a map with no scale of any kind is a
-       picture of a coastline */
-    var step = view.width < 6 ? 1 : (view.width < 40 ? 5 : 10);
+    /* the graticule: every degree when close, thirty when the whole world is on
+       screen, with the degrees written on it, because a map with no scale of any
+       kind is a picture of a coastline. Ten degrees to the world left a wall of
+       numbers down the side of it. */
+    var step = view.width < 6 ? 1 : (view.width < 20 ? 2 : (view.width < 45 ? 5 :
+      (view.width < 120 ? 10 : 30)));
     var g = el("g", { class: "graticule" });
     for (var lon = Math.ceil(view.lon / step) * step; lon <= view.lon + view.width; lon += step) {
       var a = px(lon, view.lat + 1), b = px(lon, view.lat - view.width * aspect - 1);
@@ -181,55 +193,54 @@
       t2.textContent = Math.abs(lat) + "\u00b0" + (lat < 0 ? "S" : "N");
       g.appendChild(t2);
     }
-    svg.appendChild(g);
+    scene.appendChild(g);
 
-    /* the coastline goes under the basemap — the world's or the region's, whichever
-       this view uses: where the raster reaches it is hidden, and where it does not
-       (the whole world, or a pinch of it so close in that the ground falls back) the
-       map is still a map and not a blue rectangle. */
+    /* the coastline and the lakes go under the basemap: hidden where the raster is
+       opaque, and there — crisp — where it is faded, off the edge of the crop, or
+       failed to load, so no view is a blue rectangle. */
     land.features.forEach(function (f) {
       ringsOf(f).forEach(function (ring) {
-        svg.appendChild(el("path", { class: "land", d: pathOf(ring, true) }));
+        scene.appendChild(el("path", { class: "land", d: pathOf(ring, true) }));
+      });
+    });
+    lakes.features.forEach(function (f) {
+      ringsOf(f).forEach(function (ring) {
+        scene.appendChild(el("path", { class: "lake", d: pathOf(ring, true) }));
       });
     });
     if (showRelief) {
       var tl = px(RELIEF.lon0, RELIEF.lat1);
       var br = px(RELIEF.lon1, RELIEF.lat0);
       var image = el("image", { class: "relief", x: tl[0], y: tl[1], width: br[0] - tl[0],
-        height: br[1] - tl[1], preserveAspectRatio: "none",
+        height: br[1] - tl[1], preserveAspectRatio: "none", opacity: reliefOpacity,
         href: root + RELIEF.file });
       image.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", root + RELIEF.file);
       image.addEventListener("error", function () { reliefOk = false; draw(); });
-      svg.appendChild(image);
-    } else {
-      /* the raster carries its own water; the vector lakes are only for the views
-         it does not cover, where their sand fill would otherwise sit on blue sea */
-      lakes.features.forEach(function (f) {
-        ringsOf(f).forEach(function (ring) {
-          svg.appendChild(el("path", { class: "lake", d: pathOf(ring, true) }));
-        });
-      });
+      scene.appendChild(image);
     }
     /* the rivers are drawn whatever the borders are set to: they are geography,
        and the legend has always promised them. */
     if (!world) {
       rivers.features.forEach(function (f) {
         linesOf(f).forEach(function (line) {
-          svg.appendChild(el("path", { class: "river", d: pathOf(line, false) }));
+          scene.appendChild(el("path", { class: "river", d: pathOf(line, false) }));
         });
       });
     }
     if (!world && bordersOn) {
       borders.features.forEach(function (f) {
         linesOf(f).forEach(function (line) {
-          svg.appendChild(el("path", { class: "border", d: pathOf(line, false) }));
+          scene.appendChild(el("path", { class: "border", d: pathOf(line, false) }));
         });
       });
     }
 
-    /* modern cities, for a reader who knows where Cairo and Baghdad are. The size
-       a city has to be grows with the view, and a few are named whatever the zoom,
-       because they are the ones a reader of the Bible orients by. */
+    /* Modern cities, for a reader who knows where Cairo and Baghdad are. The size a
+       city has to be grows with the view, and a few are named whatever the zoom,
+       because they are the ones a reader of the Bible orients by. The marks are
+       drawn here; the names wait for the label pass with every other name, or the
+       same city is named twice — once past the collision placer, once through it. */
+    var namedCities = [];
     if (!world) {
       cities.features.forEach(function (f) {
         var p = px(f.c[0], f.c[1]);
@@ -238,40 +249,27 @@
           (view.width <= 12 ? true : (f.p || 0) >= (view.width <= 30 ? 1000000 :
             (view.width <= 60 ? 3000000 : 6000000)));
         if (!wanted) { return; }
-        svg.appendChild(el("circle", { class: "city", cx: p[0], cy: p[1], r: 1.8 }));
-        var t = el("text", { x: p[0] + 3, y: p[1] + 2.5, class: "city-label" });
-        t.textContent = f.n;
-        svg.appendChild(t);
+        scene.appendChild(el("circle", { class: "city", cx: p[0], cy: p[1], r: 2.2 }));
+        namedCities.push({ x: p[0], y: p[1], name: f.n });
       });
     }
 
-    /* the names of seas and regions, which no dataset here carries */
-    if (view.width < 90) {
-      NAMES.forEach(function (row) {
-        var px = project(row[1], row[2], box);
-        if (px[0] < 0 || px[0] > 1 || px[1] < 0 || px[1] > aspect) { return; }
-        /* a name has a size class, and it is drawn while the view is not too much
-           wider than that: at the Bible-lands view the seas and regions are named,
-           and at world scale only the largest are */
-        if (view.width > row[3] * 10) { return; }
-        var t = el("text", { x: px[0] * 1000, y: px[1] * 1000, class: "sea-label",
-          "text-anchor": "middle" });
-        t.textContent = row[0];
-        svg.appendChild(t);
-      });
-    }
+    /* The names of seas and regions, which no dataset here carries, are placed
+       below with everything else that is a name. They used to be drawn twice — once
+       here, past the collision placer, and once there — so every sea was drawn
+       twice, at two heights, because the two passes measured y differently. */
 
     /* a journey, drawn stop to stop: the text gives stages, not a surveyed path */
     if (route) {
       var line = route.stops.map(function (stop) { return px(stop.lon, stop.lat); });
-      svg.appendChild(el("path", { class: "route-line",
+      scene.appendChild(el("path", { class: "route-line",
         d: line.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ") }));
       route.stops.forEach(function (stop, i) {
         var p = px(stop.lon, stop.lat);
-        svg.appendChild(el("circle", { class: "route-stop", cx: p[0], cy: p[1], r: 3.4 }));
+        scene.appendChild(el("circle", { class: "route-stop", cx: p[0], cy: p[1], r: 3.4 }));
         var n = el("text", { class: "route-num", x: p[0] - 2, y: p[1] + 2.4 });
         n.textContent = String(i + 1);
-        svg.appendChild(n);
+        scene.appendChild(n);
       });
     }
 
@@ -280,7 +278,12 @@
       if (place.lon < view.lon - 1 || place.lon > view.lon + view.width + 1) { return; }
       if (place.lat > view.lat + 1 || place.lat < view.lat - view.width * aspect - 1) { return; }
       var p = px(place.lon, place.lat);
-      var r = view.width < 20 ? 2.8 : (view.width < 60 ? 2 : 1.5);
+      /* A dot the size of how often the place is named. A thousand dots all of one
+         size is a smear with no way to find Jerusalem in it; this is the convention
+         of the printed maps, where the city is a bigger mark than the village. */
+      var base = view.width < 20 ? 3 : (view.width < 60 ? 2.2 : 1.7);
+      var r = base * (0.72 + 0.68 * Math.min(1, Math.log(1 + (place.verses_total || 0)) /
+        Math.log(60)));
       var hit = matchesFilter(place);
       var circle = el("circle", { class: "place" + (place.water ? " water" : "") +
         (chosen && chosen.name === place.name ? " on" : "") +
@@ -291,44 +294,63 @@
       title.textContent = place.name + " \u2014 " +
         ((place.verses_total || 0) ? place.verses_total + " verses" : "no verses attached");
       circle.appendChild(title);
-      svg.appendChild(circle);
+      scene.appendChild(circle);
       drawn++;
     });
 
-    /* the names, placed last and never overlapping */
+    /* The names, placed last and never overlapping. The seas and regions go first:
+       they are the frame the reader hangs the places on, and a name that is worth
+       printing at every zoom should not be crowded out by a village. */
     var labelPlacer = makePlacer();
     var cityPlacer = makePlacer();
+    var regionNames = {};      /* the regions the map has already named itself */
+    var printed = {};          /* the names already on the map, whoever put them there */
+    if (view.width < 90) {
+      NAMES.forEach(function (row) {
+        /* a name has a size class, and it is drawn while the view is not too much
+           wider than that: at the Bible-lands view the seas and regions are named,
+           and at world scale only the largest are */
+        if (view.width > row[3] * 10 || view.width < row[3] / 3) { return; }
+        var at = px(row[1], row[2]);
+        if (at[0] < 0 || at[0] > 1000 || at[1] < 0 || at[1] > 1000 * aspect) { return; }
+        if (labelPlacer(at[0], at[1], row[0], "sea-label", "middle")) {
+          regionNames[row[0].toLowerCase()] = true;
+          printed[row[0].toLowerCase()] = true;
+        }
+      });
+    }
     var named = places.slice().sort(function (a, b) {
       return (b.verses_total || 0) - (a.verses_total || 0);
     });
     var shown = 0;
+    /* a journey is the subject of the map when one is chosen, so its stops are
+       named before the crowd of ordinary places takes the room */
+    if (route) {
+      route.stops.forEach(function (stop) {
+        if (stop.lon < view.lon || stop.lon > view.lon + view.width) { return; }
+        if (stop.lat > view.lat || stop.lat < view.lat - view.width * aspect) { return; }
+        var at = px(stop.lon, stop.lat);
+        if (labelPlacer(at[0] + 5, at[1] - 4, stop.name, "place-label")) { shown++; }
+      });
+    }
     named.forEach(function (place) {
-      if (view.width > 16 || shown > 40) { return; }
+      if (view.width > 30 || shown > 40) { return; }
+      if (regionNames[place.name.toLowerCase()]) { return; }
       if (place.lon < view.lon || place.lon > view.lon + view.width) { return; }
       if (place.lat > view.lat || place.lat < view.lat - view.width * aspect) { return; }
       var p = px(place.lon, place.lat);
-      if (labelPlacer(p[0] + 5, p[1] - 4, place.name, "place-label")) { shown++; }
+      if (labelPlacer(p[0] + 5, p[1] - 4, place.name, "place-label")) {
+        shown++;
+        printed[place.name.toLowerCase()] = true;
+      }
     });
-    if (!world) {
-      cities.features.forEach(function (f) {
-        var p = px(f.c[0], f.c[1]);
-        if (p[0] < 0 || p[0] > 1000 || p[1] < 0 || p[1] > 1000 * aspect) { return; }
-        var wanted = ALWAYS.indexOf(f.n) !== -1 ||
-          (view.width <= 12 ? true : (f.p || 0) >= (view.width <= 30 ? 1000000 :
-            (view.width <= 60 ? 3000000 : 6000000)));
-        if (!wanted) { return; }
-        cityPlacer(p[0] + 3, p[1] + 2.5, f.n, "city-label");
-      });
-    }
-    if (view.width < 90) {
-      NAMES.forEach(function (row) {
-        if (view.width > row[3] * 10 || view.width < row[3] / 3) { return; }
-        var at = px(row[1], row[2]);
-        if (at[0] < 0 || at[0] > 1000 || at[1] < 0 || at[1] > 1000 * aspect) { return; }
-        labelPlacer(at[0], at[1], row[0], "sea-label", "middle");
-      });
-    }
-
+    /* Jerusalem and Gaza are in both datasets — the place the Bible names and the
+       city that stands there now — so a modern city whose name is already on the
+       map does not get a second label beside the first */
+    namedCities.forEach(function (c) {
+      if (printed[c.name.toLowerCase()]) { return; }
+      cityPlacer(c.x + 4, c.y + 3.5, c.name, "city-label");
+    });
     /* a north arrow, because a map has one */
     var nx = 1000 - 26, ny = 22;
     svg.appendChild(el("path", { class: "north", d: "M" + nx + " " + (ny - 10) + " l5 14 l-5 -4 l-5 4 Z" }));
@@ -336,16 +358,43 @@
     north.textContent = "N";
     svg.appendChild(north);
 
+    /* And a scale bar, drawn on the map in kilometres with a round number on it:
+       "about 4,372 km across" says how wide the panel is, and what a reader wants
+       to know is how far it is from Jerusalem to Babylon. Not the world view, where
+       one scale bar cannot be right for the whole map. */
+    if (!world) {
+      var midLat = view.lat - view.width * aspect / 2;
+      var kmPerDegree = 111.32 * Math.cos(midLat * Math.PI / 180);
+      var want = view.width * kmPerDegree / 4;
+      var barKm = 1;
+      [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000].forEach(function (n) {
+        if (n <= want) { barKm = n; }
+      });
+      var barW = Math.max(24, barKm / kmPerDegree / view.width * 1000);
+      var by = 1000 * aspect - 16;
+      var bar = el("g", { class: "scalebar" });
+      bar.appendChild(el("line", { class: "scale-line", x1: 16, y1: by, x2: 16 + barW, y2: by }));
+      bar.appendChild(el("line", { class: "scale-line", x1: 16, y1: by - 5, x2: 16, y2: by + 5 }));
+      bar.appendChild(el("line", { class: "scale-line", x1: 16 + barW, y1: by - 5, x2: 16 + barW, y2: by + 5 }));
+      var bl = el("text", { class: "scale-label", x: 16, y: by - 8 });
+      bl.textContent = barKm.toLocaleString() + " km";
+      bar.appendChild(bl);
+      svg.appendChild(bar);
+    }
+
     /* a scale: the width of the plot in kilometres at this latitude */
     var kmPerDegree = 111.32;
     var midLat = view.lat - view.width * aspect / 2;
     var km = view.width * kmPerDegree * Math.cos(midLat * Math.PI / 180);
     hint.textContent = drawn + " of " + places.length + " places in view \u00b7 about " +
       Math.round(km).toLocaleString() + " km across, " + step + "\u00b0 of grid \u00b7 drag to move, " +
-      "wheel or the buttons to zoom. The ground, coasts, rivers and borders are Natural Earth " +
-      "(public domain)" + (showRelief ? "; the ground is modern terrain, and the borders of any period " +
-      "are not drawn" : (world ? "; at world scale the ground is drawn as a plain coastline" :
-      "; this close in, the ground is drawn as a plain coastline")) + ".";
+      "wheel, buttons or arrow keys. The ground, coasts, rivers and borders are Natural Earth " +
+      "(public domain)" + (showRelief ? "; the ground is the terrain as it is now" +
+      (reliefOpacity < 1 ? ", faded because the raster itself resolves about " +
+        RELIEF_PX_PER_DEGREE + " pixels to the degree" : "") +
+      ", and the borders of any period are not drawn" :
+      (world ? "; at world scale the ground is drawn as a plain coastline" :
+      "; the ground will not load, so this is the plain coastline")) + ".";
   }
 
   /* Labels are placed after everything else and never on top of one another: at a
@@ -354,9 +403,13 @@
   function makePlacer() {
     var used = [];
     return function (x, y, text, className, anchor) {
-      var w = text.length * 3.6 + 4;
-      var h = 8;
-      var box = [x - (anchor === "middle" ? w / 2 : 0), y - h, w, h * 1.2];
+      /* the room a name takes, measured with the size the stylesheet gives it: an
+         average glyph is a little over half the font size, and the box has to be
+         right or the map is either a pile of overlapping names or mostly empty */
+      var size = LABEL_SIZE[className] || 12;
+      var w = text.length * size * 0.56 + 4;
+      var h = size;
+      var box = [x - (anchor === "middle" ? w / 2 : 0), y - h, w, h * 1.15];
       for (var i = 0; i < used.length; i++) {
         var u = used[i];
         if (box[0] < u[0] + u[2] && box[0] + box[2] > u[0] &&
@@ -368,7 +421,7 @@
       var t = el("text", { x: x, y: y, class: className });
       if (anchor) { t.setAttribute("text-anchor", anchor); }
       t.textContent = text;
-      svg.appendChild(t);
+      if (scene) { scene.appendChild(t); }
       return true;
     };
   }
@@ -485,25 +538,55 @@
 
   var books = [];
 
-  /* pan by dragging */
+  /* Draw at most once a frame. The wheel fires a dozen events between two frames
+     and each one used to rebuild three thousand nodes. */
+  var frame = 0;
+  function scheduleDraw() {
+    if (frame) { return; }
+    frame = requestAnimationFrame(function () { frame = 0; draw(); });
+  }
+
+  /* Panning moves the drawn map as a picture — one transform on the group — and
+     redraws it once, when the pointer is let go. Redrawing on every pointermove
+     rebuilt the whole map, dots and names and all, faster than the screen could
+     show it; a drag is the one interaction where that is felt. */
   var dragging = null;
+  function letGo() {
+    if (dragging && (dragging.dx || dragging.dy)) {
+      var box = svg.getBoundingClientRect();
+      var perPixel = view.width / Math.max(1, box.width);
+      view.lon = dragging.view.lon - dragging.dx * perPixel;
+      view.lat = dragging.view.lat + dragging.dy * perPixel * aspect;
+      dragging = null;
+      draw();
+    } else {
+      dragging = null;
+    }
+    svg.classList.remove("dragging");
+  }
   svg.addEventListener("pointerdown", function (e) {
-    dragging = { x: e.clientX, y: e.clientY, view: { lon: view.lon, lat: view.lat } };
+    /* a frame the wheel left pending would redraw the map mid-drag, from a view the
+       drag has not committed yet, and the picture would jump */
+    if (frame) { cancelAnimationFrame(frame); frame = 0; }
+    dragging = { x: e.clientX, y: e.clientY, dx: 0, dy: 0,
+      view: { lon: view.lon, lat: view.lat } };
     svg.classList.add("dragging");
     svg.setPointerCapture(e.pointerId);
   });
   svg.addEventListener("pointermove", function (e) {
     if (!dragging) { return; }
     var box = svg.getBoundingClientRect();
-    var perPixel = view.width / Math.max(1, box.width);
-    view.lon = dragging.view.lon - (e.clientX - dragging.x) * perPixel;
-    view.lat = dragging.view.lat + (e.clientY - dragging.y) * perPixel * aspect;
-    draw();
+    if (!box.width) { return; }
+    dragging.dx = e.clientX - dragging.x;
+    dragging.dy = e.clientY - dragging.y;
+    if (scene) {
+      var unit = 1000 / box.width;      /* user units to a pixel, both ways */
+      scene.setAttribute("transform", "translate(" + (dragging.dx * unit).toFixed(2) + " " +
+        (dragging.dy * unit).toFixed(2) + ")");
+    }
   });
-  svg.addEventListener("pointerup", function () {
-    dragging = null;
-    svg.classList.remove("dragging");
-  });
+  svg.addEventListener("pointerup", letGo);
+  svg.addEventListener("pointercancel", letGo);
   svg.addEventListener("wheel", function (e) {
     e.preventDefault();
     var factor = e.deltaY > 0 ? 1.15 : 0.87;
@@ -513,8 +596,26 @@
     view.lon += (view.width - width) * at[0];
     view.lat -= (view.width - width) * at[1] * aspect;
     view.width = width;
-    draw();
+    scheduleDraw();
   }, { passive: false });
+
+  /* The keyboard, because a map you cannot nudge is a map you cannot use without a
+     mouse: arrows move it, + and - zoom about the middle, 0 comes back to the
+     Bible lands. */
+  svg.addEventListener("keydown", function (e) {
+    var step = view.width * 0.12;
+    var key = e.key;
+    if (key === "ArrowLeft") { view.lon -= step; }
+    else if (key === "ArrowRight") { view.lon += step; }
+    else if (key === "ArrowUp") { view.lat += step * aspect; }
+    else if (key === "ArrowDown") { view.lat -= step * aspect; }
+    else if (key === "+" || key === "=") { e.preventDefault(); zoomBy(0.7); return; }
+    else if (key === "-" || key === "_") { e.preventDefault(); zoomBy(1 / 0.7); return; }
+    else if (key === "0") { e.preventDefault(); lands(); return; }
+    else { return; }
+    e.preventDefault();
+    draw();
+  });
 
   document.getElementById("lands").addEventListener("click", lands);
   document.getElementById("world").addEventListener("click", function () { go(WORLD); });

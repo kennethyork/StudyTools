@@ -330,14 +330,18 @@ check("and covers that window at any shape the panel can take", uncovered.length
   "uncovered at panel ratios " + uncovered.join(", "));
 check("the page clamps the panel's shape, so there is no taller window than that",
   /Math\.min\(1\.4, box\.height \/ box\.width\)/.test(app));
-check("the page falls back to the coastline when the raster cannot reach or resolve",
-  /RELIEF_PX_PER_DEGREE/.test(app) && /pxPerDegree <= RELIEF_PX_PER_DEGREE \* 3/.test(app) &&
+check("the ground fades when the raster is stretched instead of vanishing",
+  /RELIEF_PX_PER_DEGREE/.test(app) && /RELIEF_MIN_OPACITY/.test(app) &&
+  /var stretch = pxPerDegree \/ RELIEF_PX_PER_DEGREE/.test(app) &&
+  /opacity: reliefOpacity,/.test(app) &&
   /reliefOk = false; draw\(\)/.test(app));
+check("the lakes are drawn under the ground too",
+  app.indexOf("lakes.features.forEach") > 0 &&
+  app.indexOf("lakes.features.forEach") < app.indexOf("if (showRelief)"));
 check("the coastline is drawn under the basemap, so no view is a blue rectangle",
   app.indexOf("land.features.forEach") > 0 &&
   app.indexOf("land.features.forEach") < app.indexOf("if (showRelief)"));
-check("the raster's own water is not covered by sand-filled lakes",
-  /else \{[\s\S]{0,200}lakes.features.forEach/.test(app) &&
+check("a lake is drawn in the water's own colour, over the ground or under it",
   /\.lake \{ fill: var\(--sea\)/.test(page));
 
 /* The two controls a reader will reach for, and the fault they had: the borders
@@ -352,6 +356,71 @@ check("the rivers are drawn whatever the borders are set to",
 check("zooming keeps the middle of the panel where it was",
   /function zoomBy\(factor\)/.test(app) && /zoomBy\(0\.7\)/.test(app) &&
   /view\.lon \+= \(view\.width - width\) \/ 2;/.test(app));
+
+/* A drag is the one interaction where rebuilding the map is felt: the first version
+   of this rebuilt three thousand nodes on every pointermove. It moves the drawn map
+   as a picture now, and draws once when the pointer is let go. */
+check("a drag moves the drawn map rather than rebuilding it",
+  /scene\.setAttribute\("transform", "translate\("/.test(app) &&
+  /svg\.addEventListener\("pointerup", letGo\)/.test(app) &&
+  /svg\.addEventListener\("pointercancel", letGo\)/.test(app) &&
+  !/dragging\.dx\*\)[\s\S]{0,80}draw\(\)/.test(app));
+check("the wheel redraws at most once a frame",
+  /function scheduleDraw\(\)/.test(app) && /requestAnimationFrame\(function \(\) \{ frame = 0; draw\(\); \}\)/.test(app));
+
+/* The names: sized so they can be read, placed once, and never twice. */
+const cssSizes = {};
+["grat-label", "city-label", "sea-label", "place-label", "route-num", "scale-label"].forEach(function (name) {
+  const m = new RegExp("\\." + name + "\\s*\\{[^}]*font-size:\\s*([\\d.]+)px").exec(page);
+  if (m) { cssSizes[name] = +m[1]; }
+});
+check("every name on the map has a size in the stylesheet",
+  Object.keys(cssSizes).length === 6, Object.keys(cssSizes).join(", "));
+const small = Object.keys(cssSizes).filter(function (n) { return cssSizes[n] < 11; });
+check("and every one of them is big enough to read", small.length === 0,
+  "under 11 map units (about 7 pixels on a 660-pixel map): " +
+  small.map(function (n) { return n + " " + cssSizes[n]; }).join(", "));
+const mismatched = Object.keys(cssSizes).filter(function (name) {
+  const m = new RegExp('"' + name + '":\\s*([\\d.]+)').exec(app);
+  return !m || +m[1] !== cssSizes[name];
+});
+check("the sizes the collision boxes are measured with are the same sizes",
+  mismatched.length === 0, mismatched.map(function (name) {
+    const m = new RegExp('"' + name + '":\\s*([\\d.]+)').exec(app);
+    return name + " stylesheet " + cssSizes[name] + " against script " + (m ? m[1] : "none");
+  }).join(", "));
+check("no name is drawn twice: the seas and the cities are placed once",
+  (app.match(/NAMES\.forEach/g) || []).length === 1 &&
+  (app.match(/cities\.features\.forEach/g) || []).length === 1,
+  (app.match(/NAMES\.forEach/g) || []).length + " sea-name passes, " +
+  (app.match(/cities\.features\.forEach/g) || []).length + " city passes");
+check("and the map's own region names are not printed beside the dataset's",
+  /regionNames\[row\[0\]\.toLowerCase\(\)\]/.test(app) &&
+  /if \(regionNames\[place\.name\.toLowerCase\(\)\]\) \{ return; \}/.test(app));
+check("a journey's stops are named before the crowd of ordinary places",
+  app.indexOf("labelPlacer(at[0] + 5, at[1] - 4, stop.name") > 0 &&
+  app.indexOf("labelPlacer(at[0] + 5, at[1] - 4, stop.name") <
+    app.indexOf("labelPlacer(p[0] + 5, p[1] - 4, place.name"));
+
+/* The map's own furniture: a dot that says how often a place is named, a scale bar,
+   and a graticule that does not wallpaper the world with numbers. */
+check("a place's dot is as large as how often the Bible names it",
+  /Math\.log\(1 \+ \(place\.verses_total \|\| 0\)\)/.test(app));
+check("the map carries a scale bar in kilometres",
+  /class: "scalebar"/.test(app) && /barKm\.toLocaleString\(\) \+ " km"/.test(app) &&
+  /\[1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000\]/.test(app) &&
+  /\.scale-line \{/.test(page) && /\.scale-label \{/.test(page));
+check("the graticule steps back to thirty degrees at world scale",
+  /view\.width < 120 \? 10 : 30/.test(app));
+
+/* And the keyboard, because a map you can only move with a mouse is a map half the
+   readers cannot move. */
+check("the map can be moved from the keyboard",
+  /tabindex="0"/.test(page) && /svg\.addEventListener\("keydown"/.test(app) &&
+  /key === "ArrowLeft"/.test(app) && /key === "ArrowRight"/.test(app) &&
+  /key === "\+" \|\| key === "="/.test(app) && /key === "0"/.test(app) &&
+  /#map:focus-visible \{/.test(page) &&
+  /aria-label="[^"]*Arrow keys[^"]*"/.test(page));
 check("the page says where its ground came from, and that it is not a period map",
   /shaded relief/.test(page) && /Natural Earth/.test(page) && /public domain/.test(page) &&
   /terrain is the terrain as it is now/.test(page) &&

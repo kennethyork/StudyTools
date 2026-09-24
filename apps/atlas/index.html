@@ -21,6 +21,7 @@
   @media (max-width: 900px) { .atlas-layout { grid-template-columns: 1fr; } }
   #map { width: 100%; height: 460px; border: 1px solid var(--line); border-radius: 8px; touch-action: none; cursor: grab; }
   #map.dragging { cursor: grabbing; }
+  #map:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   /* the sea is the colour the basemap draws its water in, so that the water is the
      same water where the raster stops */
   .sea { fill: var(--sea); }
@@ -33,18 +34,24 @@
   .river { fill: none; stroke: var(--accent-2); stroke-width: .6; opacity: .85; }
   .border { fill: none; stroke: var(--line); stroke-width: .5; stroke-dasharray: 3 2; }
   .graticule line { stroke: var(--line); stroke-width: .3; opacity: .55; }
-  .grat-label { font-family: var(--mono); font-size: 7px; fill: var(--ink-faint); }
+  /* Name sizes in the map's own units: the panel draws 1000 units across it, so a
+     13 is about 9 pixels on a 700-pixel map. These numbers and the LABEL_SIZE the
+     page measures its collision boxes with are compared by check-atlas.js — they
+     were 7 and 8, which is under five pixels on screen, and nobody could read them. */
+  .grat-label { font-family: var(--mono); font-size: 12px; fill: var(--ink-faint); }
   .city { fill: var(--ink-faint); }
-  .city-label { font-family: var(--sans); font-size: 7.5px; fill: var(--ink-faint); }
-  .sea-label { font-family: var(--sans); font-size: 8px; font-style: italic; fill: var(--ink-faint); letter-spacing: .04em; }
+  .city-label { font-family: var(--sans); font-size: 12px; fill: var(--ink-faint); }
+  .sea-label { font-family: var(--sans); font-size: 14px; font-style: italic; fill: var(--ink-faint); letter-spacing: .04em; }
+  .scale-line { stroke: var(--ink-soft); stroke-width: 1.4; }
+  .scale-label { font-family: var(--mono); font-size: 12px; fill: var(--ink-soft); }
   /* every name is written with a halo of the page behind it: over shaded relief a
      bare label disappears into the mountains it is naming */
-  .grat-label, .city-label, .sea-label, .place-label, .route-num {
-    paint-order: stroke; stroke: var(--bg); stroke-width: 2.4px; stroke-linejoin: round; }
+  .grat-label, .city-label, .sea-label, .place-label, .route-num, .scale-label {
+    paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
   .place { fill: var(--accent); opacity: .75; cursor: pointer; }
   .place.water { fill: var(--accent-2); }
   .place:hover, .place.on { opacity: 1; stroke: var(--ink); stroke-width: 1; }
-  .place-label { font-family: var(--sans); font-size: 7px; fill: var(--ink-soft); pointer-events: none; }
+  .place-label { font-family: var(--sans); font-size: 13px; fill: var(--ink-soft); pointer-events: none; }
   .atlas-hint { font-size: .8rem; color: var(--ink-faint); }
   .atlas-select { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem;
     white-space: nowrap; color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
@@ -54,9 +61,9 @@
   .atlas-check input { margin: 0; }
   .route-line { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 5 3; opacity: .8; }
   .route-stop { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
-  .route-num { font-family: var(--mono); font-size: 6.5px; fill: var(--accent); }
+  .route-num { font-family: var(--mono); font-size: 11px; fill: var(--accent); }
   .north { fill: var(--accent); }
-  .north-label { font-family: var(--sans); font-size: 8px; fill: var(--accent); }
+  .north-label { font-family: var(--sans); font-size: 12px; fill: var(--accent); }
   .place.dim { opacity: .18; }
   .place.hit { opacity: 1; stroke: var(--ink); stroke-width: 1.2; }
   .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: .78rem; color: var(--ink-faint); }
@@ -106,7 +113,7 @@
     <p class="atlas-hint" id="hint" style="margin:10px 0 0">Loading the map&hellip;</p>
     <div class="legend">
       <span><i class="ground"></i> the ground: Natural Earth shaded relief</span>
-      <span><i></i> a place named in the Bible</span>
+      <span><i></i> a place named in the Bible &mdash; the more it is named, the larger</span>
       <span><i class="city"></i> a modern city, to place yourself</span>
       <span><i class="river"></i> river</span>
       <span><i class="border"></i> a border of today, if you turn them on &mdash; not of any biblical period</span>
@@ -116,7 +123,7 @@
 
   <div class="atlas-layout">
     <section class="card" style="padding:10px">
-      <svg id="map" role="img" aria-label="Map of the places named in the Bible"></svg>
+      <svg id="map" role="img" tabindex="0" aria-label="Map of the places named in the Bible, over Natural Earth shaded relief. Arrow keys move the map, plus and minus zoom in and out, 0 returns to the Bible lands."></svg>
     </section>
     <aside id="side"></aside>
   </div>
@@ -137,8 +144,10 @@
       historical atlas: the terrain is the terrain as it is now, and the borders you can turn on are
       today's, there only to help you find your way. No dataset in this project holds the political
       lines of any biblical period, so none are drawn. Zoomed in past what the raster can resolve, the
-      ground falls back to the plain coastline. The names of the seas and the regions, which no dataset
-      here carries, are this site's own, placed by hand.</p>
+      ground fades rather than switching off, so the coastline, rivers and lakes drawn under it stay
+      readable and there is never a blank white plain. A place's dot is as large as how often the Bible
+      names it, and the bar at the foot of the map is kilometres at the middle of the view. The names of
+      the seas and the regions, which no dataset here carries, are this site's own, placed by hand.</p>
   </footer>
 </main>
 
