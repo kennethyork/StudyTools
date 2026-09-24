@@ -132,6 +132,38 @@ check("the cities carry names to label them",
   (layers["cities-region"].features || []).filter(function (f) { return !f.n; }).length + " unnamed");
 notes.push(ringCounts.length + " land rings, " + Object.keys(EXPECTED).length + " layers");
 
+/* The journeys: every stop has to be a place that exists, or the line would run
+   through nothing, and each route has to say what it is — a reading of the
+   narrative, not a surveyed path. */
+const routeFile = load("data/atlas/routes.json");
+const routeList = routeFile.routes || [];
+const byPlaceName = {};
+atlas.places.forEach(function (p) { byPlaceName[p.name] = p; });
+check("the atlas ships journeys to follow", routeList.length >= 4,
+  routeList.length + " routes");
+check("every journey has stages", routeList.every(function (r) { return r.stops.length >= 3; }),
+  routeList.map(function (r) { return r.stops.length; }).join(", "));
+check("every stage is a place in the data", routeList.every(function (r) {
+  return r.stops.every(function (st) { return !!byPlaceName[st.name]; });
+}), routeList.map(function (r) {
+  return r.stops.filter(function (st) { return !byPlaceName[st.name]; })
+    .map(function (st) { return st.name; }).join("/");
+}).filter(Boolean).join(", ") || "none missing");
+check("every journey says it is a reading rather than a road",
+  routeList.every(function (r) { return r.note && r.note.length > 30; }) &&
+  /reading of the narrative/.test(routeFile.note || ""));
+
+/* The interactivity the page offers, which is the point of it. */
+check("clicking the map asks what is near the point",
+  /function nearHere/.test(app) && /km\(/.test(app));
+check("a chapter can be chosen and the other places dim",
+  /function matchesFilter/.test(app) && /dim/.test(app) && /filter\.chapter/.test(app));
+check("a journey can be drawn and followed",
+  /route-line/.test(app) && /route-stops|route-stop/.test(app));
+check("labels are placed so that they never overlap",
+  /function makePlacer/.test(app));
+check("the view can be linked to", /ST\.qs\("route"\)/.test(app) && /ST\.qs\("place"\)/.test(app));
+
 /* The geometry itself, tested by asking it questions with known answers: Cairo is
    on land, and a point in the middle of the Mediterranean is not. This is what a
    clipped or mis-assembled coastline fails, and it is cheaper than looking. */

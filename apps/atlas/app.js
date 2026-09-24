@@ -13,13 +13,19 @@
   var side = document.getElementById("side");
   var hint = document.getElementById("hint");
   var find = document.getElementById("find");
+  var els = {
+    route: document.getElementById("route"),
+    findBook: document.getElementById("find-book"),
+    findChapter: document.getElementById("find-chapter")
+  };
 
   /* the window of the world on screen: lon/lat of the left/top corner, and how
      many degrees wide */
   var LAND_WINDOW = { lon: -12, lat: 45, width: 74 };
   var WORLD = { lon: -180, lat: 84, width: 360 };
   var view = { lon: LAND_WINDOW.lon, lat: LAND_WINDOW.lat, width: LAND_WINDOW.width };
-  var layers = null, places = [], chosen = null;
+  var layers = null, places = [], routes = [], chosen = null, route = null;
+  var filter = { slug: "", chapter: "" };
   var aspect = 0.62;          /* height / width of the plot, changed on resize */
 
   function el(name, attrs) {
@@ -192,24 +198,73 @@
       });
     }
 
+    /* a journey, drawn stop to stop: the text gives stages, not a surveyed path */
+    if (route) {
+      var line = route.stops.map(function (stop) { return px(stop.lon, stop.lat); });
+      svg.appendChild(el("path", { class: "route-line",
+        d: line.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ") }));
+      route.stops.forEach(function (stop, i) {
+        var p = px(stop.lon, stop.lat);
+        svg.appendChild(el("circle", { class: "route-stop", cx: p[0], cy: p[1], r: 3.4 }));
+        var n = el("text", { class: "route-num", x: p[0] - 2, y: p[1] + 2.4 });
+        n.textContent = String(i + 1);
+        svg.appendChild(n);
+      });
+    }
+
     var drawn = 0;
     places.forEach(function (place) {
       if (place.lon < view.lon - 1 || place.lon > view.lon + view.width + 1) { return; }
       if (place.lat > view.lat + 1 || place.lat < view.lat - view.width * aspect - 1) { return; }
       var p = px(place.lon, place.lat);
       var r = view.width < 20 ? 2.8 : (view.width < 60 ? 2 : 1.5);
+      var hit = matchesFilter(place);
       var circle = el("circle", { class: "place" + (place.water ? " water" : "") +
-        (chosen && chosen.name === place.name ? " on" : ""),
-        cx: p[0], cy: p[1], r: r });
+        (chosen && chosen.name === place.name ? " on" : "") +
+        ((filter.slug || filter.chapter) ? (hit ? " hit" : " dim") : ""),
+        cx: p[0], cy: p[1], r: hit && (filter.slug || filter.chapter) ? r * 1.6 : r });
       circle.setAttribute("data-name", place.name);
+      var title = el("title");
+      title.textContent = place.name + " \u2014 " +
+        ((place.verses_total || 0) ? place.verses_total + " verses" : "no verses attached");
+      circle.appendChild(title);
       svg.appendChild(circle);
       drawn++;
-      if (view.width < 16) {
-        var label = el("text", { class: "place-label", x: p[0] + 5, y: p[1] - 4 });
-        label.textContent = place.name;
-        svg.appendChild(label);
-      }
     });
+
+    /* the names, placed last and never overlapping */
+    var labelPlacer = makePlacer();
+    var cityPlacer = makePlacer();
+    var named = places.slice().sort(function (a, b) {
+      return (b.verses_total || 0) - (a.verses_total || 0);
+    });
+    var shown = 0;
+    named.forEach(function (place) {
+      if (view.width > 16 || shown > 40) { return; }
+      if (place.lon < view.lon || place.lon > view.lon + view.width) { return; }
+      if (place.lat > view.lat || place.lat < view.lat - view.width * aspect) { return; }
+      var p = px(place.lon, place.lat);
+      if (labelPlacer(p[0] + 5, p[1] - 4, place.name, "place-label")) { shown++; }
+    });
+    if (!world) {
+      cities.features.forEach(function (f) {
+        var p = px(f.c[0], f.c[1]);
+        if (p[0] < 0 || p[0] > 1000 || p[1] < 0 || p[1] > 1000 * aspect) { return; }
+        var wanted = ALWAYS.indexOf(f.n) !== -1 ||
+          (view.width <= 12 ? true : (f.p || 0) >= (view.width <= 30 ? 1000000 :
+            (view.width <= 60 ? 3000000 : 6000000)));
+        if (!wanted) { return; }
+        cityPlacer(p[0] + 3, p[1] + 2.5, f.n, "city-label");
+      });
+    }
+    if (view.width < 90) {
+      NAMES.forEach(function (row) {
+        if (view.width > row[3] * 10 || view.width < row[3] / 3) { return; }
+        var at = px(row[1], row[2]);
+        if (at[0] < 0 || at[0] > 1000 || at[1] < 0 || at[1] > 1000 * aspect) { return; }
+        labelPlacer(at[0], at[1], row[0], "sea-label", "middle");
+      });
+    }
 
     /* a scale: the width of the plot in kilometres at this latitude */
     var kmPerDegree = 111.32;
@@ -219,6 +274,75 @@
       Math.round(km).toLocaleString() + " km across, " + step + "\u00b0 of grid \u00b7 drag to move, " +
       "wheel or the buttons to zoom. Coastlines, rivers and borders are Natural Earth (public domain): " +
       "the borders are today's, for orientation only.";
+  }
+
+  /* Labels are placed after everything else and never on top of one another: at a
+     close zoom there are more names than room, and overlapping text is worse than
+     a name left out. The most significant places are offered first. */
+  function makePlacer() {
+    var used = [];
+    return function (x, y, text, className, anchor) {
+      var w = text.length * 3.6 + 4;
+      var h = 8;
+      var box = [x - (anchor === "middle" ? w / 2 : 0), y - h, w, h * 1.2];
+      for (var i = 0; i < used.length; i++) {
+        var u = used[i];
+        if (box[0] < u[0] + u[2] && box[0] + box[2] > u[0] &&
+            box[1] < u[1] + u[3] && box[1] + box[3] > u[1]) {
+          return false;
+        }
+      }
+      used.push(box);
+      var t = el("text", { x: x, y: y, class: className });
+      if (anchor) { t.setAttribute("text-anchor", anchor); }
+      t.textContent = text;
+      svg.appendChild(t);
+      return true;
+    };
+  }
+
+  function matchesFilter(place) {
+    if (!filter.slug && !filter.chapter) { return true; }
+    return (place.verses || []).some(function (v) {
+      if (filter.slug && v[0] !== filter.slug) { return false; }
+      return !filter.chapter || String(v[1]) === String(filter.chapter);
+    });
+  }
+
+  /* kilometres between two points, for "what is near here" */
+  function km(aLon, aLat, bLon, bLat) {
+    var rad = Math.PI / 180;
+    var dLat = (bLat - aLat) * rad, dLon = (bLon - aLon) * rad;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(aLat * rad) * Math.cos(bLat * rad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 6371 * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+  }
+
+  function nearHere(lon, lat, box) {
+    var found = [];
+    places.forEach(function (place) {
+      var d = km(lon, lat, place.lon, place.lat);
+      if (d <= view.width * 1.4) { found.push({ place: place, km: Math.round(d) }); }
+    });
+    found.sort(function (a, b) { return a.km - b.km; });
+    side.innerHTML = "";
+    var card = ST.el("div", { class: "card place-card" }, [
+      ST.el("h2", { class: "serif", text: "Near " + Math.abs(lon).toFixed(2) + "\u00b0" +
+        (lon < 0 ? "W" : "E") + ", " + Math.abs(lat).toFixed(2) + "\u00b0" + (lat < 0 ? "S" : "N") }),
+      ST.el("p", { class: "meta", text: found.length
+        ? "the " + Math.min(found.length, 12) + " nearest of " + found.length + " places within " +
+          Math.round(view.width * 1.4) + " km"
+        : "no place in the dataset within " + Math.round(view.width * 1.4) + " km" })
+    ]);
+    var list = ST.el("div", { class: "place-verses" });
+    found.slice(0, 12).forEach(function (item) {
+      var a = ST.el("a", { href: "#", text: item.place.name + " \u00b7 " + item.km + " km \u00b7 " +
+        (item.place.verses_total || 0) + " v" });
+      a.addEventListener("click", function (e) { e.preventDefault(); show(item.place); });
+      list.appendChild(a);
+    });
+    card.appendChild(list);
+    side.appendChild(card);
   }
 
   function show(place) {
@@ -252,6 +376,11 @@
     }
     side.appendChild(card);
     draw();
+  }
+
+  function showByName(name) {
+    var hit = places.filter(function (p) { return p.name === name; })[0];
+    if (hit) { show(hit); }
   }
 
   function labelOf(slug, chapter, verse) {
@@ -303,6 +432,70 @@
     view.width = Math.min(360, view.width / 0.7); draw();
   });
 
+  els.route.addEventListener("change", function () {
+    route = null;
+    routes.forEach(function (r) { if (r.name === els.route.value) { route = r; } });
+    if (route && route.stops.length) {
+      var lons = route.stops.map(function (s) { return s.lon; });
+      var lats = route.stops.map(function (s) { return s.lat; });
+      var pad = 6;
+      var width = Math.max(12, Math.max.apply(null, lons) - Math.min.apply(null, lons) + pad * 2);
+      var height = Math.max.apply(null, lats) - Math.min.apply(null, lats) + pad * 2;
+      view.width = Math.min(120, Math.max(width, height / aspect));
+      view.lon = Math.min.apply(null, lons) - pad;
+      view.lat = Math.max.apply(null, lats) + pad;
+      side.innerHTML = "";
+      side.appendChild(ST.el("div", { class: "card place-card" }, [
+        ST.el("h2", { class: "serif", text: route.name }),
+        ST.el("p", { class: "meta", text: route.stops.length + " stops" }),
+        ST.el("p", { class: "muted small", style: "margin:0", text: route.note })
+      ]));
+    }
+    draw();
+  });
+
+  els.findBook.addEventListener("change", function () {
+    filter.slug = els.findBook.value;
+    fillChaptersFor();
+    draw();
+  });
+  els.findChapter.addEventListener("change", function () {
+    filter.chapter = els.findChapter.value;
+    draw();
+  });
+
+  function fillChaptersFor() {
+    var book = books.filter(function (b) { return b.slug === filter.slug; })[0];
+    els.findChapter.innerHTML = "";
+    var any = document.createElement("option");
+    any.value = "";
+    any.textContent = "any";
+    els.findChapter.appendChild(any);
+    if (!book) { return; }
+    for (var c = 1; c <= book.chapters; c++) {
+      var o = document.createElement("option");
+      o.value = String(c);
+      o.textContent = c;
+      els.findChapter.appendChild(o);
+    }
+    filter.chapter = "";
+  }
+
+  function fillRoutes() {
+    routes.forEach(function (r) {
+      var o = document.createElement("option");
+      o.value = r.name;
+      o.textContent = r.name;
+      els.route.appendChild(o);
+    });
+    books.forEach(function (b) {
+      var o = document.createElement("option");
+      o.value = b.slug;
+      o.textContent = b.name;
+      els.findBook.appendChild(o);
+    });
+  }
+
   find.addEventListener("keydown", function (e) {
     if (e.key !== "Enter") { return; }
     var want = find.value.trim().toLowerCase();
@@ -325,9 +518,16 @@
 
   svg.addEventListener("click", function (e) {
     var name = e.target && e.target.getAttribute && e.target.getAttribute("data-name");
-    if (!name) { return; }
-    var place = places.filter(function (p) { return p.name === name; })[0];
-    if (place) { show(place); }
+    if (name) {
+      var place = places.filter(function (p) { return p.name === name; })[0];
+      if (place) { show(place); return; }
+    }
+    /* empty water or empty land: what is near the point that was clicked? */
+    var box = svg.getBoundingClientRect();
+    if (!box.width) { return; }
+    var fx = (e.clientX - box.left) / box.width;
+    var fy = (e.clientY - box.top) / box.height;
+    nearHere(view.lon + fx * view.width, view.lat - fy * view.width * aspect, box);
   });
 
   function fit() {
@@ -340,15 +540,51 @@
   Promise.all([
     ST.loadJSON(root + "data/bible/books.json"),
     ST.loadJSON(root + "data/atlas/places.json"),
-    ST.loadJSON(root + "data/atlas/layers.json")
+    ST.loadJSON(root + "data/atlas/layers.json"),
+    ST.loadJSON(root + "data/atlas/routes.json")
   ]).then(function (loaded) {
     books = loaded[0] || [];
     places = (loaded[1] || {}).places || [];
     layers = loaded[2] || {};
+    routes = ((loaded[3] || {}).routes) || [];
+    fillRoutes();
+
+    /* the view in the URL, so a journey or a chapter can be linked to */
+    var qRoute = ST.qs("route");
+    if (qRoute) {
+      routes.forEach(function (r) { if (r.name.toLowerCase() === qRoute.toLowerCase()) { route = r; } });
+      if (route) { els.route.value = route.name; }
+    }
+    var qBook = ST.qs("book");
+    if (qBook) { filter.slug = qBook; els.findBook.value = qBook; fillChaptersFor(); }
+    var qChapter = ST.qs("chapter");
+    if (qChapter) { filter.chapter = String(qChapter); els.findChapter.value = String(qChapter); }
+    var qPlace = ST.qs("place");
+    if (qPlace) {
+      var hit = places.filter(function (p) { return p.name.toLowerCase() === qPlace.toLowerCase(); })[0];
+      if (hit) {
+        view = { lon: hit.lon - 6, lat: hit.lat + 6 * aspect, width: 12 };
+        chosen = hit;
+      }
+    }
     fit();
-    go(LAND_WINDOW);
-    var jerusalem = places.filter(function (p) { return p.name === "Jerusalem"; })[0];
-    if (jerusalem) { show(jerusalem); }
+    if (route) {
+      /* frame the journey */
+      var lons = route.stops.map(function (s) { return s.lon; });
+      var lats = route.stops.map(function (s) { return s.lat; });
+      var pad = 6;
+      view.width = Math.min(120, Math.max(12, Math.max.apply(null, lons) - Math.min.apply(null, lons) + pad * 2));
+      view.lon = Math.min.apply(null, lons) - pad;
+      view.lat = Math.max.apply(null, lats) + pad;
+      if (route.stops.length) { showByName(route.stops[0].name); }
+    } else if (chosen) {
+      show(chosen);
+    } else {
+      go(LAND_WINDOW);
+      var jerusalem = places.filter(function (p) { return p.name === "Jerusalem"; })[0];
+      if (jerusalem) { show(jerusalem); }
+    }
+    if (filter.slug || filter.chapter) { draw(); }
   }).catch(function (err) {
     hint.textContent = "Could not load the map data: " + err.message;
   });

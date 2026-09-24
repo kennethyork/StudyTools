@@ -33,6 +33,14 @@
   .place:hover, .place.on { opacity: 1; stroke: var(--ink); stroke-width: 1; }
   .place-label { font-family: var(--sans); font-size: 7px; fill: var(--ink-soft); pointer-events: none; }
   .atlas-hint { font-size: .8rem; color: var(--ink-faint); }
+  .atlas-select { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem;
+    color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
+  .atlas-select select { font-size: .86rem; min-width: 9em; }
+  .route-line { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 5 3; opacity: .8; }
+  .route-stop { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
+  .route-num { font-family: var(--mono); font-size: 6.5px; fill: var(--accent); }
+  .place.dim { opacity: .18; }
+  .place.hit { opacity: 1; stroke: var(--ink); stroke-width: 1.2; }
   .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: .78rem; color: var(--ink-faint); }
   .legend span { display: inline-flex; align-items: center; gap: 5px; }
   .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--accent); }
@@ -64,6 +72,15 @@
       <button type="button" class="btn secondary" id="world">The whole world</button>
       <button type="button" class="btn secondary" id="zoom-in">Zoom in</button>
       <button type="button" class="btn secondary" id="zoom-out">Zoom out</button>
+      <label class="atlas-select">A journey <select id="route">
+        <option value="">none</option>
+      </select></label>
+      <label class="atlas-select">Places named in <select id="find-book">
+        <option value="">the whole map</option>
+      </select></label>
+      <label class="atlas-select">chapter <select id="find-chapter">
+        <option value="">any</option>
+      </select></label>
     </div>
     <p class="atlas-hint" id="hint" style="margin:10px 0 0">Loading the map\u2026</p>
     <div class="legend">
@@ -71,6 +88,7 @@
       <span><i class="city"></i> a modern city, to place yourself</span>
       <span><i class="river"></i> river</span>
       <span><i class="border"></i> a border of today &mdash; not of any biblical period</span>
+      <span><i class="river" style="background:var(--accent)"></i> a journey, drawn stop to stop</span>
     </div>
   </section>
 
@@ -88,7 +106,9 @@
       are contested). The coastline, lakes and rivers of the base map are
       <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> 1:110m, public domain.
       The map is a plain equirectangular plot of those coordinates drawn here, not a historical atlas:
-      it shows where the dataset puts each place today, with the borders of no period at all &mdash;
+      Click anywhere on the map for the places near that point, pick a journey to follow it, or pick
+      a book and chapter to see only the places that chapter names. It shows where the dataset puts
+      each place today, with the borders of no period at all &mdash;
       the ones drawn are today's, and are there only to help you find your way. The names of the seas
       and the regions are this site's own, placed by hand; the coastlines, rivers, lakes, borders and
       modern cities are Natural Earth's.</p>

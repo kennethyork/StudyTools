@@ -191,6 +191,60 @@ def read_places(markers):
     return joined
 
 
+# Journeys and travels, as a reading of the narrative rather than a dataset: each
+# stop is a place name from the dataset, in order. The builder resolves each name —
+# the dataset disambiguates as "Antioch 1", "Babylon 2" and so on — and refuses to
+# write a route whose stops cannot all be found, so a typo here fails the build.
+ROUTES = [
+    {"name": "The exodus from Egypt",
+     "note": "From Rameses to the plains of Moab, as the narrative gives the stages. "
+             "The line joins the stops; the text does not give a surveyed route.",
+     "stops": ["Rameses", "Succoth 1", "Migdol 1", "Marah", "Elim", "Rephidim", "Mount Sinai",
+               "Kadesh-barnea", "Punon", "Dibon 1", "Mount Nebo", "Jericho 1", "Gilgal 1"]},
+    {"name": "Abraham from Ur to Hebron",
+     "note": "From Ur of the Chaldees by way of Haran into Canaan, as Genesis tells it.",
+     "stops": ["Ur 1", "Haran", "Shechem", "Bethel 1", "Negeb", "Egypt", "Beersheba 1",
+               "Hebron"]},
+    {"name": "Paul's first journey",
+     "note": "Antioch, Cyprus, the cities of Galatia, and back to Antioch, as Acts gives them.",
+     "stops": ["Antioch 1", "Seleucia", "Salamis", "Paphos", "Perga", "Antioch 2", "Iconium",
+               "Lystra", "Derbe", "Attalia"]},
+    {"name": "Into exile and back",
+     "note": "Judah to Babylon, and the return under Cyrus.",
+     "stops": ["Jerusalem", "Riblah", "Babylon", "Susa", "Jerusalem"]},
+    {"name": "Jesus in Galilee and Judea",
+     "note": "The places the Gospels name in his ministry, from Bethlehem to Jerusalem.",
+     "stops": ["Bethlehem", "Nazareth", "Cana", "Capernaum", "Nain", "Bethany", "Jericho",
+               "Jerusalem"]},
+]
+
+
+def routes_of(places):
+    """The routes, with every stop resolved to a place that exists."""
+    by_name = {}
+    for place in places:
+        by_name.setdefault(place["name"], place)
+    out = []
+    for route in ROUTES:
+        stops = []
+        for wanted in route["stops"]:
+            hit = by_name.get(wanted)
+            if hit is None:
+                exact = [p for p in places if p["name"].split(" ")[0] == wanted]
+                if not exact:
+                    print("    route {!r}: no place called {!r} — route skipped".format(
+                        route["name"], wanted))
+                    stops = []
+                    break
+                hit = sorted(exact, key=lambda p: -(p.get("verses_total") or 0))[0]
+            stops.append({"name": hit["name"], "lon": hit["lon"], "lat": hit["lat"],
+                          "verses_total": hit.get("verses_total") or 0})
+        if len(stops) < 3:
+            continue
+        out.append({"name": route["name"], "note": route["note"], "stops": stops})
+    return out
+
+
 def main():
     markers, water = read_kml()
     joined = read_places(markers)
@@ -250,6 +304,13 @@ def main():
             os.remove(path)
 
     places = sorted(markers.values(), key=lambda p: p["name"])
+    routes = routes_of(places)
+    with open(os.path.join(OUT, "routes.json"), "w", encoding="utf-8") as f:
+        json.dump({"note": "Routes are this site's reading of the narrative, drawn stop to stop "
+                           "between places named in the text, not surveyed paths.",
+                   "routes": routes}, f, ensure_ascii=False, separators=(",", ":"))
+    print("  {} routes, {} stops in all".format(
+        len(routes), sum(len(r["stops"]) for r in routes)))
     with open(os.path.join(OUT, "places.json"), "w", encoding="utf-8") as f:
         json.dump({
             "source": {
@@ -265,7 +326,7 @@ def main():
         len(places), named))
     print("  {:,} joined to the verse lists by name".format(joined))
     print("  {} water lines".format(len(water)))
-    for name in ("places.json", "layers.json"):
+    for name in ("places.json", "layers.json", "routes.json"):
         print("  {:<12} {:>7.2f} MB".format(
             name, os.path.getsize(os.path.join(OUT, name)) / 1e6))
 
