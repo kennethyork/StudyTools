@@ -79,6 +79,7 @@ data/creeds/             Apostles', Nicene, Athanasian
 data/devotional/         topic wheel content
 data/liturgical/         BCP 1928 daily office and Sunday tables (public domain)
 scripts/                 data build scripts (Python 3, no third-party deps)
+demo/make-demo.sh        the walkthrough video, rendered from these pages
 ```
 
 ## Running locally
@@ -90,6 +91,22 @@ local server rather than double-clicking the HTML files:
 python3 -m http.server 8000
 # then visit http://localhost:8000/
 ```
+
+## The demo video
+
+`demo/make-demo.sh` renders a captioned walkthrough of the site — sixteen screens,
+about a minute — to `demo/studytools-demo.mp4`:
+
+```sh
+./demo/make-demo.sh
+```
+
+It shoots the pages from a copy of this repository served on the loopback address,
+so what the video shows is what these files do rather than what a server happened
+to be running that day, and it can be rendered again on a machine with no network.
+It needs Chrome, ffmpeg built with `drawtext`, and Python 3 to serve the folder;
+nothing in it is used by the site at runtime. The video itself is a build artefact
+and is not committed — regenerate it after changing a page, which takes a minute.
 
 ## Publishing to GitHub Pages
 

@@ -14,3 +14,12 @@ desktop.ini
 # Python bytecode
 __pycache__/
 *.pyc
+
+# The harness demo/make-demo.sh writes into the repository root while it renders,
+# and deletes on exit; this is in case it is interrupted.
+_demo-frame.html
+
+# The rendered demo video. A build artefact of demo/make-demo.sh rather than
+# source -- regenerate it rather than versioning a 1.6 MB binary in a repository
+# that is mostly text and data. Remove this line if you decide you want it here.
+demo/*.mp4
