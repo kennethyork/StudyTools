@@ -55,25 +55,20 @@
 
     if (query) {
       els.listTitle.textContent = "Search results";
+      /* Searched in the index, not in the letter files: every name the dictionary
+         holds is in the index the page already has, and looking in the letters meant
+         fetching all twenty-six of them — fifteen megabytes — before the first result
+         could be shown. Clicking a result opens the one file its entry is in. */
       var results = [];
-      var letters = Object.keys(index.letters);
-      var pending = letters.length;
-      letters.forEach(function (letter) {
-        loadLetter(letter).then(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.name.toLowerCase().indexOf(query) !== -1 || entry.slug.indexOf(query) !== -1) {
-              results.push({ letter: letter, entry: entry });
-            }
-          });
-          pending -= 1;
-          if (pending === 0) {
-            results.sort(function (a, b) { return a.entry.name.localeCompare(b.entry.name); });
-            paintList(results.slice(0, 400).map(function (r) { return r.entry; }), results.length);
+      Object.keys(index.letters).forEach(function (letter) {
+        index.letters[letter].forEach(function (entry) {
+          if (entry.name.toLowerCase().indexOf(query) !== -1 || entry.slug.indexOf(query) !== -1) {
+            results.push({ letter: letter, entry: entry });
           }
-        }).catch(function () {
-          pending -= 1;
         });
       });
+      results.sort(function (a, b) { return a.entry.name.localeCompare(b.entry.name); });
+      paintList(results.slice(0, 400), results.length);
       return;
     }
 
@@ -85,28 +80,38 @@
     }
 
     els.listTitle.textContent = "Terms starting with " + activeLetter.toUpperCase();
-    loadLetter(activeLetter).then(function (entries) {
-      paintList(entries, entries.length);
-    });
+    paintList(index.letters[activeLetter].map(function (entry) {
+      return { letter: activeLetter, entry: entry };
+    }), index.letters[activeLetter].length);
   }
 
-  function paintList(entries, total) {
+  /* The list is drawn from the index, which carries each term's name and how many
+     sources it has; the definitions arrive when one is opened. */
+  function paintList(items, total) {
     els.list.innerHTML = "";
     els.listCount.textContent = total.toLocaleString() + (total === 1 ? " term" : " terms");
-    if (!entries.length) {
+    if (!items.length) {
       els.list.appendChild(ST.el("p", { class: "muted small", text: "Nothing matches that search." }));
       return;
     }
-    entries.forEach(function (entry) {
-      var btn = ST.el("button", { type: "button", class: "term-item" + (entry.slug === activeSlug ? " active" : "") });
-      btn.appendChild(ST.el("span", { text: entry.name }));
-      btn.appendChild(ST.el("span", { class: "count", text: "  · " + entry.definitions.length }));
-      btn.addEventListener("click", function () {
-        activeSlug = entry.slug;
-        showEntry(entry);
-        renderList();
-      });
+    items.forEach(function (item) {
+      var btn = ST.el("button", { type: "button",
+        class: "term-item" + (item.entry.slug === activeSlug ? " active" : "") });
+      btn.appendChild(ST.el("span", { text: item.entry.name }));
+      btn.appendChild(ST.el("span", { class: "count", text: "  · " + item.entry.count }));
+      btn.addEventListener("click", function () { openEntry(item.letter, item.entry.slug); });
       els.list.appendChild(btn);
+    });
+  }
+
+  function openEntry(letter, slug) {
+    activeLetter = letter;
+    activeSlug = slug;
+    renderLetters();
+    loadLetter(letter).then(function (entries) {
+      var full = entries.filter(function (e) { return e.slug === slug; })[0];
+      if (full) { showEntry(full); }
+      renderList();
     });
   }
 
@@ -152,6 +157,30 @@
     });
   }
 
+  /* Nothing under that name, and what is close to it. */
+  function renderMissing(term, near) {
+    els.entry.innerHTML = "";
+    var card = ST.el("div", {});
+    card.appendChild(ST.el("h2", { class: "serif", style: "margin:0 0 6px;font-size:1.35rem",
+      text: "Nothing under \u201c" + term + "\u201d" }));
+    card.appendChild(ST.el("p", { class: "muted", style: "margin:0 0 10px", text: near.length
+      ? "These begin with it."
+      : "No term in the five dictionaries begins with it. Try a shorter spelling, or browse a letter." }));
+    if (near.length) {
+      var list = ST.el("div", { class: "term-list" });
+      near.forEach(function (item) {
+        var button = ST.el("button", { type: "button", class: "term-item" });
+        button.appendChild(ST.el("span", { text: item.entry.name }));
+        button.appendChild(ST.el("span", { class: "count", text: "  \u00b7 " + item.entry.count }));
+        button.addEventListener("click", function () { openEntry(item.letter, item.entry.slug); });
+        list.appendChild(button);
+      });
+      card.appendChild(list);
+    }
+    els.entry.appendChild(card);
+    document.title = "Nothing under " + term + " — Bible Dictionary";
+  }
+
   function init() {
     ST.loadJSON(ST.siteRoot() + "data/dictionary/index.json").then(function (data) {
       index = data;
@@ -162,14 +191,23 @@
       var term = ST.qs("term");
       var hit = term ? lookup(term) : null;
       if (hit) {
-        activeLetter = hit.letter;
-        activeSlug = hit.entry.slug;
-        renderLetters();
-        loadLetter(hit.letter).then(function (entries) {
-          var full = entries.filter(function (e) { return e.slug === hit.entry.slug; })[0];
-          if (full) showEntry(full);
-          renderList();
+        openEntry(hit.letter, hit.entry.slug);
+      } else if (term) {
+        /* A word this dictionary does not have: say so, and offer what begins with
+           it. It used to open the first entry — ask for "meek" and the page showed
+           you "A", as if that were the answer. */
+        var want = String(term).toLowerCase();
+        var near = [];
+        Object.keys(index.letters).forEach(function (letter) {
+          index.letters[letter].forEach(function (entry) {
+            if (near.length < 12 && (entry.name.toLowerCase().indexOf(want) === 0 ||
+                entry.slug.indexOf(want) === 0)) {
+              near.push({ letter: letter, entry: entry });
+            }
+          });
         });
+        renderMissing(term, near);
+        renderList();
       } else {
         // Open the first entry so the page is never empty.
         loadLetter("a").then(function (entries) {

@@ -233,6 +233,7 @@ SCENES=(
   "matrix|/apps/matrix/?ref=John%201:1||Translations side by side, verse by verse"
   "interlinear|/apps/interlinear/?ref=John%201:1||Every word of the Greek and Hebrew, with its gloss"
   "search|/apps/search/?q=grace||Search every translation at once, Apocrypha included"
+  "dict|/apps/dictionary/?term=lasciviousness||Five dictionaries, and the words the King James uses|4.6"
   "atlas|/apps/atlas/||An atlas of every place the Bible names, on real terrain|4.6"
   "route|/apps/atlas/?route=Paul's%20first%20journey||A journey, drawn stop by stop"
   "ask|/apps/ask/?q=is%20Psalm%2023%20in%20the%20office%3F|doc::#thread .card > .answer-cite::end|Ask the site: no model, every answer cited|4.6"

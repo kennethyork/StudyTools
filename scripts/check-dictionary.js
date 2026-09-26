@@ -1,0 +1,173 @@
+#!/usr/bin/env node
+/* Checks the Bible dictionary data: five sources merged into one alphabetical
+   dictionary, and the things that go wrong when a dictionary is built by machine
+   rather than typed.
+
+   The failure this guards is silence. The dictionary is scraped and abridged: a
+   row read one field too far gives a definition that belongs to another word, a
+   stray tag or a `Â` sits in the middle of a sentence, an entry arrives with no
+   source to cite, and the page still renders — it simply lies. The check that
+   matters most is the one about "lasciviousness": a word a reader of the King
+   James Version would look up has to be there, and has to be about that word,
+   because its absence is how this whole source came to be added.
+
+   Run with:
+
+     node scripts/check-dictionary.js
+*/
+"use strict";
+
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.join(__dirname, "..");
+const DIR = path.join(ROOT, "data", "dictionary");
+
+const failures = [];
+const notes = [];
+function check(name, condition, detail) {
+  if (!condition) { failures.push(name + (detail ? " — " + detail : "")); }
+}
+function load(rel) { return JSON.parse(fs.readFileSync(path.join(DIR, rel), "utf8")); }
+
+const index = load("index.json");
+const letters = Object.keys(index.letters || {}).sort();
+
+/* ---------- the index ---------- */
+
+const WANTED = [
+  ["Easton's Bible Dictionary", 1897],
+  ["Smith's Bible Dictionary", 1863],
+  ["Hastings' Dictionary of the Bible", 1909],
+  ["Hitchcock's Bible Names", 1869],
+  ["Webster's 1828 Dictionary", 1828]
+];
+check("the index names its sources",
+  Array.isArray(index.sources) && index.sources.length === WANTED.length,
+  (index.sources || []).map(function (s) { return s.label; }).join(", "));
+const missing = WANTED.filter(function (pair) {
+  return !(index.sources || []).some(function (s) { return s.label === pair[0] && s.year === pair[1]; });
+});
+check("and they are the five the app claims, with their years", missing.length === 0,
+  missing.map(function (p) { return p.join(" "); }).join(", "));
+check("every letter from a to z is indexed",
+  letters.join("") === "abcdefghijklmnopqrstuvwxyz", letters.join(""));
+const counted = letters.reduce(function (n, letter) { return n + index.letters[letter].length; }, 0);
+check("the index's total is the number of terms it lists", counted === index.total,
+  counted + " against " + index.total);
+notes.push(index.total.toLocaleString() + " terms from " + index.sources.length + " sources");
+
+/* ---------- the entries ---------- */
+
+const byLabel = {};
+(index.sources || []).forEach(function (s) { byLabel[s.label] = s.year; });
+
+let definitions = 0;
+const problems = {
+  unnamed: [], badSlug: [], empty: [], tagged: [], mojibake: [], uncited: [], mislabelled: [],
+  long: [], placeholderText: []
+};
+const words = {};
+
+letters.forEach(function (letter) {
+  const file = load(letter + ".json");
+  check(letter + ".json is the letter it says it is", file.letter === letter, String(file.letter));
+  const slugs = {};
+  (file.entries || []).forEach(function (entry) {
+    const where = letter + "/" + (entry.slug || entry.name || "?");
+    if (!entry.name) { problems.unnamed.push(where); }
+    /* a name the scraper left behind: the 1828 dump fills the heading of a row it
+       could not find with "&nbsp; No results found." or "Did you mean one of these
+       words?", and both reached the page as entries a reader could click */
+    else if (/&[a-z]+;|no results? found|did you mean/i.test(entry.name)) {
+      problems.unnamed.push(where + " [" + entry.name + "]");
+    }
+    if (!entry.slug || !/^[a-z0-9-]+$/.test(entry.slug)) { problems.badSlug.push(where); }
+    if (slugs[entry.slug]) { problems.badSlug.push(where + " (twice in one letter)"); }
+    slugs[entry.slug] = true;
+    (entry.definitions || []).forEach(function (def) {
+      definitions++;
+      const text = String(def.text || "");
+      if (!text.trim()) { problems.empty.push(where); return; }
+      if (/<[a-z/][^>]*>/i.test(text)) { problems.tagged.push(where); }
+      /* the 1828 dump keeps the scrape's own failure notice where it found no
+         definition; it reads like an entry until a reader opens one */
+      if (/please check your spelling|no results? found|for further assistance|did you mean/i.test(text)) {
+        problems.placeholderText.push(where + " [" + text.slice(0, 40) + "]");
+      }
+      /* the 1828 dump arrives with non-breaking spaces decoded as two characters,
+         and with the HTML entities the source used */
+      if (text.indexOf("\u00c2") !== -1 || /&(?:amp|nbsp|quot|#39);/.test(text)) {
+        problems.mojibake.push(where);
+      }
+      /* Only the abridgment is capped. Hastings writes essays — "Bible" runs to
+         63,000 characters and that is the work, not a fault — but a 1828 entry
+         longer than its cap means the dump was read out of step and two entries
+         have been run together. */
+      if (def.sourceLabel === "Webster's 1828 Dictionary" && text.length > 2100) {
+        problems.long.push(where + " " + text.length);
+      }
+      if (!def.source || !def.sourceLabel) { problems.uncited.push(where); }
+      else if (!(def.sourceLabel in byLabel) || byLabel[def.sourceLabel] !== def.year) {
+        problems.mislabelled.push(where + " [" + def.sourceLabel + " " + def.year + "]");
+      }
+      if (def.sourceLabel === "Webster's 1828 Dictionary") { words[entry.slug] = true; }
+    });
+  });
+});
+check("every definition can cite a source the index lists",
+  problems.uncited.length === 0 && problems.mislabelled.length === 0,
+  problems.uncited.concat(problems.mislabelled).slice(0, 3).join(", "));
+check("no definition carries markup", problems.tagged.length === 0,
+  problems.tagged.slice(0, 3).join(", "));
+check("no definition carries the dump's mis-read characters", problems.mojibake.length === 0,
+  problems.mojibake.slice(0, 3).join(", "));
+check("no term is left with a scraper's placeholder for a name",
+  problems.unnamed.length === 0, problems.unnamed.slice(0, 3).join(", "));
+check("and no definition is one either", problems.placeholderText.length === 0,
+  problems.placeholderText.slice(0, 3).join(", "));
+check("no definition is empty, unnamed or badly slugged",
+  problems.empty.length + problems.unnamed.length + problems.badSlug.length === 0,
+  problems.empty.concat(problems.unnamed, problems.badSlug).slice(0, 3).join(", "));
+check("no 1828 entry ran past the length the abridgment caps it at",
+  problems.long.length === 0, problems.long.slice(0, 3).join(", "));
+notes.push(definitions.toLocaleString() + " definitions checked");
+
+/* ---------- the word dictionary, which is why it is here ---------- */
+
+/* A KJV word the three Bible dictionaries have nothing on: Easton, Smith and
+   Hastings are about people, places and subjects, and this one is about words. */
+const las = load("l.json").entries.filter(function (e) { return e.slug === "lasciviousness"; })[0];
+check("a KJV word the Bible dictionaries have nothing on is defined here", !!las,
+  "lasciviousness is not in the dictionary");
+if (las) {
+  const from = las.definitions.map(function (d) { return d.sourceLabel; });
+  check("and it is Webster's 1828 that defines it", from.indexOf("Webster's 1828 Dictionary") !== -1,
+    from.join(", "));
+  const text = las.definitions.map(function (d) { return d.text; }).join(" ");
+  check("with the sense the King James uses, and its citation",
+    /Looseness/.test(text) && /Ephesians/.test(text), text.slice(0, 80));
+}
+check("the word dictionary is a real share of the whole",
+  Object.keys(words).length > 5000, Object.keys(words).length + " headwords");
+check("and it holds the ordinary words of the King James, not only the names",
+  ["conversation", "charity", "kingdom", "hope"].every(function (w) { return words[w]; }),
+  ["conversation", "charity", "kingdom", "hope"].filter(function (w) { return !words[w]; }).join(", "));
+check("the 1828 words are the King James's: nothing the 1828 could not have defined",
+  !words.telephone && !words.railway && !words.locomotive,
+  "a word outside the King James vocabulary is headworded from the 1828");
+
+/* Hitchcock's contribution: what a name means. */
+const aaron = load("a.json").entries.filter(function (e) { return e.slug === "aaron"; })[0];
+check("a Bible name is given its meaning as well as its history",
+  !!aaron && aaron.definitions.some(function (d) {
+    return d.sourceLabel === "Hitchcock's Bible Names" && /teacher|lofty/i.test(d.text);
+  }), aaron ? aaron.definitions.map(function (d) { return d.sourceLabel; }).join(", ") : "no entry");
+
+notes.forEach(function (n) { console.log("note: " + n); });
+if (failures.length) {
+  failures.forEach(function (f) { console.log("FAIL: " + f); });
+  console.log(failures.length + " failure(s)");
+  process.exit(1);
+}
+console.log("checked the dictionary: five sources, and the words the King James uses");
