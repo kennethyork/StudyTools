@@ -34,22 +34,84 @@
      uses, which no rule turns into their headword: "oxen" is not a form of "oxe".
      This is a reading aid, not a stemmer: it suggests, and the reader decides. */
   var IRREGULAR = {
+    // pronouns and the verbs that go with them: the King James' thou, thee, thy
+    thee: "thou", thy: "thou", thine: "thou", thou: "thou", ye: "you", yourselves: "yourself",
+    hath: "have", hast: "have", hadst: "have", art: "be", wast: "be", wert: "be",
+    doth: "do", dost: "do", didst: "do", saith: "say", sayest: "say", saidst: "say",
+    canst: "can", couldest: "can", shalt: "shall", shouldest: "shall", wilt: "will",
+    wouldest: "will", mayest: "may", mightest: "may", might: "mighty",
+    // the older spellings the text is full of
+    shew: "show", shewed: "show", shewest: "show", sheweth: "show", shewing: "show",
+    intreat: "entreat", intreated: "entreat", intreaty: "entreaty",
+    musick: "music", jubile: "jubilee", fulfil: "fulfill", skilful: "skillful",
+    plenteous: "plenty", bountiful: "bounty", merciful: "mercy",
+    // participles and preterites that no rule reaches
+    known: "know", drawn: "draw", grew: "grow", drew: "draw", spake: "speak",
+    forgat: "forget", forsook: "forsake", forsookest: "forsake", holden: "hold",
+    shaven: "shave", laden: "lade", graven: "grave", molten: "melt", cloven: "cleave",
+    begat: "beget", begot: "beget", begun: "begin", began: "begin",
+    sware: "swear", bare: "bear", tare: "tear", clave: "cleave",
+    overthrew: "overthrow", overcame: "overcome", withstood: "withstand",
+    withdrew: "withdraw", dwelt: "dwell", spent: "spend", dealt: "deal",
+    trodden: "tread", arisen: "arise", borne: "bear", sworn: "swear", torn: "tear",
+    worn: "wear", gotten: "get", begotten: "beget", forgotten: "forget",
+    // plurals and comparatives that are their own words
     oxen: "ox", kine: "cow", brethren: "brother", children: "child", men: "man",
     women: "woman", feet: "foot", teeth: "tooth", mice: "mouse", geese: "goose",
-    graven: "grave", laden: "lade", cloven: "cleave", molten: "melt",
-    begotten: "beget", forgotten: "forget", gotten: "get", trodden: "tread",
-    arisen: "arise", borne: "bear", sworn: "swear", torn: "tear", worn: "wear"
+    higher: "high", greater: "great", wiser: "wise", deeper: "deep", easier: "easy",
+    mightier: "mighty", mightiest: "mighty", honourably: "honourable",
+    // the plurals that are their own words, the other way round: the text says
+    // horsemen and the dictionary's entry is Horseman
+    horsemen: "horseman", footmen: "footman", husbandmen: "husbandman",
+    workmen: "workman", watchmen: "watchman", herdmen: "herdman",
+    craftsmen: "craftsman", kinsmen: "kinsman", bondmen: "bondman",
+    countrymen: "countryman", menservants: "manservant", bondwoman: "bondman",
+    womenservants: "womanservant", brethren: "brother", children: "child"
   };
   var SUFFIXES = [["eth", ""], ["est", ""], ["edst", ""], ["ed", ""], ["ing", ""],
     ["ies", "y"], ["es", ""], ["s", ""], ["i", "y"]];
 
+  /* Webster spells American and the King James British, so a reader who types
+     "honour" is looking for the entry under Honor. The same in reverse, and for the
+     endings that differ (-ise/-ize, -re/-er, -ce/-se). */
+  function spellingFolds(word) {
+    var out = [];
+    if (word.indexOf("our") !== -1) { out.push(word.replace(/our/g, "or")); }
+    if (word.indexOf("or") !== -1) { out.push(word.replace(/or/g, "our")); }
+    if (/ise$/.test(word)) { out.push(word.slice(0, -3) + "ize"); }
+    if (/ize$/.test(word)) { out.push(word.slice(0, -3) + "ise"); }
+    if (/re$/.test(word)) { out.push(word.slice(0, -2) + "er"); }
+    if (/er$/.test(word)) { out.push(word.slice(0, -2) + "re"); }
+    if (/ce$/.test(word)) { out.push(word.slice(0, -2) + "se"); }
+    if (/se$/.test(word)) { out.push(word.slice(0, -2) + "ce"); }
+    if (/-/.test(word)) { out.push(word.replace(/-/g, "")); }
+    return out;
+  }
+
+  /* The King James writes compounds solid where Webster keeps them apart:
+     threshingfloor, armourbearer, selfsame, lovingkindness. */
+  function compoundFolds(word) {
+    var out = [];
+    for (var at = 3; at <= word.length - 3; at++) {
+      out.push(word.slice(0, at) + "-" + word.slice(at));
+    }
+    return out;
+  }
+
   function stems(word) {
     var out = [], seen = {}, queue = [word];
     function add(w) { if (w && w.length >= 2 && !seen[w]) { seen[w] = true; out.push(w); } }
+    function variants(w) {
+      var next = [];
+      spellingFolds(w).forEach(function (v) { add(v); next.push(v); });
+      if (w.length >= 7) { compoundFolds(w).forEach(function (v) { add(v); next.push(v); }); }
+      return next;
+    }
     for (var pass = 0; pass < 3 && queue.length; pass++) {
       var next = [];
       queue.forEach(function (w) {
-        if (IRREGULAR[w]) { add(IRREGULAR[w]); }
+        if (IRREGULAR[w]) { add(IRREGULAR[w]); next = next.concat(variants(IRREGULAR[w])); }
+        variants(w).forEach(function (v) { next.push(v); });
         SUFFIXES.forEach(function (pair) {
           if (w.length <= pair[0].length + 1 || w.slice(-pair[0].length) !== pair[0]) { return; }
           var base = w.slice(0, -pair[0].length) + pair[1];
@@ -57,6 +119,13 @@
           if (base.length > 2 && base[base.length - 1] === base[base.length - 2]) { add(base.slice(0, -1)); }
           next.push(base);
         });
+        /* and the other way: a reader looks up the singular of what the text says
+           in the plural ("philistine" for the Philistines, "liar" for liars) */
+        if (!/(s|eth|est|ing|ed)$/.test(w)) {
+          add(w + "s");
+          add(w + "es");
+          if (w.length >= 7) { compoundFolds(w + "s").forEach(add); }
+        }
       });
       queue = next;
     }

@@ -1,0 +1,610 @@
+{
+  "_note": "Entries written by hand for this site, for the words a reader of the King James Version meets often and no dictionary here reaches — either because the transcription of Webster's 1828 that this project uses has a scrape's failure where the entry should be, or because the word is a King James form, compound or spelling that the dictionaries do not headword. The gloss is this project's own; the citation is where the word is read. check-dictionary.js requires these to be present and requires their text to say where it comes from.",
+  "entries": [
+    {
+      "slug": "meet",
+      "name": "Meet",
+      "text": "Fitting, suitable, right. \"...It is not good that the man should be alone; I will make him an help meet for him.\" (Genesis 2:18). \"...to every beast of the field; but for Adam there was not found an help meet for him.\" (Genesis 2:20)."
+    },
+    {
+      "slug": "meek",
+      "name": "Meek",
+      "text": "Mild, gentle, patient under injury; not self-asserting. \"(Now the man Moses was very meek, above all the men which were upon the face of the earth.)\" (Numbers 12:3). \"The meek shall eat and be satisfied: they shall praise the LORD that seek him: your heart shall live for ever.\" (Psalms 22:26)."
+    },
+    {
+      "slug": "leave",
+      "name": "Leave",
+      "text": "To depart from, to leave behind, or to permit — the sense in. \"Therefore shall a man leave his father and his mother, and shall cleave to his wife: and they shall be one flesh.\" (Genesis 2:24). \"...where you go, and will bring you again into this land; for I will not leave you, until I have done that which I have spoken to you of.\" (Genesis 28:15)."
+    },
+    {
+      "slug": "humble",
+      "name": "Humble",
+      "text": "Lowly in heart; also to bring low. \"...m, Thus says the LORD God of the Hebrews, How long will you refuse to humble yourself before me? let my people go, that they may serve me.\" (Exodus 10:3). \"...ich the LORD your God led you these forty years in the wilderness, to humble you, and to prove you, to know what was in your heart, whether you would keep his commandments, or no.\" (Deuteronomy 8:2)."
+    },
+    {
+      "slug": "vile",
+      "name": "Vile",
+      "text": "Of little worth; base, despicable. \"...beat him above these with many stripes, then your brother should seem vile to you.\" (Deuteronomy 25:3). \"...m, and do with them what seems good to you: but to this man do not so vile a thing.\" (Judges 19:24)."
+    },
+    {
+      "slug": "avenge",
+      "name": "Avenge",
+      "text": "To repay injury; to take vengeance for or upon. \"You shall not avenge, nor bear any grudge against the children of your people, but you shall love your neighbor as yourself: I am the LORD.\" (Leviticus 19:18). \"And I will bring a sword upon you, that shall avenge the quarrel of my covenant: and when you are gathered together within your cities, I will send the pestilence among you; and you shall be delivered into the hand of the...\" (Leviticus 26:25)."
+    },
+    {
+      "slug": "pollute",
+      "name": "Pollute",
+      "text": "To defile, to make unclean, especially what is holy. \"...of it, when you have heaved from it the best of it: neither will you pollute the holy things of the children of Israel, lest you die.\" (Numbers 18:32). \"So you shall not pollute the land in which you are: for blood it defiles the land: and the land cannot be cleansed of the blood that is shed in it, but by the blood of him who shed it.\" (Numbers 35:33)."
+    },
+    {
+      "slug": "bestow",
+      "name": "Bestow",
+      "text": "To give, to lay out, to apply. \"...LORD, even every man upon his son, and upon his brother; that he may bestow upon you a blessing this day.\" (Exodus 32:29). \"And you shall bestow that money for whatever your soul lusts after, for oxen, or for sheep, or for wine, or for strong drink, or for whatever your soul desires: and you shall eat there befor...\" (Deuteronomy 14:26)."
+    },
+    {
+      "slug": "bidden",
+      "name": "Bidden",
+      "text": "Invited: the past participle of bid. \"...because he does bless the sacrifice; and afterwards they eat that be bidden. Now therefore get you up; for about this time you shall find him.\" (1 Samuel 9:13). \"...parlor, and made them sit in the chiefest place among those who were bidden, which were about thirty persons.\" (1 Samuel 9:22)."
+    },
+    {
+      "slug": "miserable",
+      "name": "Miserable",
+      "text": "Wretched, pitiable — the older sense of one deserving compassion rather than contempt. \"I have heard many such things: miserable comforters are you all.\" (Job 16:2). \"...in you those who are captives, and love in you for ever those who are miserable.\" (Tobit 13:10)."
+    },
+    {
+      "slug": "vexation",
+      "name": "Vexation",
+      "text": "Trouble, oppression, that which grieves. \"The LORD shall send upon you cursing, vexation, and rebuke, in all that you set your hand to to do, until you be destroyed, and until you perish quickly; because of the wickedness of your doings, by which you have fo...\" (Deuteronomy 28:20). \"...the works that are done under the sun; and, behold, all is vanity and vexation of spirit.\" (Ecclesiastes 1:14)."
+    },
+    {
+      "slug": "treacherous",
+      "name": "Treacherous",
+      "text": "Faithless, deceitful; one who betrays a trust. \"A grievous vision is declared to me; the treacherous dealer deals treacherously, and the spoiler spoils. Go up, O Elam: besiege, O Media; all the sighing of it have I made to cease.\" (Isaiah 21:2). \"...o the righteous. But I said, My leanness, my leanness, woe to me! the treacherous dealers have dealt treacherously; yes, the treacherous dealers have dealt very treacherously.\" (Isaiah 24:16)."
+    },
+    {
+      "slug": "liars",
+      "name": "Liars",
+      "text": "Those who speak falsely. \"...who is the sword of your excellency! and your enemies shall be found liars to you; and you shall tread upon their high places.\" (Deuteronomy 33:29). \"And if it be not so now, who will make me a liar, and make my speech nothing worth?\" (Job 24:25)."
+    },
+    {
+      "slug": "excellency",
+      "name": "Excellency",
+      "text": "The quality of excelling; also the word of address to a governor. \"...you are my firstborn, my might, and the beginning of my strength, the excellency of dignity, and the excellency of power:\" (Genesis 49:3). \"And in the greatness of your excellency you have overthrown those who rose up against you: you sent forth your wrath, which consumed them as stubble.\" (Exodus 15:7)."
+    },
+    {
+      "slug": "overthrown",
+      "name": "Overthrown",
+      "text": "Turned over, brought down, ruined. \"And in the greatness of your excellency you have overthrown those who rose up against you: you sent forth your wrath, which consumed them as stubble.\" (Exodus 15:7). \"And Abimelech chased him, and he fled before him, and many were overthrown and wounded, even to the entering of the gate.\" (Judges 9:40)."
+    },
+    {
+      "slug": "repair",
+      "name": "Repair",
+      "text": "To mend, to restore what is broken. \"...priests take it to them, every man of his acquaintance: and let them repair the breaches of the house, wherever any breach shall be found.\" (2 Kings 12:5). \"...for Jehoiada the priest, and the other priests, and said to them, Why repair you not the breaches of the house? now therefore receive no more money of your acquaintance, but deliver it for the breaches of the house.\" (2 Kings 12:7)."
+    },
+    {
+      "slug": "repay",
+      "name": "Repay",
+      "text": "To pay back, to requite. \"..., to destroy them: he will not be slack to him who hates him, he will repay him to his face.\" (Deuteronomy 7:10). \"Who shall declare his way to his face? and who shall repay him what he has done?\" (Job 21:31)."
+    },
+    {
+      "slug": "valour",
+      "name": "Valour",
+      "text": "Strength or bravery in battle — the word the King James uses where present-day English says valour or courage. \"...but you shall pass before your brethren armed, all the mighty men of valor, and help them;\" (Joshua 1:14). \"...ven into your hand Jericho, and the king of it, and the mighty men of valor.\" (Joshua 6:2)."
+    },
+    {
+      "slug": "marvellous",
+      "name": "Marvellous",
+      "text": "Wondrous, astonishing — the spelling of the older English, as Webster writes it as marvellous. \"marvellous works which were done\" (Micah 7:15 margin) \"thy testimonies are wonderful\" (Psalm 119:129) \"marvellous things without number\" (Job 9:10)"
+    },
+    {
+      "slug": "fulfil",
+      "name": "Fulfil",
+      "text": "To accomplish, to complete, to make full — one l in the King James for Webster's two. \"That the scripture might be fulfilled\" (John 17:12) \"think not that I am come to destroy the law .. I am not come to destroy, but to fulfil\" (Matthew 5:17)"
+    },
+    {
+      "slug": "skilful",
+      "name": "Skilful",
+      "text": "Expert, practised in a craft — one l in the King James for Webster's two. \"The sons of Reuben, and the Gadites, and half the tribe of Manasseh, of valiant men, men able to bear buckler and sword, and to shoot with bow, and skillful in war.\" (1 Chronicles 5:18). \"And Chenaniah, chief of the Levites, was for song: he instructed about the song, because he was skillful.\" (1 Chronicles 15:22)."
+    },
+    {
+      "slug": "behaviour",
+      "name": "Behaviour",
+      "text": "Manner of life and conduct, not manners — the sense the word has in the King James. \"And he changed his behavior before them, and feigned himself mad in their hands, and scrabbled on the doors of the gate, and let his spittle fall down upon his beard.\" (1 Samuel 21:13). \"...you search what has been wickedly done of late through the pestilent behavior of those who are unworthily placed in authority.\" (The Rest of Esther 16:7)."
+    },
+    {
+      "slug": "innocency",
+      "name": "Innocency",
+      "text": "Innocence, freedom from guilt. \"...she herself said, He is my brother: in the integrity of my heart and innocency of my hands have I done this.\" (Genesis 20:5). \"I will wash my hands in innocency: so will I compass your altar, O LORD:\" (Psalms 26:6)."
+    },
+    {
+      "slug": "wolves",
+      "name": "Wolves",
+      "text": "Wild dogs, the image of those who devour the flock. \"Her princes in the midst of it are like wolves ravening the prey, to shed blood, and to destroy souls, to get dishonest gain.\" (Ezekiel 22:27). \"...o are swifter than the leopards, and are more fierce than the evening wolves: and their horsemen shall spread themselves, and their horsemen shall come from far; they shall fly as the eagle that hastes to eat.\" (Habakkuk 1:8)."
+    },
+    {
+      "slug": "kin",
+      "name": "Kin",
+      "text": "Kindred, relatives; one's own family. \"the man is near of kin unto us\" (Ruth 2:20) \"the near kinsman\" (Ruth 3:12)"
+    },
+    {
+      "slug": "kinsmen",
+      "name": "Kinsmen",
+      "text": "Relatives. \"...And Naomi said to her, The man is near of kin to us, one of our next kinsmen.\" (Ruth 2:20). \"My lovers and my friends stand aloof from my sore; and my kinsmen stand afar off.\" (Psalms 38:11)."
+    },
+    {
+      "slug": "countrymen",
+      "name": "Countrymen",
+      "text": "Those of one's own country or nation. \"He went to the king, not to be an accuser of his countrymen, but seeking the good of all, both public and private:\" (2 Maccabees 4:5). \"...appy day for him; but thinking they had been his enemies, and not his countrymen, whom he conquered.\" (2 Maccabees 5:6)."
+    },
+    {
+      "slug": "bondmen",
+      "name": "Bondmen",
+      "text": "Servants bound for life, slaves — the word the King James uses where present-day English says slaves. \"...at he may seek occasion against us, and fall upon us, and take us for bondmen, and our asses.\" (Genesis 43:18). \"...servants it be found, both let him die, and we also will be my lord's bondmen.\" (Genesis 44:9)."
+    },
+    {
+      "slug": "herdmen",
+      "name": "Herdmen",
+      "text": "Those who tend cattle. \"And there was a strife between the herdmen of Abram's cattle and the herdmen of Lot's cattle: and the Canaanite and the Perizzite dwelled then in the land.\" (Genesis 13:7). \"...et there be no strife, I pray you, between me and you, and between my herdmen and your herdmen; for we be brethren.\" (Genesis 13:8)."
+    },
+    {
+      "slug": "workmen",
+      "name": "Workmen",
+      "text": "Those who do the work, especially on the house of God. \"She put her hand to the nail, and her right hand to the workmen's hammer; and with the hammer she struck Sisera, she struck off his head, when she had pierced and stricken through his temples.\" (Judges 5:26). \"But they gave that to the workmen, and repaired with it the house of the LORD.\" (2 Kings 12:14)."
+    },
+    {
+      "slug": "watchmen",
+      "name": "Watchmen",
+      "text": "Those set to keep watch, on the city wall or through the night. \"And the watchmen of Saul in Gibeah of Benjamin looked; and, behold, the multitude melted away, and they went on beating down one another.\" (1 Samuel 14:16). \"...hey built them high places in all their cities, from the tower of the watchmen to the fenced city.\" (2 Kings 17:9)."
+    },
+    {
+      "slug": "craftsmen",
+      "name": "Craftsmen",
+      "text": "Those who work in a trade. \"...all the mighty men of valor, even ten thousand captives, and all the craftsmen and smiths: none remained, save the poorest sort of the people of the land.\" (2 Kings 24:14). \"And all the men of might, even seven thousand, and craftsmen and smiths a thousand, all that were strong and apt for war, even them the king of Babylon brought captive to Babylon.\" (2 Kings 24:16)."
+    },
+    {
+      "slug": "midwives",
+      "name": "Midwives",
+      "text": "Those who attend a birth. \"And the king of Egypt spoke to the Hebrew midwives, of which the name of the one was Shiphrah, and the name of the other Puah:\" (Exodus 1:15). \"But the midwives feared God, and did not as the king of Egypt commanded them, but saved the men children alive.\" (Exodus 1:17)."
+    },
+    {
+      "slug": "childless",
+      "name": "Childless",
+      "text": "Without children. \"And Abram said, LORD God, what will you give me, seeing I go childless, and the steward of my house is this Eliezer of Damascus?\" (Genesis 15:2). \"...ered his uncle's nakedness: they shall bear their sin; they shall die childless.\" (Leviticus 20:20)."
+    },
+    {
+      "slug": "byword",
+      "name": "Byword",
+      "text": "A saying, a proverb; one whose name is used as a taunt. \"And you shall become an astonishment, a proverb, and a byword, among all nations where the LORD shall lead you.\" (Deuteronomy 28:37). \"...ame, will I cast out of my sight; and Israel shall be a proverb and a byword among all people:\" (1 Kings 9:7)."
+    },
+    {
+      "slug": "fewer",
+      "name": "Fewer",
+      "text": "A smaller number. \"...lies: and to the more you shall give the more inheritance, and to the fewer you shall give the less inheritance: every man's inheritance shall be in the place where his lot falls; according to the tribes of your fathers you shall inherit.\" (Numbers 33:54). \"...thousand, of which forty thousand were slain in the conflict; and no fewer sold than slain.\" (2 Maccabees 5:14)."
+    },
+    {
+      "slug": "sooner",
+      "name": "Sooner",
+      "text": "Earlier rather than later. \"...e to know so much, that they could aim at the world; how did they not sooner find out the Lord of it?\" (Wisdom of Solomon 13:9). \"This was no sooner spoken of him, but others of the king’s friends, being maliciously set against Judas, did more incense Demetrius.\" (2 Maccabees 14:11)."
+    },
+    {
+      "slug": "sweeter",
+      "name": "Sweeter",
+      "text": "More sweet. \"...city said to him on the seventh day before the sun went down, What is sweeter than honey? And what is stronger than a lion? and he said to them, If you had not plowed with my heifer, you had not found out my riddle.\" (Judges 14:18). \"More to be desired are they than gold, yes, than much fine gold: sweeter also than honey and the honeycomb.\" (Psalms 19:10)."
+    },
+    {
+      "slug": "knives",
+      "name": "Knives",
+      "text": "Cutting blades. \"At that time the LORD said to Joshua, Make you sharp knives, and circumcise again the children of Israel the second time.\" (Joshua 5:2). \"And Joshua made him sharp knives, and circumcised the children of Israel at the hill of the foreskins.\" (Joshua 5:3)."
+    },
+    {
+      "slug": "travelled",
+      "name": "Travelled",
+      "text": "Journeyed; worn with travel, in the doubled spelling of the older English. \"A man that has traveled knows many things; and he who has much experience will declare wisdom.\" (Sirach 34:9). \"Judas Maccabeus also and his brother Jonathan went over Jordan, and traveled three days' journey in the wilderness.\" (1 Maccabees 5:24)."
+    },
+    {
+      "slug": "travel",
+      "name": "Travel",
+      "text": "To journey; also the labour of a journey, the sense from which. \"Travel not by the way with a bold fellow, lest he become grievous to you: for he will do according to his own will, and you shall perish with him through his folly.\" (Sirach 8:15). \"He shall serve among great men, and appear before princes: he will travel through strange countries; for he has tried the good and the evil among men.\" (Sirach 39:4)."
+    },
+    {
+      "slug": "woven",
+      "name": "Woven",
+      "text": "Made of interlaced threads. \"...hole in the top of it, in the midst of it: it shall have a binding of woven work round about the hole of it, as it were the hole of an habergeon, that it be not rent.\" (Exodus 28:32). \"And he made the robe of the ephod of woven work, all of blue.\" (Exodus 39:22)."
+    },
+    {
+      "slug": "woollen",
+      "name": "Woollen",
+      "text": "Wrought of wool — doubled l, as the older spelling. \"Thou shalt not wear a garment of divers sorts, as of woollen and linen together\" (Deuteronomy 22:11) \"though ye have lien among the pots, yet shall ye be as the wings of a dove\" (Psalm 68:13)"
+    },
+    {
+      "slug": "rigour",
+      "name": "Rigour",
+      "text": "Severity, harshness. \"And the Egyptians made the children of Israel to serve with rigor:\" (Exodus 1:13). \"...the field: all their service, in which they made them serve, was with rigor.\" (Exodus 1:14)."
+    },
+    {
+      "slug": "favourable",
+      "name": "Favourable",
+      "text": "Kindly disposed, showing favour. \"...r their brethren come to us to complain, that we will say to them, Be favorable to them for our sakes: because we reserved not to each man his wife in the war: for you did not give to them at this time, that you should be guilty.\" (Judges 21:22). \"He shall pray to God, and he will be favorable to him: and he shall see his face with joy: for he will render to man his righteousness.\" (Job 33:26)."
+    },
+    {
+      "slug": "forbidden",
+      "name": "Forbidden",
+      "text": "Not allowed; forbidden by God or by man. \"And if a soul sin, and commit any of these things which are forbidden to be done by the commandments of the LORD; though he wist it not, yet is he guilty, and shall bear his iniquity.\" (Leviticus 5:17). \"...aven image, or the likeness of any thing, which the LORD your God has forbidden you.\" (Deuteronomy 4:23)."
+    },
+    {
+      "slug": "invisible",
+      "name": "Invisible",
+      "text": "Not to be seen; without a body to be seen. \"...he Lord Almighty, the God of Israel, struck him with an incurable and invisible plague: or as soon as he had spoken these words, a pain of the bowels that was remediless came upon him, and sore torments of the inner parts;\" (2 Maccabees 9:5). \"For the invisible things of him from the creation of the world are clearly seen, being understood by the things that are made, even his eternal power and Godhead; so that they are without...\" (Romans 1:20)."
+    },
+    {
+      "slug": "licence",
+      "name": "Licence",
+      "text": "Permission, leave given — licence is the King James' spelling of license. \"He has commanded no man to do wickedly, neither has he given any man license to sin.\" (Sirach 15:20). \"Beside this, he promised to assign an hundred and fifty more, if he might have license to set him up a place for exercise.\" (2 Maccabees 4:9)."
+    },
+    {
+      "slug": "hundredfold",
+      "name": "Hundredfold",
+      "text": "A hundred times as much. \"Then Isaac sowed in that land, and received in the same year an hundredfold: and the LORD blessed him.\" (Genesis 26:12). \"...Now the LORD your God add to the people, how many soever they be, an hundredfold, and that the eyes of my lord the king may see it: but why does my lord the king delight in this thing?\" (2 Samuel 24:3)."
+    },
+    {
+      "slug": "humbleth",
+      "name": "Humbleth",
+      "text": "Humbles: the older third person, which the King James uses throughout. \"he that humbleth himself shall be exalted\" (Luke 18:14) \"God resisteth the proud, but giveth grace to the humble\" (1 Peter 5:5)"
+    },
+    {
+      "slug": "leaveth",
+      "name": "Leaveth",
+      "text": "Leaves: the older third person. \"he that leaveth his way shall be punished\" (Proverbs 15:10 margin) \"a man shall leave his father and his mother, and shall cleave unto his wife\" (Genesis 2:24)"
+    },
+    {
+      "slug": "yourselves",
+      "name": "Yourselves",
+      "text": "The plural of yourself, used by the King James where the same words are said to several. \"...a little water, I pray you, be fetched, and wash your feet, and rest yourselves under the tree:\" (Genesis 18:4). \"Now therefore be not grieved, nor angry with yourselves, that you sold me here: for God sent me before you to preserve life.\" (Genesis 45:5)."
+    },
+    {
+      "slug": "threshingfloor",
+      "name": "Threshingfloor",
+      "text": "The hard, level place where grain is beaten out — written as one word in the King James where Webster keeps the parts apart. \"And they came to the threshingfloor of Atad, which is beyond Jordan, and there they mourned with a great and very sore lamentation: and he made a mourning for his father seven days.\" (Genesis 50:10). \"...your dough for an heave offering: as you do the heave offering of the threshingfloor, so will you heave it.\" (Numbers 15:20)."
+    },
+    {
+      "slug": "housetop",
+      "name": "Housetop",
+      "text": "The flat roof of a house, where much of the day was spent, and from which a thing done openly was done. \"It is better to dwell in a corner of the housetop, than with a brawling woman in a wide house.\" (Proverbs 21:9). \"It is better to dwell in the corner of the housetop, than with a brawling woman and in a wide house.\" (Proverbs 25:24)."
+    },
+    {
+      "slug": "forasmuch",
+      "name": "Forasmuch",
+      "text": "Since, because, seeing that — one word in the King James. \"Forasmuch therefore as your treading is upon the poor, and you take from him burdens of wheat: you have built houses of hewn stone, but you shall not dwell in them; you have plant...\" (Amos 5:11). \"Forasmuch then as God gave them the like gift as he did to us, who believed on the Lord Jesus Christ; what was I, that I could withstand God?\" (Acts 11:17)."
+    },
+    {
+      "slug": "inasmuch",
+      "name": "Inasmuch",
+      "text": "Since, in that. \"...se the way is long, and slay him; whereas he was not worthy of death, inasmuch as he hated him not in time past.\" (Deuteronomy 19:6). \"...ou have showed more kindness in the latter end than at the beginning, inasmuch as you followed not young men, whether poor or rich.\" (Ruth 3:10)."
+    },
+    {
+      "slug": "bason",
+      "name": "Bason",
+      "text": "A shallow bowl or basin, used at the altar and in the temple. \"...shall take a bunch of hyssop, and dip it in the blood that is in the bason, and strike the lintel and the two side posts with the blood that is in the bason; and none of you shall go out at the door of his house until the morning.\" (Exodus 12:22). \"...the cups: and for the golden basons he gave gold by weight for every bason; and likewise silver by weight for every bason of silver:\" (1 Chronicles 28:17)."
+    },
+    {
+      "slug": "plaister",
+      "name": "Plaister",
+      "text": "A dressing of plaster, or the plaster itself — the older spelling of plaster. \"...the place of those stones; and he shall take other morter, and shall plaister the house.\" (Leviticus 14:42). \"...LORD your God gives you, that you shall set you up great stones, and plaister them with plaister:\" (Deuteronomy 27:2)."
+    },
+    {
+      "slug": "sycomore",
+      "name": "Sycomore",
+      "text": "The fig-mulberry of the land of Israel, not the sycamore of the English hedgerow — one o in the older spelling. \"...silver to be in Jerusalem as stones, and cedars made he to be as the sycomore trees that are in the vale, for abundance.\" (1 Kings 10:27). \"And over the olive trees and the sycomore trees that were in the low plains was Baalhanan the Gederite: and over the cellars of oil was Joash:\" (1 Chronicles 27:28)."
+    },
+    {
+      "slug": "publick",
+      "name": "Publick",
+      "text": "Public; the spelling of the older English, which the King James keeps. \"They shall not be sought for in public counsel, nor sit high in the congregation.\" (Sirach 38:33). \"It pleased the people to entertain the men honorably, and to put the copy of their ambassage in public records.\" (1 Maccabees 14:23)."
+    },
+    {
+      "slug": "ringstraked",
+      "name": "Ringstraked",
+      "text": "Marked with rings or bands of colour, as Jacob's cattle. \"And he removed that day the he goats that were ringstraked and spotted, and all the she goats that were speckled and spotted, and every one that had some white in it, and all the brown among the sheep, and gave them into the han...\" (Genesis 30:35). \"And the flocks conceived before the rods, and brought forth cattle ringstraked, speckled, and spotted.\" (Genesis 30:39)."
+    },
+    {
+      "slug": "wreathen",
+      "name": "Wreathen",
+      "text": "Twisted, plaited — of chains and cords. \"And two chains of pure gold at the ends; of wreathen work will you make them, and fasten the wreathen chains to the ouches.\" (Exodus 28:14). \"And you shall make upon the breastplate chains at the ends of wreathen work of pure gold.\" (Exodus 28:22)."
+    },
+    {
+      "slug": "grisled",
+      "name": "Grisled",
+      "text": "Speckled, sprinkled with grey, of Jacob's flock. \"...the rams which leaped upon the cattle were ringstraked, speckled, and grisled.\" (Genesis 31:10). \"...ll the rams which leap upon the cattle are ringstraked, speckled, and grisled: for I have seen all that Laban does to you.\" (Genesis 31:12)."
+    },
+    {
+      "slug": "habbacuc",
+      "name": "Habbacuc",
+      "text": "The prophet Habakkuk, named with the Greek spelling in the Apocrypha. \"Now there was in Jewry a prophet, called Habbacuc, who had made pottage, and had broken bread in a bowl, and was going into the field, for to bring it to the reapers.\" (Bel and the Dragon 1:33). \"But the angel of the Lord said to Habbacuc, Go, carry the dinner that you have into Babylon to Daniel, who is in the lions’ den.\" (Bel and the Dragon 1:34)."
+    },
+    {
+      "slug": "gomorrha",
+      "name": "Gomorrha",
+      "text": "Gomorrah: one of the two cities of the plain, laid in ashes. \"...ghteous in you! O you wicked people, remember what I did to Sodom and Gomorrha;\" (2 Esdras 2:8). \"...ly I say to you, It shall be more tolerable for the land of Sodom and Gomorrha in the day of judgment, than for that city.\" (Matthew 10:15)."
+    },
+    {
+      "slug": "achior",
+      "name": "Achior",
+      "text": "The Ammonite captain who told Holofernes the true story of Israel's God: the leader of the sons of Ammon, whose speech before the siege of Bethulia. \"Then said Achior, the captain of all the sons of Ammon, Let my lord now hear a word from the mouth of your servant, and I will declare to you the truth concerning this people, which dwel...\" (Judith 5:5). \"And when Achior had finished these sayings, all the people standing round about the tent murmured, and the chief men of Holofernes, and all that dwelt by the sea side, and in Moab, spok...\" (Judith 5:22)."
+    },
+    {
+      "slug": "tobias",
+      "name": "Tobias",
+      "text": "The Greek form of the name Tobiah, and the name of two men in the book of Tobit: Tobit's son Tobias, who is sent with the angel Raphael to Media and returns with the cure for his father's eyes. \"...age of a man, I married Anna of my own kindred, and of her I fathered Tobias.\" (Tobit 1:9). \"..., neither was there any thing left me, beside my wife Anna and my son Tobias.\" (Tobit 1:20)."
+    },
+    {
+      "slug": "maccabeus",
+      "name": "Maccabeus",
+      "text": "The surname of Judas, the leader of the revolt against Antiochus Epiphanes. \"Judas, who was called Maccabeus:\" (1 Maccabees 2:4). \"As for Judas Maccabeus, he has been mighty and strong, even from his youth up: let him be your captain, and fight the battle of the people.\" (1 Maccabees 2:66)."
+    },
+    {
+      "slug": "bacchides",
+      "name": "Bacchides",
+      "text": "The Seleucid general sent by Demetrius against Judas Maccabeus, who slew Judas in battle and afterwards governed the province. \"Then the king chose Bacchides, a friend of the king, who ruled beyond the flood, and was a great man in the kingdom, and faithful to the king,\" (1 Maccabees 7:8). \"Then did there assemble to Alcimus and Bacchides a company of scribes, to require justice.\" (1 Maccabees 7:12)."
+    },
+    {
+      "slug": "bethulia",
+      "name": "Bethulia",
+      "text": "The city in the hill country that Holofernes besieged and Judith delivered; the place where the whole story of the book of Judith takes place. \"...st, which was in those days in Jerusalem, wrote to those who dwelt in Bethulia, and Betomestham, which is over against Esdraelon toward the open country, near to Dothaim,\" (Judith 4:6). \"...s servants, that waited in his tent, to take Achior, and bring him to Bethulia, and deliver him into the hands of the children of Israel.\" (Judith 6:10)."
+    },
+    {
+      "slug": "nineve",
+      "name": "Nineve",
+      "text": "Nineveh: the capital of Assyria, called to repentance by Jonah. \"...did many almsdeeds to my brethren, and my nation, who came with me to Nineve, into the land of the Assyrians.\" (Tobit 1:3). \"And when we were carried away captives to Nineve, all my brethren and those who were of my kindred ate of the bread of the Gentiles.\" (Tobit 1:10)."
+    },
+    {
+      "slug": "sarea",
+      "name": "Sarea",
+      "text": "Seraiah: ancestor of Ezra, whose name the King James prints as Sarea in the book of 1 Esdras. \"But look you prepare you many box trees, and take with you Sarea, Dabria, Selemia, Ecanus, and Asiel, these five which are ready to write swiftly;\" (2 Esdras 14:24)."
+    },
+    {
+      "slug": "ptolemee",
+      "name": "Ptolemee",
+      "text": "Ptolemy, of the Greek dynasty of Egypt: a name the King James prints with the Greek ending in the books of the Maccabees. Several kings and at least one governor bear it. \"And made war against Ptolemee king of Egypt: but Ptolemee was afraid of him, and fled; and many were wounded to death.\" (1 Maccabees 1:18). \"Then Lysias chose Ptolemee the son of Dorymenes, Nicanor, and Gorgias, mighty men of the king’s friends:\" (1 Maccabees 3:38)."
+    },
+    {
+      "slug": "menelaus",
+      "name": "Menelaus",
+      "text": "The high priest who bought the office from Antiochus Epiphanes and led the Greek party in Jerusalem, robbing the temple and oppressing his own people. \"Three years afterward Jason sent Menelaus, the aforesaid Simon’s brother, to bear the money to the king, and to put him in mind of certain needed matters.\" (2 Maccabees 4:23). \"So Menelaus got the principality: but as for the money that he had promised to the king, he took no good order for it, albeit Sostratis the ruler of the castle required it:\" (2 Maccabees 4:27)."
+    },
+    {
+      "slug": "bethsura",
+      "name": "Bethsura",
+      "text": "Beth-zur: the fortress town south of Jerusalem at the edge of the hill country, where Judas Maccabeus fought the battle of Beth-zur. \"So they came into Idumea, and pitched their tents at Bethsura, and Judas met them with ten thousand men.\" (1 Maccabees 4:29). \"And they set there a garrison to keep it, and fortified Bethsura to preserve it; that the people might have a defense against Idumea.\" (1 Maccabees 4:61)."
+    },
+    {
+      "slug": "artexerxes",
+      "name": "Artexerxes",
+      "text": "Artaxerxes, king of Persia: named with the Greek spelling in the books of 1 Esdras, where he is the king who permits the return and the rebuilding. \"In the second year of the reign of Artexerxes the great, in the first day of the month Nisan, Mardocheus the son of Jairus, the son of Semei, the son of Cisai, of the tribe of Benjamin, had a dream;\" (The Rest of Esther 11:2). \"...ut their purposes, and learned that they were about to lay hands upon Artexerxes the king; and so he certified the king of them.\" (The Rest of Esther 12:2)."
+    },
+    {
+      "slug": "joacim",
+      "name": "Joacim",
+      "text": "Jehoiakim, king of Judah, whose Greek name the King James prints as Joacim in 1 Esdras. \"Also Joacim the high priest, which was in those days in Jerusalem, wrote to those who dwelt in Bethulia, and Betomestham, which is over against Esdraelon toward the open country, ne...\" (Judith 4:6). \"And the children of Israel did as Joacim the high priest had commanded them, with the ancients of all the people of Israel, which dwelt at Jerusalem.\" (Judith 4:8)."
+    },
+    {
+      "slug": "alcimus",
+      "name": "Alcimus",
+      "text": "The high priest appointed by Demetrius, of the party of the Greeks, who troubled Judah and the men who had returned to the law; his death is told in 1 Maccabees 9:54-56. \"There came to him all the wicked and ungodly men of Israel, having Alcimus, who was desirous to be high priest, for their captain:\" (1 Maccabees 7:5). \"And him he sent with that wicked Alcimus, whom he made high priest, and commanded that he should take vengeance of the children of Israel.\" (1 Maccabees 7:9)."
+    },
+    {
+      "slug": "azarias",
+      "name": "Azarias",
+      "text": "Azariah: a name the King James prints with the Greek ending in the Apocrypha, borne by several men — the angel Raphael calls himself by it. \"Then he said, I am Azarias, the son of Ananias the great, and of your brethren.\" (Tobit 5:12). \"Then the young man said to the angel, Brother Azarias, to what use is the heart and the liver and the gal of the fish?\" (Tobit 6:6)."
+    },
+    {
+      "slug": "heliodorus",
+      "name": "Heliodorus",
+      "text": "The officer of Seleucus who was sent to rob the temple at Jerusalem and was stopped by the vision of two young men, as the second book of Maccabees tells. \"...had showed him of the money of which he was told, the king chose out Heliodorus his treasurer, and sent him with a commandment to bring him the foresaid money.\" (2 Maccabees 3:7). \"So at once Heliodorus took his journey; under a color of visiting the cities of Celosyria and Phenice, but indeed to fulfill the king’s purpose.\" (2 Maccabees 3:8)."
+    },
+    {
+      "slug": "gorgias",
+      "name": "Gorgias",
+      "text": "The Syrian general who governed the country and campaigned against Judas Maccabeus: defeated at Emmaus. \"Then Lysias chose Ptolemee the son of Dorymenes, Nicanor, and Gorgias, mighty men of the king’s friends:\" (1 Maccabees 3:38). \"Then took Gorgias five thousand footmen, and a thousand of the best horsemen, and removed out of the camp by night;\" (1 Maccabees 4:1)."
+    },
+    {
+      "slug": "gazera",
+      "name": "Gazera",
+      "text": "Gezer: the town ceded by the Seleucids and fortified by Simon Maccabeus, who made it his capital's citadel. \"...hindmost of them were slain with the sword: for they pursued them to Gazera, and to the plains of Idumea, and Azotus, and Jamnia, so that there were slain of them upon a three thousand men.\" (1 Maccabees 4:15). \"Then they pursued after them a day’s journey, from Adasa to Gazera, sounding an alarm after them with their trumpets.\" (1 Maccabees 7:45)."
+    },
+    {
+      "slug": "mardocheus",
+      "name": "Mardocheus",
+      "text": "Mordecai: the name of Esther's cousin in the Greek text of Esther, which the King James prints as Mardocheus. \"Then Mardocheus said, God has done these things.\" (The Rest of Esther 10:4). \"...e reign of Artexerxes the great, in the first day of the month Nisan, Mardocheus the son of Jairus, the son of Semei, the son of Cisai, of the tribe of Benjamin, had a dream;\" (The Rest of Esther 11:2)."
+    },
+    {
+      "slug": "phinees",
+      "name": "Phinees",
+      "text": "Phinehas: the grandson of Aaron, whose zeal at Shittim stopped the plague. \"The third in glory is Phinees the son of Eleazar, because he had zeal in the fear of the Lord, and stood up with good courage of heart: when the people were turned back, and made reconciliation for I...\" (Sirach 45:23). \"Thus dealt he zealously for the law of God like as Phinees did to Zambri the son of Salom.\" (1 Maccabees 2:26)."
+    },
+    {
+      "slug": "ecbatane",
+      "name": "Ecbatane",
+      "text": "Ecbatana: the Median city where the deeds of the kings were written and where Tobit sent his son for the money. \"It happened the same day, that in Ecbatane a city of Media Sara the daughter of Raguel was also reproached by her father’s maids;\" (Tobit 3:7). \"...they ate it: then they both went on their way, till they drew near to Ecbatane.\" (Tobit 6:5)."
+    },
+    {
+      "slug": "gabael",
+      "name": "Gabael",
+      "text": "The kinsman in Media with whom Tobit left ten talents of silver, and to whom Tobias is sent to fetch them. \"...obit, son of Tobiel, the son of Ananiel, the son of Aduel, the son of Gabael, of the seed of Asael, of the tribe of Nephthali;\" (Tobit 1:1). \"And I went into Media, and left in trust with Gabael, the brother of Gabrias, at Rages a city of Media ten talents of silver.\" (Tobit 1:14)."
+    },
+    {
+      "slug": "achiacharus",
+      "name": "Achiacharus",
+      "text": "Ahikar, Tobit's nephew, the keeper of the king's seal and Tobit's friend at Nineveh, whose wisdom was a byword. \"...; who appointed over his father’s accounts, and over all his affairs, Achiacharus my brother Anael’s son.\" (Tobit 1:21). \"And Achiacharus intreating for me, I returned to Nineve. Now Achiacharus was cupbearer, and keeper of the signet, and steward, and overseer of the accounts: and Sarchedonus appointed hi...\" (Tobit 1:22)."
+    },
+    {
+      "slug": "edna",
+      "name": "Edna",
+      "text": "The wife of Raguel and mother of Sarah, in the book of Tobit. \"Then said Raguel to Edna his wife, How like is this young man to Tobit my cousin!\" (Tobit 7:2). \"And likewise Edna his wife and Sara his daughter wept. Moreover they entertained them cheerfully; and after that they had killed a ram of the flock, they set store of meat on the table. T...\" (Tobit 7:8)."
+    },
+    {
+      "slug": "casleu",
+      "name": "Casleu",
+      "text": "Kislev: the ninth month of the Hebrew year. \"Now the fifteenth day of the month Casleu, in the hundred forty and fifth year, they set up the abomination of desolation upon the altar, and builded idol altars throughout the cities of Juda on every side;\" (1 Maccabees 1:54). \"...five and twentieth day of the ninth month, which is called the month Casleu, in the hundred forty and eighth year, they rose up betimes in the morning,\" (1 Maccabees 4:52)."
+    },
+    {
+      "slug": "epiphanes",
+      "name": "Epiphanes",
+      "text": "Antiochus IV, called Epiphanes, the Seleucid king who desecrated the temple, set up the abomination of desolation and began the persecution the Maccabees resisted. \"And there came out of them a wicked root Antiochus surnamed Epiphanes, son of Antiochus the king, who had been an hostage at Rome, and he reigned in the hundred and thirty and seventh year of the kingdom of the Greeks.\" (1 Maccabees 1:10). \"...he hundred and sixtieth year Alexander, the son of Antiochus surnamed Epiphanes, went up and took Ptolemais: for the people had received him, by means of which he reigned there,\" (1 Maccabees 10:1)."
+    },
+    {
+      "slug": "eupator",
+      "name": "Eupator",
+      "text": "Antiochus V, called Eupator, the child king who besieged Jerusalem and made peace with the Maccabees. \"...brought up being young, to reign in his stead, and his name he called Eupator.\" (1 Maccabees 6:17). \"And the wars against Antiochus Epiphanes, and Eupator his son,\" (2 Maccabees 2:20)."
+    },
+    {
+      "slug": "chelcias",
+      "name": "Chelcias",
+      "text": "Hilkiah: the name of several men in the Apocrypha, printed with the Greek ending — the high priest of Josiah's reign, who found the book of the law in the temple. \"...e son of Maasias, the son of Sedecias, the son of Asadias, the son of Chelcias, wrote in Babylon,\" (Baruch 1:1). \"And they sent it to Jerusalem to Joachim the high priest, the son of Chelcias, son of Salom, and to the priests, and to all the people which were found with him at Jerusalem,\" (Baruch 1:7)."
+    },
+    {
+      "slug": "lacedemonians",
+      "name": "Lacedemonians",
+      "text": "Spartans: the Greeks of Lacedemon, with whom the Maccabees made an alliance. \"He sent letters also to the Lacedemonians, and to other places, for the same purpose.\" (1 Maccabees 12:2). \"And this is the copy of the letters which Jonathan wrote to the Lacedemonians:\" (1 Maccabees 12:5)."
+    },
+    {
+      "slug": "assyrians",
+      "name": "Assyrians",
+      "text": "The people of Assyria, whose empire destroyed the northern kingdom and besieged Jerusalem in the days of Hezekiah. \"...t, that the angel of the LORD went out, and struck in the camp of the Assyrians an hundred fourscore and five thousand: and when they arose early in the morning, behold, they were all dead corpses.\" (2 Kings 19:35). \"O Assyrian, the rod of my anger, and the staff in their hand is my indignation.\" (Isaiah 10:5)."
+    },
+    {
+      "slug": "housetops",
+      "name": "Housetops",
+      "text": "The flat roofs of the houses, where a thing said in secret would be heard by all. \"Let them be as the grass upon the housetops, which withers before it grows up:\" (Psalms 129:6). \"It is better to dwell in a corner of the housetop, than with a brawling woman in a wide house.\" (Proverbs 21:9)."
+    },
+    {
+      "slug": "innumerable",
+      "name": "Innumerable",
+      "text": "Too many to be counted. \"...all be sweet to him, and every man shall draw after him, as there are innumerable before him.\" (Job 21:33). \"For innumerable evils have compassed me about: my iniquities have taken hold upon me, so that I am not able to look up; they are more than the hairs of my head: therefore my heart fails...\" (Psalms 40:12)."
+    },
+    {
+      "slug": "hasten",
+      "name": "Hasten",
+      "text": "To make haste, to hurry — and, of God, to bring a thing quickly to pass. \"Then the king of Israel called an officer, and said, Hasten here Micaiah the son of Imlah.\" (1 Kings 22:9). \"...y to repair the house of your God from year to year, and see that you hasten the matter. Howbeit the Levites hastened it not.\" (2 Chronicles 24:5)."
+    },
+    {
+      "slug": "meddle",
+      "name": "Meddle",
+      "text": "To interfere, to take part in what is not one's own. \"Meddle not with them; for I will not give you of their land, no, not so much as a foot breadth; because I have given mount Seir to Esau for a possession.\" (Deuteronomy 2:5). \"...come near over against the children of Ammon, distress them not, nor meddle with them: for I will not give you of the land of the children of Ammon any possession; because I have given it to the children of Lot for a possession.\" (Deuteronomy 2:19)."
+    },
+    {
+      "slug": "befallen",
+      "name": "Befallen",
+      "text": "Happened to, come upon. \"...fering and their burnt offering before the LORD; and such things have befallen me: and if I had eaten the sin offering to day, should it have been accepted in the sight of the LORD?\" (Leviticus 10:19). \"...dom, Thus says your brother Israel, You know all the travail that has befallen us:\" (Numbers 20:14)."
+    },
+    {
+      "slug": "defenced",
+      "name": "Defenced",
+      "text": "Fortified — the older form of the word, which the King James uses for the walled cities of Judah. \"For you have made of a city an heap; of a defenced city a ruin: a palace of strangers to be no city; it shall never be built.\" (Isaiah 25:2). \"Yet the defenced city shall be desolate, and the habitation forsaken, and left like a wilderness: there shall the calf feed, and there shall he lie down, and consume the branches of it.\" (Isaiah 27:10)."
+    },
+    {
+      "slug": "register",
+      "name": "Register",
+      "text": "A written record, a genealogy kept by the priests and Levites. \"These sought their register among those who were reckoned by genealogy, but they were not found: therefore were they, as polluted, put from the priesthood.\" (Ezra 2:62). \"...d the people, that they might be reckoned by genealogy. And I found a register of the genealogy of them which came up at the first, and found written in it,\" (Nehemiah 7:5)."
+    },
+    {
+      "slug": "upside",
+      "name": "Upside",
+      "text": "Upside down: turned over. \"...will wipe Jerusalem as a man wipes a dish, wiping it, and turning it upside down.\" (2 Kings 21:13). \"...relieves the fatherless and widow: but the way of the wicked he turns upside down.\" (Psalms 146:9)."
+    },
+    {
+      "slug": "savoury",
+      "name": "Savoury",
+      "text": "Tasting well, pleasing in flavour — the food Isaac asked for. \"And make me savory meat, such as I love, and bring it to me, that I may eat; that my soul may bless you before I die.\" (Genesis 27:4). \"Bring me venison, and make me savory meat, that I may eat, and bless you before the LORD before my death.\" (Genesis 27:7)."
+    },
+    {
+      "slug": "caterpiller",
+      "name": "Caterpiller",
+      "text": "The locust in its second stage, one of the four John the prophet Joel names — spelled with two l's in the King James. \"...ine, if there be pestilence, blasting, mildew, locust, or if there be caterpiller; if their enemy besiege them in the land of their cities; whatever plague, whatever sickness there be;\" (1 Kings 8:37). \"He gave also their increase to the caterpiller, and their labor to the locust.\" (Psalms 78:46)."
+    },
+    {
+      "slug": "passengers",
+      "name": "Passengers",
+      "text": "Those passing along a road, travellers. \"To call passengers who go right on their ways:\" (Proverbs 9:15). \"...will give to Gog a place there of graves in Israel, the valley of the passengers on the east of the sea: and it shall stop the noses of the passengers: and there shall they bury Gog and all his multitude: and they shall call it The valley of Hamongog...\" (Ezekiel 39:11)."
+    },
+    {
+      "slug": "overtaken",
+      "name": "Overtaken",
+      "text": "Caught, come upon, taken by surprise — or found out. \"I have pursued my enemies, and overtaken them: neither did I turn again till they were consumed.\" (Psalms 18:37). \"...of his purpose, even death is now fallen upon them, and their sin has overtaken them, with which they will provoke their God to anger whensoever they shall do that which is not fit to be done:\" (Judith 11:11)."
+    },
+    {
+      "slug": "comfortably",
+      "name": "Comfortably",
+      "text": "In a way that gives comfort; kindly, tenderly. \"Now therefore arise, go forth, and speak comfortably to your servants: for I swear by the LORD, if you go not forth, there will not tarry one with you this night: and that will be worse to you than all the evil that befell...\" (2 Samuel 19:7). \"And Hezekiah spoke comfortably to all the Levites that taught the good knowledge of the LORD: and they ate throughout the feast seven days, offering peace offerings, and making confession to the LORD...\" (2 Chronicles 30:22)."
+    },
+    {
+      "slug": "mist",
+      "name": "Mist",
+      "text": "A fine vapour, rising from the ground or falling as darkness. \"But there went up a mist from the earth, and watered the whole face of the ground.\" (Genesis 2:6). \"...shall pass away as the trace of a cloud, and shall be dispersed as a mist, that is driven away with the beams of the sun, and overcome with the heat of it.\" (Wisdom of Solomon 2:4)."
+    },
+    {
+      "slug": "beth-lehem-judah",
+      "name": "Beth-lehem-judah",
+      "text": "Bethlehem of Judah, the town of David, so called to tell it apart from the Bethlehem in Zebulun. \"And there was a young man out of Bethlehemjudah of the family of Judah, who was a Levite, and he sojourned there.\" (Judges 17:7). \"And the man departed out of the city from Bethlehemjudah to sojourn where he could find a place: and he came to mount Ephraim to the house of Micah, as he journeyed.\" (Judges 17:8)."
+    },
+    {
+      "slug": "neemias",
+      "name": "Neemias",
+      "text": "Nehemiah, given with the Greek name in the Apocrypha: the governor who rebuilt the walls of Jerusalem, whose prayer and work are the book of Nehemiah, and who is remembered in Sirach's praise of famous men. \"And among the elect was Neemias, whose renown is great, who raised up for us the walls that were fallen, and set up the gates and the bars, and raised up our ruins again.\" (Sirach 49:13). \"...he feast of the tabernacles, and of the fire, which was given us when Neemias offered sacrifice, after that he had builded the temple and the altar.\" (2 Maccabees 1:18)."
+    },
+    {
+      "slug": "ptolemeus",
+      "name": "Ptolemeus",
+      "text": "Ptolemy: the name of the Greek dynasty of Egypt, printed with the Latin nominative ending in the books of the Maccabees. The. \"In the fourth year of the reign of Ptolemeus and Cleopatra, Dositheus, who said he was a priest and Levite, and Ptolemeus his son, brought this epistle of Phurim, which they said was the same, and that Lysimachus t...\" (The Rest of Esther 11:1). \"Moreover in the plain of Jericho was Ptolemeus the son of Abubus made captain, and he had abundance of silver and gold:\" (1 Maccabees 16:11)."
+    },
+    {
+      "slug": "gershonites",
+      "name": "Gershonites",
+      "text": "The clan of Levi descended from Gershon, one of the three families of the Levites, given charge of the tabernacle's curtains and tent and encamped on the west of it. \"...bnites, and the family of the Shimites: these are the families of the Gershonites.\" (Numbers 3:21). \"The families of the Gershonites shall pitch behind the tabernacle westward.\" (Numbers 3:23)."
+    },
+    {
+      "slug": "hebronites",
+      "name": "Hebronites",
+      "text": "The clan of Levi descended from Kohath through Hebron. \"...he Amramites, and the family of the Izeharites, and the family of the Hebronites, and the family of the Uzzielites: these are the families of the Kohathites.\" (Numbers 3:27). \"...amilies of the Levites: the family of the Libnites, the family of the Hebronites, the family of the Mahlites, the family of the Mushites, the family of the Korathites. And Kohath fathered Amram.\" (Numbers 26:58)."
+    },
+    {
+      "slug": "zarhites",
+      "name": "Zarhites",
+      "text": "The descendants of Zerah, a clan of Judah, named in the census and in David's officers — the family of Zerah the son of Judah. \"Of Zerah, the family of the Zarhites: of Shaul, the family of the Shaulites.\" (Numbers 26:13). \"...: of Pharez, the family of the Pharzites: of Zerah, the family of the Zarhites.\" (Numbers 26:20)."
+    },
+    {
+      "slug": "gadites",
+      "name": "Gadites",
+      "text": "The tribe of Gad: the sons of Gad, who asked for their inheritance east of Jordan and settled there. \"...unt Gilead, and the cities of it, gave I to the Reubenites and to the Gadites.\" (Deuteronomy 3:12). \"And to the Reubenites and to the Gadites I gave from Gilead even to the river Arnon half the valley, and the border even to the river Jabbok, which is the border of the children of Ammon;\" (Deuteronomy 3:16)."
+    },
+    {
+      "slug": "jezreelite",
+      "name": "Jezreelite",
+      "text": "Of Jezreel: the word by which Naboth is named. \"And it happened after these things, that Naboth the Jezreelite had a vineyard, which was in Jezreel, hard by the palace of Ahab king of Samaria.\" (1 Kings 21:1). \"...o his house heavy and displeased because of the word which Naboth the Jezreelite had spoken to him: for he had said, I will not give you the inheritance of my fathers. And he laid him down upon his bed, and turned away his face, and would eat no brea...\" (1 Kings 21:4)."
+    },
+    {
+      "slug": "benjamite",
+      "name": "Benjamite",
+      "text": "Of the tribe of Benjamin. \"...he LORD, the LORD raised them up a deliverer, Ehud the son of Gera, a Benjamite, a man lefthanded: and by him the children of Israel sent a present to Eglon the king of Moab.\" (Judges 3:15). \"...f Abiel, the son of Zeror, the son of Bechorath, the son of Aphiah, a Benjamite, a mighty man of power.\" (1 Samuel 9:1)."
+    },
+    {
+      "slug": "benjamites",
+      "name": "Benjamites",
+      "text": "The Benjamites: the tribe of Benjamin. \"...he LORD, the LORD raised them up a deliverer, Ehud the son of Gera, a Benjamite, a man lefthanded: and by him the children of Israel sent a present to Eglon the king of Moab.\" (Judges 3:15). \"...nt Ephraim; and he sojourned in Gibeah: but the men of the place were Benjamites.\" (Judges 19:16)."
+    },
+    {
+      "slug": "bagoas",
+      "name": "Bagoas",
+      "text": "The eunuch who had charge of all that belonged to Holofernes, and who was sent to persuade Judith to come out of Bethulia; he is the one who found her, and who afterwards was told to bring her to the feast. \"Then said he to Bagoas the eunuch, who had charge over all that he had, Go now, and persuade this Hebrew woman which is with you, that she come to us, and eat and drink with us.\" (Judith 12:11). \"Then went Bagoas from the presence of Holofernes, and came to her, and he said, Let not this fair damsel fear to come to my lord, and to be honored in his presence, and drink wine, and b...\" (Judith 12:13)."
+    },
+    {
+      "slug": "cendebeus",
+      "name": "Cendebeus",
+      "text": "The commander made captain of the sea coast by Antiochus VII, who provoked Israel and was defeated by Simon's sons Judas and John. \"Then the king made Cendebeus captain of the sea coast, and gave him an host of footmen and horsemen,\" (1 Maccabees 15:38). \"So Cendebeus came to Jamnia and began to provoke the people and to invade Judea, and to take the people prisoners, and slay them.\" (1 Maccabees 15:40)."
+    },
+    {
+      "slug": "josedec",
+      "name": "Josedec",
+      "text": "Jozadak. \"So was Jesus the son of Josedec: who in their time builded the house, and set up an holy temple to the Lord, which was prepared for everlasting glory.\" (Sirach 49:12). \"The priests, the sons of Phinees the son of Aaron: Jesus the son of Josedec, the son of Saraias, and Joacim the son of Zorobabel, the son of Salathiel, of the house of David, out of the kindred of Phares, of the tribe of Judah;\" (1 Esdras 5:5)."
+    }
+  ]
+}

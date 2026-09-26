@@ -48,7 +48,15 @@ SOURCES = [
     {"id": "hastings", "label": "Hastings' Dictionary of the Bible", "year": 1909},
     {"id": "hitchcock", "label": "Hitchcock's Bible Names", "year": 1869},
     {"id": "webster1828", "label": "Webster's 1828 Dictionary", "year": 1828},
+    # Written by hand, in scripts/dictionary-notes.json, for the words a reader
+    # meets often and none of the others reach: the transcription of the 1828 this
+    # project uses has a scrape's failure where some of their entries should be, and
+    # the rest are King James forms, compounds and spellings no dictionary here
+    # headwords. The gloss is this site's own and the citation says where it is read.
+    {"id": "notes", "label": "This site's own note", "year": 2026},
 ]
+
+NOTES = os.path.join(ROOT, "scripts", "dictionary-notes.json")
 
 # The whole of Webster's 1828 as a MySQL dump (62,977 entries), from a repository
 # that says the text came from Project Gutenberg and was cleaned up (MIT for the
@@ -79,6 +87,20 @@ def download(url, name, least=1000):
     return body
 
 
+def notes_by_letter():
+    """The notes written by hand, grouped by first letter, in the shape of a source."""
+    with open(NOTES, encoding="utf-8") as f:
+        notes = json.load(f)
+    grouped = {}
+    for entry in notes.get("entries", []):
+        letter = entry["slug"][0].lower()
+        grouped.setdefault(letter, {})[entry["slug"].upper()] = {
+            "name": entry["name"], "slug": entry["slug"],
+            "definitions": [{"text": entry["text"]}],
+        }
+    return grouped
+
+
 def fetch(source, letter):
     dest = os.path.join(CACHE, "{}-{}.json".format(source, letter))
     if os.path.exists(dest) and os.path.getsize(dest) > 100:
@@ -87,6 +109,8 @@ def fetch(source, letter):
     os.makedirs(CACHE, exist_ok=True)
     if source == "webster1828":
         data = webster_by_letter(letter)
+    elif source == "notes":
+        data = notes_by_letter().get(letter, {})
     else:
         url = RAW.format(source) + letter + ".json"
         try:
@@ -111,22 +135,82 @@ def forms_of(word):
     This gives the regular forms; app.js gives them back the other way round, when a
     reader types an older form and the entry is under the headword.
     """
-    out = {word}
-    for suffix in ("s", "es", "ed", "ing", "eth", "est", "edst"):
-        out.add(word + suffix)
-    if word.endswith("y"):
-        out.add(word[:-1] + "ies")
-        out.add(word[:-1] + "ieth")
-        out.add(word[:-1] + "ied")
-    if word.endswith("e"):
-        out.add(word + "d")
-        out.add(word[:-1] + "ing")
-        out.add(word[:-1] + "eth")
-    if len(word) > 2 and word[-1] not in "aeiouwxy":
-        out.add(word + word[-1] + "ed")      # abhor -> abhorred
-        out.add(word + word[-1] + "ing")
-        out.add(word + word[-1] + "eth")     # abhor -> abhorreth
-        out.add(word + word[-1] + "est")     # abhor -> abhorrest
+    out, spellings = {word}, [word]
+    # Webster spells American and the King James British: the entry a reader wants is
+    # the one under "honor" when the text says "honour", and under "savior" when it
+    # says "saviour". Before this the abridgment dropped every such entry — honour
+    # (214 times in the text), labour, favour, savour, valour, neighbour — because the
+    # headword itself never appears in the King James.
+    #
+    # The King James' own older spellings, which a headword has to be matched against
+    # too or its entry is thrown away: the text says shew, musick, fulf il, spue.
+    for modern, older in (("show", "shew"), ("music", "musick"), ("fulfill", "fulfil"),
+                          ("skillful", "skilful"), ("jubilee", "jubile"), ("entreat", "intreat"),
+                          ("spew", "spue"), ("plaster", "plaister"), ("sycamore", "sycomore"),
+                          ("ceiled", "cieled"), ("public", "publick"), ("basin", "bason"),
+                          ("caterpillar", "caterpiller"), ("grizzled", "grisled"),
+                          ("marvelous", "marvellous"), ("wonderous", "wondrous")):
+        if word == modern or word.startswith(modern + "-"):
+            spellings.append(word.replace(modern, older, 1))
+    if "or" in word:
+        spellings.append(word.replace("or", "our"))
+    if "our" in word:
+        spellings.append(word.replace("our", "or"))
+    if word.endswith("ize"):
+        spellings.append(word[:-3] + "ise")
+    if word.endswith("ise"):
+        spellings.append(word[:-3] + "ize")
+    if word.endswith("er"):
+        spellings.append(word[:-2] + "re")
+    if word.endswith("re"):
+        spellings.append(word[:-2] + "er")
+    if word.endswith("se"):
+        spellings.append(word[:-2] + "ce")
+    if word.endswith("ce"):
+        spellings.append(word[:-2] + "se")
+    # the doubled letters the older spelling keeps, which are the last ones:
+    # marvellous, woollen, travelled, jewell
+    for ending, other in (("l", "ll"), ("ll", "l"), ("led", "lled"), ("lled", "led"),
+                          ("ling", "lling"), ("lling", "ling"), ("ler", "ller"), ("ller", "ler")):
+        if word.endswith(ending):
+            spellings.append(word[: -len(ending)] + other)
+    # the plurals and preterites that are their own words, which no suffix rule
+    # reaches: the text says horsemen and the dictionary has horseman
+    odd = {"man": "men", "woman": "women", "child": "children", "foot": "feet",
+           "tooth": "teeth", "goose": "geese", "mouse": "mice", "ox": "oxen"}
+    for spelling in spellings:
+        for singular, plural in odd.items():
+            if spelling == singular:
+                out.add(plural)
+            elif spelling.endswith("-" + singular):
+                out.add(spelling[: -len(singular)] + plural)
+            elif spelling.endswith(singular) and len(spelling) > len(singular):
+                out.add(spelling[: -len(singular)] + plural)      # horseman -> horsemen
+        for suffix in ("s", "es", "ed", "ing", "eth", "est", "edst"):
+            out.add(spelling + suffix)
+        if spelling.endswith("y"):
+            out.add(spelling[:-1] + "ies")
+            out.add(spelling[:-1] + "ieth")
+            out.add(spelling[:-1] + "ied")
+        if spelling.endswith("e"):
+            out.add(spelling + "d")
+            out.add(spelling[:-1] + "ing")
+            out.add(spelling[:-1] + "eth")
+        if len(spelling) > 2 and spelling[-1] not in "aeiouwxy":
+            out.add(spelling + spelling[-1] + "ed")      # abhor -> abhorred
+            out.add(spelling + spelling[-1] + "ing")
+            out.add(spelling + spelling[-1] + "eth")     # abhor -> abhorreth
+            out.add(spelling + spelling[-1] + "est")     # abhor -> abhorrest
+    # the King James writes compounds solid where Webster keeps them apart:
+    # threshingfloor, armourbearer, selfsame, lovingkindness. The headword is tried
+    # with a hyphen at every point, and a hyphenated headword is tried solid, because
+    # where the dictionary puts the hyphen is its own business and not the reader's.
+    for spelling in spellings:
+        if len(spelling) >= 7:
+            for split in range(3, len(spelling) - 3):
+                out.add(spelling[:split] + "-" + spelling[split:])
+        if "-" in spelling:
+            out.add(spelling.replace("-", ""))
     return out
 
 
@@ -159,13 +243,21 @@ def kjv_words():
             if "-FRT" in name or name.startswith("00-"):
                 continue
             text = z.read(name).decode("utf-8", "replace")
+            # only the verses: a word list taken from the whole file also takes the
+            # book headings, the apparatus and the file names ("utf", "sfm")
+            text = "\n".join(line for line in text.splitlines() if line.startswith("\\v "))
             text = re.sub(r"\\f\s.*?\\f\*", " ", text, flags=re.S)     # footnotes
             text = re.sub(r"\\x\s.*?\\x\*", " ", text, flags=re.S)     # cross-references
             text = re.sub(r"\\[a-z0-9]+\*?", " ", text)                  # the markers
-            for word in re.findall(r"[A-Za-z][A-Za-z']+", text):
-                word = word.lower().strip("'")
+            # hyphens are kept, because the King James writes Beth-lehem and Ash-dod:
+            # splitting on them put "lehem" and "dod" in the word list as if they were
+            # words, and lost the name the reader would look up
+            for word in re.findall(r"[A-Za-z][A-Za-z'\-]*[A-Za-z]", text):
+                word = word.lower().strip("'").strip("-")
                 if len(word) >= 3:
                     words.add(word)
+                    if "-" in word:
+                        words.add(word.replace("-", ""))
     with open(dest, "w", encoding="utf-8") as f:
         json.dump(sorted(words), f)
     print("  the King James Version uses {:,} words".format(len(words)))
