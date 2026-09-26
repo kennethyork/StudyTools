@@ -76,6 +76,7 @@ letters.forEach(function (letter) {
   const slugs = {};
   (file.entries || []).forEach(function (entry) {
     const where = letter + "/" + (entry.slug || entry.name || "?");
+    if (!(entry.definitions || []).length) { problems.empty.push(where + " (no definitions)"); }
     if (!entry.name) { problems.unnamed.push(where); }
     /* a name the scraper left behind: the 1828 dump fills the heading of a row it
        could not find with "&nbsp; No results found." or "Did you mean one of these
@@ -127,7 +128,7 @@ check("no term is left with a scraper's placeholder for a name",
   problems.unnamed.length === 0, problems.unnamed.slice(0, 3).join(", "));
 check("and no definition is one either", problems.placeholderText.length === 0,
   problems.placeholderText.slice(0, 3).join(", "));
-check("no definition is empty, unnamed or badly slugged",
+check("no term is empty, unnamed or badly slugged",
   problems.empty.length + problems.unnamed.length + problems.badSlug.length === 0,
   problems.empty.concat(problems.unnamed, problems.badSlug).slice(0, 3).join(", "));
 check("no 1828 entry ran past the length the abridgment caps it at",

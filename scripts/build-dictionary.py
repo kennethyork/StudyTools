@@ -443,7 +443,14 @@ def main():
                         "text": text,
                     })
 
-        entries = sorted(merged.values(), key=lambda e: e["name"].lower())
+        # A term whose every definition came out empty is not an entry: the sources
+        # carry a few dozen of those (cross-references whose text the dataset has
+        # lost), and a reader who opened one was shown a word with nothing under it.
+        entries = [e for e in merged.values() if e["definitions"]]
+        without = len(merged) - len(entries)
+        if without:
+            print("    {} term(s) dropped as empty for {}".format(without, letter))
+        entries = sorted(entries, key=lambda e: e["name"].lower())
         for entry in entries:
             entry["definitions"].sort(key=lambda d: d["year"])
         with open(os.path.join(OUT, "{}.json".format(letter)), "w", encoding="utf-8") as f:
