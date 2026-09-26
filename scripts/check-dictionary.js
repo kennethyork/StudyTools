@@ -165,9 +165,26 @@ check("and the words of the King James' own front matter are not in it",
 check("and it holds the ordinary words of the King James, not only the names",
   ["conversation", "charity", "kingdom", "hope"].every(function (w) { return words[w]; }),
   ["conversation", "charity", "kingdom", "hope"].filter(function (w) { return !words[w]; }).join(", "));
-check("the 1828 words are the King James's: nothing the 1828 could not have defined",
-  !words.telephone && !words.railway && !words.locomotive,
-  "a word outside the King James vocabulary is headworded from the 1828");
+/* The whole of Webster's 1828 ships — 60,968 entries, most of them about things no
+   Bible reader looks up — so the words the King James uses are marked in the index
+   and put first in a letter's list. That mark is what is checked: a word of the
+   King James must carry it, and a word the King James never uses must not. */
+const marked = load("index.json").letters;
+let flagged = 0;
+const flaggedSlugs = {};
+Object.keys(marked).forEach(function (letter) {
+  flagged += marked[letter].filter(function (e) { return e.kjv; }).length;
+  marked[letter].forEach(function (e) { if (e.kjv) { flaggedSlugs[e.slug] = true; } });
+});
+check("the words of the King James are marked in the index",
+  flagged > 5000 && flaggedSlugs.lasciviousness && flaggedSlugs.meek,
+  flagged + " marked" + ["lasciviousness", "meek"].filter(function (w) { return !flaggedSlugs[w]; })
+    .map(function (w) { return "; " + w + " not among them"; }).join(""));
+check("and the rest of the dictionary is not marked",
+  !!index.letters.s.filter(function (e) { return e.slug === "saxifrage"; }).length &&
+  !flaggedSlugs.steam && !flaggedSlugs.locomotive && !flaggedSlugs.saxifrage,
+  ["steam", "locomotive", "saxifrage"].filter(function (w) { return flaggedSlugs[w]; }).join(", ") +
+  " wrongly marked");
 
 /* ---------- the notes written by hand ----------
 

@@ -209,13 +209,25 @@
     }
 
     els.listTitle.textContent = "Terms starting with " + activeLetter.toUpperCase();
-    paintList(index.letters[activeLetter].map(function (entry) {
+    /* The whole of Webster's 1828 is here now, so a letter can hold seven thousand
+       terms. They are put in two runs — the words the King James uses first, since
+       that is what a reader of the Bible is looking for, then the rest — and only
+       the first few hundred are drawn, because seven thousand buttons is not a
+       list, it is a stall. Searching still reaches all of them. */
+    var all = index.letters[activeLetter].map(function (entry) {
       return { letter: activeLetter, entry: entry };
-    }), index.letters[activeLetter].length);
+    });
+    all.sort(function (a, b) {
+      if (!!a.entry.kjv !== !!b.entry.kjv) { return a.entry.kjv ? -1 : 1; }
+      return a.entry.name.localeCompare(b.entry.name);
+    });
+    paintList(all.slice(0, SHOWN), all.length);
   }
 
   /* The list is drawn from the index, which carries each term's name and how many
      sources it has; the definitions arrive when one is opened. */
+  var SHOWN = 300;                 /* how many terms of a letter are drawn at once */
+
   function paintList(items, total) {
     els.list.innerHTML = "";
     els.listCount.textContent = total.toLocaleString() + (total === 1 ? " term" : " terms");
@@ -223,10 +235,18 @@
       els.list.appendChild(ST.el("p", { class: "muted small", text: "Nothing matches that search." }));
       return;
     }
+    if (items.length < total) {
+      els.list.appendChild(ST.el("p", { class: "muted small", style: "margin:0 0 6px", text:
+        "Showing the first " + items.length + " of " + total.toLocaleString() +
+        " — type in the search box to reach the rest." }));
+    }
     items.forEach(function (item) {
       var btn = ST.el("button", { type: "button",
         class: "term-item" + (item.entry.slug === activeSlug ? " active" : "") });
       btn.appendChild(ST.el("span", { text: item.entry.name }));
+      if (item.entry.kjv) {
+        btn.appendChild(ST.el("span", { class: "muted small", text: "  King James" }));
+      }
       if (item.form) {
         btn.appendChild(ST.el("span", { class: "muted small", text: "  the King James' \u201c" + item.form + "\u201d" }));
       }

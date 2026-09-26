@@ -346,8 +346,10 @@ def webster_all():
         letter = word[0].lower()
         if not ("a" <= letter <= "z"):
             continue
-        if word.lower() not in words and not (forms_of(word.lower()) & words):
-            continue
+        # Every entry the transcription has is kept — the whole dictionary, not only
+        # the words the King James uses. Which of them are words of the King James is
+        # decided after the merge, so that a word the King James uses is marked
+        # whichever dictionary defines it.
         text = webster_text(content)
         heading = fields[5] or ""
         # Rows with no definition at all, of which the dump has about 1,500: the scrape
@@ -377,7 +379,7 @@ def webster_all():
             continue
         grouped.setdefault(letter, {})[word.upper()] = entry
         kept += 1
-    print("  Webster's 1828: {} of {:,} entries are words the King James uses".format(kept, considered))
+    print("  Webster's 1828: {:,} entries kept".format(kept))
     if dropped:
         print("    {} of them dropped: the dump has the scrape's own failure where the\n"
               "    definition should be".format(dropped))
@@ -432,6 +434,8 @@ def main():
                 name = entry.get("name") or _key
                 slug = entry.get("slug") or re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
                 item = merged.setdefault(slug, {"name": name, "slug": slug, "definitions": []})
+                if entry.get("kjv"):
+                    item["kjv"] = True
                 for definition in entry.get("definitions", []):
                     text = clean(definition.get("text", ""))
                     if not text:
@@ -446,6 +450,11 @@ def main():
         # A term whose every definition came out empty is not an entry: the sources
         # carry a few dozen of those (cross-references whose text the dataset has
         # lost), and a reader who opened one was shown a word with nothing under it.
+        king_james = kjv_words()
+        for e in merged.values():
+            word = e["slug"].replace("-", "")
+            if word in king_james or (forms_of(word) & king_james):
+                e["kjv"] = True
         entries = [e for e in merged.values() if e["definitions"]]
         without = len(merged) - len(entries)
         if without:
@@ -456,7 +465,9 @@ def main():
         with open(os.path.join(OUT, "{}.json".format(letter)), "w", encoding="utf-8") as f:
             json.dump({"letter": letter, "entries": entries}, f, ensure_ascii=False, separators=(",", ":"))
 
-        index[letter] = [{"name": e["name"], "slug": e["slug"], "count": len(e["definitions"])} for e in entries]
+        index[letter] = [dict({"name": e["name"], "slug": e["slug"],
+                               "count": len(e["definitions"])},
+                              **({"kjv": 1} if e.get("kjv") else {})) for e in entries]
         print("  {}: {} terms".format(letter, len(entries)), flush=True)
 
     with open(os.path.join(OUT, "index.json"), "w", encoding="utf-8") as f:
@@ -465,7 +476,9 @@ def main():
             "letters": index,
             "total": sum(len(v) for v in index.values()),
         }, f, ensure_ascii=False, separators=(",", ":"))
-    print("total terms: {}".format(sum(len(v) for v in index.values())))
+    marked_words = sum(1 for v in index.values() for e in v if e.get("kjv"))
+    print("total terms: {} ({} of them words the King James uses)".format(
+        sum(len(v) for v in index.values()), marked_words))
 
 
 if __name__ == "__main__":
