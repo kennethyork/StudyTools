@@ -150,6 +150,16 @@ if (las) {
 }
 check("the word dictionary is a real share of the whole",
   Object.keys(words).length > 5000, Object.keys(words).length + " headwords");
+/* A headword the King James only ever uses in an inflected form. "Acclamation"
+   occurs in it as "acclamations" and "abhor" as "abhorrest" and "abhorreth", so a
+   filter that asked whether the headword itself appears in the text threw both
+   entries away and the reader who looked one up found nothing. */
+check("a headword the King James only uses inflected is still defined",
+  words.acclamation && words.abhor, ["acclamation", "abhor"]
+    .filter(function (w) { return !words[w]; }).join(", ") + " missing");
+check("and the words of the King James' own front matter are not in it",
+  !words.afternoon && !words.alfred && !words.anything,
+  ["afternoon", "alfred", "anything"].filter(function (w) { return words[w]; }).join(", "));
 check("and it holds the ordinary words of the King James, not only the names",
   ["conversation", "charity", "kingdom", "hope"].every(function (w) { return words[w]; }),
   ["conversation", "charity", "kingdom", "hope"].filter(function (w) { return !words[w]; }).join(", "));

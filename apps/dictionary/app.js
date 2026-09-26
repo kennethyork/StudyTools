@@ -27,6 +27,50 @@
     });
   }
 
+  /* The King James' forms of a word, so that a reader who looks up "aboundeth" is
+     shown "Abound". The dictionary headwords are lemmas, as dictionaries have
+     always been; the text is not. Suffixes are stripped in passes because a form can
+     carry two of them ("pouredst"), and a short list covers the irregulars the text
+     uses, which no rule turns into their headword: "oxen" is not a form of "oxe".
+     This is a reading aid, not a stemmer: it suggests, and the reader decides. */
+  var IRREGULAR = {
+    oxen: "ox", kine: "cow", brethren: "brother", children: "child", men: "man",
+    women: "woman", feet: "foot", teeth: "tooth", mice: "mouse", geese: "goose",
+    graven: "grave", laden: "lade", cloven: "cleave", molten: "melt",
+    begotten: "beget", forgotten: "forget", gotten: "get", trodden: "tread",
+    arisen: "arise", borne: "bear", sworn: "swear", torn: "tear", worn: "wear"
+  };
+  var SUFFIXES = [["eth", ""], ["est", ""], ["edst", ""], ["ed", ""], ["ing", ""],
+    ["ies", "y"], ["es", ""], ["s", ""], ["i", "y"]];
+
+  function stems(word) {
+    var out = [], seen = {}, queue = [word];
+    function add(w) { if (w && w.length >= 2 && !seen[w]) { seen[w] = true; out.push(w); } }
+    for (var pass = 0; pass < 3 && queue.length; pass++) {
+      var next = [];
+      queue.forEach(function (w) {
+        if (IRREGULAR[w]) { add(IRREGULAR[w]); }
+        SUFFIXES.forEach(function (pair) {
+          if (w.length <= pair[0].length + 1 || w.slice(-pair[0].length) !== pair[0]) { return; }
+          var base = w.slice(0, -pair[0].length) + pair[1];
+          add(base); add(base + "e");
+          if (base.length > 2 && base[base.length - 1] === base[base.length - 2]) { add(base.slice(0, -1)); }
+          next.push(base);
+        });
+      });
+      queue = next;
+    }
+    return out;
+  }
+
+  /* slug -> where it lives, for looking a word up without walking the index */
+  var bySlug = {};
+  function buildSlugIndex() {
+    Object.keys(index.letters).forEach(function (letter) {
+      index.letters[letter].forEach(function (entry) { bySlug[entry.slug] = { letter: letter, entry: entry }; });
+    });
+  }
+
   function loadLetter(letter) {
     if (letterCache[letter]) return Promise.resolve(letterCache[letter]);
     return ST.loadJSON(ST.siteRoot() + "data/dictionary/" + letter + ".json").then(function (data) {
@@ -60,14 +104,30 @@
          fetching all twenty-six of them — fifteen megabytes — before the first result
          could be shown. Clicking a result opens the one file its entry is in. */
       var results = [];
+      var already = {};
       Object.keys(index.letters).forEach(function (letter) {
         index.letters[letter].forEach(function (entry) {
           if (entry.name.toLowerCase().indexOf(query) !== -1 || entry.slug.indexOf(query) !== -1) {
             results.push({ letter: letter, entry: entry });
+            already[entry.slug] = true;
           }
         });
       });
-      results.sort(function (a, b) { return a.entry.name.localeCompare(b.entry.name); });
+      /* Nothing by that name: it may be a form of one the dictionary has, which is
+         what a reader of the King James runs into — "pouredst", "aboundeth",
+         "oxen". Those are offered, labelled as what they are. */
+      var forms = stems(query.replace(/[^a-z']/g, ""));
+      forms.forEach(function (form) {
+        var hit = bySlug[form];
+        if (hit && !already[hit.entry.slug]) {
+          already[hit.entry.slug] = true;
+          results.push({ letter: hit.letter, entry: hit.entry, form: query });
+        }
+      });
+      results.sort(function (a, b) {
+        if (!!a.form !== !!b.form) { return a.form ? 1 : -1; }
+        return a.entry.name.localeCompare(b.entry.name);
+      });
       paintList(results.slice(0, 400), results.length);
       return;
     }
@@ -98,6 +158,9 @@
       var btn = ST.el("button", { type: "button",
         class: "term-item" + (item.entry.slug === activeSlug ? " active" : "") });
       btn.appendChild(ST.el("span", { text: item.entry.name }));
+      if (item.form) {
+        btn.appendChild(ST.el("span", { class: "muted small", text: "  the King James' \u201c" + item.form + "\u201d" }));
+      }
       btn.appendChild(ST.el("span", { class: "count", text: "  · " + item.entry.count }));
       btn.addEventListener("click", function () { openEntry(item.letter, item.entry.slug); });
       els.list.appendChild(btn);
@@ -134,6 +197,11 @@
   }
 
   function lookup(slug) {
+    if (bySlug[slug]) { return bySlug[slug]; }
+    var forms = stems(slug);
+    for (var f = 0; f < forms.length; f++) {
+      if (bySlug[forms[f]]) { return bySlug[forms[f]]; }
+    }
     var letters = Object.keys(index.letters);
     for (var i = 0; i < letters.length; i++) {
       var found = index.letters[letters[i]].filter(function (e) { return e.slug === slug; })[0];
@@ -184,6 +252,7 @@
   function init() {
     ST.loadJSON(ST.siteRoot() + "data/dictionary/index.json").then(function (data) {
       index = data;
+      buildSlugIndex();
       activeLetter = "a";
       renderLetters();
       renderList();

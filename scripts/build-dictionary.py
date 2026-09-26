@@ -101,6 +101,35 @@ def fetch(source, letter):
     return data
 
 
+def forms_of(word):
+    """The forms a headword is written in, for matching it against the text.
+
+    A dictionary's headword is a lemma; the King James is not. "Acclamation" occurs
+    in it only as "acclamations", and "abhor" only as "abhorrest" and "abhorreth",
+    so a filter that asks whether the headword itself appears in the text threw
+    those entries away — and then the reader who looked the word up found nothing.
+    This gives the regular forms; app.js gives them back the other way round, when a
+    reader types an older form and the entry is under the headword.
+    """
+    out = {word}
+    for suffix in ("s", "es", "ed", "ing", "eth", "est", "edst"):
+        out.add(word + suffix)
+    if word.endswith("y"):
+        out.add(word[:-1] + "ies")
+        out.add(word[:-1] + "ieth")
+        out.add(word[:-1] + "ied")
+    if word.endswith("e"):
+        out.add(word + "d")
+        out.add(word[:-1] + "ing")
+        out.add(word[:-1] + "eth")
+    if len(word) > 2 and word[-1] not in "aeiouwxy":
+        out.add(word + word[-1] + "ed")      # abhor -> abhorred
+        out.add(word + word[-1] + "ing")
+        out.add(word + word[-1] + "eth")     # abhor -> abhorreth
+        out.add(word + word[-1] + "est")     # abhor -> abhorrest
+    return out
+
+
 def kjv_words():
     """Every word the King James Version uses, lowercased — from the text itself.
 
@@ -114,6 +143,7 @@ def kjv_words():
     if os.path.exists(dest):
         with open(dest, encoding="utf-8") as f:
             return set(json.load(f))
+    # (delete the cache to rebuild it after a change to the rules above)
     import io
     import zipfile
     body = download(KJV[0], KJV[1], least=100000)
@@ -121,6 +151,12 @@ def kjv_words():
     with zipfile.ZipFile(io.BytesIO(body)) as z:
         for name in z.namelist():
             if not name.lower().endswith(".usfm"):
+                continue
+            # 00-FRT is the King James' front matter: the dedication, the letter to
+            # the reader, the tables. Its vocabulary is not the Bible's, and taking
+            # it for the Bible's put words like "afternoon" and "alex" in the word
+            # list and so in the dictionary.
+            if "-FRT" in name or name.startswith("00-"):
                 continue
             text = z.read(name).decode("utf-8", "replace")
             text = re.sub(r"\\f\s.*?\\f\*", " ", text, flags=re.S)     # footnotes
@@ -216,7 +252,9 @@ def webster_all():
             continue
         considered += 1
         letter = word[0].lower()
-        if not ("a" <= letter <= "z") or word.lower() not in words:
+        if not ("a" <= letter <= "z"):
+            continue
+        if word.lower() not in words and not (forms_of(word.lower()) & words):
             continue
         text = webster_text(content)
         heading = fields[5] or ""
